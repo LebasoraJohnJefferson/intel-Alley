@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -9,12 +10,15 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuardService{
 
-  constructor(public auth:AuthService, public router:Router) { }
+  constructor(
+    public auth:AuthService, 
+    public router:Router,
+    public toastr:ToastrService) { }
 
   canActivate():boolean{
     if(!this.auth.isAuthenticated()){
       this.router.navigate([''])
-      alert('login-first')
+      this.toastr.warning('login-first')
       return false
     }
     return true
