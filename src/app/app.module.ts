@@ -1,46 +1,50 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
+import { CoreModule } from './core/core.module';
+import { AlumnusModule } from './modules/alumnus/alumnus.module';
+import { AdminModule } from './modules/admin/admin.module';
 
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    PageNotFoundComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(
-      {
-        'preventDuplicates': false,
-        timeOut: 3000,
-        positionClass: 'toast-top-right',
-      }
-    ),
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CoreModule,
+    AlumnusModule,
+    AdminModule,
+    HotToastModule.forRoot(),
+    ToastrModule.forRoot({
+      preventDuplicates: false,
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+    }),
   ],
   providers: [
-    { 
+    {
       provide: JWT_OPTIONS,
-      useValue: JWT_OPTIONS
+      useValue: JWT_OPTIONS,
     },
-    JwtHelperService],
-  bootstrap: [AppComponent]
+    JwtHelperService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

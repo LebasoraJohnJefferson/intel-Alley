@@ -1,0 +1,203 @@
+<div class="relative min-h-fit h-screen md:overflow-y-scroll md:pt-12">
+  <img
+    src="../../../../assets/logo/evsu_logo_3.png"
+    alt=""
+    class="-left-[1000px] fixed -bottom-40 md:-left-20 opacity-5"
+  />
+
+  <div class="">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-[1fr_400px] md:p-8">
+      <div class="hidden lg:block">
+        <div class="bg-slate-800 p-4 rounded-md w-fit pr-6 min-h-[96px]">
+          <img
+            src="../../../../assets/logo/evsu_logo.png"
+            alt="EVSU Logo"
+            class="w-[320px]"
+          />
+        </div>
+
+        <div class="mt-14">
+          <h1 class="font-black text-5xl">
+            ALUMNI MONITORING
+            <div class="">
+              <span class="text-red-500">System</span>
+            </div>
+          </h1>
+        </div>
+      </div>
+
+      <div
+        class="relative p-6 pt-0 md:w-[400px] mx-auto z-50 md:shadow-md lg:shadow-none rounded-md"
+      >
+        <div
+          class="absolute top-0 left-0 w-full md:hidden mb-10 z-50 bg-slate-800 py-4"
+        >
+          <div class="text-center flex items-center w-fit mx-auto">
+            <img
+              src="../../../../assets/logo/evsu_logo_3.png"
+              alt="EVSU Logo"
+              class="w-[35px] mr-2"
+            />
+            <h1 class="font-black text-2xl text-slate-50">
+              ALUMNI MONITORING <span class="text-red-400">System</span>
+            </h1>
+          </div>
+        </div>
+
+        <div class="mt-[100px] md:mt-4">
+          <h1 class="font-bold text-red-500 text-center">
+            Choose Account Type
+          </h1>
+
+          <div class="grid grid-cols-[1fr_1fr] my-7 gap-8">
+            <div
+              (click)="changeLoginAcctType('alumnus')"
+              class="min-h-[121px] relative grid place-items-center bg-white p-2 px-4 rounded-md shadow-sm text-sm border-2 border-white cursor-pointer hover:border-red-500 transition-all"
+              [ngClass]="
+                loginAcctType == 'alumnus'
+                  ? 'border-2 border-red-500'
+                  : 'border-white'
+              "
+            >
+              <img
+                src="../../../../assets/images/student.png"
+                alt="student image"
+                class=""
+              />
+              <h1 class="font-semibold mt-2">Alumnus</h1>
+
+              <div
+                class=""
+                [ngClass]="
+                  loginAcctType == 'alumnus'
+                    ? 'absolute -bottom-2 -right-2 bg-red-500 w-5 h-5 grid place-items-center rounded-full'
+                    : 'hidden'
+                "
+              >
+                <i class="fal fa-check text-white text-[10px]"></i>
+              </div>
+            </div>
+            <div
+              (click)="changeLoginAcctType('admin')"
+              class="min-h-[121px] relative grid place-items-center bg-white p-3 px-5 rounded-md shadow-sm text-sm border-2 border-white cursor-pointer hover:border-red-500 transition-all"
+              [ngClass]="
+                loginAcctType == 'admin' ? 'border-red-500' : 'border-white'
+              "
+            >
+              <img
+                src="../../../../assets/images/admin.png"
+                alt="admin image"
+              />
+              <h1 class="font-semibold mt-2">Admin</h1>
+
+              <div
+                [ngClass]="
+                  loginAcctType == 'admin'
+                    ? 'absolute -bottom-2 -right-2 bg-red-500 w-5 h-5 grid place-items-center rounded-full'
+                    : 'hidden'
+                "
+              >
+                <i class="fal fa-check text-white text-[10px]"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mb-4">
+            <h2 class="capitalize text-[15px]">Hello {{ loginAcctType }}!</h2>
+            <p class="text-[13px]">Please fill out the form below to Login.</p>
+          </div>
+        </div>
+
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="loginForm"
+          class="grid gap-3"
+        >
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+
+            <div class="mt-1 relative">
+              <input
+                type="email"
+                formControlName="email"
+                placeholder="Your email"
+                pInputText
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Password</label
+            >
+            <div class="mt-1 relative">
+              <p-password
+                placeholder="Your password"
+                styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+                formControlName="password"
+                [toggleMask]="true"
+                [feedback]="false"
+              ></p-password>
+            </div>
+
+            <div class="flex justify-between items-center mt-2">
+              <div class=""></div>
+              <p
+                routerLink="/forgotpassword"
+                class="text-[13px] cursor-pointer hover:text-red-500"
+              >
+                Forgot your password?
+              </p>
+            </div>
+          </div>
+
+          <button
+            [disabled]="submitLoading"
+            type="submit"
+            class="grid place-items-center cursor-pointer bg-red-500 text-white font-semibold rounded-md py-2 hover:bg-red-500/80 transition-all w-full"
+          >
+            <div class="flex items-center w-fit mx-autoo" *ngIf="submitLoading">
+              <svg
+                class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+
+              <span>Processing</span>
+            </div>
+
+            <span *ngIf="!submitLoading">Login</span>
+          </button>
+
+          <div
+            class="text-[14px] text-center"
+            [ngClass]="loginAcctType == 'alumnus' ? 'block' : 'hidden'"
+          >
+            <p>
+              No account?
+              <span class="text-red-500 cursor-pointer" routerLink="/signup"
+                >Signup</span
+              >
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
