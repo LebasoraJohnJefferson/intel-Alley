@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-forgotpassword',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class ForgotpasswordComponent {
 
+  constructor(public location:Location){
+
+  }
+
+  goBack(){
+    this.location.back()
+  }
 }

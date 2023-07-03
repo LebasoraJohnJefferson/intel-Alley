@@ -7,14 +7,12 @@ import { PrimengModule } from '../modules/primeng/primeng.module';
 
 import { CoreRoutingModule } from './core-routing.module';
 import { LoginComponent } from './pages/login/login.component';
-import { SignupComponent } from './pages/signup/signup.component';
 import { ResetpasswordComponent } from './pages/resetpassword/resetpassword.component';
 import { ForgotpasswordComponent } from './pages/forgotpassword/forgotpassword.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
-    SignupComponent,
     ResetpasswordComponent,
     ForgotpasswordComponent,
   ],
