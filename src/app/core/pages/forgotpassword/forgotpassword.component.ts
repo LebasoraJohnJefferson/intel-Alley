@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormBuilder,Validators,FormGroup } from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
+
 
 @Component({
   selector: 'app-forgotpassword',
@@ -18,7 +20,8 @@ export class ForgotpasswordComponent {
 
   constructor(
     public location:Location,
-    private _fb:FormBuilder
+    private _fb:FormBuilder,
+    public toast:HotToastService
     ){
 
   }
@@ -30,7 +33,7 @@ export class ForgotpasswordComponent {
   clickSubmit(event:boolean){
     this.isLoading = !event
     if(this.emailForm.invalid){
-      alert('Invalid Email')
+      this.toast.warning('Invalid Email')
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import {FormBuilder, FormGroup,Validators} from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-resetpassword',
@@ -17,7 +18,8 @@ export class ResetpasswordComponent {
 
   constructor(
     private _fb:FormBuilder,
-    public location:Location
+    public location:Location,
+    public toast:HotToastService
   ){
 
   }
@@ -30,9 +32,9 @@ export class ResetpasswordComponent {
   clickSubmit(event:boolean){
     this.isLoading = !event
     if(this.passwordForm.invalid){
-      alert('Empty Input(s)')
+      this.toast.warning('Empty Input(s)')
     }else if(this.passwordForm.controls['password'].value !=this.passwordForm.controls['confirmPassword']){
-      alert('password does`nt match')
+      this.toast.warning('password does`nt match')
     }
   }
 }

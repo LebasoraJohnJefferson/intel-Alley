@@ -36,7 +36,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AlumnusModule,
     AdminModule,
     MatProgressSpinnerModule,
-    HotToastModule.forRoot(),
+    HotToastModule.forRoot({
+      position:'top-right'
+    }),
     ToastrModule.forRoot({
       preventDuplicates: false,
       timeOut: 3000,
