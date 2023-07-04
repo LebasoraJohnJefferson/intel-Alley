@@ -17,6 +17,10 @@ import { AdminModule } from './modules/admin/admin.module';
 
 import { HotToastModule } from '@ngneat/hot-toast';
 
+
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,6 +35,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
     CoreModule,
     AlumnusModule,
     AdminModule,
+    MatProgressSpinnerModule,
     HotToastModule.forRoot(),
     ToastrModule.forRoot({
       preventDuplicates: false,

@@ -8,12 +8,16 @@ import { Location } from '@angular/common';
   styleUrls: ['./forgotpassword.component.scss']
 })
 export class ForgotpasswordComponent {
-
+  isLoading:boolean = true
   constructor(public location:Location){
 
   }
 
   goBack(){
     this.location.back()
+  }
+
+  clickSubmit(event:boolean){
+    this.isLoading = !this.isLoading
   }
 }
