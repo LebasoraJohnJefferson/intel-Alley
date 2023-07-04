@@ -1,0 +1,61 @@
+<div class="relative z-40 mt-10 pb-20">
+  <h1 class="font-bold text-xl md:text-3xl text-white">
+    Good <span *ngIf="isMorning">Morning</span>
+    <span *ngIf="isAfternoon">Afternoon</span>
+    <span *ngIf="isEvening">Evening</span>
+    <span *ngIf="isNight">Night</span>,
+    <span *ngIf="true"
+      >Alumnus!</span
+    >
+  </h1>
+
+  <div class="mt-20 pb-10">
+    <div class="grid lg:grid-cols-3 gap-5">
+      <a
+        href="/elections"
+        class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+      >
+        <div class="h-[100px]">
+          <img
+            src="../../../../../assets/images/forgot-password.png"
+            alt=""
+            class="w-[100px]"
+          />
+        </div>
+
+        <div class="">
+          <h1 class="text-5xl lg:text-6xl font-black text-slate-800 text-end">
+            122
+          </h1>
+          <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+            314
+          </p>
+        </div>
+      </a>
+
+      <a
+        href="/polls"
+        class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+      >
+        <div class="h-[100px]">
+          <img
+            src="../../../../../assets/images/forgot-password.png"
+            alt=""
+            class="w-[100px]"
+          />
+        </div>
+
+        <div class="">
+          <h1 class="text-5xl lg:text-6xl font-black text-slate-800 text-end">
+            12
+          </h1>
+          <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+            Active 
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <hr />
+</div>

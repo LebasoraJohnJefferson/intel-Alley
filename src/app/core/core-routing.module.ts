@@ -10,8 +10,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'resetpassword', component: ResetpasswordComponent },
-  {path:'page-not-found',component:PageNotFoundComponent},
-  { path:"**", redirectTo:'page-not-found'}
+  //  {path:'page-not-found',component:PageNotFoundComponent},
+  //  { path:"**", redirectTo:'page-not-found'}
 ];
 
 @NgModule({

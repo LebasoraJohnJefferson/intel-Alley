@@ -70,7 +70,7 @@
                 class=""
                 [ngClass]="
                   loginAcctType == 'alumnus'
-                    ? 'absolute -bottom-2 -right-2 bg-red-500 w-5 h-5 grid place-items-center rounded-full'
+                    ? 'absolute -bottom-2 -right-2 bg-slate-500 w-5 h-5 grid place-items-center rounded-full'
                     : 'hidden'
                 "
               >
@@ -93,7 +93,7 @@
               <div
                 [ngClass]="
                   loginAcctType == 'admin'
-                    ? 'absolute -bottom-2 -right-2 bg-red-500 w-5 h-5 grid place-items-center rounded-full'
+                    ? 'absolute -bottom-2 -right-2 bg-slate-500 w-5 h-5 grid place-items-center rounded-full'
                     : 'hidden'
                 "
               >
@@ -155,7 +155,7 @@
           <button
             [disabled]="submitLoading"
             type="submit"
-            class="grid place-items-center cursor-pointer bg-red-500 text-white font-semibold rounded-md py-2 hover:bg-red-500/80 transition-all w-full"
+            class="grid place-items-center cursor-pointer bg-slate-500 text-white font-semibold rounded-md py-2 hover:bg-slate-500/80 transition-all w-full"
           >
             <div class="flex items-center w-fit mx-autoo" *ngIf="submitLoading">
               <svg
@@ -184,7 +184,6 @@
 
             <span *ngIf="!submitLoading">Login</span>
           </button>
-
         </form>
       </div>
     </div>

@@ -13,8 +13,8 @@ const HELPER = new JwtHelperService();
 export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  studentRegister(data: any): any {
-    return this.http.post(`${BASEURL}/api/auth/alumniregister`, data);
+  alumnusRegister(data: any): any {
+    return this.http.post(`${BASEURL}/api/auth/alumnusregister`, data);
   }
 
   login(type: string, data: any): any {
