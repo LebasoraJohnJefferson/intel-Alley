@@ -1,6 +1,6 @@
-<button (click)="btnClick()" *ngIf="isLoading" [class]="style">
+<button (click)="btnClick()" *ngIf="!isLoading" [class]="style">
     <p class="flex m-auto">{{name}}</p>
 </button>
-<button *ngIf="!isLoading" [class]="style">
+<button *ngIf="isLoading" [class]="style">
     <mat-spinner class="flex m-auto" [diameter]="25"></mat-spinner>
 </button>

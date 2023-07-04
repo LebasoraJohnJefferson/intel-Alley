@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-
+import { FormBuilder,Validators,FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-forgotpassword',
@@ -8,8 +8,18 @@ import { Location } from '@angular/common';
   styleUrls: ['./forgotpassword.component.scss']
 })
 export class ForgotpasswordComponent {
-  isLoading:boolean = true
-  constructor(public location:Location){
+  isLoading:boolean = false
+
+  emailForm:FormGroup = this._fb.group({
+    email:['',[Validators.required,Validators.email]]
+  })
+
+
+
+  constructor(
+    public location:Location,
+    private _fb:FormBuilder
+    ){
 
   }
 
@@ -18,6 +28,9 @@ export class ForgotpasswordComponent {
   }
 
   clickSubmit(event:boolean){
-    this.isLoading = !this.isLoading
+    this.isLoading = !event
+    if(this.emailForm.invalid){
+      alert('Invalid Email')
+    }
   }
 }

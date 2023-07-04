@@ -21,7 +21,7 @@ export class CustomBtnComponent {
 
   ngOnInit(){
     this.style = `
-      rounded p-3 mx-2 font-bold
+      rounded p-3 font-bold
       ${this.textColor}
       ${this.bgColor}
       ${this.bgColorHover}
