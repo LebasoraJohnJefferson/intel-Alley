@@ -10,6 +10,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AccountComponent } from './pages/account/account.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { AboutComponent } from './pages/about/about.component';
+import { SurveysComponent } from './pages/surveys/surveys.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { NotificationComponent } from './components/notification/notification.co
     HeaderComponent,
     SidebarComponent,
     AccountComponent,
-    NotificationComponent
+    NotificationComponent,
+    AboutComponent,
+    SurveysComponent
   ],
   imports: [
     CommonModule,
