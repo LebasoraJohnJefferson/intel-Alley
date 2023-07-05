@@ -198,7 +198,7 @@
       <img
         src="../../../../../assets/images/background.jpg"
         alt=""
-        class="h-[200px] lg:h-[300px] object-cover w-full rounded-2xl"
+        class="h-[150px] lg:h-[200px] object-cover w-full rounded-2xl"
       />
 
       <div
@@ -215,25 +215,14 @@
 
           <div class="mt-5 lg:mt-20 mx-auto text-center lg:text-start">
             <h1 class="font-semibold text-2xl capitalize">
-              {{
-                profile.name.split(" ")[0].charAt(0).toUpperCase() +
-                  profile.name.slice(1)
-              }}
+              John Doe
             </h1>
             <div class="lg:flex items-center">
-              <div class="text-sm text-slate-700 mb-1 lg:mb-0">
-                @{{ profile.username }}
-              </div>
-              <span *ngIf="profile.username" class="mx-2 hidden lg:block"
-                >·</span
-              >
-
               <div class="text-[10px] flex items-center w-fit mx-auto lg:mx-0">
                 <p
-                  *ngFor="let role of profile.UserRoles"
                   class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md"
                 >
-                  {{ role.Role.title }}
+                  Alumnus
                 </p>
               </div>
             </div>
@@ -267,7 +256,7 @@
                 ID number:
               </td>
               <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.StudentCredential.schoolId }}
+                2018-02023
               </td>
             </tr>
 
@@ -276,23 +265,7 @@
                 Course:
               </td>
               <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.StudentCredential.Course.title }}
-              </td>
-            </tr>
-
-            <tr>
-              <td class="border border-gray-300 p-1 px-2 text-[12px]">
-                Section:
-              </td>
-              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.StudentCredential.section }}
-              </td>
-            </tr>
-
-            <tr>
-              <td class="border border-gray-300 p-1 px-2 text-[12px]">Year:</td>
-              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.StudentCredential.year }}
+                Bachelor of Science in Information Technology
               </td>
             </tr>
 
@@ -301,7 +274,31 @@
                 Email:
               </td>
               <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.email }}
+                student@evsu.edu.ph
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 p-1 px-2 text-[12px]">
+                Academic Status:
+              </td>
+              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
+                <p
+                  class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
+                >
+                  Graduate
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-300 p-1 px-2 text-[12px]">
+                Employment Status:
+              </td>
+              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
+                <p
+                  class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
+                >
+                  Unemployed
+                </p>
               </td>
             </tr>
           </table>
@@ -309,6 +306,38 @@
       </div>
 
       <hr />
+
+      <div class="mt-10 mb-20">
+        <div class="mt-5 md:mt-0">
+          <div class="mb-2 font-semibold pl-6">Employment History</div>
+
+          <div class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md">
+
+            <div *ngIf="history.length == 0" class="h-[200px] grid place-items-center">
+              <div class="">
+                <img
+                  src="../../../../../assets/images/empty-box.png"
+                  alt=""
+                  class="w-[80px] h-[80px] object-cover mx-auto"
+                />
+                <p class="text-[12px] text-center mt-2">No data</p>
+              </div>
+            </div>
+
+            <p-timeline [value]="history" align="left">
+              <ng-template pTemplate="content" let-log>
+                <div class="mb-1">
+                  <div class="text-[10px] md:text-[11px]">
+                    {{ dateFormat(log.createdAt) }}
+                  </div>
+                  <div class="font-semibold text-[12px] md:text-sm">{{ log.job }}</div>
+                  <p class="text-[11px]">{{ log.description }}</p>
+                </div>
+              </ng-template>
+            </p-timeline>
+          </div>
+        </div>
+      </div>
 
 
     </div>
@@ -321,11 +350,18 @@
     <div class="md:max-w-[400px]">
       <div class="grid gap-1">
         <div
-          *ngIf="profile.isPasswordChange == true"
+          *ngIf="true"
           (click)="editModal = true; op.toggle($event)"
           class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
         >
           <i class="fal fa-user mr-1"></i>Edit Profile
+        </div>
+        <div
+          *ngIf="true"
+          (click)="editModal = true; op.toggle($event)"
+          class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+        >
+          <i class="fal fa-user mr-1"></i>Update Employment
         </div>
         <div
           (click)="changePasswordModal = true"

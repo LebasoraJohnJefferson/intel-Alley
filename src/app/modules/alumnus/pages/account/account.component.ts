@@ -18,24 +18,10 @@ export class AccountComponent implements OnInit {
   defaultImg: any = '../../../../../assets/images/admin.png';
   previewImg: any = '';
 
-  tweets: any = [];
-  tweet: any = '';
-
   isLoading: boolean = true;
-  reactLoading: boolean = false;
-  tweetCommentsModal: boolean = false;
-  comment: string = '';
-  comments: any = [];
-  commentTweetId: any = '';
 
   profiledata: any = {
     name: null,
-    username: null,
-    section: null,
-    year: null,
-    image: null,
-    email: null,
-    CourseId: null,
   };
 
   changePassData: any = {
@@ -43,6 +29,23 @@ export class AccountComponent implements OnInit {
     newpass: null,
   };
 
+  history: any = [
+    {
+      createdAt: new Date(),
+      job: "Web Developer",
+      description: "lorem ipsum dolor",
+    },
+    {
+      createdAt: new Date(),
+      job: "Web Developer",
+      description: "lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor",
+    },
+    {
+      createdAt: new Date(),
+      job: "Web Developer",
+      description: "lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor",
+    },
+  ]
 
   changePasswordModal: boolean = false;
 
