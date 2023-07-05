@@ -14,6 +14,8 @@ import { ForgotpasswordComponent } from './pages/forgotpassword/forgotpassword.c
 import { CustomBtnComponent } from './components/custom-btn/custom-btn.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
+import { NotificationComponent } from './components/notification/notification.component';
+
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     ForgotpasswordComponent,
     CustomBtnComponent,
     PageNotFoundComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,
@@ -32,5 +35,6 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     ReactiveFormsModule,
     MatProgressSpinnerModule
   ],
+  exports: [NotificationComponent],
 })
 export class CoreModule {}
