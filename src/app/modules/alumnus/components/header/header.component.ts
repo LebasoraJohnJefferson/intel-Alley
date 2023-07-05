@@ -29,8 +29,13 @@ export class HeaderComponent implements OnInit {
       icon: 'fal fa-pallet',
     },
     {
-      title: 'Anouncements',
-      route: 'anouncements',
+      title: 'Jobs',
+      route: 'jobs',
+      icon: 'fal fa-pallet',
+    },
+    {
+      title: 'Events',
+      route: 'events',
       icon: 'fal fa-pallet',
     },
     {

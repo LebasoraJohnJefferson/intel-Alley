@@ -4,7 +4,7 @@
       class="lg:hidden flex justify-between items-center px-5 py-3 fixed w-full"
       [ngClass]="{ 'bg-white shadow-md text-slate-800': onScroll }"
     >
-      <div class="flex items-center" routerLink="/faculty/">
+      <div class="flex items-center" routerLink="/">
         <img
           src="../../../../../assets/images/selfie.png"
           alt=""
@@ -23,7 +23,7 @@
         </div>
 
         <div
-          *ngIf="user.length != 0"
+          *ngIf="user.length != 0"  
           class="mr-3 cursor-pointer border rounded-full w-fit h-fit"
           [ngClass]="onScroll ? 'border-slate-200' : 'border-purple-900'"
           routerLink="/account"
