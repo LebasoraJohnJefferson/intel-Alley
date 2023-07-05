@@ -59,17 +59,17 @@ export class HeaderComponent implements OnInit {
     window.addEventListener('scroll', this.listenScrollEvent);
 
     const route = this.route.snapshot.children[0].routeConfig?.path;
-    route == '' ? (this.currentRoute = '/') : (this.currentRoute = route);
+    route == '' ? (this.currentRoute = '/admin/') : (this.currentRoute = route);
   }
 
   getCurrentRouteURL(route: any) {
-    route == '' ? (this.currentRoute = '/') : (this.currentRoute = route);
+    route == '' ? (this.currentRoute = '/admin/') : (this.currentRoute = route);
 
     this.openCloseNavOverlay();
   }
 
   logout() {
-    this.authService.logout('faculty');
+    this.authService.logout('admin');
   }
 
   openCloseNavOverlay() {
