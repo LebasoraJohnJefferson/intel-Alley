@@ -16,6 +16,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
 import { JobsComponent } from './pages/jobs/jobs.component';
 import { EventsComponent } from './pages/events/events.component';
+import { SurveyContentComponent } from './components/survey-content/survey-content.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { EventsComponent } from './pages/events/events.component';
     AboutComponent,
     SurveysComponent,
     JobsComponent,
-    EventsComponent
+    EventsComponent,
+    SurveyContentComponent
   ],
   imports: [
     CommonModule,

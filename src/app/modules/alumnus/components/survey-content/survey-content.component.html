@@ -1,0 +1,15 @@
+<div class="flex-full w-full flex flex-wrap  gap-y-2">
+    <div class="border  border-red-200 grid m-auto grid-cols-1 w-[20rem]   px-2 shadow-md rounded border" *ngFor="let _ of fakeArray">
+        <span class="text-[16px] w-full h-full flex items-center">
+            <p class="mt-2">
+                {{survey.question}}
+            </p>
+        </span>
+        <div class=" flex items-center  w-full">
+            <p-chart class="w-[300px] m-auto" type="doughnut" 
+                    [data]="data" 
+                    [options]="chartOptions" >
+            </p-chart>
+        </div>
+    </div>
+</div>
