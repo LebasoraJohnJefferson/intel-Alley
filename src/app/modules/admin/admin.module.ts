@@ -12,7 +12,6 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { AccountComponent } from './pages/account/account.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AlumniComponent } from './pages/alumni/alumni.component';
-import { JobsComponent } from './pages/jobs/jobs.component';
 import { EventsComponent } from './pages/events/events.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
 import { AlumnusComponent } from './pages/alumnus/alumnus.component';
@@ -27,7 +26,6 @@ import { AlumnusComponent } from './pages/alumnus/alumnus.component';
     AccountComponent,
     LogsComponent,
     AlumniComponent,
-    JobsComponent,
     EventsComponent,
     SurveysComponent,
     AlumnusComponent

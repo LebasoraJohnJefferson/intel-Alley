@@ -8,7 +8,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AboutComponent } from './pages/about/about.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
-import { JobsComponent } from './pages/jobs/jobs.component';
 import { EventsComponent } from './pages/events/events.component';
 
 const routes: Routes = [
@@ -19,7 +18,6 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'surveys', component: SurveysComponent },
-      { path: 'jobs', component: JobsComponent },
       { path: 'events', component: EventsComponent },
       { path: 'about', component: AboutComponent },
 

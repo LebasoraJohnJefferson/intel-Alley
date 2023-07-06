@@ -14,7 +14,6 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AboutComponent } from './pages/about/about.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
-import { JobsComponent } from './pages/jobs/jobs.component';
 import { EventsComponent } from './pages/events/events.component';
 import { SurveyContentComponent } from './components/survey-content/survey-content.component';
 
@@ -28,7 +27,6 @@ import { SurveyContentComponent } from './components/survey-content/survey-conte
     AccountComponent,
     AboutComponent,
     SurveysComponent,
-    JobsComponent,
     EventsComponent,
     SurveyContentComponent
   ],
