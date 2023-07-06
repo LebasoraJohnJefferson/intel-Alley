@@ -17,10 +17,16 @@ export class SurveysComponent implements OnInit {
 
   createForm!: FormGroup;
 
+  cols: any[] = [];
+  exportColumns: any[] = [];
+  selectedStudents: any[] = [];
+
   constructor(
     private router: Router,
     private toast: HotToastService
   ) {}
+
+  importedStudents: any[] = [];
 
   ngOnInit(): void {
     this.getStudents();
@@ -34,6 +40,15 @@ export class SurveysComponent implements OnInit {
       year: new FormControl('', [Validators.required]),
       password: new FormControl('', Validators.required),
     });
+
+    this.cols = [
+      { field: 'StudentCredential.schoolId', header: 'Student ID' },
+      { field: 'name', header: 'Name' },
+      { field: 'StudentCredential.Course.acronym', header: 'Course' },
+      { field: 'StudentCredential.section', header: 'Section' },
+      { field: 'StudentCredential.year', header: 'Year' },
+      { field: 'email', header: 'Email' },
+    ];
   }
 
   getStudents() {
