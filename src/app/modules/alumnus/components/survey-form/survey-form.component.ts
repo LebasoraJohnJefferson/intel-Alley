@@ -12,7 +12,7 @@ export class SurveyFormComponent implements OnInit {
 
       generalInfo = this._formBuilder.group({
         address: ['', [Validators.required,Validators.email]],
-        contactNumber:['',[Validators.required]],
+        contactNumber: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
         civilStatus:['',[Validators.required]],
         sex:['',[Validators.required]]
       });
@@ -48,6 +48,16 @@ export class SurveyFormComponent implements OnInit {
           university:['',Validators.required],
           highLvl:['',Validators.required],
           yearGraduated:['',Validators.required]
+        }),
+        profExam1:this._formBuilder.group({
+          examName:['',Validators.required],
+          yearOfExam:['',Validators.required],
+          rating:['',Validators.required]
+        }),
+        profExam2:this._formBuilder.group({
+          examName:['',Validators.required],
+          yearOfExam:['',Validators.required],
+          rating:['',Validators.required]
         })
       });
 

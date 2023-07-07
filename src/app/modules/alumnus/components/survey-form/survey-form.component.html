@@ -28,7 +28,7 @@
                 class="w-full border rounded outline-0"
                 type="number"
                 formControlName="contactNumber"
-                placeholder="Enter Contract Number"
+                placeholder="E.G: (09********* or +639*********)"
                 pInputText
                 required
               />
@@ -64,20 +64,23 @@
 
 
 
-    <mat-step [stepControl]="educationalBG" label="Fill out your address">
+    <mat-step [stepControl]="educationalBG" class="mb-2" label="Fill out your address">
         <ng-template matStepLabel>
             <span class="text-black font-bold">Educational Background</span>
         </ng-template>
+      <div class="w-full flex justify-start px-3">
+        <label class="block text-base font-bold my-2 text-gray-700 text-center">A.) Educational Attainment</label>
+      </div>
       <form [formGroup]="educationalBG" class="grid gap-3" >
-        <div>
-          <table class="w-full grid">
+        <div class="overflow-x-auto">
+          <table class="md:w-full w-[60rem] grid ">
             <tr class="grid grid-cols-4 gap-2">
               <th class="block text-sm font-medium text-gray-700">Degree</th>
               <th class="block text-sm font-medium text-gray-700">University / College</th>
               <th class="block text-sm font-medium text-gray-700">Highest Level/Units Earned (if not graduated)</th>
               <th class="block text-sm font-medium text-gray-700">Year Graduated</th>
             </tr>
-            <tr formGroupName="elementary" class="grid grid-cols-4 gap-2">
+            <tr formGroupName="elementary" class="grid grid-cols-4  gap-2">
               <td class="block text-sm font-medium text-gray-700 text-center">Elementary</td>
               <td>
                 <input
@@ -258,6 +261,75 @@
               </td>
             </tr>
           </table>
+            
+          <div class="w-full flex justify-start px-3 my-2">
+            <label class="block text-base font-bold my-2 text-gray-700 text-center">B.) Professional Examination/s Passed</label>
+          </div>
+          <table class="md:w-full w-[60rem] grid ">
+            <tr class="grid grid-cols-3 gap-2 my-1">
+              <th class="block text-sm font-medium text-gray-700">Name of Examination (PRC, CSC and TESDA)</th>
+              <th class="block text-sm font-medium text-gray-700">Year of Examination</th>
+              <th class="block text-sm font-medium text-gray-700">Rank/Rating (Optional)</th>
+            </tr>
+            <tr  formGroupName="profExam1" class="grid grid-cols-3 gap-2">
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="examName"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                pInputText
+                formControlName="yearOfExam"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="number"
+                pInputText
+                formControlName="rating"
+                required
+              />
+              </td>
+            </tr>
+            <tr formGroupName="profExam2"  class="grid grid-cols-3 gap-2">
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="examName"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                pInputText
+                formControlName="yearOfExam"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="number"
+                pInputText
+                formControlName="rating"
+                required
+              />
+              </td>
+            </tr>
+          </table>
         </div>
 
       </form>
@@ -276,7 +348,9 @@
         <ng-template matStepLabel>
             <span class="text-black font-bold">Employment Information</span>
         </ng-template>
-        <p>You are now done.</p>
+        <div class="w-full flex justify-start px-3">
+          <label class="block text-base font-bold my-2 text-gray-700 text-center">A.) Current Employment Status</label>
+        </div>
     </mat-step>
 
 
