@@ -1,0 +1,301 @@
+  <mat-stepper class="bg-transparent border border-red-200 rounded shadow-lg py-2"  #stepper orientation="vertical">
+  
+    <mat-step [stepControl]="generalInfo" >
+        <ng-template matStepLabel>
+            <span class="text-black font-bold">General Information</span>
+        </ng-template>
+        <form [formGroup]="generalInfo" class="grid gap-3" >
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Address</label>
+
+            <div class="mt-1 relative">
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                formControlName="address"
+                placeholder="Your address"
+                pInputText
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Contract Number</label>
+
+            <div class="mt-1 relative">
+              <input
+                class="w-full border rounded outline-0"
+                type="number"
+                formControlName="contactNumber"
+                placeholder="Enter Contract Number"
+                pInputText
+                required
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Civil Status</label>
+              <select class="mt-1 relative" placeholder="Civil Status" pInputText formControlName="civilStatus">
+                <option value="Single" selected >Single</option>
+                <option value="Engaged">Engaged</option>
+                <option value="Married">Married</option>
+                <option value="windowed">Windowed</option>
+                <option value="separated">Separated</option>
+                <option value="divorced">Divorced</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Sex</label>
+              <select class="mt-1 relative" placeholder="Civil Status" pInputText formControlName="sex">
+                <option value="male" selected >Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+        </form>
+        
+        <button
+            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
+    </mat-step>
+
+
+
+    <mat-step [stepControl]="educationalBG" label="Fill out your address">
+        <ng-template matStepLabel>
+            <span class="text-black font-bold">Educational Background</span>
+        </ng-template>
+      <form [formGroup]="educationalBG" class="grid gap-3" >
+        <div>
+          <table class="w-full grid">
+            <tr class="grid grid-cols-4 gap-2">
+              <th class="block text-sm font-medium text-gray-700">Degree</th>
+              <th class="block text-sm font-medium text-gray-700">University / College</th>
+              <th class="block text-sm font-medium text-gray-700">Highest Level/Units Earned (if not graduated)</th>
+              <th class="block text-sm font-medium text-gray-700">Year Graduated</th>
+            </tr>
+            <tr formGroupName="elementary" class="grid grid-cols-4 gap-2">
+              <td class="block text-sm font-medium text-gray-700 text-center">Elementary</td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="university"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="highLvl"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                pInputText
+                formControlName="yearGraduated"
+                required
+              />
+              </td>
+            </tr>
+            <tr formGroupName="secondary"  class="grid grid-cols-4 gap-2">
+              <td class="block text-sm font-medium text-gray-700 text-center">Secondary</td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                formControlName="university"
+                pInputText
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                formControlName="highLvl"
+                pInputText
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                formControlName="yearGraduated"
+                pInputText
+                required
+              />
+              </td>
+            </tr>
+            <tr formGroupName="tertiary" class="grid grid-cols-4 gap-2">
+              <td class="block text-sm font-medium text-gray-700 text-center">Tertiary</td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="university"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="highLvl"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                pInputText
+                formControlName="yearGraduated"
+                required
+              />
+              </td>
+            </tr>
+            <tr formGroupName="baccalaureate" class="grid grid-cols-4 gap-2">
+              <td class="block text-sm font-medium text-gray-700 text-center">Baccalaureate</td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="university"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                formControlName="highLvl"
+                pInputText
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                formControlName="yearGraduated"
+                pInputText
+                required
+              />
+              </td>
+            </tr>
+            <tr formGroupName="master" class="grid grid-cols-4 gap-2">
+              <td class="block text-sm font-medium text-gray-700 text-center">Master</td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="university"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="highLvl"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                formControlName="yearGraduated"
+                pInputText
+                required
+              />
+              </td>
+            </tr>
+            <tr formGroupName="doctorate" class="grid grid-cols-4 gap-2">
+              <td class="block text-sm font-medium text-gray-700 text-center">Doctorate</td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="university"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="highLvl"
+                required
+              />
+              </td>
+              <td>
+                <input
+                class="w-full border rounded outline-0"
+                type="date"
+                pInputText
+                formControlName="yearGraduated"
+                required
+              />
+              </td>
+            </tr>
+          </table>
+        </div>
+
+      </form>
+      <div class="flex gap-2">
+        <button
+            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
+        <button
+            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
+      </div>
+    </mat-step>
+
+
+    <mat-step [stepControl]="thirdFormGroup">
+        <ng-template matStepLabel>
+            <span class="text-black font-bold">Employment Information</span>
+        </ng-template>
+        <p>You are now done.</p>
+    </mat-step>
+
+
+    <mat-step [stepControl]="fourthFormGroup">
+      <ng-template matStepLabel>
+        <span class="text-black font-bold">Survey One</span>
+      </ng-template>
+      <p>You are now done.</p>
+    </mat-step>
+
+    <mat-step [stepControl]="fifthFormGroup">
+      <ng-template matStepLabel>
+        <span class="text-black font-bold">Final Survey</span>
+      </ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  

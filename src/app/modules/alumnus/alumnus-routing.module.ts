@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate: [AlumnusGuard],
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'surveys', component: SurveysComponent },
+      { path: 'surveys', component: SurveysComponent},
       { path: 'events', component: EventsComponent },
       { path: 'about', component: AboutComponent },
 

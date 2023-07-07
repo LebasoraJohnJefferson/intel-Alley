@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./surveys.component.scss']
 })
 export class SurveysComponent {
-
+  isSurveyTaken:boolean = false
 }

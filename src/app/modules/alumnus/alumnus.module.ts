@@ -16,6 +16,8 @@ import { AboutComponent } from './pages/about/about.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
 import { EventsComponent } from './pages/events/events.component';
 import { SurveyContentComponent } from './components/survey-content/survey-content.component';
+import { SurveyFormComponent } from './components/survey-form/survey-form.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { SurveyContentComponent } from './components/survey-content/survey-conte
     AboutComponent,
     SurveysComponent,
     EventsComponent,
-    SurveyContentComponent
+    SurveyContentComponent,
+    SurveyFormComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +40,8 @@ import { SurveyContentComponent } from './components/survey-content/survey-conte
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    CoreModule
+    CoreModule,
+    MatStepperModule,
   ]
 })
 export class AlumnusModule { }
