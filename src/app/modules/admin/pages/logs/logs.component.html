@@ -4,10 +4,152 @@
     <p class="text-slate-100 text-[12px]">Information about the system</p>
   </div>
 
-  <div class="mt-24 pb-10">
-    <h2 class="font-semibold text-lg md:text-xl mb-5 text-slate-800">
-      Content
-    </h2>
+  <div class="mt-20 pb-10">
+    <p-tabMenu
+      #tab
+      [model]="tabItems"
+      [activeItem]="activeItem"
+      (click)="changeTab(tab)"
+    ></p-tabMenu>
+
+    <div class="w-full">
+      <div *ngIf="activeItem.label == 'System'">
+        <div *ngIf="isLoading" class="grid gap-2 mt-10">
+          <p-skeleton
+            width="100%"
+            height="60px"
+            *ngFor="let arr of ['', '', '', '', '', '', '', '']"
+          ></p-skeleton>
+        </div>
+
+        <!-- TODO: add show more functionality instead of pulling all the logs in the database every time calling the api endpoint -->
+        <div
+          *ngIf="!isLoading && allLogs.length == 0"
+          class="text-center mt-10"
+        >
+          <div class="">
+            <img
+              src="../../../../../assets/images/empty-box.png"
+              alt=""
+              class="w-[150px] h-[150px] object-cover mx-auto"
+            />
+            <h1 class="text-center mt-8 font-semibold text-slate-800 text-md">
+              No logs
+            </h1>
+          </div>
+        </div>
+
+        <div class="mt-10">
+          <div class="grid gap-2">
+            <div
+              *ngFor="let log of allLogs; trackBy: logTrack"
+              class="bg-slate-50 rounded-md py-2 px-3 cursor-pointer hover:bg-slate-100 transition-all"
+            >
+              <div class="text-[10px]">{{ dateFormat(log.createdAt) }}</div>
+              <div class="text-[12px]">
+                <div class="flex items-center">
+                  <div class="font-semibold mr-1 capitalize">
+                    {{ log.User.name }}
+                  </div>
+                  <div class="text-[8px] flex items-center">
+                    <div *ngFor="let role of log.User.UserRoles">
+                      <div
+                        *ngIf="
+                          role.Role.title == 'Admin' &&
+                          log.User.position == 'Head'
+                        "
+                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                      >
+                        SAO Head
+                      </div>
+
+                      <div
+                        *ngIf="
+                          role.Role.title == 'Admin' &&
+                          log.User.position == 'Director'
+                        "
+                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                      >
+                        SAO Director
+                      </div>
+
+                      <div
+                        *ngIf="
+                          role.Role.title == 'Admin' &&
+                          log.User.coverage == 0 &&
+                          log.User.position == 'Scholarship Officer'
+                        "
+                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                      >
+                        SAO Scholarship Officer
+                      </div>
+                      <div
+                        *ngIf="
+                          role.Role.title == 'Admin' &&
+                          log.User.coverage == 0 &&
+                          log.User.position == 'Administrative Aide'
+                        "
+                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                      >
+                        SAO Administrative Aide
+                      </div>
+                      <div
+                        *ngIf="
+                          role.Role.title == 'Admin' &&
+                          log.User.coverage == 0 &&
+                          log.User.position == 'Staff'
+                        "
+                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                      >
+                        SAO Staff
+                      </div>
+
+                      <div
+                        *ngIf="
+                          role.Role.title == 'Faculty' &&
+                          log.User.coverage != 0 &&
+                          log.User.position == 'Head'
+                        "
+                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                      >
+                        {{ getCourse(log.User.coverage) }} Head
+                      </div>
+
+                      <div
+                        *ngIf="
+                          role.Role.title == 'Faculty' &&
+                          log.User.coverage != 0 &&
+                          log.User.position == 'Staff'
+                        "
+                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                      >
+                        {{ getCourse(log.User.coverage) }} Staff
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="">- {{ log.description }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="activeItem.label == 'User'">
+        <div class="mt-10">
+          <p-timeline [value]="logs" align="left">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1">
+                <div class="text-[10px] md:text-[12px]">
+                  {{ dateFormat(log.createdAt) }}
+                </div>
+                <div class="text-[12px] md:text-sm">{{ log.description }}</div>
+              </div>
+            </ng-template>
+          </p-timeline>
+        </div>
+      </div>
+    </div>
 
   </div>
 
