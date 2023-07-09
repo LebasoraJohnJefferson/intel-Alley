@@ -18,7 +18,6 @@ import { EventsComponent } from './pages/events/events.component';
 import { SurveyContentComponent } from './components/survey-content/survey-content.component';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
 import {MatStepperModule} from '@angular/material/stepper';
-import { CheckboxModule } from 'primeng/checkbox';
 
 
 
@@ -44,7 +43,6 @@ import { CheckboxModule } from 'primeng/checkbox';
     HttpClientModule,
     CoreModule,
     MatStepperModule,
-    CheckboxModule
   ]
 })
 export class AlumnusModule { }

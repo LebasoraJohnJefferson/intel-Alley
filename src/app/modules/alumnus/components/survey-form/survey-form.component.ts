@@ -14,15 +14,28 @@ export class SurveyFormComponent implements OnInit {
     selectedTypeOfOrganization:any;
     selectedJobStatus:any;
     selectedOccupation:any;
+    selectedReasonOfHiring:any;
     showEmploymentStatusForm:string = ''
     isOtherOccupation:boolean = false
-
+    isOtherCurrentJob:boolean = false
+    isSelectedDegreeRelative:any;
 
     categories: any[] = [
         { name: 'Employed', key: 'Employed' },
         { name: 'Self-employed', key: 'Self-employed' },
         { name: 'Unemployed', key: 'Unemployed' },
     ];
+
+
+    workExp:any=[
+      {name:'0-6 months' ,key:'workEpx0_6'},
+      {name:'7 months - 1 year' ,key:'workEpx7_1y'},
+      {name:'2 years - 3 years' ,key:'workEpx2y_3y'},
+      {name:'4 years - 5 years' ,key:'workEpx4y_5y'},
+      {name:'6 years - 7 years' ,key:'workEpx6y_7y'},
+      {name:'8 years - 9 years' ,key:'workEpx8y_9y'},
+      {name:'10 years & onwards' ,key:'workEpx10y_more'}
+    ]
 
     typeOfOrganization: any[]=[
       {name:"Private",key:'Private' },
@@ -46,6 +59,28 @@ export class SurveyFormComponent implements OnInit {
       { name:"Temporary",key:'Temporary' },
       { name:"Contractual",key:'Contractual' },
       { name:"Job Order/Casual/COS",key:'Order/Casual/COS' },
+    ]
+
+    eduBG:any=[
+      { name: 'Elementary', key: 'elementary' },
+      { name: 'Secondary', key: 'secondary' },
+      { name: 'Tertiary', key: 'tertiary' },
+      { name: 'Baccalaureate', key: 'baccalaureate' },
+      { name: 'Master', key: 'master' },
+      { name: 'Doctorate', key: 'doctorate' }
+    ]
+
+    reasonOfHiringList:any=[
+      { name: 'Through friends and relatives', key: 'throughFriendsAndRelatives' },
+      { name: 'Advertisement in media', key: 'advertisementInMedia' },
+      { name: 'Walk-in Applicant', key: 'walkInApplicant' },
+      { name: 'Arrange by school job placement officer', key: 'arrangeBySchoolJobPlacementOfficer' },
+      { name: 'Other', key: 'Other' },
+    ]
+
+    isJobIsBaseOnDegreeTaken:any=[
+      { name: 'Yes', key: true },
+      { name: 'No', key:false },
     ]
 
 
@@ -104,9 +139,68 @@ export class SurveyFormComponent implements OnInit {
       employmentInfo = this._formBuilder.group({
         employmentStatus: ['', Validators.required],
         typeOfOrgChosen:['', Validators.required],
-        occupationClass:['', Validators.required],
+        proofOfEmp:['', Validators.required],
         jobStatus:['', Validators.required],
+        workPosition:['', Validators.required],
+        orgName:['', Validators.required],
+        orgAddress:['', Validators.required],
+        yrsInCompany:['', Validators.required],
+        awards:['', Validators.required],
+        monthlyIncome:['', Validators.required],
+        occupClass:['', Validators.required],
+        reason:[''],
+        reasonOfHiring:['', Validators.required],
+        otherReasonOfHiring:[''],
+        isDegreeRelativeTakenInEVSU:['',Validators.required],
+        CertificateOfEmploy:['',Validators.required],
+        workEpx0_6:this._formBuilder.group({
+          natureOfWork:['',Validators.required],
+          jobStatus:['',Validators.required],
+          JobRelatedToDegree:['',Validators.required],
+          enrolledOtherCourses:['',Validators.required],
+        }),
+        workEpx7_1y:this._formBuilder.group({
+          natureOfWork:['',Validators.required],
+          jobStatus:['',Validators.required],
+          JobRelatedToDegree:['',Validators.required],
+          enrolledOtherCourses:['',Validators.required],
+        }),
+        workEpx2y_3y:this._formBuilder.group({
+          natureOfWork:['',Validators.required],
+          jobStatus:['',Validators.required],
+          JobRelatedToDegree:['',Validators.required],
+          enrolledOtherCourses:['',Validators.required],
+        }),
+        workEpx4y_5y:this._formBuilder.group({
+          natureOfWork:['',Validators.required],
+          jobStatus:['',Validators.required],
+          JobRelatedToDegree:['',Validators.required],
+          enrolledOtherCourses:['',Validators.required],
+        }),
+        workEpx6y_7y:this._formBuilder.group({
+          natureOfWork:['',Validators.required],
+          jobStatus:['',Validators.required],
+          JobRelatedToDegree:['',Validators.required],
+          enrolledOtherCourses:['',Validators.required],
+        }),
+        workEpx8y_9y:this._formBuilder.group({
+          natureOfWork:['',Validators.required],
+          jobStatus:['',Validators.required],
+          JobRelatedToDegree:['',Validators.required],
+          enrolledOtherCourses:['',Validators.required],
+        }),
+        workEpx10y_more:this._formBuilder.group({
+          natureOfWork:['',Validators.required],
+          jobStatus:['',Validators.required],
+          JobRelatedToDegree:['',Validators.required],
+          enrolledOtherCourses:['',Validators.required],
+        })
       });
+
+
+
+
+
       fourthFormGroup = this._formBuilder.group({
         secondCtrl: ['', Validators.required],
       });
@@ -127,7 +221,7 @@ export class SurveyFormComponent implements OnInit {
 
 
       checkForm(){
-        console.log(this.educationalBG.value)
+        console.log(this.employmentInfo.value)
       }
 
       changeEmploymentStatus(value:any){
@@ -144,9 +238,18 @@ export class SurveyFormComponent implements OnInit {
         this.isOtherOccupation = value == 'Other'
         this.selectedOccupation = [value];
       }
+      
+      changeCauseOfHiring(value:any){
+        this.isOtherCurrentJob = value == 'Other'
+        this.selectedReasonOfHiring = [value];
+      }
 
       changeJobStatus(value:any){
         this.selectedJobStatus = [value];
+      }
+
+      changeIsDegreeRelative(value:any){
+        this.isSelectedDegreeRelative = [value]
       }
 
 
@@ -172,6 +275,32 @@ export class SurveyFormComponent implements OnInit {
 
       clickUploadProof(){
         let element: HTMLElement = document.querySelector('input[name="proofOfEmployment"]') as HTMLElement;
+        if (element) element.click();
+      }
+
+      // upload cirtificate of employment
+
+      uploadCertificateOfEmp(event:any){
+        if(event.target.files[0]){
+          this.uploadFile = event.target.files[0]
+        }
+        if(!event.target.files[0] || event.target.files[0].length == 0) {
+          this.toast.warning('You must select an File');
+          return;
+        }
+    
+        // var mimeType = event.target.files[0].type;
+    
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+    
+        reader.onload = (_event) => {
+          this.onLoadFile = `${reader.result}` 
+        }
+      }
+
+      clickUploadCertificateOfEmployment(){
+        let element: HTMLElement = document.querySelector('input[name="CertificateOfEmployment"]') as HTMLElement;
         if (element) element.click();
       }
 

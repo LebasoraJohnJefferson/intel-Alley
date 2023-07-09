@@ -80,158 +80,8 @@
               <th class="block text-sm font-medium text-gray-700">Highest Level/Units Earned (if not graduated)</th>
               <th class="block text-sm font-medium text-gray-700">Year Graduated</th>
             </tr>
-            <tr formGroupName="elementary" class="grid grid-cols-4  gap-2">
-              <td class="block text-sm font-medium text-gray-700 text-center">Elementary</td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="university"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="highLvl"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="date"
-                pInputText
-                formControlName="yearGraduated"
-                required
-              />
-              </td>
-            </tr>
-            <tr formGroupName="secondary"  class="grid grid-cols-4 gap-2">
-              <td class="block text-sm font-medium text-gray-700 text-center">Secondary</td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                formControlName="university"
-                pInputText
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                formControlName="highLvl"
-                pInputText
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="date"
-                formControlName="yearGraduated"
-                pInputText
-                required
-              />
-              </td>
-            </tr>
-            <tr formGroupName="tertiary" class="grid grid-cols-4 gap-2">
-              <td class="block text-sm font-medium text-gray-700 text-center">Tertiary</td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="university"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="highLvl"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="date"
-                pInputText
-                formControlName="yearGraduated"
-                required
-              />
-              </td>
-            </tr>
-            <tr formGroupName="baccalaureate" class="grid grid-cols-4 gap-2">
-              <td class="block text-sm font-medium text-gray-700 text-center">Baccalaureate</td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="university"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                formControlName="highLvl"
-                pInputText
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="date"
-                formControlName="yearGraduated"
-                pInputText
-                required
-              />
-              </td>
-            </tr>
-            <tr formGroupName="master" class="grid grid-cols-4 gap-2">
-              <td class="block text-sm font-medium text-gray-700 text-center">Master</td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="university"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="highLvl"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="date"
-                formControlName="yearGraduated"
-                pInputText
-                required
-              />
-              </td>
-            </tr>
-            <tr formGroupName="doctorate" class="grid grid-cols-4 gap-2">
-              <td class="block text-sm font-medium text-gray-700 text-center">Doctorate</td>
+            <tr [formGroupName]="EducationalBG.key" *ngFor="let EducationalBG of eduBG" class="grid grid-cols-4  gap-2">
+              <td class="block text-sm font-medium text-gray-700 text-center">{{EducationalBG.name}}</td>
               <td>
                 <input
                 class="w-full border rounded outline-0"
@@ -368,7 +218,7 @@
                   If employed 
                   <i>(Attach file for proof of employment)</i> :
                 </label>
-                <input type="file"  class="hidden" (change)="uploadProof($event)" name="proofOfEmployment"/>
+                <input type="file" formControlName="proofOfEmp"  class="hidden" (change)="uploadProof($event)" name="proofOfEmployment"/>
                 <button
                   (click)="clickUploadProof()"
                   class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
@@ -384,6 +234,7 @@
                   class="w-full border rounded outline-0"
                   type="text"
                   placeholder="Enter Organization name..."
+                  formControlName="orgName"
                   pInputText
                   required
                   />
@@ -394,6 +245,7 @@
                   class="w-full border rounded outline-0"
                   type="text"
                   placeholder="Enter Organization address"
+                  formControlName="orgAddress"
                   pInputText
                   required
                   />
@@ -410,7 +262,7 @@
                 <label class="block text-base font-bold my-2 text-gray-700">B.) Occupational Classification </label>
                 <div *ngIf="!isOtherOccupation">
                   <div *ngFor="let typeOfOrg of occupationClass" class="flex mt-1 items-center gap-2 mx-1">
-                    <p-checkbox (onChange)="changeOccupationClass(typeOfOrg.name)" formControlName="occupationClass" name="{{typeOfOrg.name}}" [value]="typeOfOrg.name" [(ngModel)]="selectedOccupation" [inputId]="typeOfOrg.key"></p-checkbox>
+                    <p-checkbox (onChange)="changeOccupationClass(typeOfOrg.name)" formControlName="occupClass" name="{{typeOfOrg.name}}" [value]="typeOfOrg.name" [(ngModel)]="selectedOccupation" [inputId]="typeOfOrg.key"></p-checkbox>
                     <label class="block text-sm font-medium text-gray-700" [for]="typeOfOrg.key">{{ typeOfOrg.name }}</label>
                   </div>
                 </div>
@@ -425,6 +277,7 @@
                     type="text"
                     placeholder="Enter Other Occupation..."
                     pInputText
+                    formControlName="reason"
                     required
                     />
                   </div>
@@ -441,6 +294,161 @@
                   </div>
                 </div>
               </div>
+              <div class="w-full flex justify-start px-3">
+                <label class="block text-base font-bold my-2 text-gray-700 text-center">C.) Work Experience</label>
+              </div>
+              <div class="grid grid-cols-1 overflow-x-auto">
+                <table class="md:w-full w-[80rem] grid">
+                  <tr class="grid grid-cols-5 gap-2">
+                    <th class="block text-sm font-medium text-gray-700">Employment after Graduation</th>
+                    <th class="block text-sm font-medium text-gray-700">Nature of Work</th>
+                    <th class="block text-sm font-medium text-gray-700">Job Status</th>
+                    <th class="block text-sm font-medium text-gray-700">Job Related to the Degree Earned </th>
+                    <th class="block text-sm font-medium text-gray-700">Enrolled in other Degree Courses</th>
+                  </tr>
+                  <tr [formGroupName]="work.key" *ngFor='let work of workExp' class="grid grid-cols-5  gap-2">
+                    <td class="block text-sm font-medium text-gray-700 m-auto text-center">{{work.name}}</td>
+                    <td>
+                      <input
+                      class="w-full border rounded outline-0"
+                      type="text"
+                      pInputText
+                      formControlName="natureOfWork"
+                      required
+                    />
+                    </td>
+                    <td>
+                      <input
+                      class="w-full border rounded outline-0"
+                      type="text"
+                      pInputText
+                      formControlName="jobStatus"
+                      required
+                    />
+                    </td>
+                    <td>
+                      <input
+                      class="w-full border rounded outline-0"
+                      type="text"
+                      pInputText
+                      formControlName="JobRelatedToDegree"
+                      required
+                    />
+                    </td>
+                    <td>
+                      <input
+                      class="w-full border rounded outline-0"
+                      type="text"
+                      pInputText
+                      formControlName="enrolledOtherCourses"
+                      required
+                    />
+                    </td>
+                  </tr>                 
+                </table>
+              </div>
+              <div class="w-full flex justify-start px-3">
+                <label class="block text-base font-bold my-1 text-gray-700 text-center">D.) Designation or Work Position: </label>
+              </div>
+              <div >
+                <div  class="flex gap-2 text-sm items-center " >
+                  <div class="block font-medium text-gray-700 my-2">Designation or Work Position:</div>
+                </div>
+                <div>
+                  <input
+                  class="w-full border rounded outline-0"
+                  type="text"
+                  placeholder="Enter Other Occupation..."
+                  pInputText
+                  formControlName="workPosition"
+                  required
+                  />
+                </div>
+                <div class="my-2">
+                  <label class="block text-sm font-medium text-gray-700">Number of years in the company</label>
+                  <select class="mt-1 relative" placeholder="Enter Number Of year" pInputText formControlName="yrsInCompany">
+                    <option value="Below1" selected >below 1</option>
+                    <option value="1To5">1-5</option>
+                    <option value="6To10">6-10</option>
+                    <option value="11To15">11-15</option>
+                    <option value="16To20">16-20</option>
+                    <option value="21To25">21-25</option>
+                    <option value="25Above">above  25</option>
+                  </select>
+                </div>
+                <div  class="flex gap-2 text-sm items-center " >
+                  <div class="block font-medium text-gray-700 my-1">Awards or recognitions received (please specify): </div>
+                </div>
+                <div>
+                  <input
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    placeholder="Enter Other Occupation..."
+                    pInputText
+                    formControlName="awards"
+                    required
+                  />
+                </div>
+                <div class="my-2">
+                  <label class="block text-sm font-medium text-gray-700">Monthly Income Range</label>
+                  <select class="mt-1 relative" placeholder="Enter Number Of year" pInputText formControlName="monthlyIncome">
+                    <option value="Below10k" selected >Below ₱10,000</option>
+                    <option value="10kTo20k">₱10,000 -  ₱20,000</option>
+                    <option value="21kTo30k">₱21,000 -  ₱30,000</option>
+                    <option value="31kTo40k">₱31,000 -  ₱40,000</option>
+                    <option value="40kTo50k">₱41,000 - ₱50,000</option>
+                    <option value="51kTo60k">₱51,000 - ₱60,000</option>
+                    <option value="61kTo70k">₱61,000 – ₱70,000</option>
+                    <option value="70kAbove">₱71,000 above</option>
+                  </select>
+                </div>
+                <div class="w-full flex-col justify-start px-3">
+                  <label class="block text-base font-bold my-2 text-gray-700">B.) How did you come to know about your current job? </label>
+                  <div *ngIf="!isOtherCurrentJob">
+                    <div *ngFor="let reason of reasonOfHiringList" class="flex mt-1 items-center gap-2 mx-1">
+                      <p-checkbox (onChange)="changeCauseOfHiring(reason.name)" formControlName="otherReasonOfHiring" name="{{reason.name}}" [value]="reason.name" [(ngModel)]="selectedReasonOfHiring" [inputId]="reason.key"></p-checkbox>
+                      <label class="block text-sm font-medium text-gray-700" [for]="reason.key">{{ reason.name }}</label>
+                    </div>
+                  </div>
+                  <div *ngIf="isOtherCurrentJob">
+                    <div  class="flex gap-2 text-sm items-center " >
+                      <div class="block font-medium text-gray-700 my-2">pls. specify:</div>
+                      <div (click)="changeCauseOfHiring('')"  class="block font-medium text-gray-700 my-2 hover:bg-blue-200 cursor-pointer bg-gray-200 px-2 py-1 rounded">undo   <i class="pi pi-undo"></i> </div>
+                    </div>
+                    <div>
+                      <input
+                      class="w-full border rounded outline-0"
+                      type="text"
+                      placeholder="Enter Other Occupation..."
+                      pInputText
+                      formControlName="reasonOfHiring"
+                      required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-2 my-2">
+                  <label class="block text-sm my-2 font-medium text-gray-700">Is your current job related to the degree earned from EVSU?</label>
+                  <div *ngFor="let isDegreeRelative of isJobIsBaseOnDegreeTaken" class="flex items-center gap-2 mx-1">
+                    <p-checkbox (onChange)="changeIsDegreeRelative(isDegreeRelative.key)" formControlName="isDegreeRelativeTakenInEVSU" name="{{isDegreeRelative.name}}" [value]="isDegreeRelative.key" [(ngModel)]="isSelectedDegreeRelative" [inputId]="isDegreeRelative.key"></p-checkbox>
+                    <label class="block text-sm font-medium text-gray-700" [for]="isDegreeRelative.key">{{ isDegreeRelative.name }}</label>
+                  </div>
+                </div>
+                <div class="flex gap-2 ">
+                  <label class="block text-sm my-2 font-medium text-gray-700">
+                    (Attach files- ID’s or Certificate of Employment)
+                  </label>
+                  <input type="file" formControlName="CertificateOfEmploy"  class="hidden" (change)="uploadCertificateOfEmp($event)" name="CertificateOfEmployment"/>
+                  <button
+                    (click)="clickUploadCertificateOfEmployment()"
+                    class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                  >
+                    <i class="pi pi-cloud-upload"></i>
+                    File
+                  </button>
+                </div>
+              </div>
+              
             </div>
             
           </div>
