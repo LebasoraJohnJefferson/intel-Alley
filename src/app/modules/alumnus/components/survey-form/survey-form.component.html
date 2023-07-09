@@ -344,12 +344,114 @@
     </mat-step>
 
 
-    <mat-step [stepControl]="thirdFormGroup">
+    <mat-step [stepControl]="employmentInfo">
         <ng-template matStepLabel>
             <span class="text-black font-bold">Employment Information</span>
         </ng-template>
         <div class="w-full flex justify-start px-3">
           <label class="block text-base font-bold my-2 text-gray-700 text-center">A.) Current Employment Status</label>
+        </div>
+        <form [formGroup]="employmentInfo" class="grid " >
+          <div class="gap-3">
+            <div class="md:w-full w-[25rem] grid overflow-x-auto">
+              <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
+                <label class="block text-sm my-2 font-medium text-gray-700">Are you currently</label>
+                <div *ngFor="let category of categories" class="flex items-center gap-2 mx-1">
+                    <p-checkbox (onChange)="changeEmploymentStatus(category.name)" formControlName="employmentStatus" name="{{category.name}}" [value]="category.name" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
+                    <label class="block text-sm font-medium text-gray-700" [for]="category.key">{{ category.name }}</label>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-2 my-1 flex-col" *ngIf="showEmploymentStatusForm=='Employed'">
+              <div class="flex gap-2 ">
+                <label class="block text-sm my-2 font-medium text-gray-700">
+                  If employed 
+                  <i>(Attach file for proof of employment)</i> :
+                </label>
+                <input type="file"  class="hidden" (change)="uploadProof($event)" name="proofOfEmployment"/>
+                <button
+                  (click)="clickUploadProof()"
+                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                >
+                  <i class="pi pi-cloud-upload"></i>
+                  File
+                </button>
+              </div>
+              <ol>
+                <li>
+                  <div class="block text-sm font-medium text-gray-700 my-2">Name of the Organization: </div>
+                  <input
+                  class="w-full border rounded outline-0"
+                  type="text"
+                  placeholder="Enter Organization name..."
+                  pInputText
+                  required
+                  />
+                </li>
+                <li>
+                  <div class="block text-sm font-medium text-gray-700 my-2">Address: </div>
+                  <input
+                  class="w-full border rounded outline-0"
+                  type="text"
+                  placeholder="Enter Organization address"
+                  pInputText
+                  required
+                  />
+                </li>
+                <li class="flex gap-2 my-2">
+                  <label class="block text-sm my-2 font-medium text-gray-700">Type of Organization</label>
+                  <div *ngFor="let typeOfOrg of typeOfOrganization" class="flex items-center gap-2 mx-1">
+                    <p-checkbox (onChange)="changeTypeOfOrganization(typeOfOrg.name)" formControlName="typeOfOrgChosen" name="{{typeOfOrg.name}}" [value]="typeOfOrg.name" [(ngModel)]="selectedTypeOfOrganization" [inputId]="typeOfOrg.key"></p-checkbox>
+                    <label class="block text-sm font-medium text-gray-700" [for]="typeOfOrg.key">{{ typeOfOrg.name }}</label>
+                  </div>
+                </li>
+              </ol>
+              <div class="w-full flex-col justify-start px-3">
+                <label class="block text-base font-bold my-2 text-gray-700">B.) Occupational Classification </label>
+                <div *ngIf="!isOtherOccupation">
+                  <div *ngFor="let typeOfOrg of occupationClass" class="flex mt-1 items-center gap-2 mx-1">
+                    <p-checkbox (onChange)="changeOccupationClass(typeOfOrg.name)" formControlName="occupationClass" name="{{typeOfOrg.name}}" [value]="typeOfOrg.name" [(ngModel)]="selectedOccupation" [inputId]="typeOfOrg.key"></p-checkbox>
+                    <label class="block text-sm font-medium text-gray-700" [for]="typeOfOrg.key">{{ typeOfOrg.name }}</label>
+                  </div>
+                </div>
+                <div *ngIf="isOtherOccupation">
+                  <div  class="flex gap-2 text-sm items-center " >
+                    <div class="block font-medium text-gray-700 my-2">pls. specify:</div>
+                    <div (click)="changeOccupationClass('')"  class="block font-medium text-gray-700 my-2 hover:bg-blue-200 cursor-pointer bg-gray-200 px-2 py-1 rounded">undo   <i class="pi pi-undo"></i> </div>
+                  </div>
+                  <div>
+                    <input
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    placeholder="Enter Other Occupation..."
+                    pInputText
+                    required
+                    />
+                  </div>
+                  </div>
+              </div>
+              <div class="w-full flex justify-start px-3">
+                <div class="md:w-full w-[25rem] grid overflow-x-auto">
+                  <label class="block text-sm my-2 font-medium text-gray-700">Job Status</label>
+                  <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
+                    <div *ngFor="let job of jobStatus" class="flex items-center gap-2 mx-1">
+                        <p-checkbox (onChange)="changeJobStatus(job.name)" formControlName="jobStatus" name="{{job.name}}" [value]="job.name" [(ngModel)]="selectedJobStatus" [inputId]="job.key"></p-checkbox>
+                        <label class="block text-sm font-medium text-gray-700" [for]="job.key">{{ job.name }}</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </form>
+        <div class="flex gap-2">
+          <button
+              class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+              mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
+          <button
+              class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+              mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
         </div>
     </mat-step>
 
