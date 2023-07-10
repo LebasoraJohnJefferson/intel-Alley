@@ -8,8 +8,12 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./survey-form.component.scss']
 })
 export class SurveyFormComponent implements OnInit {  
-    uploadFile:any;
-    onLoadFile:any;
+    uploadFilePoorOfEmp:any;
+    uploadFileCertificateOfEmp:any;
+    uploadFileProofOfSelfEmploy:any;
+    onLoadFilePoorOfEmp:any;
+    onLoadFileCertificateOfEmp:any;
+    onLoadFileProofOfSelfEmploy:any;
     selectedCategories:any;
     selectedTypeOfOrganization:any;
     selectedJobStatus:any;
@@ -137,7 +141,6 @@ export class SurveyFormComponent implements OnInit {
 
 
       employmentInfo = this._formBuilder.group({
-        employmentStatus: ['', Validators.required],
         typeOfOrgChosen:['', Validators.required],
         proofOfEmp:['', Validators.required],
         jobStatus:['', Validators.required],
@@ -197,6 +200,17 @@ export class SurveyFormComponent implements OnInit {
         })
       });
 
+      selfEmployInfo = this._formBuilder.group({
+        proofOfSelfEmployFile:['',Validators.required],
+        businessName:['',Validators.required],
+        address:['',Validators.required],
+        natureOfBusiness :['',Validators.required],
+      })
+
+      unEmploy=this._formBuilder.group({
+        reasonOfUnEmploy:['',Validators.required]
+      })
+
 
 
 
@@ -221,7 +235,9 @@ export class SurveyFormComponent implements OnInit {
 
 
       checkForm(){
+        console.log(this.selfEmployInfo.value)
         console.log(this.employmentInfo.value)
+        console.log(this.unEmploy.value)
       }
 
       changeEmploymentStatus(value:any){
@@ -256,7 +272,7 @@ export class SurveyFormComponent implements OnInit {
       // upload proof 
       uploadProof(event:any){
         if(event.target.files[0]){
-          this.uploadFile = event.target.files[0]
+          this.uploadFilePoorOfEmp = event.target.files[0]
         }
         if(!event.target.files[0] || event.target.files[0].length == 0) {
           this.toast.warning('You must select an File');
@@ -269,7 +285,7 @@ export class SurveyFormComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
     
         reader.onload = (_event) => {
-          this.onLoadFile = `${reader.result}` 
+          this.onLoadFilePoorOfEmp = `${reader.result}` 
         }
       }
 
@@ -282,7 +298,7 @@ export class SurveyFormComponent implements OnInit {
 
       uploadCertificateOfEmp(event:any){
         if(event.target.files[0]){
-          this.uploadFile = event.target.files[0]
+          this.uploadFileCertificateOfEmp = event.target.files[0]
         }
         if(!event.target.files[0] || event.target.files[0].length == 0) {
           this.toast.warning('You must select an File');
@@ -295,7 +311,7 @@ export class SurveyFormComponent implements OnInit {
         reader.readAsDataURL(event.target.files[0]);
     
         reader.onload = (_event) => {
-          this.onLoadFile = `${reader.result}` 
+          this.onLoadFileCertificateOfEmp = `${reader.result}` 
         }
       }
 
@@ -304,5 +320,29 @@ export class SurveyFormComponent implements OnInit {
         if (element) element.click();
       }
 
+      
+      uploadProofOfSelfEmploy(event:any){
+        if(event.target.files[0]){
+          this.uploadFileProofOfSelfEmploy = event.target.files[0]
+        }
+        if(!event.target.files[0] || event.target.files[0].length == 0) {
+          this.toast.warning('You must select an File');
+          return;
+        }
+        
+        // var mimeType = event.target.files[0].type;
+        
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        
+        reader.onload = (_event) => {
+          this.onLoadFileProofOfSelfEmploy = `${reader.result}` 
+        }
+      }
+      
+      clickUploadSelfEmploy(){
+        let element: HTMLElement = document.querySelector('input[name="proofOfSelfEmploy"]') as HTMLElement;
+        if (element) element.click();
+      }
 
 }

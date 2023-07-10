@@ -201,17 +201,18 @@
         <div class="w-full flex justify-start px-3">
           <label class="block text-base font-bold my-2 text-gray-700 text-center">A.) Current Employment Status</label>
         </div>
+        <div class="md:w-full w-[25rem] grid overflow-x-auto">
+          <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
+            <label class="block text-sm my-2 font-medium text-gray-700">Are you currently</label>
+            <div *ngFor="let category of categories" class="flex items-center gap-2 mx-1">
+                <p-checkbox (onChange)="changeEmploymentStatus(category.name)" name="{{category.name}}" [value]="category.name" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
+                <label class="block text-sm font-medium text-gray-700" [for]="category.key">{{ category.name }}</label>
+            </div>
+          </div>
+        </div>
         <form [formGroup]="employmentInfo" class="grid " >
           <div class="gap-3">
-            <div class="md:w-full w-[25rem] grid overflow-x-auto">
-              <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
-                <label class="block text-sm my-2 font-medium text-gray-700">Are you currently</label>
-                <div *ngFor="let category of categories" class="flex items-center gap-2 mx-1">
-                    <p-checkbox (onChange)="changeEmploymentStatus(category.name)" formControlName="employmentStatus" name="{{category.name}}" [value]="category.name" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
-                    <label class="block text-sm font-medium text-gray-700" [for]="category.key">{{ category.name }}</label>
-                </div>
-              </div>
-            </div>
+            
             <div class="flex gap-2 my-1 flex-col" *ngIf="showEmploymentStatusForm=='Employed'">
               <div class="flex gap-2 ">
                 <label class="block text-sm my-2 font-medium text-gray-700">
@@ -403,7 +404,7 @@
                   </select>
                 </div>
                 <div class="w-full flex-col justify-start px-3">
-                  <label class="block text-base font-bold my-2 text-gray-700">B.) How did you come to know about your current job? </label>
+                  <label class="block text-base font-bold my-2 text-gray-700">E.) How did you come to know about your current job? </label>
                   <div *ngIf="!isOtherCurrentJob">
                     <div *ngFor="let reason of reasonOfHiringList" class="flex mt-1 items-center gap-2 mx-1">
                       <p-checkbox (onChange)="changeCauseOfHiring(reason.name)" formControlName="otherReasonOfHiring" name="{{reason.name}}" [value]="reason.name" [(ngModel)]="selectedReasonOfHiring" [inputId]="reason.key"></p-checkbox>
@@ -453,6 +454,97 @@
             
           </div>
         </form>
+        
+        <form  [formGroup]="selfEmployInfo" class="grid ">
+          <div class="gap-3">
+            <div class="flex gap-2 my-1 flex-col" *ngIf="showEmploymentStatusForm=='Self-employed'">
+              <div class="flex gap-2 ">
+                <label class="block text-sm my-2 font-medium text-gray-700">
+                  If Self- employed 
+                  <i>(Attach file for proof but Optional)</i> :
+                </label>
+                <input type="file" formControlName="proofOfSelfEmployFile" class="hidden" (change)="uploadProofOfSelfEmploy($event)" name="proofOfSelfEmploy"/>
+                <button
+                  (click)="clickUploadSelfEmploy()"
+                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                >
+                  <i class="pi pi-cloud-upload"></i>
+                  File
+                </button>
+                </div>
+                <div>
+                  <div  class="flex gap-2 text-sm items-center " >
+                    <div class="block font-medium text-gray-700">Name of Business:</div>
+                  </div>
+                  <div>
+                    <input
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    placeholder="Enter name of the business..."
+                    formControlName="businessName"
+                    pInputText
+                    required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div  class="flex gap-2 text-sm items-center " >
+                    <div class="block font-medium text-gray-700">Address: </div>
+                  </div>
+                  <div>
+                    <input
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    placeholder="Enter name of the business..."
+                    formControlName="address"
+                    pInputText
+                    required
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div  class="flex gap-2 text-sm items-center " >
+                    <div class="block font-medium text-gray-700">Nature of Business (please specify): </div>
+                  </div>
+                  <div>
+                    <input
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    placeholder="Enter name of the business..."
+                    formControlName="natureOfBusiness"
+                    pInputText
+                    required
+                    />
+                  </div>
+                </div>
+            </div>
+          </div>
+        </form>
+
+        <form [formGroup]="unEmploy"  class="grid ">
+          <div class="gap-3">
+            <div class="flex gap-2 my-1 flex-col" *ngIf="showEmploymentStatusForm=='Unemployed'">
+              <div>
+                <div  class="flex gap-2 text-sm items-center my-1 " >
+                  <div class="block font-medium text-gray-700">If Unemployed:</div>
+                </div>
+                <div>
+                  <textarea
+                  class="w-full border rounded outline-0"
+                  type="text"
+                  placeholder="Please state your reason/s why you are unemployed..."
+                  pInputText
+                  formControlName="reasonOfUnEmploy"
+                  required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+
         <div class="flex gap-2">
           <button
               class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
