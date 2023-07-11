@@ -558,20 +558,125 @@
 
     <mat-step [stepControl]="fourthFormGroup">
       <ng-template matStepLabel>
-        <span class="text-black font-bold">Survey One</span>
+        <span class="text-black font-bold">WORK HISTORY</span>
       </ng-template>
-      <p>You are now done.</p>
+      <div class="w-full flex justify-start px-3">
+        <label class="block text-base font-bold my-2 text-gray-700 text-center">For those with one (1) year and above past employment</label>
+      </div>
+      <form [formGroup]="workHistoryFB">
+        <table class="grid">
+          <tr class="grid grid-cols-6">
+            <th class="block text-sm font-medium text-gray-700">Name of Company</th>
+            <th class="block text-sm font-medium text-gray-700">Address</th>
+            <th class="block text-sm font-medium text-gray-700">Year Employed</th>
+            <th class="block text-sm font-medium text-gray-700">Designation</th>
+            <th class="block text-sm font-medium text-gray-700">Number of Years Served</th>
+            <th class="block text-sm font-medium text-gray-700">Monthly Income (Optional)</th>
+          </tr>
+          <tr>
+            <td *ngFor="let work of workHistory" class="grid grid-cols-6 gap-2">
+              <input *ngFor="let workInput of work.nameOfInputs"
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    formControlName="{{work.name+workInput}}"
+                    pInputText
+                    required
+                    />
+            </td>
+          </tr>
+        </table>
+      </form>
+      <div class="w-full flex justify-start mt-2 px-3">
+        <label class="block text-base font-bold my-2 text-gray-700">D. How would you rate the contribution of the program of your study at EVSU to your personal and professional growth in terms of the following: (1-poorly	2-fairly	3-highly	4-very highly)</label>
+      </div>
+      <form class="grid" [formGroup]="firstSurveyFB">
+        <table class="w-full text-center  overflow-x-auto" >
+          <tr class="grid grid-cols-10 border">
+            <th class="block text-base font-bold my-2 text-gray-700 ">SN</th>
+            <th class="block text-base font-bold my-2 text-gray-700  col-span-5">Particulars</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">1</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">2</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">3</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">4</th>
+          </tr>
+          <tr class="grid grid-cols-10 border" *ngFor="let survey of firstSurveys; let i = index" [attr.data-index]="i">
+            <td class="block text-base font-bold my-2 text-gray-700">{{ i + 1 }}</td>
+            <td class="block text-base font-bold my-2 text-gray-700 col-span-5">{{ survey.particulars }}</td>
+            <td class="block text-base font-bold my-2 text-gray-700" *ngFor="let rate of ['1', '2', '3', '4']">
+              <p-checkbox [formControlName]="'particulars'+survey.key" (onChange)="changeRate(i, rate)" [name]="'rate-' + i" [value]="rate" [(ngModel)]="selectedRatings[i]" [inputId]="'rate-' + i"></p-checkbox>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <div class="w-full flex justify-start mt-2 px-3">
+        <label class="block text-base font-bold my-2 text-gray-700">E. How would you rate the degree program you finished at EVSU in terms of the following:
+          (1-poorly    2-fairly    3-highly    4- very highly)
+      </label>
+      </div>
+      <form class="grid" [formGroup]="secondSurveyFB">
+        <table class="w-full text-center  overflow-x-auto" >
+          <tr class="grid grid-cols-10 border">
+            <th class="block text-base font-bold my-2 text-gray-700 ">SN</th>
+            <th class="block text-base font-bold my-2 text-gray-700  col-span-5">Particulars</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">1</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">2</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">3</th>
+            <th class="block text-base font-bold my-2 text-gray-700 ">4</th>
+          </tr>
+          <tr class="grid grid-cols-10 border" *ngFor="let survey of secondSurveys; let i = index" [attr.data-index]="i">
+            <td class="block text-base font-bold my-2 text-gray-700">{{ i + 1 }}</td>
+            <td class="block text-base font-bold my-2 text-gray-700 col-span-5">{{ survey.particulars }}</td>
+            <td class="block text-base font-bold my-2 text-gray-700" *ngFor="let rate of ['1', '2', '3', '4']">
+              <p-checkbox [formControlName]="'particulars'+survey.key" (onChange)="changeRate2(i, rate)" [name]="'rate-' + i" [value]="rate" [(ngModel)]="selectedRatings2[i]" [inputId]="'rate-' + i"></p-checkbox>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <div class="flex gap-2">
+        <button
+            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
+        <button
+            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
+      </div>
     </mat-step>
 
     <mat-step [stepControl]="fifthFormGroup">
       <ng-template matStepLabel>
         <span class="text-black font-bold">Final Survey</span>
       </ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+      <div class="w-full flex justify-start px-3">
+        <label class="block text-base font-bold my-2 text-gray-700 text-center">We would appreciate an HONEST feedback.</label>
       </div>
+      <div  class="flex gap-2 text-sm items-center my-1 " >
+        <div class="block font-medium text-gray-700">Please provide your suggestions/recommendations to further improve your course curriculum and for the betterment of the university/institution.</div>
+      </div>
+      <form [formGroup]="recommendation">
+        <textarea
+            formControlName="context"
+            class="w-full border rounded outline-0"
+            type="text"
+            pInputText
+            required
+        ></textarea>
+      </form>
+      <i class="block font-medium text-xs text-red-500 text-end w-full mt-3 text-gray-700">Thank you for your continued support and cooperation<i class="pi pi-heart-fill mx-3"></i></i>
+      <div class="flex gap-2">
+        <button
+            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
+        <button
+            class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button (click)="stepper.reset()"><p>Reset</p></button>
+            <button
+            class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            ><p>Submit</p></button>
+        <button
+            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
+            mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
+      </div>
+      
     </mat-step>
   </mat-stepper>
   

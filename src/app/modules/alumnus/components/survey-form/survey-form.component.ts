@@ -8,6 +8,7 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./survey-form.component.scss']
 })
 export class SurveyFormComponent implements OnInit {  
+    tempRowIndex:any;
     uploadFilePoorOfEmp:any;
     uploadFileCertificateOfEmp:any;
     uploadFileProofOfSelfEmploy:any;
@@ -19,10 +20,13 @@ export class SurveyFormComponent implements OnInit {
     selectedJobStatus:any;
     selectedOccupation:any;
     selectedReasonOfHiring:any;
+    selectedRatings: any[] = [];
+    selectedRatings2: any[] = [];
     showEmploymentStatusForm:string = ''
     isOtherOccupation:boolean = false
     isOtherCurrentJob:boolean = false
     isSelectedDegreeRelative:any;
+    particularsValue:any;
 
     categories: any[] = [
         { name: 'Employed', key: 'Employed' },
@@ -82,10 +86,96 @@ export class SurveyFormComponent implements OnInit {
       { name: 'Other', key: 'Other' },
     ]
 
+   
+
     isJobIsBaseOnDegreeTaken:any=[
       { name: 'Yes', key: true },
       { name: 'No', key:false },
     ]
+
+    workHistory:any=[
+      {
+        name:'firstForm',
+        nameOfInputs:['NameOfCompany','Address','YearEmployed','Designation','NumOfYrServed','MonthlyIncome']
+      },
+      {
+        name:'secondForm',
+        nameOfInputs:['NameOfCompany','Address','YearEmployed','Designation','NumOfYrServed','MonthlyIncome']
+      }
+    ]
+
+    firstSurveys:any=[
+      {particulars:'Enhanced Academic Profession',key:'1'},
+      {particulars:'Improved problem-solving/critical thinking skills',key:'2'},
+      {particulars:'Improved research skills',key:'3'},
+      {particulars:'Improved learning efficacy',key:'4'},
+      {particulars:'Improved communication/interpersonal skills',key:'5'},
+      {particulars:'Improved human relation skills',key:'6'},
+      {particulars:'Improved information technology skills',key:'7'},
+      {particulars:'Improved Entrepreneurial Skills',key:'8'},
+      {particulars:'Exposure to local and/or international community within field of specialization',key:'9'},
+      {particulars:'Personality Development',key:'10'}
+    ]
+
+    firstSurveyFB=this._formBuilder.group({
+      particulars1:['',Validators.required],
+      particulars2:['',Validators.required],
+      particulars3:['',Validators.required],
+      particulars4:['',Validators.required],
+      particulars5:['',Validators.required],
+      particulars6:['',Validators.required],
+      particulars7:['',Validators.required],
+      particulars8:['',Validators.required],
+      particulars9:['',Validators.required],
+      particulars10:['',Validators.required],
+    })
+
+
+    secondSurveys:any=[
+      {particulars:'Quality of Instruction/Premium given to Research',key:'1'},
+      {particulars:'Range of subjects offered',key:'2'},
+      {particulars:'Relevance of the program to your professional requirements',key:'3'},
+      {particulars:'Extra-Curricular Activities',key:'4'},
+      {particulars:'Problem Solving',key:'5'},
+      {particulars:'Teaching and learning Environment',key:'6'},
+      {particulars:'Teacher- Student Relationship',key:'7'},
+      {particulars:'Library Resources',key:'8'},
+      {particulars:'Infrastructure/facilities/Laboratory Resources',key:'9'},
+      {particulars:'Class Size',key:'10'}
+    ]
+
+    secondSurveyFB=this._formBuilder.group({
+      particulars1:['',Validators.required],
+      particulars2:['',Validators.required],
+      particulars3:['',Validators.required],
+      particulars4:['',Validators.required],
+      particulars5:['',Validators.required],
+      particulars6:['',Validators.required],
+      particulars7:['',Validators.required],
+      particulars8:['',Validators.required],
+      particulars9:['',Validators.required],
+      particulars10:['',Validators.required],
+    })
+
+    recommendation=this._formBuilder.group({
+      context:['',Validators.required]
+    })
+
+    workHistoryFB:any = this._formBuilder.group({
+      firstFormNameOfCompany:[''],
+      firstFormAddress:[''],
+      firstFormYearEmployed:[''],
+      firstFormDesignation:[''],
+      firstFormNumOfYrServed:[''],
+      firstFormMonthlyIncome:[''],
+      secondFormNameOfCompany:[''],
+      secondFormAddress:[''],
+      secondFormYearEmployed:[''],
+      secondFormDesignation:[''],
+      secondFormNumOfYrServed:[''],
+      secondFormMonthlyIncome:[''],
+    })
+    
 
 
       generalInfo = this._formBuilder.group({
@@ -94,6 +184,8 @@ export class SurveyFormComponent implements OnInit {
         civilStatus:['',[Validators.required]],
         sex:['',[Validators.required]]
       });
+
+
 
 
       educationalBG = this._formBuilder.group({
@@ -211,6 +303,8 @@ export class SurveyFormComponent implements OnInit {
         reasonOfUnEmploy:['',Validators.required]
       })
 
+      
+
 
 
 
@@ -235,15 +329,29 @@ export class SurveyFormComponent implements OnInit {
 
 
       checkForm(){
-        console.log(this.selfEmployInfo.value)
-        console.log(this.employmentInfo.value)
-        console.log(this.unEmploy.value)
+        // console.log(this.selfEmployInfo.value)
+        // console.log(this.employmentInfo.value)
+        // console.log(this.unEmploy.value)
+        // console.log(this.workHistoryFB.value)
+        // console.log(this.firstSurveyFB.value)
+        // console.log(this.secondSurveyFB.value)
+        console.log(this.recommendation.value)
       }
 
       changeEmploymentStatus(value:any){
           this.selectedCategories = [value];
           // show the form base on the employee choice in Current Employment Status
           this.showEmploymentStatusForm = value
+      }
+
+
+      changeRate(rowIndex: number, value: any) {
+        this.selectedRatings[rowIndex] = [value];
+      }
+
+
+      changeRate2(rowIndex: number, value: any) {
+        this.selectedRatings2[rowIndex] = [value];
       }
 
       changeTypeOfOrganization(value:any){
