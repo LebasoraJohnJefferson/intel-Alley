@@ -51,14 +51,18 @@ export class SurveyFormComponent implements OnInit {
     ]
 
     occupationClass:any[]=[
-      { name:"Manufacturing",key:'Manufacturing' },
-      { name:"Construction",key:'Construction' },
-      { name:"Wholesale and Retail Trade	",key:'Wholesale and Retail Trade	' },
-      { name:"Hotels and Restaurant",key:'Hotels and Restaurant' },
-      { name:"Public Administration and Defense",key:'Public Administration and Defense' },
-      { name:"Financial Intermediation",key:'Financial Intermediation' },
-      { name:"Other Community, Social and Personal Service Activities",key:'Other Community, Social and Personal Service Activities' },
-      { name:"IT or Web developer and the like",key:'IT or Web developer and the like' },
+      { name:"System Analyst",key:'System Analyst' },
+      { name:"System Integration",key:'System Integration' },
+      { name:"It Audit Assistant",key:'It Audit Assistant' },
+      { name:"QA Specialist",key:'QA Specialist' },
+      { name:"Web Applications Developer",key:'Web Applications Developer' },
+      { name:"Computer Programmer",key:'Computer Programmer' },
+      { name:"Junior Database Administrator",key:'Junior Database Administrator' },
+      { name:"Multimeida Specialist",key:'Multimeida Specialist' },
+      { name:"Technical Support Specialist",key:'Technical Support Specialist' },
+      { name:"Network Engineer",key:'Network Engineer'},
+      { name:"Systems Administrator",key:'Systems Administrator'},
+      { name:"Junior Information Security Administrator",key:'Junior Information Security Administrator'},
       { name:"Other",key:'Other'}
     ]
 
@@ -304,10 +308,6 @@ export class SurveyFormComponent implements OnInit {
       })
 
       
-
-
-
-
 
       fourthFormGroup = this._formBuilder.group({
         secondCtrl: ['', Validators.required],
