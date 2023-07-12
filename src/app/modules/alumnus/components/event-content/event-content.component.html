@@ -1,0 +1,115 @@
+<article class="w-full shadow-lg rounded border p-4">
+    <div class="flex justify-between items-center w-full">
+        <span class="flex items-center gap-2 mx-2">
+            <img src="../../../../../assets/logo/evsu_logo_3.png" alt="profile" class="w-12 h-12 object-cover rounded-full border-2 border-red-500">
+            <div>
+              <div class="text-slate-700 font-bold">
+                Admin
+              </div>
+              <div class="text-xs text-blue-500 flex items-center gap-2">
+                <i class="pi pi-globe"></i>posted: 23hr ago.
+              </div>
+            </div>
+        </span>  
+        <span class="relative" *ngIf="isAdmin">
+            <i class="pi pi-ellipsis-v" (click)="op.toggle($event)"></i>
+            <p-overlayPanel #op>
+                <ng-template pTemplate>
+                  <div class="md:max-w-[200px]">
+                    <div
+                      class="grid my-2 min-w-[100px]">
+                        <div class="grid grid-col-1">
+                            <div class="flex gap-2 items-center hover:text-orange-500 cursor-pointer">
+                                <i class="pi pi-pencil"></i>
+                                <p>Edit</p>
+                            </div>
+                            <div class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer">
+                                <i class="pi pi-trash"></i>
+                                <p>Delete</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </ng-template>
+            </p-overlayPanel>
+        </span>
+        
+    </div>
+    <hr class="my-3"/>
+    <div class="m-2 text-slate-700 font-medium">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, error!
+    </div>
+    <div class="p-3 bg-gray-200 rounded">
+      <img class="rounded w-full h-[280px]  object-scale-down" src="https://miro.medium.com/v2/resize:fit:1400/1*kNYb0DUGPBUUi_-X3oqyUw.jpeg" alt="profile">
+    </div>
+    <div class=" mt-4 flex items-center gap-2 mx-2">
+        <span class=" flex items-center gap-1">
+            <p (click)="openComment(1)" class="pi pi-comments text-blue-500 hover:text-blue-300"></p>
+            <span class="text-slate-700 text-sm">200 Comments</span>
+        </span>
+        <span class=" flex items-center gap-1">
+            <p class="pi pi-star-fill text-yellow-500 hover:text-yellow-300"></p>
+            <span class="text-slate-700 text-sm">200 Likes</span>
+        </span>
+    </div>
+    <div *ngIf="openCommentThroughIndex == 1">
+        <div  class="shadow-md border my-2 p-3">
+            <span class="flex items-center  flex justify-between">
+                <div class="flex items-center  gap-2 mx-2">
+                    <img src="https://static.wikia.nocookie.net/97553714-a5ef-4af5-81c5-8e10a31c0aae" alt="profile" class="w-8 h-8 object-cover rounded-full border-2 border-red-500">
+                    <div class="flex items-center gap-2">
+                        <div>
+                            <div class="text-slate-700 text-sm font-bold">
+                              John Doe
+                            </div>
+                            <div class="text-xs text-blue-500 flex items-center gap-2">
+                              @JohnDoe@evsu.edu.ph
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <span class="relative" *ngIf="isOwner || isAdmin">
+                    <i class="pi pi-ellipsis-v" (click)="op2.toggle($event)"></i>
+                    <p-overlayPanel #op2>
+                        <ng-template pTemplate>
+                          <div class="md:max-w-[200px]">
+                            <div
+                              class="grid my-2 min-w-[100px]">
+                                <div class="grid grid-col-1">
+                                    <div class="flex gap-2 items-center hover:text-orange-500 cursor-pointer">
+                                        <i class="pi pi-pencil"></i>
+                                        <p>Edit</p>
+                                    </div>
+                                    <div class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer">
+                                        <i class="pi pi-trash"></i>
+                                        <p>Delete</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </ng-template>
+                    </p-overlayPanel>
+                </span>
+            </span>  
+            <hr class="my-3"/>
+            <div class="px-4 mt-3">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem voluptas illo enim esse ea quam possimus maxime, excepturi obcaecati iusto, quaerat accusantium vero dolor odit! Ipsa quas et pariatur deserunt.</p>
+                <div class="text-xs justify-end py-1 text-blue-500 flex items-center gap-2">
+                    <i class="pi pi-globe"></i>posted: 23hr ago.
+                </div>
+            </div>
+        </div>
+        <form class="mt-3" [formGroup]="commentForm">
+            <textarea
+                  class="w-full text-md  shadow-lg rounded borderoutline-0"
+                  type="text"
+                  placeholder="Enter your thought about this ..."
+                  pInputText
+                  formControlName="comment"
+                  required
+                  ></textarea>
+        </form>
+    </div>
+    
+   
+  </article>

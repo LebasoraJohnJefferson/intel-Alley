@@ -18,7 +18,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { SurveyContentComponent } from './components/survey-content/survey-content.component';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import { EventContentComponent } from './components/event-content/event-content.component';
 
 
 @NgModule({
@@ -32,7 +32,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     SurveysComponent,
     EventsComponent,
     SurveyContentComponent,
-    SurveyFormComponent
+    SurveyFormComponent,
+    EventContentComponent
   ],
   imports: [
     CommonModule,
