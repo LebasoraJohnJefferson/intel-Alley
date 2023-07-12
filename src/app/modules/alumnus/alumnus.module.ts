@@ -19,6 +19,7 @@ import { SurveyContentComponent } from './components/survey-content/survey-conte
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { EventContentComponent } from './components/event-content/event-content.component';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { EventContentComponent } from './components/event-content/event-content.
     EventsComponent,
     SurveyContentComponent,
     SurveyFormComponent,
-    EventContentComponent
+    EventContentComponent,
+    BarChartComponent
   ],
   imports: [
     CommonModule,

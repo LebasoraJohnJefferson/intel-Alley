@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { developersProfile } from 'src/environments/environment';
 
 @Component({
   selector: 'app-about',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-
+  developers:any = developersProfile
 }
