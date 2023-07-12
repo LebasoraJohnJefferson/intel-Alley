@@ -201,8 +201,8 @@
         <div class="w-full flex justify-start px-3">
           <label class="block text-base font-bold my-2 text-gray-700 text-center">A.) Current Employment Status</label>
         </div>
-        <div class="md:w-full w-[25rem] grid overflow-x-auto">
-          <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
+        <div class="md:w-full w-[22rem] grid overflow-x-auto">
+          <div class="grid grid-cols-4 gap-2 md:w-full w-[30rem]">
             <label class="block text-sm my-2 font-medium text-gray-700">Are you currently</label>
             <div *ngFor="let category of categories" class="flex items-center gap-2 mx-1">
                 <p-checkbox (onChange)="changeEmploymentStatus(category.name)" name="{{category.name}}" [value]="category.name" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>

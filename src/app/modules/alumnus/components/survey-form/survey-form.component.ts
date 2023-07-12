@@ -144,7 +144,7 @@ export class SurveyFormComponent implements OnInit {
       {particulars:'Teaching and learning Environment',key:'6'},
       {particulars:'Teacher- Student Relationship',key:'7'},
       {particulars:'Library Resources',key:'8'},
-      {particulars:'Infrastructure/facilities/Laboratory Resources',key:'9'},
+      {particulars:'Infrastructure/ facilities/ Laboratory Resources',key:'9'},
       {particulars:'Class Size',key:'10'}
     ]
 
