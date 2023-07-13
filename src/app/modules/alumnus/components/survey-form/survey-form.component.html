@@ -565,8 +565,8 @@
       <div class="w-full flex justify-start px-3">
         <label class="block text-base font-bold my-2 text-gray-700 text-center">For those with one (1) year and above past employment</label>
       </div>
-      <form [formGroup]="workHistoryFB">
-        <table class="grid">
+      <form [formGroup]="workHistoryFB" class="md:w-full grid grid-cols-1 md:overflow-x-hidden overflow-x-scroll">
+        <table class="grid md:w-full w-[100rem]">
           <tr class="grid grid-cols-6">
             <th class="block text-sm font-medium text-gray-700">Name of Company</th>
             <th class="block text-sm font-medium text-gray-700">Address</th>
