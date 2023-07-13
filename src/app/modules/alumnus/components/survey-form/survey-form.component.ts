@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
+import { SurveyService } from '../../shared/services/survey.service';
 
 @Component({
   selector: 'app-survey-form',
@@ -113,7 +114,7 @@ export class SurveyFormComponent implements OnInit {
       {particulars:'Improved problem-solving/critical thinking skills',key:'2'},
       {particulars:'Improved research skills',key:'3'},
       {particulars:'Improved learning efficacy',key:'4'},
-      {particulars:'Improved communication/interpersonal skills',key:'5'},
+      {particulars:'Improved communication/ interpersonal skills',key:'5'},
       {particulars:'Improved human relation skills',key:'6'},
       {particulars:'Improved information technology skills',key:'7'},
       {particulars:'Improved Entrepreneurial Skills',key:'8'},
@@ -183,8 +184,8 @@ export class SurveyFormComponent implements OnInit {
 
 
       generalInfo = this._formBuilder.group({
-        address: ['', [Validators.required,Validators.email]],
-        contactNumber: ['', [Validators.required, Validators.pattern(/^(09|\+639)\d{9}$/)]],
+        address: ['', [Validators.required]],
+        contactNumber: ['', [Validators.required, Validators.pattern(/^(\9)\d{9}$/)]],
         civilStatus:['',[Validators.required]],
         sex:['',[Validators.required]]
       });
@@ -259,40 +260,40 @@ export class SurveyFormComponent implements OnInit {
           enrolledOtherCourses:['',Validators.required],
         }),
         workEpx7_1y:this._formBuilder.group({
-          natureOfWork:['',Validators.required],
-          jobStatus:['',Validators.required],
-          JobRelatedToDegree:['',Validators.required],
-          enrolledOtherCourses:['',Validators.required],
+          natureOfWork:[''],
+          jobStatus:[''],
+          JobRelatedToDegree:[''],
+          enrolledOtherCourses:[''],
         }),
         workEpx2y_3y:this._formBuilder.group({
-          natureOfWork:['',Validators.required],
-          jobStatus:['',Validators.required],
-          JobRelatedToDegree:['',Validators.required],
-          enrolledOtherCourses:['',Validators.required],
+          natureOfWork:[''],
+          jobStatus:[''],
+          JobRelatedToDegree:[''],
+          enrolledOtherCourses:[''],
         }),
         workEpx4y_5y:this._formBuilder.group({
-          natureOfWork:['',Validators.required],
-          jobStatus:['',Validators.required],
-          JobRelatedToDegree:['',Validators.required],
-          enrolledOtherCourses:['',Validators.required],
+          natureOfWork:[''],
+          jobStatus:[''],
+          JobRelatedToDegree:[''],
+          enrolledOtherCourses:[''],
         }),
         workEpx6y_7y:this._formBuilder.group({
-          natureOfWork:['',Validators.required],
-          jobStatus:['',Validators.required],
-          JobRelatedToDegree:['',Validators.required],
-          enrolledOtherCourses:['',Validators.required],
+          natureOfWork:[''],
+          jobStatus:[''],
+          JobRelatedToDegree:[''],
+          enrolledOtherCourses:[''],
         }),
         workEpx8y_9y:this._formBuilder.group({
-          natureOfWork:['',Validators.required],
-          jobStatus:['',Validators.required],
-          JobRelatedToDegree:['',Validators.required],
-          enrolledOtherCourses:['',Validators.required],
+          natureOfWork:[''],
+          jobStatus:[''],
+          JobRelatedToDegree:[''],
+          enrolledOtherCourses:[''],
         }),
         workEpx10y_more:this._formBuilder.group({
-          natureOfWork:['',Validators.required],
-          jobStatus:['',Validators.required],
-          JobRelatedToDegree:['',Validators.required],
-          enrolledOtherCourses:['',Validators.required],
+          natureOfWork:[''],
+          jobStatus:[''],
+          JobRelatedToDegree:[''],
+          enrolledOtherCourses:[''],
         })
       });
 
@@ -320,7 +321,8 @@ export class SurveyFormComponent implements OnInit {
 
       constructor(
         private _formBuilder: FormBuilder,
-        public toast:HotToastService
+        public toast:HotToastService,
+        private _surveyService:SurveyService
       ) {}
 
       ngOnInit() {
@@ -328,15 +330,7 @@ export class SurveyFormComponent implements OnInit {
       }
 
 
-      checkForm(){
-        // console.log(this.selfEmployInfo.value)
-        // console.log(this.employmentInfo.value)
-        // console.log(this.unEmploy.value)
-        // console.log(this.workHistoryFB.value)
-        // console.log(this.firstSurveyFB.value)
-        // console.log(this.secondSurveyFB.value)
-        console.log(this.recommendation.value)
-      }
+      
 
       changeEmploymentStatus(value:any){
           this.selectedCategories = [value];
@@ -451,6 +445,83 @@ export class SurveyFormComponent implements OnInit {
       clickUploadSelfEmploy(){
         let element: HTMLElement = document.querySelector('input[name="proofOfSelfEmploy"]') as HTMLElement;
         if (element) element.click();
+      }
+
+      submitSurvey(){
+        let errorMsg = ''
+        if(this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs'
+        if(this.generalInfo.controls.contactNumber.invalid && errorMsg!='') errorMsg = 'Contact number inputs error'
+        if(this.educationalBG.invalid) errorMsg+= errorMsg != '' ? '<br/>Educational Background Empty Inputs' : 'Educational Background Empty Inputs'  
+        if(this.employmentInfo.invalid && this.selfEmployInfo.invalid && this.unEmploy.invalid) errorMsg+= errorMsg != '' ? '<br/>Employment Information Empty Inputs' : 'Employment Information Empty Inputs'
+        if(this.workHistoryFB.invalid || this.firstSurveyFB.invalid || this.secondSurveyFB.invalid) errorMsg+= errorMsg != '' ? '<br/>Work History Empty Inputs' : 'Work History Empty Inputs'
+        if(this.recommendation.invalid) errorMsg+= errorMsg != '' ? '<br/>Final Survey Empty Inputs' : 'Final Survey Empty Inputs'  
+        if(errorMsg!=''){
+          this.toast.warning(errorMsg)
+          return
+        }
+
+        
+        if(this.showEmploymentStatusForm == 'Employed'){
+          let temp:any = {
+            general:this.generalInfo.value,
+            education:this.educationalBG.value,
+            employInfo:this.employmentInfo.value,
+            history:this.workHistoryFB.value,
+            recommend:this.recommendation.value
+          }
+          this._surveyService.employed(temp).subscribe({
+            next:()=>{
+
+            },
+            error:()=>{
+              
+            },
+            complete:()=>{
+
+            }
+          })
+        }else if(this.showEmploymentStatusForm == 'Self-employed'){
+          
+          let temp:any = {
+            general:this.generalInfo.value,
+            education:this.educationalBG.value,
+            employInfo:this.selfEmployInfo.value,
+            history:this.workHistoryFB.value,
+            recommend:this.recommendation.value
+          }
+          this._surveyService.selfEmployed(temp).subscribe({
+            next:()=>{
+
+            },
+            error:()=>{
+              
+            },
+            complete:()=>{
+
+            }
+          })
+        }else if(this.showEmploymentStatusForm == 'Unemployed'){
+          let temp:any = {
+            general:this.generalInfo.value,
+            education:this.educationalBG.value,
+            employInfo:this.unEmploy.value,
+            history:this.workHistoryFB.value,
+            recommend:this.recommendation.value
+          }
+          this._surveyService.unemployed(temp).subscribe({
+            next:()=>{
+
+            },
+            error:()=>{
+              
+            },
+            complete:()=>{
+
+            }
+          })
+        }
+
+
       }
 
 }

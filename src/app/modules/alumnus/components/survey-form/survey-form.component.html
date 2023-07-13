@@ -28,7 +28,7 @@
                 class="w-full border rounded outline-0"
                 type="number"
                 formControlName="contactNumber"
-                placeholder="E.G: (09********* or +639*********)"
+                placeholder="E.G: (9423*******)"
                 pInputText
                 required
               />
@@ -317,7 +317,6 @@
                       type="text"
                       pInputText
                       formControlName="natureOfWork"
-                      required
                     />
                     </td>
                     <td>
@@ -326,7 +325,6 @@
                       type="text"
                       pInputText
                       formControlName="jobStatus"
-                      required
                     />
                     </td>
                     <td>
@@ -335,7 +333,6 @@
                       type="text"
                       pInputText
                       formControlName="JobRelatedToDegree"
-                      required
                     />
                     </td>
                     <td>
@@ -344,7 +341,6 @@
                       type="text"
                       pInputText
                       formControlName="enrolledOtherCourses"
-                      required
                     />
                     </td>
                   </tr>                 
@@ -671,7 +667,7 @@
         <button
             class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
             mat-button (click)="stepper.reset()"><p>Reset</p></button>
-            <button
+            <button (click)="submitSurvey()"
             class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
             ><p>Submit</p></button>
       </div>
