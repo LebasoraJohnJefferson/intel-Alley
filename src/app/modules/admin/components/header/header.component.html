@@ -4,7 +4,7 @@
       class="lg:hidden flex justify-between items-center px-5 py-3 fixed w-full"
       [ngClass]="{ 'bg-white shadow-md text-slate-800': onScroll }"
     >
-      <div class="flex items-center" routerLink="/">
+      <div class="flex items-center" routerLink="/admin">
         <img
           src="../../../../../assets/images/selfie.png"
           alt=""
@@ -100,7 +100,7 @@
       <div class="flex items-center">
         <div
           class="flex items-center cursor-pointer hover:bg-slate-900 transition-colors py-2 px-2 pl-3 rounded-xl mr-2"
-          routerLink="/account"
+          routerLink="/admin/account"
         >
           <h1 *ngIf="user.length != 0" class="font-semibold mr-2 capitalize">
             Hi, {{ user.name.split(" ")[0] }}
