@@ -227,12 +227,12 @@ export class SurveyFormComponent implements OnInit {
         profExam1:this._formBuilder.group({
           examName:['',Validators.required],
           yearOfExam:['',Validators.required],
-          rating:['',Validators.required]
+          rating:['']
         }),
         profExam2:this._formBuilder.group({
           examName:['',Validators.required],
           yearOfExam:['',Validators.required],
-          rating:['',Validators.required]
+          rating:['']
         })
       });
 
@@ -469,7 +469,7 @@ export class SurveyFormComponent implements OnInit {
             history:this.workHistoryFB.value,
             recommend:this.recommendation.value
           }
-          this._surveyService.employed(temp).subscribe({
+          this._surveyService.employed(this.uploadFilePoorOfEmp,this.uploadFileCertificateOfEmp,temp).subscribe({
             next:()=>{
 
             },
@@ -489,7 +489,7 @@ export class SurveyFormComponent implements OnInit {
             history:this.workHistoryFB.value,
             recommend:this.recommendation.value
           }
-          this._surveyService.selfEmployed(temp).subscribe({
+          this._surveyService.selfEmployed(this.uploadFileProofOfSelfEmploy,temp).subscribe({
             next:()=>{
 
             },

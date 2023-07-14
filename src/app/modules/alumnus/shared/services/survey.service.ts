@@ -15,11 +15,11 @@ export class SurveyService {
 
   constructor(private _http: HttpClient, private router: Router) {}
 
-  employed(data: any):Observable<any> {
+  employed(uploadFilePoorOfEmp:File,uploadFileCertificateOfEmp:File,data: any):Observable<any> {
     return this._http.post(`${BASEURL}/api/alumnus/employed`, data);
   }
 
-  selfEmployed(data: any): any {
+  selfEmployed(uploadFileProofOfSelfEmploy:File,data: any): any {
     return this._http.post(`${BASEURL}/api/alumnus/selfEmployed`, data);
   }
 
