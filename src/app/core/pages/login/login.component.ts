@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private toast: HotToastService,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
           (response: any) => {
             this.submitLoading = false;
             this.authService.setSession(this.loginAcctType, response);
+            this.router.navigate(["/"])
             this.toast.success(response.message);
             this.loginForm.reset();
           },

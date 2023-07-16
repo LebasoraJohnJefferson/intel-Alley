@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseURL: "http://localhost:3000"
+  baseURL: "https://intel-alley-backend-production.up.railway.app"
 };
 
 export const developersProfile = {
