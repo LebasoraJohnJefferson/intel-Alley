@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 const BASEURL = environment.baseURL;
 const HELPER = new JwtHelperService();
 
@@ -25,8 +26,11 @@ export class AuthService {
     return this.http.post(`${BASEURL}/api/auth/forgotpassword`, data);
   }
 
-  resetpassword(data: any): any {
-    return this.http.post(`${BASEURL}/api/auth/resetpassword`, data);
+  resetPassword(data: any, token: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.post(`${BASEURL}/api/auth/resetpassword`, data, { headers });
   }
 
   isLoggedIn(type: string): boolean {

@@ -9,7 +9,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forgotpassword', component: ForgotpasswordComponent },
-  { path: 'resetpassword', component: ResetpasswordComponent },
+  { path: 'resetpassword/:token', component: ResetpasswordComponent },
   //  {path:'page-not-found',component:PageNotFoundComponent},
   //  { path:"**", redirectTo:'page-not-found'}
 ];
