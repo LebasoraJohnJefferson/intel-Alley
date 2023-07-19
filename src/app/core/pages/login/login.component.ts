@@ -61,11 +61,11 @@ export class LoginComponent implements OnInit {
           (error: any) => {
             this.submitLoading = false;
             let result: any;
-
+            console.log(error.error)
             if (error.status == 0) {
               result = 'Server has fallen!';
-            } else if (error.status == 401) {
-              result = error.error.message;
+            } else if (error.status == 401 || error.status == 404) {
+              result = error.error.message ? error.error.message : result = error.error
             } else if (error.status == 422) {
               result = error.error.email[0];
             } else if (error.status == 500) {

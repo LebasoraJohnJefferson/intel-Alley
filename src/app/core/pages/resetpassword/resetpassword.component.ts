@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 import {FormBuilder, FormGroup,Validators} from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 
 
@@ -21,10 +20,10 @@ export class ResetpasswordComponent {
 
   constructor(
     private _fb:FormBuilder,
-    public location:Location,
     public toast:HotToastService,
     private _route:ActivatedRoute,
-    private _authService:AuthService
+    private _authService:AuthService,
+    public router:Router
   ){
     this._route.queryParams.subscribe((value) => {
       this.token = this._route.snapshot.paramMap.get('token');
@@ -32,7 +31,7 @@ export class ResetpasswordComponent {
   }
 
   goBack(){
-    this.location.back()
+    this.router.navigate(['/login'])
   }
 
 
@@ -49,13 +48,13 @@ export class ResetpasswordComponent {
       this._authService.resetPassword(this.passwordForm.value,this.token).subscribe({
         complete:()=>{
           this.isLoading = false
+          this.passwordForm.reset()
         },
         error:(err)=>{
-          console.log(err)
           this.toast.warning(err.error)
         },next:(res)=>{
           this.toast.success(res.message)
-          this.passwordForm.reset()
+          this.router.navigate(['/login'])
         }
       })
     }
