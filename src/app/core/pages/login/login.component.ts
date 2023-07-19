@@ -42,6 +42,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    let validParams = ['alumnus','admin']
+    if(!validParams.includes(this.loginAcctType)) return this.toast.warning("Select a category!")
     if (
       this.loginForm.status == 'VALID' &&
       this.loginForm.controls['password'].value.trim()
