@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
       next:(res)=>{
         this.name = res.user.name
       },error:(err)=>{
-        this.router.navigate(['login'])
+        this.router.navigate(['/login'])
         localStorage.removeItem('token')
         this.toast.warning("Forbidden")
       }
