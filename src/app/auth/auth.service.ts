@@ -12,7 +12,6 @@ export class AuthService {
     public router:Router) {
 
     }
-
   public isAuthenticated():boolean{
     const token = localStorage.getItem('token') || ''
     return !this.jwtHelper.isTokenExpired(token)

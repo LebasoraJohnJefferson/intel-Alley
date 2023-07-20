@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-
+import { JwtInterceptor } from './modules/alumnus/jwt.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,6 +46,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     }),
   ],
   providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:JwtInterceptor,
+      multi:true
+    },
     {
       provide: JWT_OPTIONS,
       useValue: JWT_OPTIONS,

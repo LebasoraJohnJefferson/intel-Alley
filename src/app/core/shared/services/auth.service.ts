@@ -27,10 +27,8 @@ export class AuthService {
   }
 
   resetPassword(data: any, token: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-    return this.http.post(`${BASEURL}/api/auth/resetpassword`, data, { headers });
+    localStorage.setItem('token',token)
+    return this.http.post(`${BASEURL}/api/auth/resetpassword`, data);
   }
 
   isLoggedIn(type: string): boolean {

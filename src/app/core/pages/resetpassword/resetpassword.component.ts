@@ -36,7 +36,6 @@ export class ResetpasswordComponent {
 
 
   clickSubmit(event:boolean){
-    console.log(event)
     this.isLoading = !event
     if(this.passwordForm.invalid){
       this.toast.warning('Empty Input(s)')
@@ -52,6 +51,7 @@ export class ResetpasswordComponent {
         },
         error:(err)=>{
           this.toast.warning(err.error)
+          this.isLoading = false
         },next:(res)=>{
           this.toast.success(res.message)
           this.router.navigate(['/login'])

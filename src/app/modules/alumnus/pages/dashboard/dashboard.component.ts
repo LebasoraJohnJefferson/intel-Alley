@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsersService } from '../../shared/services/users.service';
+import { HotToastService } from '@ngneat/hot-toast';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   profile: any = [];
-
+  name:string = 'Alumnus'
   date: any;
   greetingState:number = 0
   greeting:Array<string>=[
@@ -17,9 +21,25 @@ export class DashboardComponent implements OnInit {
     'Night'
   ]
   constructor(
+    public router:Router,
+    private _userService:UsersService,
+    public toast:HotToastService,
   ) {}
 
+  getUser(){
+    this._userService.getUser().subscribe({
+      next:(res)=>{
+        this.name = res.user.name
+      },error:(err)=>{
+        this.router.navigate(['login'])
+        localStorage.removeItem('token')
+        this.toast.warning("Forbidden")
+      }
+    })
+  }
+
   ngOnInit(): void {
+    this.getUser()
     this.date = new Date();
 
     if(this.date.getHours() > 5 && this.date.getHours() <= 12) this.greetingState = 0

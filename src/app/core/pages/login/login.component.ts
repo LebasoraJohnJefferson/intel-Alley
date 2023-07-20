@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
             this.submitLoading = false;
             this.authService.setSession(this.loginAcctType, response);
             this.router.navigate(["/"])
+            localStorage.setItem('token',response.accessToken)
             this.toast.success(response.message);
             this.loginForm.reset();
           },
