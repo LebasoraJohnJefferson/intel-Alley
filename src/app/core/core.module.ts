@@ -25,7 +25,7 @@ import { NotificationComponent } from './components/notification/notification.co
     ForgotpasswordComponent,
     CustomBtnComponent,
     PageNotFoundComponent,
-    NotificationComponent
+    NotificationComponent,
   ],
   imports: [
     CommonModule,

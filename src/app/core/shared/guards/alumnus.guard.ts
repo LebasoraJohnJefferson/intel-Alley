@@ -49,7 +49,7 @@ export class AlumnusGuard  {
         });
         
         // Check if the user data is valid (e.g., logged in)
-        if (user && user.isLoggedIn) {
+        if (user) {
           return true; // Allow navigation
         } else {
           // User is not logged in or user data is invalid
