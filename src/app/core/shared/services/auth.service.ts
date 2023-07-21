@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   logout(type: string) {
-    localStorage.removeItem(`${type}_access_token`);
+    localStorage.removeItem(`token`);
     this.router.navigate([`/login`], {
       queryParams: { type: type },
     });

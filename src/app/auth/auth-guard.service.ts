@@ -17,7 +17,7 @@ export class AuthGuardService{
 
   canActivate():boolean{
     if(!this.auth.isAuthenticated()){
-      this.router.navigate([''])
+      this.router.navigate(['/'])
       this.toastr.warning('login-first')
       return false
     }

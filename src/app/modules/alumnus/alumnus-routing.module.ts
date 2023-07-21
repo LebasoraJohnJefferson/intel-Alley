@@ -16,7 +16,7 @@ const routes: Routes = [
     component: LayoutComponent,
     canActivate: [AlumnusGuard],
     children: [
-      { path: '', component: DashboardComponent },
+      { path: '', component: DashboardComponent ,canActivate: [AlumnusGuard],},
       { path: 'surveys', component: SurveysComponent},
       { path: 'events', component: EventsComponent },
       { path: 'about', component: AboutComponent },

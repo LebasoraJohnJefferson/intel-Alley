@@ -30,10 +30,6 @@ export class DashboardComponent implements OnInit {
     this._userService.getUser().subscribe({
       next:(res)=>{
         this.name = res.user.name
-      },error:(err)=>{
-        this.router.navigate(['/login'])
-        localStorage.removeItem('token')
-        this.toast.warning("Forbidden")
       }
     })
   }
