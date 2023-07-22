@@ -9,6 +9,7 @@ import autoTable from 'jspdf-autotable';
 import { read, utils, writeFile } from 'xlsx';
 
 import { CourseService } from 'src/app/core/shared/services/course.service';
+import { AlumniService } from '../../shared/services/alumni.service';
 
 @Component({
   selector: 'app-alumni',
@@ -16,7 +17,7 @@ import { CourseService } from 'src/app/core/shared/services/course.service';
   styleUrls: ['./alumni.component.scss'],
 })
 export class AlumniComponent implements OnInit {
-  students: any = [];
+  alumni: any = [];
   courses: any = [];
 
   createAccountModal: boolean = false;
@@ -31,7 +32,8 @@ export class AlumniComponent implements OnInit {
   constructor(
     private router: Router,
     private toast: HotToastService,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private alumniService: AlumniService
   ) {}
 
   importedStudents: any[] = [];
@@ -45,9 +47,8 @@ export class AlumniComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       studentID: new FormControl('', [Validators.required]),
       course: new FormControl('', [Validators.required]),
-      section: new FormControl('', [Validators.required]),
-      year: new FormControl('', [Validators.required]),
-      password: new FormControl('', Validators.required),
+      class: new FormControl('', [Validators.required]),
+      password: new FormControl('default'),
     });
 
     this.cols = [
@@ -71,8 +72,6 @@ export class AlumniComponent implements OnInit {
 
       console.log(this.courses);
     });
-
-    
   }
 
   getStudents() {
@@ -130,19 +129,19 @@ export class AlumniComponent implements OnInit {
 
     this.submitLoading = true;
 
-    // this.studentService.createStudentAccount(this.createForm.value).subscribe(
-    //   (response: any) => {
-    //     this.submitLoading = false;
-    //     this.createForm.reset();
-    //     this.createAccountModal = false;
-    //     this.getStudents();
-    //     this.toast.success(response.message);
-    //   },
-    //   (error: any) => {
-    //     this.submitLoading = false;
-    //     this.toast.error(error.error.message);
-    //   }
-    // );
+    this.alumniService.create(this.createForm.value).subscribe(
+      (response: any) => {
+        this.submitLoading = false;
+        this.createForm.reset();
+        this.createAccountModal = false;
+        this.getStudents();
+        this.toast.success(response.message);
+      },
+      (error: any) => {
+        this.submitLoading = false;
+        this.toast.error(error.error.message);
+      }
+    );
   }
 
   exportPdf() {
@@ -159,7 +158,7 @@ export class AlumniComponent implements OnInit {
       { title: 'Year', dataKey: 'year' },
     ];
 
-    this.students.map((item: any) => {
+    this.alumni.map((item: any) => {
       data.push({
         studentId: item.StudentCredential.schoolId,
         name: item.name,
@@ -186,7 +185,7 @@ export class AlumniComponent implements OnInit {
 
   exportExcel() {
     import('xlsx').then((xlsx) => {
-      const worksheet = xlsx.utils.json_to_sheet(this.students);
+      const worksheet = xlsx.utils.json_to_sheet(this.alumni);
       const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, {
         bookType: 'xlsx',
