@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { AdminService } from '../../shared/services/admin.service';
 import { AuthService } from 'src/app/core/shared/services/auth.service';
 
 @Component({
@@ -48,10 +49,12 @@ export class HeaderComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
+    private _adminService: AdminService
   ) {}
 
   ngOnInit(): void {
     window.addEventListener('scroll', this.listenScrollEvent);
+    this.getAdmin();
 
     const route = this.route.snapshot.children[0].routeConfig?.path;
     route == '' ? (this.currentRoute = '/admin/') : (this.currentRoute = route);
@@ -79,4 +82,12 @@ export class HeaderComponent implements OnInit {
   listenScrollEvent = () => {
     window.scrollY > 15 ? (this.onScroll = true) : (this.onScroll = false);
   };
+
+  getAdmin() {
+    this._adminService.getAdmin().subscribe({
+      next: (res) => {
+        this.user = res.user;
+      },
+    });
+  }
 }

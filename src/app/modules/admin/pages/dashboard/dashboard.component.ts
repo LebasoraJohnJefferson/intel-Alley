@@ -14,23 +14,21 @@ export class DashboardComponent implements OnInit {
   isAfternoon: any;
   isEvening: any;
   isNight: any;
-  name:string = 'Admin'
+  name: string = 'Admin';
 
-  constructor(
-    private _adminService:AdminService
-  ) {}
+  constructor(private _adminService: AdminService) {}
 
-  getAdmin(){
+  getAdmin() {
     this.date = new Date();
     this._adminService.getAdmin().subscribe({
-      next:(res)=>{
-        this.name = res.user.name
-      }
-    })
+      next: (res) => {
+        this.name = res.user.name;
+      },
+    });
   }
 
   ngOnInit(): void {
-    this.getAdmin()
+    this.getAdmin();
     this.isMorning = this.date.getHours() > 5 && this.date.getHours() <= 12;
     this.isAfternoon = this.date.getHours() > 12 && this.date.getHours() <= 18;
     this.isEvening = this.date.getHours() > 18 && this.date.getHours() <= 22;

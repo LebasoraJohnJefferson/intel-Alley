@@ -6,7 +6,6 @@
 
   <div class="mt-10 pb-10">
     <div class="text-sm w-full relative mt-10 grid gap-20 z-40">
-
       <div class="" *ngIf="students">
         <div class="relative w-[350px] lg:w-full">
           <p-table
@@ -45,7 +44,7 @@
                     placeholder="Search keyword"
                   />
                 </div>
-    
+
                 <div class="flex">
                   <div class="flex items-center mr-2 gap-1">
                     <input
@@ -60,7 +59,7 @@
                       (click)="importInput.value = ''"
                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                     />
-    
+
                     <button
                       (click)="importInput.click()"
                       class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
@@ -68,7 +67,7 @@
                       <i class="fad fa-upload mr-1"></i>
                       Import
                     </button>
-    
+
                     <button
                       (click)="dt2.exportCSV()"
                       class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
@@ -100,7 +99,7 @@
                       PDF
                     </button>
                   </div>
-    
+
                   <button
                     (click)="createAccountModal = true"
                     class="bg-slate-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-slate-900/80 cursor-pointer transition-all"
@@ -141,8 +140,7 @@
         </div>
       </div>
     </div>
-    
-    
+
     <p-dialog
       header="Create account"
       [(visible)]="createAccountModal"
@@ -156,7 +154,9 @@
           class="w-full grid gap-2"
         >
           <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700">Name</label>
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Name</label
+            >
             <div class="mt-1 relative rounded-md w-full">
               <input
                 type="text"
@@ -166,9 +166,11 @@
               />
             </div>
           </div>
-    
+
           <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700">Email</label>
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Email</label
+            >
             <div class="mt-1 relative rounded-md w-full">
               <input
                 type="email"
@@ -178,7 +180,7 @@
               />
             </div>
           </div>
-    
+
           <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
               >Student ID number</label
@@ -192,7 +194,7 @@
               />
             </div>
           </div>
-    
+
           <div>
             <label class="block text-[12px] font-medium text-gray-700"
               >Course</label
@@ -212,54 +214,17 @@
               </select>
             </div>
           </div>
-    
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-[12px] font-medium text-gray-700"
-                >Section</label
-              >
-              <div class="mt-1 relative rounded-md">
-                <select
-                  formControlName="section"
-                  required
-                  class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50 cursor-pointer"
-                >
-                  <option value="" selected disabled hidden class="">
-                    Select Section
-                  </option>
-                  <option value="A" class="">A</option>
-                  <option value="B" class="">B</option>
-                  <option value="C" class="">C</option>
-                  <option value="D" class="">D</option>
-                  <option value="E" class="">E</option>
-                  <option value="F" class="">F</option>
-                </select>
-              </div>
-            </div>
-    
-            <div>
-              <label class="block text-[12px] font-medium text-gray-700"
-                >Year Level</label
-              >
-              <div class="mt-1 relative rounded-md">
-                <select
-                  formControlName="year"
-                  required
-                  class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50 cursor-pointer"
-                >
-                  <option value="" selected disabled hidden class="">
-                    Select Year level
-                  </option>
-                  <option value="1" class="">1st year</option>
-                  <option value="2" class="">2nd year</option>
-                  <option value="3" class="">3rd year</option>
-                  <option value="4" class="">4th year</option>
-                  <option value="5" class="">5th year</option>
-                </select>
-              </div>
+
+          <div>
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Class</label
+            >
+            <div class="mt-1 relative rounded-md">
+
+              <input type="" formControlName="class" class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50" />
             </div>
           </div>
-    
+
           <div class="w-full">
             <label class="block text-[12px] font-medium text-gray-700"
               >Password</label
@@ -273,11 +238,11 @@
               />
             </div>
           </div>
-    
+
           <button
             [disabled]="submitLoading"
             type="submit"
-            class="grid place-items-center cursor-pointer bg-red-500 text-white font-semibold rounded-md py-3 hover:bg-red-600/80 transition-all w-full mt-2"
+            class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-3 hover:bg-slate-900/80 transition-all w-full mt-2"
           >
             <div class="flex items-center w-fit mx-auto" *ngIf="submitLoading">
               <svg
@@ -300,16 +265,14 @@
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
-    
+
               <span>Processing</span>
             </div>
-    
+
             <span *ngIf="!submitLoading">Create</span>
           </button>
         </form>
       </div>
     </p-dialog>
-
   </div>
-
 </div>
