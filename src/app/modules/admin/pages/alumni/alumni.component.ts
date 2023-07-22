@@ -45,10 +45,10 @@ export class AlumniComponent implements OnInit {
     this.createForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      studentID: new FormControl('', [Validators.required]),
+      studentId: new FormControl('', [Validators.required]),
       course: new FormControl('', [Validators.required]),
       yearGraduated: new FormControl('', [Validators.required]),
-      password: new FormControl('default'),
+      password: new FormControl(''),
     });
 
     this.cols = [
