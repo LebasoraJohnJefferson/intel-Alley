@@ -5,7 +5,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { JwtInterceptor } from './modules/alumnus/jwt.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,9 +17,7 @@ import { AdminModule } from './modules/admin/admin.module';
 
 import { HotToastModule } from '@ngneat/hot-toast';
 
-
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +35,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AdminModule,
     MatProgressSpinnerModule,
     HotToastModule.forRoot({
-      position:'top-right'
+      position: 'top-center',
     }),
     ToastrModule.forRoot({
       preventDuplicates: false,
@@ -47,9 +45,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   ],
   providers: [
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:JwtInterceptor,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
     },
     {
       provide: JWT_OPTIONS,

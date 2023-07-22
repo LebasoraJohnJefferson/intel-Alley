@@ -15,67 +15,59 @@ import { UsersService } from 'src/app/modules/alumnus/shared/services/users.serv
 @Injectable({
   providedIn: 'root',
 })
-export class AlumnusGuard  {
+export class AlumnusGuard {
   constructor(
     private authService: AuthService,
     private router: Router,
     private toast: HotToastService,
-    private _userService:UsersService
+    private _userService: UsersService
   ) {}
 
   async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):
-    // | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    // | boolean
-    // | UrlTree 
-    
-    {
-      try {
-        // Wait for the getUser() observable and convert it to a promise
-        const user = await new Promise<any>((resolve, reject) => {
-          this._userService.getUser().subscribe(
-            {
-              next:(data) => {
-                resolve(data);
-              },
-              error:(error) => {
-                reject(error);
-              }
-            }
-          );
+  ): // | Observable<boolean | UrlTree>
+  Promise<boolean | UrlTree> { // | UrlTree // | boolean
+    try {
+      // Wait for the getUser() observable and convert it to a promise
+      const user = await new Promise<any>((resolve, reject) => {
+        this._userService.getUser().subscribe({
+          next: (data) => {
+            resolve(data);
+          },
+          error: (error) => {
+            reject(error);
+          },
         });
-        
-        // Check if the user data is valid (e.g., logged in)
-        if (user) {
-          return true; // Allow navigation
-        } else {
-          // User is not logged in or user data is invalid
-          this.authService.logout('student');
-          this.toast.warning('login first');
-          return this.router.createUrlTree(['/login'], {
-            queryParams: { type: 'student' },
-          });
-        }
-      } catch (err) {
-        // Handle errors from the getUser() call
-        this.authService.logout('student');
-        this.toast.warning('login first');
+      });
+
+      // Check if the user data is valid (e.g., logged in)
+      if (user) {
+        return true; // Allow navigation
+      } else {
+        // User is not logged in or user data is invalid
+        this.authService.logout('alumnus');
+        this.toast.info('Please login');
         return this.router.createUrlTree(['/login'], {
-          queryParams: { type: 'student' },
+          queryParams: { type: 'alumnus' },
         });
       }
+    } catch (err) {
+      // Handle errors from the getUser() call
+      this.authService.logout('alumnus');
+      this.toast.info('Please login');
+      return this.router.createUrlTree(['/login'], {
+        queryParams: { type: 'alumnus' },
+      });
     }
-    // if (this.authService.isLoggedIn('admin') == true) return true;
-
-    // this.authService.logout('admin')
-
-    // this.router.navigate([`/login`], {
-    //   queryParams: { type: 'admin' },
-    // });
-    // this.toast.info('Please login');
-    // return false;
-
   }
+  // if (this.authService.isLoggedIn('admin') == true) return true;
+
+  // this.authService.logout('admin')
+
+  // this.router.navigate([`/login`], {
+  //   queryParams: { type: 'admin' },
+  // });
+  // this.toast.info('Please login');
+  // return false;
+}
