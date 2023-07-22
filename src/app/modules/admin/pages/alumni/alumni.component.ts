@@ -8,7 +8,7 @@ import autoTable from 'jspdf-autotable';
 
 import { read, utils, writeFile } from 'xlsx';
 
-
+import { CourseService } from 'src/app/core/shared/services/course.service';
 
 @Component({
   selector: 'app-alumni',
@@ -30,13 +30,15 @@ export class AlumniComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private courseService: CourseService
   ) {}
 
   importedStudents: any[] = [];
 
   ngOnInit(): void {
     this.getStudents();
+    this.getCourses();
 
     this.createForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -61,6 +63,16 @@ export class AlumniComponent implements OnInit {
       title: col.header,
       dataKey: col.field,
     }));
+  }
+
+  getCourses() {
+    this.courseService.getAll().subscribe((response: any) => {
+      this.courses = response;
+
+      console.log(this.courses);
+    });
+
+    
   }
 
   getStudents() {
@@ -109,7 +121,6 @@ export class AlumniComponent implements OnInit {
     //     }
     //   );
   }
-
 
   onSubmit() {
     if (!this.createForm.valid) {
