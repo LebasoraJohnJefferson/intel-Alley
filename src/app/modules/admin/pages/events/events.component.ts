@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
+import { EventsService } from '../../shared/services/events.service';
 
 @Component({
   selector: 'app-events',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class EventsComponent implements OnInit {
   students: any = [];
   courses: any = [];
-
+  uploadFile:any;
+  onLoadFile:any;
   createAccountModal: boolean = false;
   submitLoading: boolean = false;
 
@@ -23,7 +25,8 @@ export class EventsComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private _eventService:EventsService
   ) {}
 
   importedStudents: any[] = [];
@@ -32,13 +35,8 @@ export class EventsComponent implements OnInit {
     this.getStudents();
 
     this.createForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      studentID: new FormControl('', [Validators.required]),
-      course: new FormControl('', [Validators.required]),
-      section: new FormControl('', [Validators.required]),
-      year: new FormControl('', [Validators.required]),
-      password: new FormControl('', Validators.required),
+      eventName: new FormControl(''),
+      image: new FormControl(''),
     });
 
     this.cols = [
@@ -60,12 +58,50 @@ export class EventsComponent implements OnInit {
     // );
   }
 
+  
+  uploadImage(event:any){
+    if(event.target.files[0]){
+      this.uploadFile = event.target.files[0]
+    }
+    if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.toast.warning('You must select an image');
+			return;
+		}
+
+		var mimeType = event.target.files[0].type;
+
+		if (mimeType.match(/image\/*/) == null) {
+      this.toast.warning("Only images are supported")
+			return;
+		}
+
+		var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+
+		reader.onload = (_event) => {
+			this.onLoadFile = `${reader.result}` 
+		}
+  }
+
+  uploadEventImage(){
+    let element: HTMLElement = document.querySelector('input[name="eventImage"]') as HTMLElement;
+    if (element) element.click();
+  }
+
 
   onSubmit() {
-    if (!this.createForm.valid) {
+    if (this.createForm?.get('eventName')?.value == '' && this.createForm?.get('image')?.value=='') {
       this.toast.warning('Please fill out the fields with valid data.');
       return;
     }
+
+    this._eventService.createEvent(this.uploadFile,this.createForm.value).subscribe({
+      next:()=>{
+
+      },error:()=>{
+        
+      }
+    })
 
     this.submitLoading = true;
 

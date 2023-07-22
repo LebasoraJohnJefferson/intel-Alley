@@ -88,7 +88,7 @@
     
     
     <p-dialog
-      header="Create account"
+      header="Create Event"
       [(visible)]="createAccountModal"
       [modal]="true"
       [style]="{ maxWidth: '400px', width: '400px' }"
@@ -99,122 +99,29 @@
           [formGroup]="createForm"
           class="w-full grid gap-2"
         >
-          <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700">Name</label>
-            <div class="mt-1 relative rounded-md w-full">
-              <input
-                type="text"
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                placeholder="Enter name"
-                formControlName="name"
-              />
-            </div>
-          </div>
-    
-          <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700">Email</label>
-            <div class="mt-1 relative rounded-md w-full">
-              <input
-                type="email"
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+          <input
+                (change)="uploadImage($event)"
+                type="file"
+                class="hidden"
                 placeholder="Enter email"
-                formControlName="email"
+                name="eventImage"
+                formControlName="image"
               />
-            </div>
-          </div>
-    
           <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Student ID number</label
-            >
+            <div class="flex items-center">
+              <i (click)="uploadEventImage()" class="pi pi-image text-lg px-1  my-1 rounded border text-green-300 cursor border-2 border-green-300"></i>
+              <p class="py-2 font-bold outline-none rounded w-full block px-1 text-[12px] rounded-md text-slate-400">UPLOAD FILE</p>
+            </div>
+            <div class="w-full flex items-center justify-center">
+              <img *ngIf="onLoadFile" [src]="onLoadFile" class="h-24 w-full rounded object-fit border-2 border-red-200 p-1"  />
+            </div>
             <div class="mt-1 relative rounded-md w-full">
-              <input
+              <textarea
                 type="text"
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                placeholder="Enter student number"
-                formControlName="studentID"
-              />
-            </div>
-          </div>
-    
-          <div>
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Course</label
-            >
-            <div class="mt-1 relative rounded-md">
-              <select
-                formControlName="course"
-                required
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50 cursor-pointer"
-              >
-                <option value="" selected disabled hidden class="">
-                  Select Course
-                </option>
-                <option *ngFor="let course of courses" [value]="course.id">
-                  {{ course.title }}
-                </option>
-              </select>
-            </div>
-          </div>
-    
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-[12px] font-medium text-gray-700"
-                >Section</label
-              >
-              <div class="mt-1 relative rounded-md">
-                <select
-                  formControlName="section"
-                  required
-                  class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50 cursor-pointer"
-                >
-                  <option value="" selected disabled hidden class="">
-                    Select Section
-                  </option>
-                  <option value="A" class="">A</option>
-                  <option value="B" class="">B</option>
-                  <option value="C" class="">C</option>
-                  <option value="D" class="">D</option>
-                  <option value="E" class="">E</option>
-                  <option value="F" class="">F</option>
-                </select>
-              </div>
-            </div>
-    
-            <div>
-              <label class="block text-[12px] font-medium text-gray-700"
-                >Year Level</label
-              >
-              <div class="mt-1 relative rounded-md">
-                <select
-                  formControlName="year"
-                  required
-                  class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50 cursor-pointer"
-                >
-                  <option value="" selected disabled hidden class="">
-                    Select Year level
-                  </option>
-                  <option value="1" class="">1st year</option>
-                  <option value="2" class="">2nd year</option>
-                  <option value="3" class="">3rd year</option>
-                  <option value="4" class="">4th year</option>
-                  <option value="5" class="">5th year</option>
-                </select>
-              </div>
-            </div>
-          </div>
-    
-          <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Password</label
-            >
-            <div class="mt-1 relative rounded-md shadow-sm w-full">
-              <input
-                type="text"
-                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
-                placeholder="Enter password"
-                formControlName="password"
-              />
+                class="py-2 outline-none rounded border w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="What`s on your mind?"
+                formControlName="eventName"
+              ></textarea>
             </div>
           </div>
     

@@ -42,6 +42,5 @@ export class DashboardComponent implements OnInit {
     else if(this.date.getHours() > 12 && this.date.getHours() <= 18) this.greetingState = 1
     else if(this.date.getHours() > 18 && this.date.getHours() <= 22) this.greetingState =2
     else this.greetingState =3
-    // this.isNight = this.date.getHours() > 22 || this.date.getHours() <= 5;
   }
 }
