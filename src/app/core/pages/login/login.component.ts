@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private toast: HotToastService,
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -42,8 +42,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    let validParams = ['alumnus','admin']
-    if(!validParams.includes(this.loginAcctType)) return this.toast.warning("Select a category!")
+    let validParams = ['alumni', 'admin'];
+    if (!validParams.includes(this.loginAcctType))
+      return this.toast.warning('Select a category!');
     if (
       this.loginForm.status == 'VALID' &&
       this.loginForm.controls['password'].value.trim()
@@ -55,18 +56,23 @@ export class LoginComponent implements OnInit {
         .subscribe(
           (response: any) => {
             this.submitLoading = false;
-            this.authService.setSession(this.loginAcctType, response.accessToken);
+            this.authService.setSession(
+              this.loginAcctType,
+              response.accessToken
+            );
             this.toast.success(response.message);
             this.loginForm.reset();
           },
           (error: any) => {
             this.submitLoading = false;
             let result: any;
-            console.log(error.error)
+            console.log(error.error);
             if (error.status == 0) {
               result = 'Server has fallen!';
             } else if (error.status == 401 || error.status == 404) {
-              result = error.error.message ? error.error.message : result = error.error
+              result = error.error.message
+                ? error.error.message
+                : (result = error.error);
             } else if (error.status == 422) {
               result = error.error.email[0];
             } else if (error.status == 500) {

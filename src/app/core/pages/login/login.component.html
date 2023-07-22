@@ -51,10 +51,10 @@
 
           <div class="grid grid-cols-[1fr_1fr] my-7 gap-6">
             <div
-              (click)="changeLoginAcctType('alumnus')"
+              (click)="changeLoginAcctType('alumni')"
               class="min-h-[100px] h-fit relative grid place-items-center bg-white p-2 px-8 rounded-md shadow-md text-sm border-2 border-white cursor-pointer hover:border-slate-500 transition-all"
               [ngClass]="
-                loginAcctType == 'alumnus'
+                loginAcctType == 'alumni'
                   ? 'border-2 border-slate-500'
                   : 'border-white'
               "
@@ -64,12 +64,12 @@
                 alt="student image"
                 class=""
               />
-              <h1 class="font-semibold mt-2">Alumnus</h1>
+              <h1 class="font-semibold mt-2">Alumni</h1>
 
               <div
                 class=""
                 [ngClass]="
-                  loginAcctType == 'alumnus'
+                  loginAcctType == 'alumni'
                     ? 'absolute -bottom-2 -right-2 bg-slate-500 w-5 h-5 grid place-items-center rounded-full'
                     : 'hidden'
                 "

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
-import { JwtInterceptor } from './modules/alumnus/jwt.interceptor';
+import { JwtInterceptor } from './modules/alumni/jwt.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CoreModule } from './core/core.module';
-import { AlumnusModule } from './modules/alumnus/alumnus.module';
+import { AlumniModule } from './modules/alumni/alumni.module';
 import { AdminModule } from './modules/admin/admin.module';
 
 import { HotToastModule } from '@ngneat/hot-toast';
@@ -31,7 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     FormsModule,
     CoreModule,
-    AlumnusModule,
+    AlumniModule,
     AdminModule,
     MatProgressSpinnerModule,
     HotToastModule.forRoot({

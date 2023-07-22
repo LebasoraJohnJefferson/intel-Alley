@@ -10,12 +10,12 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
-import { UsersService } from 'src/app/modules/alumnus/shared/services/users.service';
+import { UsersService } from 'src/app/modules/alumni/shared/services/users.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AlumnusGuard {
+export class AlumniGuard {
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -27,7 +27,8 @@ export class AlumnusGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): // | Observable<boolean | UrlTree>
-  Promise<boolean | UrlTree> { // | UrlTree // | boolean
+  Promise<boolean | UrlTree> {
+    // | UrlTree // | boolean
     try {
       // Wait for the getUser() observable and convert it to a promise
       const user = await new Promise<any>((resolve, reject) => {
@@ -46,28 +47,19 @@ export class AlumnusGuard {
         return true; // Allow navigation
       } else {
         // User is not logged in or user data is invalid
-        this.authService.logout('alumnus');
+        this.authService.logout('alumni');
         this.toast.info('Please login');
         return this.router.createUrlTree(['/login'], {
-          queryParams: { type: 'alumnus' },
+          queryParams: { type: 'alumni' },
         });
       }
     } catch (err) {
       // Handle errors from the getUser() call
-      this.authService.logout('alumnus');
+      this.authService.logout('alumni');
       this.toast.info('Please login');
       return this.router.createUrlTree(['/login'], {
-        queryParams: { type: 'alumnus' },
+        queryParams: { type: 'alumni' },
       });
     }
   }
-  // if (this.authService.isLoggedIn('admin') == true) return true;
-
-  // this.authService.logout('admin')
-
-  // this.router.navigate([`/login`], {
-  //   queryParams: { type: 'admin' },
-  // });
-  // this.toast.info('Please login');
-  // return false;
 }

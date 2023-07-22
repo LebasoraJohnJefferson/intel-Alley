@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AlumnusRoutingModule } from './alumnus-routing.module';
+import { AlumniRoutingModule } from './alumni-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { CoreModule } from 'src/app/core/core.module';
 
@@ -17,10 +17,9 @@ import { SurveysComponent } from './pages/surveys/surveys.component';
 import { EventsComponent } from './pages/events/events.component';
 import { SurveyContentComponent } from './components/survey-content/survey-content.component';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { EventContentComponent } from './components/event-content/event-content.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
-
 
 @NgModule({
   declarations: [
@@ -35,17 +34,17 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
     SurveyContentComponent,
     SurveyFormComponent,
     EventContentComponent,
-    BarChartComponent
+    BarChartComponent,
   ],
   imports: [
     CommonModule,
-    AlumnusRoutingModule,
+    AlumniRoutingModule,
     PrimengModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
     CoreModule,
     MatStepperModule,
-  ]
+  ],
 })
-export class AlumnusModule { }
+export class AlumniModule {}

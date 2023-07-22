@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AlumnusGuard } from 'src/app/core/shared/guards/alumnus.guard';
+import { AlumniGuard } from 'src/app/core/shared/guards/alumni.guard';
 
 import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -14,20 +14,19 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    canActivate: [AlumnusGuard],
+    canActivate: [AlumniGuard],
     children: [
-      { path: '', component: DashboardComponent ,canActivate: [AlumnusGuard],},
-      { path: 'surveys', component: SurveysComponent},
+      { path: '', component: DashboardComponent, canActivate: [AlumniGuard] },
+      { path: 'surveys', component: SurveysComponent },
       { path: 'events', component: EventsComponent },
       { path: 'about', component: AboutComponent },
-
     ],
   },
-  { path: 'account', component: AccountComponent, canActivate: [AlumnusGuard] },
+  { path: 'account', component: AccountComponent, canActivate: [AlumniGuard] },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AlumnusRoutingModule {}
+export class AlumniRoutingModule {}
