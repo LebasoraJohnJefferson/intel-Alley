@@ -15,6 +15,6 @@ export class AlumniService {
   constructor(private http: HttpClient, private router: Router) {}
 
   create(data: any): any {
-    return this.http.get(`${BASEURL}/api/user/alumni`, data);
+    return this.http.post(`${BASEURL}/api/user/alumni`, data);
   }
 }

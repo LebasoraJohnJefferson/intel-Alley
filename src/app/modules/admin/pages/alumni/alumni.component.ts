@@ -47,7 +47,7 @@ export class AlumniComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       studentID: new FormControl('', [Validators.required]),
       course: new FormControl('', [Validators.required]),
-      class: new FormControl('', [Validators.required]),
+      yearGraduated: new FormControl('', [Validators.required]),
       password: new FormControl('default'),
     });
 
