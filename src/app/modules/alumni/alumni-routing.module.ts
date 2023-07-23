@@ -13,10 +13,9 @@ import { EventsComponent } from './pages/events/events.component';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent,
-    canActivate: [AlumniGuard],
+    component: LayoutComponent,canActivate: [AlumniGuard],
     children: [
-      { path: '', component: DashboardComponent, canActivate: [AlumniGuard] },
+      { path: '', component: DashboardComponent },
       { path: 'surveys', component: SurveysComponent },
       { path: 'events', component: EventsComponent },
       { path: 'about', component: AboutComponent },

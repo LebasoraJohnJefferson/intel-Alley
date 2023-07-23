@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   getUser(){
-    this._userService.getUser().subscribe({
+    this._userService.getProfile().subscribe({
       next:(res)=>{
         this.name = res.user.name
       }

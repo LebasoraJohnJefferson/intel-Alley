@@ -27,12 +27,11 @@ export class AlumniGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): // | Observable<boolean | UrlTree>
-  Promise<boolean | UrlTree> {
-    // | UrlTree // | boolean
+  Promise<boolean | UrlTree> { // | UrlTree // | boolean
     try {
       // Wait for the getUser() observable and convert it to a promise
-      const user = await new Promise<any>((resolve, reject) => {
-        this._userService.getUser().subscribe({
+      const admin = await new Promise<any>((resolve, reject) => {
+        this._userService.getProfile().subscribe({
           next: (data) => {
             resolve(data);
           },
@@ -43,22 +42,24 @@ export class AlumniGuard {
       });
 
       // Check if the user data is valid (e.g., logged in)
-      if (user) {
+      if (admin) {
         return true; // Allow navigation
       } else {
         // User is not logged in or user data is invalid
-        this.authService.logout('alumni');
+        this.authService.logout('admin');
         this.toast.info('Please login');
+
         return this.router.createUrlTree(['/login'], {
-          queryParams: { type: 'alumni' },
+          queryParams: { type: 'admin' },
         });
       }
     } catch (err) {
       // Handle errors from the getUser() call
-      this.authService.logout('alumni');
+      this.authService.logout('admin');
       this.toast.info('Please login');
+
       return this.router.createUrlTree(['/login'], {
-        queryParams: { type: 'alumni' },
+        queryParams: { type: 'admin' },
       });
     }
   }

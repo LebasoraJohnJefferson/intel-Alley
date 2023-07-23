@@ -15,7 +15,7 @@ export class UsersService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getUser():Observable <any> {
-    return this.http.get(`${BASEURL}/api/user/alumni/getUser`);
+  getProfile():Observable <any> {
+    return this.http.get(`${BASEURL}/api/user/alumni/profile`);
   }
 }

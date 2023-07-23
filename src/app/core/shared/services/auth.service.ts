@@ -43,8 +43,8 @@ export class AuthService {
     
     // let the database do the validation, if token is error throw error code and redirect to login
     localStorage.setItem('token',data)
-    if (type == 'alumnus') {
-      this.router.navigate([`/`]);
+    if (type == 'alumni') {
+      this.router.navigate(['/']);
       return;
     }
 

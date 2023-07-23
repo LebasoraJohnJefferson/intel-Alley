@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
           (error: any) => {
             this.submitLoading = false;
             let result: any;
-            console.log(error.error);
             if (error.status == 0) {
               result = 'Server has fallen!';
             } else if (error.status == 401 || error.status == 404) {
