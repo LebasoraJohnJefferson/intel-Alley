@@ -1,4 +1,4 @@
-<article class="w-full shadow-lg rounded border p-4">
+<article class="w-full shadow-lg rounded border p-4" *ngFor="let event of events">
     <div class="flex justify-between items-center w-full">
         <span class="flex items-center gap-2 mx-2">
             <img src="../../../../../assets/logo/evsu_logo_3.png" alt="profile" class="w-12 h-12 object-cover rounded-full border-2 border-red-500">
@@ -37,14 +37,14 @@
     </div>
     <hr class="my-3"/>
     <div class="m-2 text-slate-700 font-medium">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, error!
+      {{event.eventName}}
     </div>
-    <div class="p-3 bg-gray-200 rounded">
-      <img class="rounded w-full h-[280px]  object-scale-down" src="https://miro.medium.com/v2/resize:fit:1400/1*kNYb0DUGPBUUi_-X3oqyUw.jpeg" alt="profile">
+    <div class="p-3 bg-gray-200 rounded" *ngIf="event.image">
+      <img class="rounded w-full h-[280px]  object-scale-down" [src]="event.image" alt="profile">
     </div>
     <div class=" mt-4 flex items-center gap-2 mx-2">
         <span class=" flex items-center gap-1">
-            <p (click)="openComment(1)" class="pi pi-comments text-blue-500 hover:text-blue-300"></p>
+            <p (click)="openComment(event.id)" class="pi pi-comments text-blue-500 hover:text-blue-300"></p>
             <span class="text-slate-700 text-sm">200 Comments</span>
         </span>
         <span class=" flex items-center gap-1">
@@ -52,18 +52,18 @@
             <span class="text-slate-700 text-sm">200 Likes</span>
         </span>
     </div>
-    <div *ngIf="openCommentThroughIndex == 1">
-        <div  class="shadow-md border my-2 p-3">
+    <div *ngIf="openCommentThroughIndex == event.id" >
+        <div  class="shadow-md border my-2 p-3" *ngFor="let comment of comments">
             <span class="flex items-center  flex justify-between">
                 <div class="flex items-center  gap-2 mx-2">
                     <img src="https://static.wikia.nocookie.net/97553714-a5ef-4af5-81c5-8e10a31c0aae" alt="profile" class="w-8 h-8 object-cover rounded-full border-2 border-red-500">
                     <div class="flex items-center gap-2">
                         <div>
                             <div class="text-slate-700 text-sm font-bold">
-                              John Doe
+                              {{comment.User.name}}
                             </div>
                             <div class="text-xs text-blue-500 flex items-center gap-2">
-                              @JohnDoe@evsu.edu.ph
+                              @{{comment.User.email}}
                             </div>
                           </div>
                     </div>
@@ -93,21 +93,24 @@
             </span>  
             <hr class="my-3"/>
             <div class="px-4 mt-3">
-                <p class="text-[12px] md:text-base">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Exercitationem voluptas illo enim esse ea quam possimus maxime, excepturi obcaecati iusto, quaerat accusantium vero dolor odit! Ipsa quas et pariatur deserunt.</p>
+                <p class="text-[12px] md:text-base">{{comment.commentContext}}</p>
                 <div class="text-[10px] justify-end py-1 text-blue-500 flex items-center gap-2">
-                    <i class="pi pi-globe"></i>posted: 23hr ago.
+                    <i class="pi pi-globe"></i>
+                    {{comment.updatedAt | dateAgo}}
                 </div>
             </div>
         </div>
-        <form class="mt-3" [formGroup]="commentForm">
+        <form class="mt-3 flex items-center" [formGroup]="commentForm"  (ngSubmit)="postComment(event.id)">
             <textarea
                   class="w-full text-md  shadow-lg rounded borderoutline-0"
                   type="text"
                   placeholder="Enter your thought about this ..."
                   pInputText
-                  formControlName="comment"
+                  formControlName="commentContext"
                   required
                   ></textarea>
+            <button *ngIf="isCommentSending" class="bg-gray-200 p-4 shadow-lg border-slate-600 border rounded mx-2" type="submit"><i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i></button>
+            <button *ngIf="!isCommentSending" class="bg-gray-200 shadow-lg p-4 border rounded mx-2 hover:text-green-500 hover:bg-green-100" type="submit"><i class="pi pi-send" style="font-size: 1.5rem"></i></button>
         </form>
     </div>
     

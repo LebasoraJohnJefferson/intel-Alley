@@ -21,6 +21,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { EventContentComponent } from './components/event-content/event-content.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
+import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -35,6 +37,7 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
     SurveyFormComponent,
     EventContentComponent,
     BarChartComponent,
+    DateAgoPipe 
   ],
   imports: [
     CommonModule,

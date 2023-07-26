@@ -15,7 +15,15 @@ export class EventService {
 
   constructor(private _http: HttpClient, private router: Router) {}
 
-  comment(data: any,eventID:number):Observable<any> {
-    return this._http.post(`${BASEURL}/api/alumnus/event/${eventID}`, data);
+  getComment(eventId:number):Observable<any> {
+    return this._http.get(`${BASEURL}/api/event/comment/${eventId}`);
+  }
+
+  postComment(data: any,eventId:number):Observable<any> {
+    return this._http.post(`${BASEURL}/api/event/comment/${eventId}`,data);
+  }
+
+  getEvents():Observable<any>{
+    return this._http.get(`${BASEURL}/api/event/`)
   }
 }
