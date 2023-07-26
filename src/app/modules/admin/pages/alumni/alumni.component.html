@@ -24,12 +24,11 @@
             [rowsPerPageOptions]="[10, 25, 50]"
             styleClass="p-datatable-gridlines"
             [globalFilterFields]="[
-              'StudentCredential.schoolId',
+              'AlumniCredential.studentId',
               'name',
               'email',
-              'StudentCredential.section',
-              'StudentCredential.year',
-              'StudentCredential.Course.acronym'
+              'AlumniCredential.Course.acronym',
+              'status'
             ]"
           >
             <ng-template pTemplate="caption">
@@ -116,20 +115,33 @@
                 <th field="name">Name</th>
                 <th field="StudentCredential.Course.acronym">Course</th>
                 <th field="email">Email</th>
+                <th field="status">Status</th>
                 <th>Action</th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-student>
-              <tr class="text-sm" [pSelectableRow]="student">
-                <td>{{ student.StudentCredential.schoolId }}</td>
-                <td>{{ student.name }}</td>
-                <td>{{ student.StudentCredential.Course.acronym }}</td>
-                <td>{{ student.StudentCredential.section }}</td>
+            <ng-template pTemplate="body" let-alum>
+              <tr class="text-sm" [pSelectableRow]="alum">
+                <td>{{ alum.AlumniCredential.studentId }}</td>
+                <td>{{ alum.name }}</td>
+                <td>{{ alum.AlumniCredential.Course.acronym }}</td>
+                <td>{{ alum.email }}</td>
+                <td>
+                  <div
+                    class="py-1 px-3 w-fit rounded-lg text-[12px] font-semibold capitalize"
+                    [ngClass]="
+                      alum.status == 'active'
+                        ? 'bg-green-200 text-green-900'
+                        : 'bg-red-200 text-red-900'
+                    "
+                  >
+                    {{ alum.status }}
+                  </div>
+                </td>
                 <td>
                   <div
                     class="cursor-pointer"
                     [routerLink]="['/admin/user']"
-                    [queryParams]="{ id: student.id }"
+                    [queryParams]="{ id: alum.id }"
                   >
                     <i class="fad fa-eye"></i> View
                   </div>

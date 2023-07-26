@@ -9,13 +9,13 @@ const BASEURL = environment.baseURL;
 const HELPER = new JwtHelperService();
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProfile():Observable <any> {
+  getProfile(): Observable<any> {
     return this.http.get(`${BASEURL}/api/user/alumni/profile`);
   }
+
 }

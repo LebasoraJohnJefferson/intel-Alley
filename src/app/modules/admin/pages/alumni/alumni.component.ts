@@ -39,7 +39,7 @@ export class AlumniComponent implements OnInit {
   importedStudents: any[] = [];
 
   ngOnInit(): void {
-    this.getStudents();
+    this.getAlumni();
     this.getCourses();
 
     this.createForm = new FormGroup({
@@ -52,11 +52,9 @@ export class AlumniComponent implements OnInit {
     });
 
     this.cols = [
-      { field: 'StudentCredential.schoolId', header: 'Student ID' },
+      { field: 'AlumniCredential.studentId', header: 'Student ID' },
       { field: 'name', header: 'Name' },
-      { field: 'StudentCredential.Course.acronym', header: 'Course' },
-      { field: 'StudentCredential.section', header: 'Section' },
-      { field: 'StudentCredential.year', header: 'Year' },
+      { field: 'AlumniCredential.Course.acronym', header: 'Course' },
       { field: 'email', header: 'Email' },
     ];
 
@@ -74,13 +72,13 @@ export class AlumniComponent implements OnInit {
     });
   }
 
-  getStudents() {
-    // this.studentService.getStudents().subscribe(
-    //   (response: any) => {
-    //     this.students = response;
-    //   },
-    //   (error: any) => {}
-    // );
+  getAlumni() {
+    this.alumniService.getAlumni().subscribe(
+      (response: any) => {
+        this.alumni = response;
+      },
+      (error: any) => {}
+    );
   }
 
   handleImport($event: any) {
@@ -134,7 +132,7 @@ export class AlumniComponent implements OnInit {
         this.submitLoading = false;
         this.createForm.reset();
         this.createAccountModal = false;
-        this.getStudents();
+        this.getAlumni();
         this.toast.success(response.message);
       },
       (error: any) => {

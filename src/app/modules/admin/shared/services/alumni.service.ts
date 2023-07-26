@@ -17,4 +17,8 @@ export class AlumniService {
   create(data: any): any {
     return this.http.post(`${BASEURL}/api/user/alumni`, data);
   }
+  
+  getAlumni(): Observable<any> {
+    return this.http.get(`${BASEURL}/api/user/alumni`);
+  }
 }
