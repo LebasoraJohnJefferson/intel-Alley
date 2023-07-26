@@ -1,6 +1,7 @@
 import { Component,Input,OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { EventService } from '../../shared/services/event.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-event-content',
@@ -11,15 +12,19 @@ export class EventContentComponent implements OnInit{
   @Input() isAdmin:boolean = false
   @Input() isOwner:boolean = true
   isCommentSending:boolean = false
+  eventId:number = -1
   events:any = []
   comments:any = []
+  defaultAlumniImage:string = '../../../../assets/images/student.png'
+  defaultAdminImage:string = '../../../../assets/images/admin.png'
   openCommentThroughIndex:number = -1
   commentForm=this._formBuilder.group({
     commentContext:['',Validators.required]
   })
   constructor(
     private _formBuilder:FormBuilder,
-    private _eventService:EventService
+    private _eventService:EventService,
+    public toast:HotToastService
   ){
 
   }
@@ -45,10 +50,21 @@ export class EventContentComponent implements OnInit{
   }
 
   getComment(eventId:number){
+    this.eventId = eventId
     this._eventService.getComment(eventId).subscribe({
       next:(res)=>{
         this.comments = res.comments
-        console.log(this.comments)
+      }
+    })
+  }
+
+  deleteComment(commendId:number){
+    this._eventService.deleteComment(commendId).subscribe({
+      next:(res)=>{
+        this.getComment(this.eventId)
+        this.toast.success("Successfully Deleted!")
+      },error:(err)=>{
+        this.toast.warning(err.error.message)
       }
     })
   }

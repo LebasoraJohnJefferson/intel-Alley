@@ -23,6 +23,10 @@ export class EventService {
     return this._http.post(`${BASEURL}/api/event/comment/${eventId}`,data);
   }
 
+  deleteComment(commentId:number):Observable<any>{
+    return this._http.delete(`${BASEURL}/api/event/comment/${commentId}`);
+  }
+
   getEvents():Observable<any>{
     return this._http.get(`${BASEURL}/api/event/`)
   }
