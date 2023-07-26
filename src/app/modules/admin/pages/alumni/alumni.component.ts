@@ -36,7 +36,7 @@ export class AlumniComponent implements OnInit {
     private alumniService: AlumniService
   ) {}
 
-  importedStudents: any[] = [];
+  importedAlumni: any[] = [];
 
   ngOnInit(): void {
     this.getAlumni();
@@ -55,6 +55,7 @@ export class AlumniComponent implements OnInit {
       { field: 'AlumniCredential.studentId', header: 'Student ID' },
       { field: 'name', header: 'Name' },
       { field: 'AlumniCredential.Course.acronym', header: 'Course' },
+      { field: 'class', header: 'Class' },
       { field: 'email', header: 'Email' },
     ];
 
@@ -94,7 +95,7 @@ export class AlumniComponent implements OnInit {
 
         if (sheets.length) {
           const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
-          this.importedStudents = rows;
+          this.importedAlumni = rows;
 
           this.importStudents();
         }
@@ -104,19 +105,17 @@ export class AlumniComponent implements OnInit {
   }
 
   importStudents() {
-    // this.studentService
-    //   .importStudents({ students: this.importedStudents })
-    //   .subscribe(
-    //     (response: any) => {
-    //       setTimeout(() => {
-    //         this.toast.success(response.message);
-    //         this.getStudents();
-    //       }, 5000);
-    //     },
-    //     (error: any) => {
-    //       this.toast.error(error.error.message);
-    //     }
-    //   );
+    this.alumniService.importAlumni({ alumni: this.importedAlumni }).subscribe(
+      (response: any) => {
+        setTimeout(() => {
+          this.toast.success(response.message);
+          this.getAlumni();
+        }, 5000);
+      },
+      (error: any) => {
+        this.toast.error(error.error.message);
+      }
+    );
   }
 
   onSubmit() {

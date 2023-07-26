@@ -111,9 +111,10 @@
             </ng-template>
             <ng-template pTemplate="header">
               <tr class="text-sm">
-                <th field="StudentCredential.schoolId">ID number</th>
+                <th field="AlumniCredential.studentId">ID number</th>
                 <th field="name">Name</th>
-                <th field="StudentCredential.Course.acronym">Course</th>
+                <th field="AlumniCredentialschoolId.Course.acronym">Course</th>
+                <th field="AlumniCredentialschoolId.gradClass">Class</th>
                 <th field="email">Email</th>
                 <th field="status">Status</th>
                 <th>Action</th>
@@ -124,6 +125,7 @@
                 <td>{{ alum.AlumniCredential.studentId }}</td>
                 <td>{{ alum.name }}</td>
                 <td>{{ alum.AlumniCredential.Course.acronym }}</td>
+                <td>{{ alum.AlumniCredential.gradClass }}</td>
                 <td>{{ alum.email }}</td>
                 <td>
                   <div

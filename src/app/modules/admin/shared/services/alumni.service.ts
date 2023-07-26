@@ -21,4 +21,8 @@ export class AlumniService {
   getAlumni(): Observable<any> {
     return this.http.get(`${BASEURL}/api/user/alumni`);
   }
+
+  importAlumni(data: any): any {
+    return this.http.post(`${BASEURL}/api/user/alumni/import`, data);
+  }
 }
