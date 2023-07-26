@@ -11,11 +11,18 @@ const HELPER = new JwtHelperService();
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService {
+export class AlumniService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getProfile(): Observable<any> {
     return this.http.get(`${BASEURL}/api/user/alumni/profile`);
   }
 
+  updateProfile(data: any): any {
+    return this.http.put(`${BASEURL}/api/user/alumni/profile`, data);
+  }
+
+  changePassword(data: any): any {
+    return this.http.put(`${BASEURL}/api/user/alumni/changepassword`, data);
+  }
 }

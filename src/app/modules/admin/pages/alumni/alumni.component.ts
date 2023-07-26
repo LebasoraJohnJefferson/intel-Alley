@@ -68,8 +68,6 @@ export class AlumniComponent implements OnInit {
   getCourses() {
     this.courseService.getAll().subscribe((response: any) => {
       this.courses = response;
-
-      console.log(this.courses);
     });
   }
 

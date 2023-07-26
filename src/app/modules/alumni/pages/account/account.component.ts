@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import { HotToastService } from '@ngneat/hot-toast';
 
 import { AuthService } from 'src/app/core/shared/services/auth.service';
+import { AlumniService } from '../../shared/services/alumni.service';
+import { CourseService } from 'src/app/core/shared/services/course.service';
 
 @Component({
   selector: 'app-account',
@@ -12,6 +14,7 @@ import { AuthService } from 'src/app/core/shared/services/auth.service';
 })
 export class AccountComponent implements OnInit {
   profile: any = [];
+  modalData: any = [];
   editModal: boolean = false;
   submitLoading: boolean = false;
   courses: any;
@@ -19,10 +22,6 @@ export class AccountComponent implements OnInit {
   previewImg: any = '';
 
   isLoading: boolean = true;
-
-  profiledata: any = {
-    name: null,
-  };
 
   changePassData: any = {
     oldpass: null,
@@ -32,35 +31,40 @@ export class AccountComponent implements OnInit {
   history: any = [
     {
       createdAt: new Date(),
-      job: "Web Developer",
-      description: "lorem ipsum dolor",
+      job: 'Web Developer',
+      description: 'lorem ipsum dolor',
     },
     {
       createdAt: new Date(),
-      job: "Web Developer",
-      description: "lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor",
+      job: 'Web Developer',
+      description:
+        'lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor',
     },
     {
       createdAt: new Date(),
-      job: "Web Developer",
-      description: "lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor",
+      job: 'Web Developer',
+      description:
+        'lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor',
     },
-  ]
+  ];
 
   changePasswordModal: boolean = false;
 
   constructor(
     private toast: HotToastService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private alumniService: AlumniService,
+    private courseService: CourseService
   ) {}
 
   ngOnInit(): void {
-    // this.getProfile();
+    this.getProfile();
+    this.getCourses();
   }
 
   logout() {
-    this.authService.logout('student');
+    this.authService.logout('alumni');
   }
 
   changePassOnsubmit() {
@@ -86,61 +90,70 @@ export class AccountComponent implements OnInit {
       newpass: this.changePassData.newpass,
     };
 
-    // this.profileService.changePassword(data).subscribe(
-    //   (response: any) => {
-    //     this.toast.success(response.message);
+    this.alumniService.changePassword(data).subscribe(
+      (response: any) => {
+        this.toast.success(response.message);
 
-    //     this.submitLoading = false;
+        this.submitLoading = false;
 
-    //     this.changePassData = {
-    //       oldpass: null,
-    //       newpass: null,
-    //     };
+        this.changePassData = {
+          oldpass: null,
+          newpass: null,
+        };
 
-    //     this.getProfile();
+        this.getProfile();
 
-    //     this.changePasswordModal = false;
-    //   },
-    //   (error: any) => {
-    //     this.toast.error(error.error.message);
+        this.changePasswordModal = false;
+      },
+      (error: any) => {
+        this.toast.error(error.error.message);
 
-    //     this.submitLoading = false;
-    //   }
-    // );
+        this.submitLoading = false;
+      }
+    );
+  }
+
+  getCourses() {
+    this.courseService.getAll().subscribe(
+      (response: any) => {
+        this.courses = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   onSubmit() {
-    if (this.profiledata.name == '') {
-      return this.toast.info('Name is required.', {
-        position: 'top-right',
-      });
+    if (this.modalData.name == '') {
+      return this.toast.info('Name is required.');
     }
 
-    if (this.profiledata.username == '') {
-      return this.toast.info('Username is required.', {
-        position: 'top-right',
-      });
-    }
-
-    if (this.profiledata.email == '') {
+    if (this.modalData.email == '') {
       return this.toast.info('Email is required.');
     }
 
     this.submitLoading = true;
 
-    // this.profileService.updateProfile(this.profiledata).subscribe(
-    //   (response: any) => {
-    //     this.toast.success(response.message);
-    //     this.submitLoading = false;
-    //     this.getProfile();
-    //     this.editModal = false;
-    //   },
-    //   (error: any) => {
-    //     console.log(error);
-    //     this.toast.error(error.error.message);
-    //     this.submitLoading = false;
-    //   }
-    // );
+    this.alumniService
+      .updateProfile({
+        name: this.modalData.name,
+        email: this.modalData.email,
+        image: this.modalData.image,
+      })
+      .subscribe(
+        (response: any) => {
+          this.toast.success(response.message);
+          this.submitLoading = false;
+          this.getProfile();
+          this.editModal = false;
+        },
+        (error: any) => {
+          console.log(error);
+          this.toast.error(error.error.message);
+          this.submitLoading = false;
+        }
+      );
   }
 
   loadInputImgToSrc(event: any) {
@@ -149,35 +162,25 @@ export class AccountComponent implements OnInit {
 
     reader.onload = () => {
       this.previewImg = reader.result;
-      this.profiledata.image = reader.result;
+      this.modalData.image = reader.result;
     };
   }
 
   getProfile() {
-    // this.profileService.getProfile().subscribe(
-    //   (response: any) => {
-    //     this.profile = response;
+    this.alumniService.getProfile().subscribe(
+      (response: any) => {
+        this.profile = response.user;
+        this.modalData = response.user;
+        this.submitLoading = false;
 
-    //     this.submitLoading = false;
-
-    //     this.profiledata = {
-    //       name: response.name,
-    //       username: response.username,
-    //       section: response.StudentCredential.section,
-    //       year: response.StudentCredential.year,
-    //       image: response.image,
-    //       email: response.email,
-    //       CourseId: response.StudentCredential.CourseId,
-    //     };
-
-    //     if (response.image != null) {
-    //       this.previewImg = response.image;
-    //     }
-    //   },
-    //   (error: any) => {
-    //     console.log(error);
-    //   }
-    // );
+        if (response.image != null) {
+          this.previewImg = response.image;
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   goBack(): void {

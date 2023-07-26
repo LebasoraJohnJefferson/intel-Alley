@@ -27,22 +27,22 @@ export class AuthService {
   }
 
   resetPassword(data: any, token: any): Observable<any> {
-    localStorage.setItem('token',token)
+    localStorage.setItem('token', token);
     return this.http.post(`${BASEURL}/api/auth/resetpassword`, data);
   }
 
   isLoggedIn(type: string): boolean {
     const token: any = localStorage.getItem(`${type}_access_token`);
     const isExpired = HELPER.isTokenExpired(token);
-    
+
     return !isExpired;
   }
 
   setSession(type: string, data: any) {
     localStorage.setItem(`${type}_access_token`, data.token);
-    
+
     // let the database do the validation, if token is error throw error code and redirect to login
-    localStorage.setItem('token',data)
+    localStorage.setItem('token', data);
     if (type == 'alumni') {
       this.router.navigate(['/']);
       return;

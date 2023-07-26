@@ -10,7 +10,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../services/auth.service';
-import { UsersService } from 'src/app/modules/alumni/shared/services/users.service';
+import { AlumniService } from 'src/app/modules/alumni/shared/services/alumni.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,18 +20,19 @@ export class AlumniGuard {
     private authService: AuthService,
     private router: Router,
     private toast: HotToastService,
-    private _userService: UsersService
+    private _alumniService: AlumniService
   ) {}
 
   async canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): // | Observable<boolean | UrlTree>
-  Promise<boolean | UrlTree> { // | UrlTree // | boolean
+  Promise<boolean | UrlTree> {
+    // | UrlTree // | boolean
     try {
       // Wait for the getUser() observable and convert it to a promise
       const admin = await new Promise<any>((resolve, reject) => {
-        this._userService.getProfile().subscribe({
+        this._alumniService.getProfile().subscribe({
           next: (data) => {
             resolve(data);
           },

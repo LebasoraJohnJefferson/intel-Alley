@@ -21,7 +21,7 @@
             #imageInput
             type="file"
             accept="image/x-png,image/gif,image/jpeg"
-            [(ngModel)]="profiledata.image"
+            [(ngModel)]="modalData.image"
             [ngModelOptions]="{ standalone: true }"
             class="hidden"
             (change)="loadInputImgToSrc($event)"
@@ -44,73 +44,10 @@
                 type="text"
                 class="outline-none block text-[12px] w-full p-3 rounded-md bg-slate-100"
                 placeholder="Your full name"
-                [(ngModel)]="profiledata.name"
+                [(ngModel)]="modalData.name"
                 [ngModelOptions]="{ standalone: true }"
                 required
               />
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Username</label
-            >
-            <div class="mt-1 relative rounded-md">
-              <input
-                type="text"
-                class="outline-none block text-[12px] w-full p-3 rounded-md bg-slate-100"
-                placeholder="Your username"
-                [(ngModel)]="profiledata.username"
-                [ngModelOptions]="{ standalone: true }"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-[12px] font-medium text-gray-700"
-                >Section</label
-              >
-              <div class="mt-1 relative rounded-md">
-                <select
-                  [(ngModel)]="profiledata.section"
-                  [ngModelOptions]="{ standalone: true }"
-                  class="py-2 px-3 outline-none block w-full pr-12 sm:text-sm border-gray-300 bg-slate-50 rounded-md cursor-pointer"
-                >
-                  <option value="" selected disabled hidden class="">
-                    Section
-                  </option>
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
-                  <option value="D">D</option>
-                  <option value="E">E</option>
-                  <option value="F">F</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-[12px] font-medium text-gray-700"
-                >Year</label
-              >
-              <div class="mt-1 relative rounded-md">
-                <select
-                  [(ngModel)]="profiledata.year"
-                  [ngModelOptions]="{ standalone: true }"
-                  class="py-2 px-3 outline-none block w-full pr-12 sm:text-sm border-gray-300 bg-slate-50 rounded-md cursor-pointer"
-                >
-                  <option value="" selected disabled hidden class="">
-                    Year
-                  </option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </div>
             </div>
           </div>
 
@@ -123,27 +60,10 @@
                 type="text"
                 class="outline-none block text-[12px] w-full p-3 rounded-md bg-slate-100"
                 placeholder="Your email"
-                [(ngModel)]="profiledata.email"
+                [(ngModel)]="modalData.email"
                 [ngModelOptions]="{ standalone: true }"
                 required
               />
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-[12px] font-medium text-gray-700"
-              >Course</label
-            >
-            <div class="mt-1 relative rounded-md">
-              <select
-                [(ngModel)]="profiledata.CourseId"
-                [ngModelOptions]="{ standalone: true }"
-                class="outline-none block text-[12px] w-full p-3 rounded-md bg-slate-100 cursor-pointer"
-              >
-                <option *ngFor="let course of courses" [value]="course.id">
-                  {{ course.title }}
-                </option>
-              </select>
             </div>
           </div>
 
@@ -215,14 +135,12 @@
 
           <div class="mt-5 lg:mt-20 mx-auto text-center lg:text-start">
             <h1 class="font-semibold text-2xl capitalize">
-              John Doe
+              {{ profile.name }}
             </h1>
             <div class="lg:flex items-center">
               <div class="text-[10px] flex items-center w-fit mx-auto lg:mx-0">
-                <p
-                  class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md"
-                >
-                  Alumnus
+                <p class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md">
+                  Alumni
                 </p>
               </div>
             </div>
@@ -248,7 +166,7 @@
         </div>
       </div>
 
-      <div class="mb-5">
+      <div class="mb-5" *ngIf="profile">
         <div class="bg-slate-50 p-1 rounded-md w-fit">
           <table class="border border-gray-300 w-fit">
             <tr class="w-fit">
@@ -256,7 +174,7 @@
                 ID number:
               </td>
               <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                2018-02023
+                {{ profile.AlumniCredential.studentId }}
               </td>
             </tr>
 
@@ -265,7 +183,7 @@
                 Course:
               </td>
               <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                Bachelor of Science in Information Technology
+                {{ profile.AlumniCredential.Course.title }}
               </td>
             </tr>
 
@@ -274,7 +192,7 @@
                 Email:
               </td>
               <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                student@evsu.edu.ph
+                {{ profile.email }}
               </td>
             </tr>
             <tr>
@@ -311,9 +229,13 @@
         <div class="mt-5 md:mt-0">
           <div class="mb-2 font-semibold pl-6">Employment History</div>
 
-          <div class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md">
-
-            <div *ngIf="history.length == 0" class="h-[200px] grid place-items-center">
+          <div
+            class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
+          >
+            <div
+              *ngIf="history.length == 0"
+              class="h-[200px] grid place-items-center"
+            >
               <div class="">
                 <img
                   src="../../../../../assets/images/empty-box.png"
@@ -330,7 +252,9 @@
                   <div class="text-[10px] md:text-[11px]">
                     {{ dateFormat(log.createdAt) }}
                   </div>
-                  <div class="font-semibold text-[12px] md:text-sm">{{ log.job }}</div>
+                  <div class="font-semibold text-[12px] md:text-sm">
+                    {{ log.job }}
+                  </div>
                   <p class="text-[11px]">{{ log.description }}</p>
                 </div>
               </ng-template>
@@ -338,12 +262,9 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </div>
-
 
 <p-overlayPanel #op>
   <ng-template pTemplate>
@@ -450,4 +371,3 @@
     </form>
   </div>
 </p-dialog>
-
