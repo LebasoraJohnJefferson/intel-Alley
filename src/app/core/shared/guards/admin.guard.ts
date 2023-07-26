@@ -27,12 +27,13 @@ export class AdminGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): // | Observable<boolean | UrlTree>
-  Promise<boolean | UrlTree> { // | UrlTree // | boolean
+  Promise<boolean | UrlTree> {
+    // | UrlTree // | boolean
     try {
       // Wait for the getUser() observable and convert it to a promise
       const admin = await new Promise<any>((resolve, reject) => {
         this._adminService.getAdmin().subscribe({
-          next: (data) => {
+          next: (data: any) => {
             resolve(data);
           },
           error: (error) => {
