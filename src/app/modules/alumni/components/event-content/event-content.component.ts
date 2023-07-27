@@ -9,18 +9,27 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./event-content.component.scss']
 })
 export class EventContentComponent implements OnInit{
-  @Input() isAdmin:boolean = false
-  @Input() isOwner:boolean = true
-  isCommentSending:boolean = false
-  eventId:number = -1
-  events:any = []
-  comments:any = []
   defaultAlumniImage:string = '../../../../assets/images/student.png'
   defaultAdminImage:string = '../../../../assets/images/admin.png'
+  @Input() isAdmin:boolean = false
+  isCommentSending:boolean = false
+  @Input() isOwner:boolean = true
+  isCommentEdit:boolean = true
+  editCommentById:number = 0
+  eventId:number = -1
+  comments:any = []
+  events:any = []
+
+
   openCommentThroughIndex:number = -1
   commentForm=this._formBuilder.group({
     commentContext:['',Validators.required]
   })
+  commentEditForm=this._formBuilder.group({
+    commentContext:['',Validators.required]
+  })
+
+
   constructor(
     private _formBuilder:FormBuilder,
     private _eventService:EventService,
@@ -58,13 +67,31 @@ export class EventContentComponent implements OnInit{
     })
   }
 
-  deleteComment(commendId:number){
-    this._eventService.deleteComment(commendId).subscribe({
+  deleteComment(commentId:number){
+    this._eventService.deleteComment(commentId).subscribe({
       next:(res)=>{
         this.getComment(this.eventId)
         this.toast.success("Successfully Deleted!")
       },error:(err)=>{
         this.toast.warning(err.error.message)
+      }
+    })
+  }
+
+  editComment(commentId:number,commentContext:string){
+    this.editCommentById = commentId == this.editCommentById ? -1 : commentId
+    if(this.editCommentById != -1) this.commentEditForm.controls.commentContext.setValue(commentContext)
+  }
+
+  commitEditComment(){
+    if(this.commentEditForm.invalid) return this.toast.warning("Empty Input")
+    this._eventService.editComment(this.editCommentById,this.commentEditForm.value).subscribe({
+      next:(res)=>{
+        this.toast.success("Post successfully updated!")
+        this.editCommentById = -1
+        this.getComment(this.eventId);
+      },error:(err)=>{
+        console.log(err.error)
       }
     })
   }
