@@ -12,8 +12,9 @@ export class EventContentComponent implements OnInit{
   defaultAlumniImage:string = '../../../../assets/images/student.png'
   defaultAdminImage:string = '../../../../assets/images/admin.png'
   @Input() isAdmin:boolean = false
-  isCommentSending:boolean = false
   @Input() isOwner:boolean = true
+  isCommentSending:boolean = false
+  isLoadingEvent:boolean = false
   isCommentEdit:boolean = true
   editCommentById:number = 0
   eventId:number = -1
@@ -48,11 +49,14 @@ export class EventContentComponent implements OnInit{
   }
 
   getEvents(){
+    this.isLoadingEvent = true
     this._eventService.getEvents().subscribe({
       next:(data:any)=>{
-        console.log(data.events)
+        this.isLoadingEvent = false
         this.events = data.events
+        console.log(this.events)
       },error:(err)=>{
+        this.isLoadingEvent = false
         console.log(err.error)
       }
     })
