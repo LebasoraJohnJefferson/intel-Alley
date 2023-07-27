@@ -33,10 +33,10 @@ export class AlumniGuard {
       // Wait for the getUser() observable and convert it to a promise
       const admin = await new Promise<any>((resolve, reject) => {
         this._alumniService.getProfile().subscribe({
-          next: (data) => {
+          next: (data: any) => {
             resolve(data);
           },
-          error: (error) => {
+          error: (error:any) => {
             reject(error);
           },
         });

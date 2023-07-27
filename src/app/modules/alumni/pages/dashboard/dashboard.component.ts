@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
 
   getUser() {
     this.alumniService.getProfile().subscribe({
-      next: (res) => {
+      next: (res: any) => {
         this.name = res.user.name;
       },
     });

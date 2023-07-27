@@ -14,7 +14,7 @@ const HELPER = new JwtHelperService();
 export class AlumniService {
   constructor(private http: HttpClient, private router: Router) {}
 
-  getProfile(): Observable<any> {
+  getProfile(): any {
     return this.http.get(`${BASEURL}/api/user/alumni/profile`);
   }
 

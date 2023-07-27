@@ -105,7 +105,7 @@
 </div>
 
 <div class="">
-  <div *ngIf="true" class="p-5 max-w-[1200px] mx-auto">
+  <div class="p-5 max-w-[1200px] mx-auto">
     <div
       *ngIf="true"
       class="flex w-[40px] h-[40px] rounded-full items-center justify-center border border-gray-200 text-slate-800 font-semibold my-10 cursor-pointer hover:bg-gray-300 transition-all"
@@ -150,7 +150,7 @@
         <div class="flex items-center">
           <button
             (click)="logout()"
-            *ngIf="profile.isPasswordChange == false"
+            *ngIf="profile.AlumniCredential.isPasswordChanged == false"
             class="bg-red-100 mr-3 hover:bg-red-200 border border-red-200 h-fit px-2 py-1 text-sm rounded-md font-semibold"
           >
             <i class="fad fa-sign-out mr-1"></i>

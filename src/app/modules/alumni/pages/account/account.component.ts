@@ -101,8 +101,6 @@ export class AccountComponent implements OnInit {
           newpass: null,
         };
 
-        this.getProfile();
-
         this.changePasswordModal = false;
       },
       (error: any) => {

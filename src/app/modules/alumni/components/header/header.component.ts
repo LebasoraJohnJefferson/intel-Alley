@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout('faculty');
+    this.authService.logout('alumnus');
   }
 
   openCloseNavOverlay() {
