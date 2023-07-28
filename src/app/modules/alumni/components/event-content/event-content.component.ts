@@ -75,6 +75,12 @@ export class EventContentComponent implements OnInit{
     this._eventService.deleteComment(commentId).subscribe({
       next:(res)=>{
         this.getComment(this.eventId)
+        this.events = this.events.map((event: any) => {
+          if (event.id === this.eventId) {
+            event.commentCount -=1
+          }
+          return event;
+        });
         this.toast.success("Successfully Deleted!")
       },error:(err)=>{
         this.toast.warning(err.error.message)
