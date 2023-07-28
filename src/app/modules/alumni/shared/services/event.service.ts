@@ -34,4 +34,8 @@ export class EventService {
   getEvents():Observable<any>{
     return this._http.get(`${BASEURL}/api/event/`)
   }
+
+  likes(eventId:number){
+    return this._http.post(`${BASEURL}/api/event/like/${eventId}`,'')
+  }
 }

@@ -112,8 +112,33 @@ export class EventContentComponent implements OnInit{
           if(this.openCommentThroughIndex != -1) this.getComment(this.openCommentThroughIndex)
           this.isCommentSending = false
           this.commentForm.reset()
+        },next:()=>{
+          this.events = this.events.map((event: any) => {
+            if (event.id === eventId) {
+              event.commentCount +=1
+            }
+            return event;
+          });
         }
       })
     }
   }
+
+  likes(eventId: number) {
+    this._eventService.likes(eventId).subscribe({
+      next: () => {
+        this.events = this.events.map((event: any) => {
+          if (event.id === eventId) {
+            event.userLikesEvent = !event.userLikesEvent;
+            event.likeCount = event.userLikesEvent ? event.likeCount + 1 : event.likeCount  = 1
+          }
+          return event;
+        });
+      },
+      error: (error) => {
+        console.error('Error while liking the event:', error);
+      }
+    });
+  }
+  
 }
