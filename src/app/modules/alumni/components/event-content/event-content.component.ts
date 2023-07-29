@@ -54,7 +54,6 @@ export class EventContentComponent implements OnInit{
       next:(data:any)=>{
         this.isLoadingEvent = false
         this.events = data.events
-        console.log(this.events)
       },error:(err)=>{
         this.isLoadingEvent = false
         console.log(err.error)
