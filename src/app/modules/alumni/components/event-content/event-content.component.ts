@@ -134,8 +134,12 @@ export class EventContentComponent implements OnInit{
       next: () => {
         this.events = this.events.map((event: any) => {
           if (event.id === eventId) {
+            if(event.userLikesEvent){
+              event.likeCount = event.userLikesEvent ? event.likeCount - 1 : event.likeCount  + 1
+            }else{
+              event.likeCount = !event.userLikesEvent ? event.likeCount + 1 : event.likeCount  - 1
+            }
             event.userLikesEvent = !event.userLikesEvent;
-            event.likeCount = event.userLikesEvent ? event.likeCount + 1 : event.likeCount  = 1
           }
           return event;
         });
