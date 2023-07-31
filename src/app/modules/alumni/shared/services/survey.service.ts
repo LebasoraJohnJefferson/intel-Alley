@@ -16,7 +16,7 @@ export class SurveyService {
   constructor(private _http: HttpClient, private router: Router) {}
 
   employed(uploadFilePoorOfEmp:File,uploadFileCertificateOfEmp:File,data: any):Observable<any> {
-    return this._http.post(`${BASEURL}/api/alumnus/employed`, data);
+    return this._http.post(`${BASEURL}/api/survey/employed`, data);
   }
 
   selfEmployed(uploadFileProofOfSelfEmploy:File,data: any): any {
