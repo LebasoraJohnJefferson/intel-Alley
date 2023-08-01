@@ -9,13 +9,24 @@ const BASEURL = environment.baseURL;
 const HELPER = new JwtHelperService();
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminService {
-
   constructor(private http: HttpClient, private router: Router) {}
 
-  getAdmin():Observable <any> {
+  getAdmin(): Observable<any> {
     return this.http.get(`${BASEURL}/api/user/admin/profile`);
+  }
+
+  getProfile(): any {
+    return this.http.get(`${BASEURL}/api/user/admin/profile`);
+  }
+
+  updateProfile(data: any): any {
+    return this.http.put(`${BASEURL}/api/user/admin/profile`, data);
+  }
+
+  changePassword(data: any): any {
+    return this.http.put(`${BASEURL}/api/user/admin/changepassword`, data);
   }
 }

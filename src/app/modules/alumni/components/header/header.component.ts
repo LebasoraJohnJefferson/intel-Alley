@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'src/app/core/shared/services/auth.service';
+import { AlumniService } from '../../shared/services/alumni.service';
 
 @Component({
   selector: 'app-header',
@@ -42,10 +43,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private alumniService: AlumniService
   ) {}
 
   ngOnInit(): void {
+    this.getUser();
     window.addEventListener('scroll', this.listenScrollEvent);
 
     const route = this.route.snapshot.children[0].routeConfig?.path;
@@ -58,8 +61,19 @@ export class HeaderComponent implements OnInit {
     this.openCloseNavOverlay();
   }
 
+  getUser() {
+    this.alumniService.getProfile().subscribe(
+      (response: any) => {
+        this.user = response.user;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
   logout() {
-    this.authService.logout('alumnus');
+    this.authService.logout('alumni');
   }
 
   openCloseNavOverlay() {

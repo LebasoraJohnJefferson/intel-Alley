@@ -168,11 +168,15 @@ export class AccountComponent implements OnInit {
     this.alumniService.getProfile().subscribe(
       (response: any) => {
         this.profile = response.user;
-        this.modalData = response.user;
+        this.modalData = {
+          name: response.user.name,
+          image: response.user.image,
+          email: response.user.email,
+        };
         this.submitLoading = false;
 
-        if (response.image != null) {
-          this.previewImg = response.image;
+        if (response.user.image != null) {
+          this.previewImg = response.user.image;
         }
       },
       (error: any) => {
