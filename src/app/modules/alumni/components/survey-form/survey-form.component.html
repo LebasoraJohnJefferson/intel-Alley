@@ -572,14 +572,23 @@
             <th class="block text-sm font-medium text-gray-700">Monthly Income (Optional)</th>
           </tr>
           <tr>
-            <td *ngFor="let work of workHistory" class="grid grid-cols-6 gap-2">
-              <input *ngFor="let workInput of work.nameOfInputs"
-                    class="w-full border rounded outline-0"
-                    type="text"
-                    formControlName="{{work.name+workInput}}"
-                    pInputText
-                    required
-                    />
+            <td *ngFor="let work of workHistory" [formGroupName]="work.name" class="grid grid-cols-6 gap-2">
+              <div *ngFor="let workInput of work.nameOfInputs">
+                <input *ngIf="workInput !='MonthlyIncome'"
+                      class="w-full border rounded outline-0"
+                      type="{{workInput == 'NumOfYrServed' || workInput == 'YearEmployed' ? 'date' : 'text'}}"
+                      [formControlName]="workInput"
+                      pInputText
+                      required
+                      />
+                <input *ngIf="workInput =='MonthlyIncome'"
+                class="w-full border rounded outline-0"
+                type="number"
+                [formControlName]="workInput"
+                pInputText
+                required
+                />
+              </div>
             </td>
           </tr>
         </table>

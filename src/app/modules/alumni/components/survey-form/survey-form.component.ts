@@ -167,18 +167,22 @@ export class SurveyFormComponent implements OnInit {
     })
 
     workHistoryFB:any = this._formBuilder.group({
-      firstFormNameOfCompany:[''],
-      firstFormAddress:[''],
-      firstFormYearEmployed:[''],
-      firstFormDesignation:[''],
-      firstFormNumOfYrServed:[''],
-      firstFormMonthlyIncome:[''],
-      secondFormNameOfCompany:[''],
-      secondFormAddress:[''],
-      secondFormYearEmployed:[''],
-      secondFormDesignation:[''],
-      secondFormNumOfYrServed:[''],
-      secondFormMonthlyIncome:[''],
+      firstForm:this._formBuilder.group({
+        NameOfCompany:[''],
+        Address:[''],
+        YearEmployed:[''],
+        Designation:[''],
+        NumOfYrServed:[''],
+        MonthlyIncome:[''],
+      }),
+      secondForm:this._formBuilder.group({
+        NameOfCompany:[''],
+        Address:[''],
+        YearEmployed:[''],
+        Designation:[''],
+        NumOfYrServed:[''],
+        MonthlyIncome:[''],
+      }),
     })
     
 
@@ -467,7 +471,13 @@ export class SurveyFormComponent implements OnInit {
             education:this.educationalBG.value,
             employInfo:this.employmentInfo.value,
             history:this.workHistoryFB.value,
-            recommend:this.recommendation.value
+            recommend:this.recommendation.value,
+            survey:{
+              firstParticulars:this.firstSurveys,
+              secondParticulars:this.secondSurveys,
+              firstSurvey:this.firstSurveyFB.value,
+              secondSurvey:this.secondSurveyFB.value,
+            }
           }
           this._surveyService.employed(this.uploadFilePoorOfEmp,this.uploadFileCertificateOfEmp,temp).subscribe({
             next:()=>{
