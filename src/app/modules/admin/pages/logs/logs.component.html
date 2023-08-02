@@ -1,10 +1,10 @@
-<div class="relative z-40 mt-10 pb-20">
+<div class="relative z-40 mt-10 pb-10">
   <div class="">
     <h1 class="font-bold text-xl md:text-3xl text-white">Logs</h1>
     <p class="text-slate-100 text-[12px]">Information about the system</p>
   </div>
 
-  <div class="mt-20 pb-10">
+  <div class="mt-10 pb-10">
     <p-tabMenu
       #tab
       [model]="tabItems"
@@ -23,10 +23,7 @@
         </div>
 
         <!-- TODO: add show more functionality instead of pulling all the logs in the database every time calling the api endpoint -->
-        <div
-          *ngIf="!isLoading && allLogs.length == 0"
-          class="text-center mt-10"
-        >
+        <div *ngIf="!isLoading && logs.length == 0" class="text-center mt-10">
           <div class="">
             <img
               src="../../../../../assets/images/empty-box.png"
@@ -42,7 +39,7 @@
         <div class="mt-10">
           <div class="grid gap-2">
             <div
-              *ngFor="let log of allLogs; trackBy: logTrack"
+              *ngFor="let log of logs; trackBy: logTrack"
               class="bg-slate-50 rounded-md py-2 px-3 cursor-pointer hover:bg-slate-100 transition-all"
             >
               <div class="text-[10px]">{{ dateFormat(log.createdAt) }}</div>
@@ -52,79 +49,18 @@
                     {{ log.User.name }}
                   </div>
                   <div class="text-[8px] flex items-center">
-                    <div *ngFor="let role of log.User.UserRoles">
-                      <div
-                        *ngIf="
-                          role.Role.title == 'Admin' &&
-                          log.User.position == 'Head'
-                        "
-                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
-                      >
-                        SAO Head
-                      </div>
+                    <div
+                      *ngIf="log.User.role == 'admin'"
+                      class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                    >
+                      Admin
+                    </div>
 
-                      <div
-                        *ngIf="
-                          role.Role.title == 'Admin' &&
-                          log.User.position == 'Director'
-                        "
-                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
-                      >
-                        SAO Director
-                      </div>
-
-                      <div
-                        *ngIf="
-                          role.Role.title == 'Admin' &&
-                          log.User.coverage == 0 &&
-                          log.User.position == 'Scholarship Officer'
-                        "
-                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
-                      >
-                        SAO Scholarship Officer
-                      </div>
-                      <div
-                        *ngIf="
-                          role.Role.title == 'Admin' &&
-                          log.User.coverage == 0 &&
-                          log.User.position == 'Administrative Aide'
-                        "
-                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
-                      >
-                        SAO Administrative Aide
-                      </div>
-                      <div
-                        *ngIf="
-                          role.Role.title == 'Admin' &&
-                          log.User.coverage == 0 &&
-                          log.User.position == 'Staff'
-                        "
-                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
-                      >
-                        SAO Staff
-                      </div>
-
-                      <div
-                        *ngIf="
-                          role.Role.title == 'Faculty' &&
-                          log.User.coverage != 0 &&
-                          log.User.position == 'Head'
-                        "
-                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
-                      >
-                        {{ getCourse(log.User.coverage) }} Head
-                      </div>
-
-                      <div
-                        *ngIf="
-                          role.Role.title == 'Faculty' &&
-                          log.User.coverage != 0 &&
-                          log.User.position == 'Staff'
-                        "
-                        class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
-                      >
-                        {{ getCourse(log.User.coverage) }} Staff
-                      </div>
+                    <div
+                      *ngIf="log.User.role == 'alumni'"
+                      class="bg-green-200 text-green-800 font-semibold px-[6px] h-fit text-[8px] md:text-[10px] rounded-md mr-1"
+                    >
+                      Alum
                     </div>
                   </div>
                 </div>
@@ -137,7 +73,7 @@
 
       <div *ngIf="activeItem.label == 'User'">
         <div class="mt-10">
-          <p-timeline [value]="logs" align="left">
+          <p-timeline [value]="userLogs" align="left">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <div class="text-[10px] md:text-[12px]">
@@ -150,7 +86,5 @@
         </div>
       </div>
     </div>
-
   </div>
-
 </div>

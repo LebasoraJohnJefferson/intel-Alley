@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { MenuItem } from 'primeng/api';
 
-// import { LogService } from '../../shared/services/log.service';
-// import { ProfileService } from '../../shared/services/profile.service';
-// import { EventService } from '../../shared/services/event.service';
-// import { CourseService } from 'src/app/core/shared/services/course.service';
+import { LogService } from '../../shared/services/logs.service';
 
 @Component({
   selector: 'app-logs',
@@ -14,26 +11,19 @@ import { MenuItem } from 'primeng/api';
 })
 export class LogsComponent implements OnInit {
   logs: any[] = [];
-  allLogs: any = [];
+  userLogs: any = [];
   userId: any;
-  isLoading: boolean = false
+  isLoading: boolean = false;
   courses: any = [];
 
   tabItems: MenuItem[] = [];
   activeItem!: MenuItem;
 
-  constructor(
-    // private logService: LogService,
-    // private profileService: ProfileService,
-    // private eventService: EventService,
-    // private courseService: CourseService
-  ) { }
+  constructor(private logService: LogService) {}
 
   ngOnInit(): void {
-    // this.getUser();
-    // this.getAllLogs();
-    // this.getLogEvent();
-    // this.getCourses()
+    this.getLogs();
+    this.getUserLogs();
 
     this.tabItems = [
       { label: 'System', icon: 'pi pi-fw pi-users' },
@@ -65,36 +55,28 @@ export class LogsComponent implements OnInit {
     }
   }
 
-  // getAllLogs() {
-  //   this.logService.getAllLogs().subscribe(
-  //     (response: any) => {
-  //       this.allLogs = response;
-  //       this.isLoading = false
-  //     },
-  //     (error: any) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
+  getLogs() {
+    this.logService.logs().subscribe(
+      (response: any) => {
+        this.logs = response;
+        this.isLoading = false;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
-  // getLogs() {
-  //   this.logService.getLogs(this.userId).subscribe(
-  //     (response: any) => {
-  //       this.logs = response;
-  //     },
-  //     (error: any) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
-  // getUser() {
-  //   this.profileService.getProfile().subscribe((response: any) => {
-  //     this.userId = response.id;
-
-  //     this.getLogs();
-  //   });
-  // }
+  getUserLogs() {
+    this.logService.log().subscribe(
+      (response: any) => {
+        this.userLogs = response;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
   dateFormat(date: any) {
     return moment(date).format('lll');
@@ -111,15 +93,4 @@ export class LogsComponent implements OnInit {
 
     return courseTitle;
   }
-
-  // getCourses() {
-  //   this.courseService.getCourses().subscribe(
-  //     (response: any) => {
-  //       this.courses = response;
-  //     },
-  //     (error: any) => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
 }
