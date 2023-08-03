@@ -1,0 +1,156 @@
+<div class="w-full">
+  <div class="bg-slate-800 w-full h-[230px] absolute z-10"></div>
+
+  <div class="max-w-[1200px] mx-auto relative z-20 p-5 pb-10">
+    <div
+      class="flex w-[40px] h-[40px] rounded-full items-center justify-center font-semibold text-white bg-slate-900 py-2 px-3 cursor-pointer hover:bg-slate-900/50 hover:shadow-md transition-all"
+      (click)="goBack()"
+    >
+      <i class="fal fa-arrow-left"></i>
+    </div>
+
+    <div *ngIf="!isLoading && !alum" class="mt-52 grid place-items-center">
+      <div class="text-slate-800 text-center">
+        <img
+          src="../../../../../assets/images/empty-box.png"
+          class="w-[200px] h-[200px] lg:w-[250px] lg:h-[250px]"
+          alt=""
+        />
+        <h1 class="text-center mt-5 font-semibold">
+          Oops! There's nothing here.
+        </h1>
+      </div>
+    </div>
+
+    <div *ngIf="alum" class="mt-20 lg:mt-24">
+      <div class="flex justify-between items-center">
+        <div class="md:flex">
+          <div class="bg-slate-900 w-fit rounded-full">
+            <img
+              [src]="
+                alum.image == null || alum.length == 0 ? defaultImg : alum.image
+              "
+              alt=""
+              class="w-[200px] h-[200px] rounded-full object-cover"
+            />
+          </div>
+
+          <div class="md:ml-5 mt-5 md:mt-24">
+            <h1
+              class="font-bold text-2xl md:text-3xl text-slate-900 capitalize"
+            >
+              {{ alum.name }}
+            </h1>
+          </div>
+        </div>
+
+        <div class="flex items-center">
+          <div
+            (click)="opAction.toggle($event)"
+            class="md:mt-5 flex items-center bg-gray-100 text-slate-800 border-2 border-slate-300 text-sm font-bold py-2 md:py-1 rounded-md w-fit px-3 hover:bg-slate-200 transition-all cursor-pointer"
+          >
+            <i class="fad fa-cog"></i>
+            <div class="ml-2 hidden md:block">Action</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid mt-16 mb-20">
+        <div class="grid gap-5 md:grid-cols-[1fr_400px]">
+          <div class="grid gap-4 h-fit">
+            <div class="text-[12px]">
+              Account Created: {{ momentFormatLLL(alum.createdAt) }}
+            </div>
+
+            <div class="">
+              <div class="text-sm text-slate-900 mb-2">Student ID number</div>
+              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
+                {{ alum.AlumniCredential.studentId }}
+              </div>
+            </div>
+
+            <div class="">
+              <div class="text-sm text-slate-900 mb-2">Name</div>
+              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
+                {{ alum.name }}
+              </div>
+            </div>
+
+            <div class="">
+              <div class="text-sm text-slate-900 mb-2">Course</div>
+              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
+                {{ alum.AlumniCredential.Course.title }}
+              </div>
+            </div>
+
+            <div class="">
+              <div class="text-sm text-slate-900 mb-2">Email</div>
+              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
+                {{ alum.email }}
+              </div>
+            </div>
+          </div>
+
+          <hr class="md:hidden" />
+
+          <div class="mt-5 md:mt-0">
+            <div class="mb-2 font-semibold pl-6">Logs</div>
+
+            <div
+              class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
+            >
+              <div
+                *ngIf="alum.Logs.length == 0"
+                class="h-[200px] grid place-items-center"
+              >
+                <div class="">
+                  <img
+                    src="../../../../../assets/images/empty-box.png"
+                    alt=""
+                    class="w-[80px] h-[80px] object-cover mx-auto"
+                  />
+                  <p class="text-[12px] text-center mt-2">No log(s) yet.</p>
+                </div>
+              </div>
+
+              <p-timeline [value]="alum.Logs" align="left">
+                <ng-template pTemplate="content" let-log>
+                  <div class="mb-1">
+                    <div class="text-[10px] md:text-[11px]">
+                      {{ dateFormat(log.createdAt) }}
+                    </div>
+                    <div class="text-[12px] md:text-sm">
+                      {{ log.description }}
+                    </div>
+                  </div>
+                </ng-template>
+              </p-timeline>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-overlayPanel #opAction>
+  <ng-template pTemplate>
+    <div class="md:max-w-[400px]">
+      <div class="grid gap-1">
+        <div class="text-[12px] px-2 py-2 flex items-center">
+          <div class="mr-2">Set status</div>
+          <p-inputSwitch
+            [(ngModel)]="status"
+            (onChange)="setStatus()"
+          ></p-inputSwitch>
+        </div>
+        <div
+          (click)="deleteAccount(); opAction.toggle($event)"
+          class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+        >
+          <i class="fal fa-trash mr-1"></i>Delete account
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-overlayPanel>

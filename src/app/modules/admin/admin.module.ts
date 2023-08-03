@@ -16,7 +16,7 @@ import { LogsComponent } from './pages/logs/logs.component';
 import { AlumniComponent } from './pages/alumni/alumni.component';
 import { EventsComponent } from './pages/events/events.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
-import { AlumnusComponent } from './pages/alumnus/alumnus.component';
+import { AlumComponent } from './pages/alum/alum.component';
 
 
 @NgModule({
@@ -30,7 +30,7 @@ import { AlumnusComponent } from './pages/alumnus/alumnus.component';
     AlumniComponent,
     EventsComponent,
     SurveysComponent,
-    AlumnusComponent
+    AlumComponent
   ],
   imports: [
     CommonModule,

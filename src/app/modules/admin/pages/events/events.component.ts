@@ -104,19 +104,5 @@ export class EventsComponent implements OnInit {
     })
 
     this.submitLoading = true;
-
-    // this.studentService.createStudentAccount(this.createForm.value).subscribe(
-    //   (response: any) => {
-    //     this.submitLoading = false;
-    //     this.createForm.reset();
-    //     this.createAccountModal = false;
-    //     this.getStudents();
-    //     this.toast.success(response.message);
-    //   },
-    //   (error: any) => {
-    //     this.submitLoading = false;
-    //     this.toast.error(error.error.message);
-    //   }
-    // );
   }
 }

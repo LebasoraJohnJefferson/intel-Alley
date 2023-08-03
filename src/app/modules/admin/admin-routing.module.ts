@@ -10,6 +10,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AlumniComponent } from './pages/alumni/alumni.component';
 import { LogsComponent } from './pages/logs/logs.component';
+import { AlumComponent } from './pages/alum/alum.component';
 
 const routes: Routes = [
   {
@@ -22,10 +23,14 @@ const routes: Routes = [
       { path: 'surveys', component: SurveysComponent },
       { path: 'events', component: EventsComponent },
       { path: 'logs', component: LogsComponent },
-
     ],
   },
-  { path: 'admin/account', component: AccountComponent, canActivate: [AdminGuard] },
+  { path: 'admin/alum', component: AlumComponent, canActivate: [AdminGuard] },
+  {
+    path: 'admin/account',
+    component: AccountComponent,
+    canActivate: [AdminGuard],
+  },
 ];
 
 @NgModule({
