@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,EventEmitter,OnInit, Output } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { SurveyService } from '../../shared/services/survey.service';
@@ -9,6 +9,7 @@ import { SurveyService } from '../../shared/services/survey.service';
   styleUrls: ['./survey-form.component.scss']
 })
 export class SurveyFormComponent implements OnInit {  
+    @Output() submitSurveyEmit: EventEmitter<any> = new EventEmitter
     tempRowIndex:any;
     uploadFilePoorOfEmp:any;
     uploadFileCertificateOfEmp:any;
@@ -28,6 +29,7 @@ export class SurveyFormComponent implements OnInit {
     isOtherCurrentJob:boolean = false
     isSelectedDegreeRelative:any;
     particularsValue:any;
+    isSubmitting:boolean = false
 
     categories: any[] = [
         { name: 'Employed', key: 'Employed' },
@@ -452,6 +454,7 @@ export class SurveyFormComponent implements OnInit {
       }
 
       submitSurvey(){
+        this.isSubmitting = true
         // let errorMsg = ''
         // if(this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs'
         // if(this.generalInfo.controls.contactNumber.invalid && errorMsg!='') errorMsg = 'Contact number inputs error'
@@ -481,10 +484,12 @@ export class SurveyFormComponent implements OnInit {
           }
           this._surveyService.employed(this.uploadFilePoorOfEmp,this.uploadFileCertificateOfEmp,temp).subscribe({
             next:()=>{
-              
+              this.submitSurveyEmit.emit()
+              this.isSubmitting = false
             },
-            error:()=>{
-              
+            error:(errorMsg)=>{
+              this.isSubmitting = false
+              if(errorMsg.error) this.toast.warning(errorMsg.error.message)
             },
             complete:()=>{
 
@@ -501,10 +506,11 @@ export class SurveyFormComponent implements OnInit {
           }
           this._surveyService.selfEmployed(this.uploadFileProofOfSelfEmploy,temp).subscribe({
             next:()=>{
-
+              this.submitSurveyEmit.emit()
+              this.isSubmitting = false
             },
             error:()=>{
-              
+              this.isSubmitting = false
             },
             complete:()=>{
 
@@ -520,10 +526,12 @@ export class SurveyFormComponent implements OnInit {
           }
           this._surveyService.unemployed(temp).subscribe({
             next:()=>{
+              this.submitSurveyEmit.emit()
+              this.isSubmitting = false
 
             },
             error:()=>{
-              
+              this.isSubmitting = false
             },
             complete:()=>{
 
