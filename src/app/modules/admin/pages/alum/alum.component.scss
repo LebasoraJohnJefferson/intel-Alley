@@ -1,17 +1,15 @@
 ::ng-deep p-timeline {
-    .p-timeline-vertical {
-      .p-timeline-event-opposite {
-        display: none;
-      }
-  
-      .p-timeline-event-content {
-        @apply bg-slate-50 text-slate-800 mb-1 pt-1;
-      }
-  
-  
+  .p-timeline-vertical {
+    .p-timeline-event-opposite {
+      display: none;
     }
-  
-    .p-timeline-event-marker {
-      background-color: rgb(153, 27, 27, 1) !important;
+
+    .p-timeline-event-content {
+      @apply bg-slate-50 text-slate-800 mb-1 pt-1;
     }
   }
+
+  .p-timeline-event-marker {
+    background-color: rgb(154, 49, 199) !important;
+  }
+}
