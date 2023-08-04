@@ -190,6 +190,7 @@ export class SurveyFormComponent implements OnInit {
 
 
       generalInfo = this._formBuilder.group({
+        birthDay:['',[Validators.required]],
         address: ['', [Validators.required]],
         contactNumber: ['', [Validators.required, Validators.pattern(/^(\9)\d{9}$/)]],
         civilStatus:['',[Validators.required]],

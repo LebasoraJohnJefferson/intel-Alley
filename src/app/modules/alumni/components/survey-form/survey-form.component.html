@@ -34,7 +34,7 @@
               />
             </div>
           </div>
-          <div class="grid grid-cols-2 gap-2">
+          <div class="grid grid-cols-3 gap-2">
             <div>
               <label class="block text-sm font-medium text-gray-700">Civil Status</label>
               <select class="mt-1 relative" placeholder="Civil Status" pInputText formControlName="civilStatus">
@@ -53,6 +53,15 @@
                 <option value="male" selected >Male</option>
                 <option value="female">Female</option>
               </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Birth Day</label>
+              <input class="w-full border rounded outline-0"
+              type="date"
+              formControlName="birthDay"
+              pInputText
+              required />
             </div>
           </div>
         </form>
