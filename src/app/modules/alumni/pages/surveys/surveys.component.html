@@ -12,7 +12,7 @@
       </ng-container>
       
       <ng-container *ngIf="!isSurveyTaken">
-        <app-survey-form></app-survey-form>
+        <app-survey-form (submitSurveyEmit)="submitSurvey()"></app-survey-form>
       </ng-container>
     </div>
 

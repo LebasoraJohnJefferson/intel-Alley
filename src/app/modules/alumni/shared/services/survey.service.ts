@@ -18,7 +18,15 @@ export class SurveyService {
   employed(uploadFilePoorOfEmp:File,uploadFileCertificateOfEmp:File,data: any):Observable<any> {
     return this._http.post(`${BASEURL}/api/survey/employed`, data);
   }
-
+  
+  checkSurvey(): any {
+    return this._http.get(`${BASEURL}/api/survey/checkSurvey`);
+  }
+  
+  getResult():any{
+    return this._http.get(`${BASEURL}/api/survey/surveyReport`);
+  }
+  
   selfEmployed(uploadFileProofOfSelfEmploy:File,data: any): any {
     return this._http.post(`${BASEURL}/api/alumnus/selfEmployed`, data);
   }
@@ -26,6 +34,7 @@ export class SurveyService {
   unemployed(data: any): any {
     return this._http.post(`${BASEURL}/api/alumnus/unemployed`, data);
   }
+
 
 
 }
