@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
 import { EventsService } from '../../shared/services/events.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-events',
@@ -10,99 +11,77 @@ import { EventsService } from '../../shared/services/events.service';
   styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent implements OnInit {
-  students: any = [];
-  courses: any = [];
-  uploadFile:any;
-  onLoadFile:any;
-  createAccountModal: boolean = true;
+  events: any = [];
+  previewImg: any;
+
+  createEventModal: boolean = false;
   submitLoading: boolean = false;
 
   createForm!: FormGroup;
 
-  cols: any[] = [];
-  exportColumns: any[] = [];
-  selectedStudents: any[] = [];
-
   constructor(
     private router: Router,
     private toast: HotToastService,
-    private _eventService:EventsService
+    private eventService: EventsService
   ) {}
 
-  importedStudents: any[] = [];
-
   ngOnInit(): void {
-    this.getStudents();
+    this.getEvents();
 
     this.createForm = new FormGroup({
-      eventName: new FormControl(''),
+      title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required]),
+      venue: new FormControl('', [Validators.required]),
       image: new FormControl(''),
     });
-
-    this.cols = [
-      { field: 'StudentCredential.schoolId', header: 'Student ID' },
-      { field: 'name', header: 'Name' },
-      { field: 'StudentCredential.Course.acronym', header: 'Course' },
-      { field: 'StudentCredential.section', header: 'Section' },
-      { field: 'StudentCredential.year', header: 'Year' },
-      { field: 'email', header: 'Email' },
-    ];
   }
 
-  getStudents() {
-    // this.studentService.getStudents().subscribe(
-    //   (response: any) => {
-    //     this.students = response;
-    //   },
-    //   (error: any) => {}
-    // );
+  getEvents() {
+    this.eventService.getEvents().subscribe(
+      (response: any) => {
+        this.events = response;
+      },
+      (error: any) => {}
+    );
   }
 
-  
-  uploadImage(event:any){
-    if(event.target.files[0]){
-      this.uploadFile = event.target.files[0]
-    }
-    if(!event.target.files[0] || event.target.files[0].length == 0) {
-			this.toast.warning('You must select an image');
-			return;
-		}
+  loadInputImgToSrc(event: any) {
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
 
-		var mimeType = event.target.files[0].type;
+    reader.onload = () => {
+      this.previewImg = reader.result;
 
-		if (mimeType.match(/image\/*/) == null) {
-      this.toast.warning("Only images are supported")
-			return;
-		}
-
-		var reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
-
-		reader.onload = (_event) => {
-			this.onLoadFile = `${reader.result}` 
-		}
+      this.createForm.patchValue({
+        image: reader.result,
+      });
+    };
   }
-
-  uploadEventImage(){
-    let element: HTMLElement = document.querySelector('input[name="eventImage"]') as HTMLElement;
-    if (element) element.click();
-  }
-
 
   onSubmit() {
-    if (this.createForm?.get('eventName')?.value == '' && this.createForm?.get('image')?.value=='') {
+    if (!this.createForm.valid) {
       this.toast.warning('Please fill out the fields with valid data.');
       return;
     }
 
-    this._eventService.createEvent(this.uploadFile,this.createForm.value).subscribe({
-      next:()=>{
+    this.eventService.createEvent(this.createForm.value).subscribe(
+      (response: any) => {
+        this.toast.success(response.message);
 
-      },error:()=>{
-        
+        this.createEventModal = false;
+        this.submitLoading = false;
+        this.getEvents();
+      },
+      (error: any) => {
+        this.toast.error(error.error.message);
+
+        this.submitLoading = false;
       }
-    })
+    );
+  }
 
-    this.submitLoading = true;
+  dateFormat(date: any) {
+    return moment(date).fromNow();
   }
 }

@@ -9,13 +9,16 @@ const BASEURL = environment.baseURL;
 const HELPER = new JwtHelperService();
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventsService {
-
   constructor(private http: HttpClient, private router: Router) {}
 
-  createEvent(file:File,data:any):Observable <any> {
-    return this.http.get(`${BASEURL}/`);
+  createEvent(data: any): Observable<any> {
+    return this.http.post(`${BASEURL}/api/event`, data);
+  }
+
+  getEvents(): any {
+    return this.http.get(`${BASEURL}/api/event`);
   }
 }
