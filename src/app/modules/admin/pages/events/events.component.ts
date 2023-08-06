@@ -14,7 +14,7 @@ export class EventsComponent implements OnInit {
   courses: any = [];
   uploadFile:any;
   onLoadFile:any;
-  createAccountModal: boolean = false;
+  createAccountModal: boolean = true;
   submitLoading: boolean = false;
 
   createForm!: FormGroup;
