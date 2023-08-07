@@ -1,0 +1,213 @@
+<div class="relative mt-10 z-40">
+  <h1 class="font-bold text-xl md:text-3xl text-white">Question</h1>
+  <p class="text-slate-100 text-[12px]">Information about the system</p>
+</div>
+<div class="relative pb-20">
+  
+    <div class=" pb-10">
+        <div class="flex items-center">
+          <div class="flex my-5 mr-3">    
+            <button
+              (click)="goBack()"
+              class="bg-slate-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-slate-900/80 cursor-pointer transition-all flex items-center justify-center"
+            >
+              <i class="pi pi-chevron-circle-left mr-2"></i>
+              Go Back
+            </button>
+          </div>
+          <div class="flex my-5">    
+              <button
+                (click)="openForm(-1)"
+                class="bg-slate-800 text-white text-[12px] md:text-sm font-semibold py-3 px-5 rounded-3xl hover:bg-slate-900/80 cursor-pointer transition-all"
+              >
+                <i class="fal fa-file-plus mr-1"></i>
+                Create Question
+              </button>
+          </div>
+        </div>
+        
+        <div class="flex-full w-full flex flex-wrap  gap-y-2">
+            <div class="border  border-red-200 grid m-auto grid-cols-1 w-[20rem]   px-2 shadow-md rounded border" *ngFor="let report of reports">
+                <div class="grid grid-col-1">
+                    <span class="text-[16px] w-full h-full flex items-center justify-between pt-2 ">
+                        <span class="flex text-[12px] text-slate-800 items-center gap-2">
+                            <img [src]="report.User.image ? report.User.image :'../../../../../assets/images/admin.png'" alt="" class="h-[20px] w-[20px] rounded-full border border-red-500">
+                            {{report.User.name}}
+                        </span>
+                        <span class="relative">
+                            <i class="pi pi-ellipsis-v cursor-pointer" (click)="op2.toggle($event)"></i>
+                            <p-overlayPanel #op2 >
+                                <ng-template pTemplate>
+                                  <div class="md:max-w-[200px]">
+                                    <div
+                                      class="grid my-2 min-w-[100px]">
+                                        <div class="grid grid-col-1">
+                                            <div (click)="openOptionForm(report.id)"  class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer" >
+                                                <i class="pi pi-plus-circle"></i>
+                                                <p>Add Option</p>
+                                            </div>
+                                            <div (click)=openForm(report.id) class="flex gap-2 mt-2 items-center hover:text-orange-500 cursor-pointer">
+                                                <i class="pi pi-pencil"></i>
+                                                <p>Edit</p>
+                                            </div>
+                                            <div (click)="deleteQuestion(report.id)" class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer" >
+                                                <i class="pi pi-trash"></i>
+                                                <p>Delete</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </ng-template>
+                            </p-overlayPanel>
+                        </span>
+                        
+                    </span>
+                    <p class="mt-2 text-center w-full text-slate-800 text-[12px]">
+                        {{report.context}}
+                    </p>
+                </div>
+                <div class=" flex items-center  w-full">
+                    <app-admin-pie-chart [result]="fakeData"></app-admin-pie-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-dialog
+      header="{{questionIdTOBeEdited != -1 ? 'Update' : 'Create'}} Question"
+      [(visible)]="createAccountModal"
+      [modal]="true"
+      [style]="{ maxWidth: '400px', width: '400px' }"
+    >
+      <div class="mt-3">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="createForm"
+          class="w-full grid gap-2"
+        >
+          <div class="w-full">
+           
+            <div class="mt-1 relative rounded-md w-full">
+              <textarea
+                type="text"
+                class="py-2 outline-none rounded border w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Add Question"
+                formControlName="context"
+              ></textarea>
+            </div>
+          </div>
+    
+          <button
+            [disabled]="isSubmitLoading"
+            type="submit"
+            class="grid place-items-center cursor-pointer bg-red-500 text-white font-semibold rounded-md py-3 hover:bg-red-600/80 transition-all w-full mt-2"
+          >
+            <div class="flex items-center w-fit mx-auto" *ngIf="isSubmitLoading">
+              <svg
+                class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+    
+              <span>Processing</span>
+            </div>
+    
+            <span *ngIf="!isSubmitLoading">{{questionIdTOBeEdited != -1 ? 'Update' : 'Create'}}</span>
+          </button>
+        </form>
+      </div>
+    </p-dialog>
+
+    
+
+    <p-dialog
+      header="Add Option"
+      [(visible)]="isAddOptionOpen"
+      [modal]="true"
+      [style]="{ maxWidth: '400px', width: '400px' }"
+    >
+      <div class="mt-1">
+        <form
+          (ngSubmit)="onSubmitQuestion()"
+          [formGroup]="createOptionForm"
+          class="w-full gap-2 flex items-center justify-center"
+        >
+          <div class="w-full">
+           
+            <div class=" relative rounded-md w-full">
+              <input
+                type="text"
+                class="py-2 outline-none rounded border w-full block px-3 text-[12px] border-gray-300 rounded-md bg-slate-50"
+                placeholder="Add Question"
+                formControlName="context"
+              >
+            </div>
+          </div>
+          
+          <button
+            [disabled]="isSubmitOptionLoading"
+            type="submit"
+            class="grid place-items-center cursor-pointer bg-red-500 text-white font-semibold rounded-md py-1 hover:bg-red-600/80 transition-all w-[60px]"
+          >
+            <div class="flex items-center py-1 w-fit mx-auto" *ngIf="isSubmitOptionLoading">
+              <svg
+                class="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            </div>
+    
+            <span *ngIf="!isSubmitOptionLoading">
+              <i class="pi pi-plus"></i>
+            </span>
+          </button>
+        </form>
+        <div class="max-h-[300px] overflow-y-auto mt-2 p-2">
+          <div *ngFor = "let option of options" class="border shadow-md w-full my-1 py-1 px-2 rounded">
+            <div class="flex w-full justify-between items-center">
+              <p *ngIf="optionToBeEditedById != option.id" class="text-[12px] w-full py-1 mr-2">{{option.context}}</p>
+              <form (ngSubmit)="ngSubmitEdit()" [formGroup]="editOptionForm" *ngIf="optionToBeEditedById == option.id" class="w-full h-full mr-2 ">
+                <input formControlName="context" type="text" class="flex w-full h-full outline-none py-[7px] rounded bg-slate-200 px-2 text-[11px]">
+              </form>
+              <div class="flex items-center justify-between py-1 w-[40px]">
+                <i (click)="openEditOptionForm(option.id)" class="pi pi-pencil text-[11px] text-green-500 mr-1 cursor-pointer"></i>
+                <i *ngIf="isOptionDeleting != option.id" (click)="deleteOption(option.id)" class="pi pi-times text-[11px] text-red-500 cursor-pointer"></i>
+                <i *ngIf="isOptionDeleting == option.id" class="pi pi-spin pi-spinner" style="font-size: 11px"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-dialog>
+
+
+</div>

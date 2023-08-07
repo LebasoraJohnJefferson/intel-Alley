@@ -456,17 +456,17 @@ export class SurveyFormComponent implements OnInit {
 
       submitSurvey(){
         this.isSubmitting = true
-        // let errorMsg = ''
-        // if(this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs'
-        // if(this.generalInfo.controls.contactNumber.invalid && errorMsg!='') errorMsg = 'Contact number inputs error'
-        // if(this.educationalBG.invalid) errorMsg+= errorMsg != '' ? '<br/>Educational Background Empty Inputs' : 'Educational Background Empty Inputs'  
-        // if(this.employmentInfo.invalid && this.selfEmployInfo.invalid && this.unEmploy.invalid) errorMsg+= errorMsg != '' ? '<br/>Employment Information Empty Inputs' : 'Employment Information Empty Inputs'
-        // if(this.workHistoryFB.invalid || this.firstSurveyFB.invalid || this.secondSurveyFB.invalid) errorMsg+= errorMsg != '' ? '<br/>Work History Empty Inputs' : 'Work History Empty Inputs'
-        // if(this.recommendation.invalid) errorMsg+= errorMsg != '' ? '<br/>Final Survey Empty Inputs' : 'Final Survey Empty Inputs'  
-        // if(errorMsg!=''){
-        //   this.toast.warning(errorMsg)
-        //   return
-        // }
+        let errorMsg = ''
+        if(this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs'
+        if(this.generalInfo.controls.contactNumber.invalid && errorMsg!='') errorMsg = 'Contact number inputs error'
+        if(this.educationalBG.invalid) errorMsg+= errorMsg != '' ? '<br/>Educational Background Empty Inputs' : 'Educational Background Empty Inputs'  
+        if(this.employmentInfo.invalid && this.selfEmployInfo.invalid && this.unEmploy.invalid) errorMsg+= errorMsg != '' ? '<br/>Employment Information Empty Inputs' : 'Employment Information Empty Inputs'
+        if(this.workHistoryFB.invalid || this.firstSurveyFB.invalid || this.secondSurveyFB.invalid) errorMsg+= errorMsg != '' ? '<br/>Work History Empty Inputs' : 'Work History Empty Inputs'
+        if(this.recommendation.invalid) errorMsg+= errorMsg != '' ? '<br/>Final Survey Empty Inputs' : 'Final Survey Empty Inputs'  
+        if(errorMsg!=''){
+          this.toast.warning(errorMsg)
+          return
+        }
 
         
         if(this.showEmploymentStatusForm == 'Employed'){

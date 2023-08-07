@@ -56,21 +56,21 @@
             </b>
           </div>
         <div class="mb-2 mx-2 text-slate-700 font-medium flex items-center text-[10px]">
-            <span class=" flex items-center justify-center w-[80px] bg-green-200 text-green-600 rounded px-2 py-1 gap-2">
+            <span class=" flex items-center justify-center min-w-[80px] bg-green-200 text-green-600 rounded px-2 py-1 gap-2">
                 <i class="pi pi-info-circle"></i>
                 <b >WHAT</b>
             </span>
             <span class="mx-2 text-[12px]">{{event.description}}</span>
         </div>
         <div class="mb-2 mx-2 text-slate-700 font-medium flex items-center text-[10px]">
-            <span class=" flex items-center justify-center w-[80px]  bg-green-200 text-green-600 rounded gap-2 px-2 py-1">
+            <span class=" flex items-center justify-center min-w-[80px]  bg-green-200 text-green-600 rounded gap-2 px-2 py-1">
                 <i class="pi pi-map"></i>
                 <b >WHERE</b>
             </span>
             <span class="mx-2 text-[12px]">{{event.venue}}</span>
         </div>
         <div class="mb-2 mx-2 text-slate-700 font-medium flex items-center text-[10px]">
-            <span class=" flex items-center justify-center w-[80px] bg-green-200 text-green-600 rounded px-2 gap-2 py-1">
+            <span class=" flex items-center justify-center min-w-[80px] bg-green-200 text-green-600 rounded px-2 gap-2 py-1">
                 <i class="pi pi-calendar-minus"></i>
                 <b >WHEN</b>
             </span>
@@ -157,7 +157,7 @@
                   formControlName="commentContext"
                   required
                   ></textarea>
-            <button *ngIf="isCommentSending" class="bg-gray-200 p-4 shadow-lg border-slate-600 border rounded mx-2 flex justify-center items-center" type="submit"><i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i></button>
+            <button *ngIf="isCommentSending" class="bg-gray-200 p-4 shadow-lg border-slate-600 border rounded mx-2 flex justify-center items-center outline-1"><i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i></button>
             <button *ngIf="!isCommentSending" class="bg-gray-200 shadow-lg p-4 border rounded mx-2 hover:text-green-500 hover:bg-green-100 flex justify-center items-center" type="submit"><i class="pi pi-send" style="font-size: 1.5rem"></i></button>
         </form>
       </article>
