@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { SurveyService } from '../../shared/services/survey.service';
 
+
 @Component({
   selector: 'app-surveys',
   templateUrl: './surveys.component.html',
@@ -8,23 +9,41 @@ import { SurveyService } from '../../shared/services/survey.service';
 })
 export class SurveysComponent implements OnInit {
   isSurveyTaken:boolean = false
-
+  surveyId:number = -1
+  toFillUp:any;
+  surveyArray:any=[]
   constructor(
-    private surveyService:SurveyService
+    private _surveyService:SurveyService
   ){
     
   }
 
   ngOnInit(): void {
     this.checkSurvey()
+    this.unAnswerSurvey()
   }
 
   checkSurvey(){
-    this.surveyService.checkSurvey().subscribe({
+    this._surveyService.checkSurvey().subscribe({
       next:(data:any)=>{
         this.isSurveyTaken = data.isTaken
       }
     })
+  }
+
+  unAnswerSurvey(){
+    this._surveyService.unAnswerSurvey().subscribe({
+      next:(res:any)=>{
+        this.surveyArray = res.surveyNotAnswer
+      },error:(error:any)=>{
+        console.log(error)
+      }
+    })
+  }
+
+  formChange(event:any){
+    this.surveyId = event.target.value
+    this.toFillUp = this.surveyArray.filter((data:any)=>{if(data.id == this.surveyId) return data})
   }
 
   submitSurvey(){

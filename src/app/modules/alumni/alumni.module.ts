@@ -23,6 +23,7 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { CustomSurveyComponent } from './components/custom-survey/custom-survey.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
     EventContentComponent,
     BarChartComponent,
     DateAgoPipe,
-    PieChartComponent 
+    PieChartComponent,
+    CustomSurveyComponent 
   ],
   imports: [
     CommonModule,

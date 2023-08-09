@@ -22,8 +22,7 @@ export class SurveyFormComponent implements OnInit {
     selectedJobStatus:any;
     selectedOccupation:any;
     selectedReasonOfHiring:any;
-    selectedRatings: any[] = [];
-    selectedRatings2: any[] = [];
+    
     showEmploymentStatusForm:string = ''
     isOtherOccupation:boolean = false
     isOtherCurrentJob:boolean = false
@@ -111,58 +110,7 @@ export class SurveyFormComponent implements OnInit {
       }
     ]
 
-    firstSurveys:any=[
-      {particulars:'Enhanced Academic Profession',key:'1'},
-      {particulars:'Improved problem-solving/critical thinking skills',key:'2'},
-      {particulars:'Improved research skills',key:'3'},
-      {particulars:'Improved learning efficacy',key:'4'},
-      {particulars:'Improved communication/ interpersonal skills',key:'5'},
-      {particulars:'Improved human relation skills',key:'6'},
-      {particulars:'Improved information technology skills',key:'7'},
-      {particulars:'Improved Entrepreneurial Skills',key:'8'},
-      {particulars:'Exposure to local and/or international community within field of specialization',key:'9'},
-      {particulars:'Personality Development',key:'10'}
-    ]
-
-    firstSurveyFB=this._formBuilder.group({
-      particulars1:['',Validators.required],
-      particulars2:['',Validators.required],
-      particulars3:['',Validators.required],
-      particulars4:['',Validators.required],
-      particulars5:['',Validators.required],
-      particulars6:['',Validators.required],
-      particulars7:['',Validators.required],
-      particulars8:['',Validators.required],
-      particulars9:['',Validators.required],
-      particulars10:['',Validators.required],
-    })
-
-
-    secondSurveys:any=[
-      {particulars:'Quality of Instruction/Premium given to Research',key:'1'},
-      {particulars:'Range of subjects offered',key:'2'},
-      {particulars:'Relevance of the program to your professional requirements',key:'3'},
-      {particulars:'Extra-Curricular Activities',key:'4'},
-      {particulars:'Problem Solving',key:'5'},
-      {particulars:'Teaching and learning Environment',key:'6'},
-      {particulars:'Teacher- Student Relationship',key:'7'},
-      {particulars:'Library Resources',key:'8'},
-      {particulars:'Infrastructure/ facilities/ Laboratory Resources',key:'9'},
-      {particulars:'Class Size',key:'10'}
-    ]
-
-    secondSurveyFB=this._formBuilder.group({
-      particulars1:['',Validators.required],
-      particulars2:['',Validators.required],
-      particulars3:['',Validators.required],
-      particulars4:['',Validators.required],
-      particulars5:['',Validators.required],
-      particulars6:['',Validators.required],
-      particulars7:['',Validators.required],
-      particulars8:['',Validators.required],
-      particulars9:['',Validators.required],
-      particulars10:['',Validators.required],
-    })
+    
 
     recommendation=this._formBuilder.group({
       context:['',Validators.required]
@@ -217,19 +165,19 @@ export class SurveyFormComponent implements OnInit {
           yearGraduated:['',Validators.required]
         }),
         baccalaureate:this._formBuilder.group({
-          university:['',Validators.required],
-          highLvl:['',Validators.required],
-          yearGraduated:['',Validators.required]
+          university:[''],
+          highLvl:[''],
+          yearGraduated:['']
         }),
         master:this._formBuilder.group({
-          university:['',Validators.required],
-          highLvl:['',Validators.required],
-          yearGraduated:['',Validators.required]
+          university:[''],
+          highLvl:[''],
+          yearGraduated:['']
         }),
         doctorate:this._formBuilder.group({
-          university:['',Validators.required],
-          highLvl:['',Validators.required],
-          yearGraduated:['',Validators.required]
+          university:[''],
+          highLvl:[''],
+          yearGraduated:['']
         }),
         profExam1:this._formBuilder.group({
           examName:[''],
@@ -346,14 +294,10 @@ export class SurveyFormComponent implements OnInit {
       }
 
 
-      changeRate(rowIndex: number, value: any) {
-        this.selectedRatings[rowIndex] = [value];
-      }
+      
 
 
-      changeRate2(rowIndex: number, value: any) {
-        this.selectedRatings2[rowIndex] = [value];
-      }
+      
 
       changeTypeOfOrganization(value:any){
         this.selectedTypeOfOrganization = [value];
@@ -459,12 +403,12 @@ export class SurveyFormComponent implements OnInit {
         let errorMsg = ''
         if(this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs'
         if(this.generalInfo.controls.contactNumber.invalid && errorMsg!='') errorMsg = 'Contact number inputs error'
-        if(this.educationalBG.invalid) errorMsg+= errorMsg != '' ? '<br/>Educational Background Empty Inputs' : 'Educational Background Empty Inputs'  
-        if(this.employmentInfo.invalid && this.selfEmployInfo.invalid && this.unEmploy.invalid) errorMsg+= errorMsg != '' ? '<br/>Employment Information Empty Inputs' : 'Employment Information Empty Inputs'
-        if(this.workHistoryFB.invalid || this.firstSurveyFB.invalid || this.secondSurveyFB.invalid) errorMsg+= errorMsg != '' ? '<br/>Work History Empty Inputs' : 'Work History Empty Inputs'
+        if(this.educationalBG.controls.elementary.invalid || this.educationalBG.controls.secondary.invalid || this.educationalBG.controls.tertiary.invalid) errorMsg+= errorMsg != '' ? '<br/>Educational Background Empty Inputs' : 'Educational Background Empty Inputs'  
+        // if(this.employmentInfo.invalid && this.selfEmployInfo.invalid && this.unEmploy.invalid) errorMsg+= errorMsg != '' ? '<br/>Employment Information Empty Inputs' : 'Employment Information Empty Inputs'
         if(this.recommendation.invalid) errorMsg+= errorMsg != '' ? '<br/>Final Survey Empty Inputs' : 'Final Survey Empty Inputs'  
         if(errorMsg!=''){
           this.toast.warning(errorMsg)
+          this.isSubmitting = false
           return
         }
 
@@ -476,16 +420,11 @@ export class SurveyFormComponent implements OnInit {
             employInfo:this.employmentInfo.value,
             history:this.workHistoryFB.value,
             recommend:this.recommendation.value,
-            survey:{
-              firstParticulars:this.firstSurveys,
-              secondParticulars:this.secondSurveys,
-              firstSurvey:this.firstSurveyFB.value,
-              secondSurvey:this.secondSurveyFB.value,
-            }
           }
           this._surveyService.employed(this.uploadFilePoorOfEmp,this.uploadFileCertificateOfEmp,temp).subscribe({
-            next:()=>{
+            next:(res)=>{
               this.submitSurveyEmit.emit()
+              this.toast.success(res.message)
               this.isSubmitting = false
             },
             error:(errorMsg)=>{
@@ -538,6 +477,9 @@ export class SurveyFormComponent implements OnInit {
 
             }
           })
+        }else{
+          this.isSubmitting = false
+          this.toast.warning("Employment Information is Required")
         }
 
 

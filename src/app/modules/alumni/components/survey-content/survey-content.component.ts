@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,Input } from '@angular/core';
 import { SurveyService } from '../../shared/services/survey.service';
 
 
@@ -18,8 +18,9 @@ export class SurveyContentComponent implements OnInit{
   constructor(
     private surveyService:SurveyService
   ){
-
   }
+  
+  
 
   ngOnInit(): void {
     this.getResult(this.surveyName)

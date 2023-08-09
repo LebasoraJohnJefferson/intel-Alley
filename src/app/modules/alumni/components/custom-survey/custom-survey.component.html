@@ -1,0 +1,27 @@
+<div class="w-full flex justify-start mt-2 px-3">
+    <label class="block text-base font-bold mb-2 my-2 text-gray-700">
+      {{toFillUp.description}}
+    </label>
+  </div>
+  <form class="grid" >
+    <table class="w-full text-center  overflow-x-auto" >
+      <tr class="grid grid-cols-3 border" style="grid-template-columns: 10% 35% 55%;">
+        <th class="block border-r-2 text-base font-bold my-2 text-gray-700 ">SN</th>
+        <th class="block text-base font-bold my-2 text-gray-700">Question</th>
+        <th class="block border-l-2  text-base font-bold my-2 text-gray-700 text-center" >Options</th>
+      </tr>
+    <tr class="grid grid-cols-3 border" style="grid-template-columns: 10% 35% 55%;" *ngFor="let question of toFillUp.Questions; let i = index" [attr.data-index]="i">
+        <td class="block border-r-2 text-base font-bold my-2 text-gray-700">{{ i + 1 }}</td>
+        <td class="block text-base font-bold my-2 text-gray-700">{{question.context}}</td>
+        <td class="grid border-l-2 grid-cols-1 md:grid-cols-3 text-base  font-bold my-2 text-gray-700">
+          <div class="flex items-center justify-center  gap-1 w-full"  *ngFor="let option of question.Options">
+            <div class="flex flex-nowrap gap-2 items-center justify-center">
+              <p> {{option.context}}</p>
+              <p-checkbox (onChange)="changeRate(i,option.id)" [name]="option.id" [value]="option.id" [(ngModel)]="selectedRatings[i]" [inputId]="option.id">
+              </p-checkbox>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>

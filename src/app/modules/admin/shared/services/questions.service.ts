@@ -19,8 +19,8 @@ export class QuestionsService {
     return this.http.post(`${BASEURL}/api/question`,data);
   }
 
-  updateQuestion(data:any):Observable <any> {
-    return this.http.put(`${BASEURL}/api/question`,data);
+  updateQuestion(data:any,surveyId:number):Observable <any> {
+    return this.http.put(`${BASEURL}/api/question/${surveyId}`,data);
   }
 
   deleteQuestion(questionId:number):Observable <any> {

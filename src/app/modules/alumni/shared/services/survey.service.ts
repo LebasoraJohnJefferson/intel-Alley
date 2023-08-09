@@ -35,6 +35,14 @@ export class SurveyService {
     return this._http.post(`${BASEURL}/api/alumnus/unemployed`, data);
   }
 
+  surveyWithQuestionAndOption(data: any): any {
+    return this._http.post(`${BASEURL}/api/alumnus/surveyWithQuestionAndOption`, {surveyName:data});
+  }
+
+  unAnswerSurvey(): any {
+    return this._http.get(`${BASEURL}/api/survey/unAnswerSurvey`);
+  }
+
 
 
 }

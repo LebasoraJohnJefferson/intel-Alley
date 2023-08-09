@@ -37,7 +37,8 @@ export class SurveysComponent implements OnInit {
     this.createForm = new FormGroup({
       surveyName: new FormControl('', [Validators.required]),
       dueDate: new FormControl('', [Validators.required]),
-      isActive: new FormControl('')
+      isActive: new FormControl(''),
+      description: new FormControl('',[Validators.required]),
     });
 
     this.cols = [
@@ -68,6 +69,7 @@ export class SurveysComponent implements OnInit {
       this.createForm.controls['dueDate'].setValue(moment(getSurvey[0].dueDate).local().format('YYYY-MM-DD'))
       this.createForm.controls['surveyName'].setValue(getSurvey[0].surveyName)
       this.createForm.controls['isActive'].setValue(getSurvey[0].isActive)
+      this.createForm.controls['description'].setValue(getSurvey[0].description)
     }
     this.createAccountModal = isOpen
     this.surveyId = surveyId
@@ -99,6 +101,7 @@ export class SurveysComponent implements OnInit {
     if(this.surveyId ==-1){
       const isActiveTemp = this.createForm.controls['isActive'].value == null ? false : true
       this.createForm.controls['isActive'].setValue(isActiveTemp)
+      console.log(this.createForm.value)
       this._surveyService.createSurvey(this.createForm.value).subscribe({
           next:(response: any) => {
             this.submitLoading = false;

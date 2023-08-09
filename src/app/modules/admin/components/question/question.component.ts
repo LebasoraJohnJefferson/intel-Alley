@@ -71,7 +71,8 @@ export class QuestionComponent implements OnInit {
         this.optionToBeEditedById = -1
         this.getAllOptionByQuestionId(this.questionIdForOption)
       },error:(err)=>{
-        this.toast.warning(err.message)
+        this.toast.warning(err.error.message)
+        this.optionToBeEditedById = -1
       }
     })
   }
@@ -120,10 +121,12 @@ export class QuestionComponent implements OnInit {
         next:(res)=>{
           this.toast.success(res.message)
           this.isSubmitOptionLoading = false
+          console.log(res)
           this.createOptionForm.reset()
           this.getAllOptionByQuestionId(this.questionIdForOption)
         },error:(err)=>{
-          this.toast.warning(err)
+          this.toast.warning(err.error.message)
+          this.isSubmitOptionLoading = false
         }
       })
     }else{
@@ -176,7 +179,7 @@ export class QuestionComponent implements OnInit {
         })
       }else{
         const newForm = {...this.createForm.value,questionId:this.questionIdTOBeEdited}
-        this._questionService.updateQuestion(newForm).subscribe({
+        this._questionService.updateQuestion(newForm,this.surveyId).subscribe({
           next:(res)=>{
             this.toast.success(res.message)
             this.isSubmitLoading = false
