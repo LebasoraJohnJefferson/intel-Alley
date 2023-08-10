@@ -31,6 +31,12 @@ export class SurveysComponent implements OnInit {
     })
   }
 
+  refreshSurveyTrigger(surveyId:number){
+    this.surveyId = surveyId
+    this.unAnswerSurvey()
+  }
+
+
   unAnswerSurvey(){
     this._surveyService.unAnswerSurvey().subscribe({
       next:(res:any)=>{

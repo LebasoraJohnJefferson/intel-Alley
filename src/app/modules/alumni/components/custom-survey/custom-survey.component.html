@@ -1,9 +1,9 @@
 <div class="w-full flex justify-start mt-2 px-3">
-    <label class="block text-base font-bold mb-2 my-2 text-gray-700">
+    <p class="block text-base font-bold mb-4 text-center my-2 text-gray-700">
       {{toFillUp.description}}
-    </label>
+    </p>
   </div>
-  <form class="grid" >
+  <form class="grid" [formGroup]="surveyForm" >
     <table class="w-full text-center  overflow-x-auto" >
       <tr class="grid grid-cols-3 border" style="grid-template-columns: 10% 35% 55%;">
         <th class="block border-r-2 text-base font-bold my-2 text-gray-700 ">SN</th>
@@ -13,15 +13,22 @@
     <tr class="grid grid-cols-3 border" style="grid-template-columns: 10% 35% 55%;" *ngFor="let question of toFillUp.Questions; let i = index" [attr.data-index]="i">
         <td class="block border-r-2 text-base font-bold my-2 text-gray-700">{{ i + 1 }}</td>
         <td class="block text-base font-bold my-2 text-gray-700">{{question.context}}</td>
-        <td class="grid border-l-2 grid-cols-1 md:grid-cols-3 text-base  font-bold my-2 text-gray-700">
-          <div class="flex items-center justify-center  gap-1 w-full"  *ngFor="let option of question.Options">
+        <td class="flex items-center border-l-2 flex-wrap justify-around text-base  font-bold my-2 text-gray-700">
+          <div class="flex items-center justify-center  gap-1 w-fit"  *ngFor="let option of question.Options">
             <div class="flex flex-nowrap gap-2 items-center justify-center">
               <p> {{option.context}}</p>
-              <p-checkbox (onChange)="changeRate(i,option.id)" [name]="option.id" [value]="option.id" [(ngModel)]="selectedRatings[i]" [inputId]="option.id">
+              <p-checkbox [formControlName]="question.id" (onChange)="changeRate(i,option.id)" [name]="option.id" [value]="option.id" [(ngModel)]="selectedRatings[i]" [inputId]="option.id">
               </p-checkbox>
             </div>
           </div>
         </td>
       </tr>
     </table>
+    <div class="flex items-center gap-2 mt-2">
+      <button  class="grid w-1/6 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-1 hover:bg-slate-900/80 transition-all  px-2" (click)="reset()">Reset</button>
+      <button [disabled]='isSurveySubmitted' class="grid w-1/6 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-1 hover:bg-slate-900/80 transition-all  px-2" (click)="submitSurvey()">
+        <i *ngIf="isSurveySubmitted" class="pi pi-spin pi-spinner mx-auto" style="font-size: 28px"></i>
+        <p *ngIf="!isSurveySubmitted">Submit</p>
+      </button>
+    </div>
   </form>

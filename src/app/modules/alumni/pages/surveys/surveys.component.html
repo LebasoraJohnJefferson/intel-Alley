@@ -19,7 +19,7 @@
         <app-survey-content></app-survey-content>
       </ng-container>
 
-      <app-custom-survey *ngIf="surveyId != -1" [toFillUp]="toFillUp[0]">
+      <app-custom-survey (refreshSurvey)="refreshSurveyTrigger(-1)"  *ngIf="surveyId != -1" [toFillUp]="toFillUp[0]">
 
       </app-custom-survey>
       <ng-container *ngIf="!isSurveyTaken && surveyId == -1">

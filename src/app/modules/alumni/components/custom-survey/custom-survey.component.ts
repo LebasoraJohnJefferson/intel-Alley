@@ -1,5 +1,8 @@
-import { Component,Input } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import { Component,Input,Output,EventEmitter } from '@angular/core';
+import {Validators,FormGroup,FormControl} from '@angular/forms';
+import { HotToastService } from '@ngneat/hot-toast';
+import { AnswerService } from '../../shared/services/answer.service';
+
 
 @Component({
   selector: 'app-custom-survey',
@@ -7,51 +10,58 @@ import {FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./custom-survey.component.scss']
 })
 export class CustomSurveyComponent {
-
+  @Output() refreshSurvey: EventEmitter<any> = new EventEmitter
   @Input() toFillUp:any;
   selectedRatings: any[] = [];
-  
-
-
-  firstSurveyFB=this._formBuilder.group({
-    particulars1:['',Validators.required],
-    particulars2:['',Validators.required],
-    particulars3:['',Validators.required],
-    particulars4:['',Validators.required],
-    particulars5:['',Validators.required],
-    particulars6:['',Validators.required],
-    particulars7:['',Validators.required],
-    particulars8:['',Validators.required],
-    particulars9:['',Validators.required],
-    particulars10:['',Validators.required],
-  })
-
-  firstSurveys:any=[
-    {particulars:'Enhanced Academic Profession',key:'1'},
-    {particulars:'Improved problem-solving/critical thinking skills',key:'2'},
-    {particulars:'Improved research skills',key:'3'},
-    {particulars:'Improved learning efficacy',key:'4'},
-    {particulars:'Improved communication/ interpersonal skills',key:'5'},
-    {particulars:'Improved human relation skills',key:'6'},
-    {particulars:'Improved information technology skills',key:'7'},
-    {particulars:'Improved Entrepreneurial Skills',key:'8'},
-    {particulars:'Exposure to local and/or international community within field of specialization',key:'9'},
-    {particulars:'Personality Development',key:'10'}
-  ]
+  surveyForm!:FormGroup;
+  isSurveySubmitted:boolean = false
 
   constructor(
-    private _formBuilder: FormBuilder,
+    public toast:HotToastService,
+    private _answerService:AnswerService
   ){
 
   }
 
+  
 
   ngOnChanges(){
-    console.log(this.toFillUp)
+    const formControls:any = {}; 
+
+    this.toFillUp.Questions.forEach((question:any) => {
+      formControls[question.id] = new FormControl('',[Validators.required]);
+    });
+
+    this.surveyForm = new FormGroup(formControls);
+
   }
 
   changeRate(rowIndex: number, value: any) {
     this.selectedRatings[rowIndex] = [value];
+  }
+
+
+  submitSurvey(){
+    this.isSurveySubmitted = true
+    if(this.surveyForm.valid){
+      this._answerService.postAnswer(this.surveyForm.value).subscribe({
+        next:(res:any)=>{
+          this.toast.success(res.message)
+          this.refreshSurvey.emit()
+          this.isSurveySubmitted = false
+        },error:(err:any)=>{
+          this.isSurveySubmitted = false
+          this.toast.warning(err.message)
+        }
+      })
+    }else{
+      this.toast.warning("Pls answer all question")
+      this.isSurveySubmitted = false
+    }
+  }
+
+  reset(){
+    this.surveyForm.reset()
   }
 
 
