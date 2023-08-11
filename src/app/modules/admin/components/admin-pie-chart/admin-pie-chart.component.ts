@@ -1,35 +1,35 @@
-import { Component, OnInit , Input, ChangeDetectorRef,SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-admin-pie-chart',
   templateUrl: './admin-pie-chart.component.html',
   styleUrls: ['./admin-pie-chart.component.scss']
 })
-export class AdminPieChartComponent implements OnInit{
-  @Input() result:any;
+export class AdminPieChartComponent implements OnInit {
+  @Input() result: any;
   data: any = {};
   chartOptions: any = {};
 
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.chartView();
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['result']) {
-      this.chartView();
+      this.chartView(this.result);
     }
   }
 
-  chartView() {
-    console.log(this.result)
+  chartView(result: any) {
+    
     this.data = {
-      labels: this.result.label,
+      labels: result.label,
       datasets: [
         {
-          data: this.result.data, 
-          backgroundColor: ["#FF6384", "#36A2EB", "#ffA2EB", "#FFCE56"],
+          data: result.data, 
+          backgroundColor: result.color,
         },
       ],
     };
@@ -37,14 +37,13 @@ export class AdminPieChartComponent implements OnInit{
       responsive: true,
       plugins: {
         legend: {
-          position: 'right',
+          position: 'bottom',
           labels: {
-            color: "#495057",
+            color: result.color,
           },
         },
       },
     };
-    // Ensure to trigger change detection manually when data is updated
     this.cdr.detectChanges();
   }
 }

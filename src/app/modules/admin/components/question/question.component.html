@@ -27,12 +27,12 @@
         </div>
         
         <div class="flex-full w-full flex flex-wrap  gap-y-2">
-            <div class="border  border-red-200 grid m-auto grid-cols-1 w-[20rem]   px-2 shadow-md rounded border" *ngFor="let report of reports">
+            <div class="border  border-red-200 grid m-auto grid-cols-1 w-[20rem]   px-2 shadow-md rounded border" *ngFor="let report of reports ; let i = index" [attr.data-index]="i">
                 <div class="grid grid-col-1">
                     <span class="text-[16px] w-full h-full flex items-center justify-between pt-2 ">
                         <span class="flex text-[12px] text-slate-800 items-center gap-2">
-                            <img [src]="report.User.image ? report.User.image :'../../../../../assets/images/admin.png'" alt="" class="h-[20px] w-[20px] rounded-full border border-red-500">
-                            {{report.User.name}}
+                            <img [src]="report.question.User.image ? report.question.User.image :'../../../../../assets/images/admin.png'" alt="" class="h-[20px] w-[20px] rounded-full border border-red-500">
+                            {{report.question.User.name}}
                         </span>
                         <span class="relative">
                             <i class="pi pi-ellipsis-v cursor-pointer" (click)="op2.toggle($event)"></i>
@@ -42,15 +42,15 @@
                                     <div
                                       class="grid my-2 min-w-[100px]">
                                         <div class="grid grid-col-1">
-                                            <div (click)="openOptionForm(report.id)"  class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer" >
+                                            <div (click)="openOptionForm(report.question.id)"  class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer" >
                                                 <i class="pi pi-plus-circle"></i>
                                                 <p>Add Option</p>
                                             </div>
-                                            <div (click)=openForm(report.id) class="flex gap-2 mt-2 items-center hover:text-orange-500 cursor-pointer">
+                                            <div (click)=openForm(report.question.id) class="flex gap-2 mt-2 items-center hover:text-orange-500 cursor-pointer">
                                                 <i class="pi pi-pencil"></i>
                                                 <p>Edit</p>
                                             </div>
-                                            <div (click)="deleteQuestion(report.id)" class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer" >
+                                            <div (click)="deleteQuestion(report.question.id)" class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer" >
                                                 <i class="pi pi-trash"></i>
                                                 <p>Delete</p>
                                             </div>
@@ -63,11 +63,11 @@
                         
                     </span>
                     <p class="mt-2 text-center w-full text-slate-800 text-[12px]">
-                        {{report.context}}
+                        {{report.question.context}}
                     </p>
                 </div>
                 <div class=" flex items-center  w-full">
-                    <app-admin-pie-chart [result]="fakeData"></app-admin-pie-chart>
+                    <app-admin-pie-chart [result]="report.info"></app-admin-pie-chart>
                 </div>
             </div>
         </div>

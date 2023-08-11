@@ -24,10 +24,6 @@ export class QuestionComponent implements OnInit {
   options:any = []
   reports:any = []
 
-  fakeData:any = {
-    data:[1,2,3,4],
-    label:['try','try1','try2','try3']
-  }
 
 
   createForm:FormGroup = this._formBuilder.group({
@@ -121,7 +117,6 @@ export class QuestionComponent implements OnInit {
         next:(res)=>{
           this.toast.success(res.message)
           this.isSubmitOptionLoading = false
-          console.log(res)
           this.createOptionForm.reset()
           this.getAllOptionByQuestionId(this.questionIdForOption)
         },error:(err)=>{
