@@ -23,10 +23,6 @@ export class SurveyService {
     return this._http.get(`${BASEURL}/api/survey/checkSurvey`);
   }
   
-  getResult():any{
-    return this._http.get(`${BASEURL}/api/survey/surveyReport`);
-  }
-  
   selfEmployed(uploadFileProofOfSelfEmploy:File,data: any): any {
     return this._http.post(`${BASEURL}/api/alumnus/selfEmployed`, data);
   }

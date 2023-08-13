@@ -65,6 +65,7 @@ export class QuestionComponent implements OnInit {
       next:(res)=>{
         this.toast.success(res.message)
         this.optionToBeEditedById = -1
+        this.getQuestion()
         this.getAllOptionByQuestionId(this.questionIdForOption)
       },error:(err)=>{
         this.toast.warning(err.error.message)
@@ -77,6 +78,7 @@ export class QuestionComponent implements OnInit {
     this.optionToBeEditedById = this.optionToBeEditedById == -1 ? optionId : -1
     let option = this.options.filter((opt:any)=>{ return opt.id == optionId})
     this.editOptionForm.controls['context'].setValue(option[0].context)
+    
   }
 
   openOptionForm(questionId:number){
@@ -101,6 +103,7 @@ export class QuestionComponent implements OnInit {
       next:(res)=>{
         this.isOptionDeleting = -1
         this.getAllOptionByQuestionId(this.questionIdForOption)
+        this.getQuestion()
         this.toast.success(res.message)
       },error:(error)=>{  
         this.isOptionDeleting = -1
@@ -118,6 +121,7 @@ export class QuestionComponent implements OnInit {
           this.toast.success(res.message)
           this.isSubmitOptionLoading = false
           this.createOptionForm.reset()
+          this.getQuestion()
           this.getAllOptionByQuestionId(this.questionIdForOption)
         },error:(err)=>{
           this.toast.warning(err.error.message)

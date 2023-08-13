@@ -40,6 +40,7 @@ export class AdminPieChartComponent implements OnInit {
           position: 'bottom',
           labels: {
             color: result.color,
+            padding:15
           },
         },
       },
