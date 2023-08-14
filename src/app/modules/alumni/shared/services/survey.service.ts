@@ -18,18 +18,22 @@ export class SurveyService {
   employed(uploadFilePoorOfEmp:File,uploadFileCertificateOfEmp:File,data: any):Observable<any> {
     return this._http.post(`${BASEURL}/api/survey/employed`, data);
   }
+
+
+  unemployed(data: any):Observable<any> {
+    return this._http.post(`${BASEURL}/api/survey/unemployed`, data);
+  }
   
+  selfEmployed(uploadFileProofOfSelfEmploy:File,data: any): any {
+    return this._http.post(`${BASEURL}/api/survey/selfEmployed`, data);
+  }
+
+
   checkSurvey(): any {
     return this._http.get(`${BASEURL}/api/survey/checkSurvey`);
   }
   
-  selfEmployed(uploadFileProofOfSelfEmploy:File,data: any): any {
-    return this._http.post(`${BASEURL}/api/alumnus/selfEmployed`, data);
-  }
 
-  unemployed(data: any): any {
-    return this._http.post(`${BASEURL}/api/alumnus/unemployed`, data);
-  }
 
   surveyWithQuestionAndOption(data: any): any {
     return this._http.post(`${BASEURL}/api/alumnus/surveyWithQuestionAndOption`, {surveyName:data});

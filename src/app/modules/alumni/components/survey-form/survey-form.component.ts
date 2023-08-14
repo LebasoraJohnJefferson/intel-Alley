@@ -445,12 +445,14 @@ export class SurveyFormComponent implements OnInit {
             recommend:this.recommendation.value
           }
           this._surveyService.selfEmployed(this.uploadFileProofOfSelfEmploy,temp).subscribe({
-            next:()=>{
+            next:(res:any)=>{
               this.submitSurveyEmit.emit()
+              this.toast.success(res.message)
               this.isSubmitting = false
             },
-            error:()=>{
+            error:(err:any)=>{
               this.isSubmitting = false
+              this.toast.warning(err.error.message || err.message)
             },
             complete:()=>{
 
@@ -465,13 +467,15 @@ export class SurveyFormComponent implements OnInit {
             recommend:this.recommendation.value
           }
           this._surveyService.unemployed(temp).subscribe({
-            next:()=>{
+            next:(res:any)=>{
               this.submitSurveyEmit.emit()
+              this.toast.success(res.message)
               this.isSubmitting = false
 
             },
-            error:()=>{
+            error:(err:any)=>{
               this.isSubmitting = false
+              this.toast.success(err.error.message || err.message)
             },
             complete:()=>{
 

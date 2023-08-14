@@ -44,6 +44,7 @@ export class SurveysComponent implements OnInit {
         this.surveyId = this.isSurveyTaken && this.surveyArray.length != 0 ? this.surveyArray[0].id : -1
         if(this.isSurveyTaken){
           this.toFillUp = this.surveyArray.filter((data:any)=>{if(data.id == this.surveyId) return data})
+          console.log(this.toFillUp)
         }
       },error:(error:any)=>{
         console.log(error)
@@ -58,6 +59,7 @@ export class SurveysComponent implements OnInit {
 
   submitSurvey(){
     this.checkSurvey()
+    this.unAnswerSurvey()
   }
 
 }
