@@ -602,52 +602,7 @@
           </tr>
         </table>
       </form>
-      <div class="w-full flex justify-start mt-2 px-3">
-        <label class="block text-base font-bold my-2 text-gray-700">D. How would you rate the contribution of the program of your study at EVSU to your personal and professional growth in terms of the following: (1-poorly	2-fairly	3-highly	4-very highly)</label>
-      </div>
-      <form class="grid" [formGroup]="firstSurveyFB">
-        <table class="w-full text-center  overflow-x-auto" >
-          <tr class="grid grid-cols-10 border">
-            <th class="block text-base font-bold my-2 text-gray-700 ">SN</th>
-            <th class="block text-base font-bold my-2 text-gray-700  col-span-5">Particulars</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">1</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">2</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">3</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">4</th>
-          </tr>
-          <tr class="grid grid-cols-10 border" *ngFor="let survey of firstSurveys; let i = index" [attr.data-index]="i">
-            <td class="block text-base font-bold my-2 text-gray-700">{{ i + 1 }}</td>
-            <td class="block text-base font-bold my-2 text-gray-700 col-span-5">{{ survey.particulars }}</td>
-            <td class="block text-base font-bold my-2 text-gray-700" *ngFor="let rate of ['1', '2', '3', '4']">
-              <p-checkbox [formControlName]="'particulars'+survey.key" (onChange)="changeRate(i, rate)" [name]="'rate-' + i" [value]="rate" [(ngModel)]="selectedRatings[i]" [inputId]="'rate-' + i"></p-checkbox>
-            </td>
-          </tr>
-        </table>
-      </form>
-      <div class="w-full flex justify-start mt-2 px-3">
-        <label class="block text-base font-bold my-2 text-gray-700">E. How would you rate the degree program you finished at EVSU in terms of the following:
-          (1-poorly    2-fairly    3-highly    4- very highly)
-      </label>
-      </div>
-      <form class="grid" [formGroup]="secondSurveyFB">
-        <table class="w-full text-center  overflow-x-auto" >
-          <tr class="grid grid-cols-10 border">
-            <th class="block text-base font-bold my-2 text-gray-700 ">SN</th>
-            <th class="block text-base font-bold my-2 text-gray-700  col-span-5">Particulars</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">1</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">2</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">3</th>
-            <th class="block text-base font-bold my-2 text-gray-700 ">4</th>
-          </tr>
-          <tr class="grid grid-cols-10 border" *ngFor="let survey of secondSurveys; let i = index" [attr.data-index]="i">
-            <td class="block text-base font-bold my-2 text-gray-700">{{ i + 1 }}</td>
-            <td class="block text-base font-bold my-2 text-gray-700 col-span-5">{{ survey.particulars }}</td>
-            <td class="block text-base font-bold my-2 text-gray-700" *ngFor="let rate of ['1', '2', '3', '4']">
-              <p-checkbox [formControlName]="'particulars'+survey.key" (onChange)="changeRate2(i, rate)" [name]="'rate-' + i" [value]="rate" [(ngModel)]="selectedRatings2[i]" [inputId]="'rate-' + i"></p-checkbox>
-            </td>
-          </tr>
-        </table>
-      </form>
+      
       <div class="flex gap-2">
         <button
             class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"

@@ -11,6 +11,7 @@ import { AccountComponent } from './pages/account/account.component';
 import { AlumniComponent } from './pages/alumni/alumni.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AlumComponent } from './pages/alum/alum.component';
+import { QuestionComponent } from './components/question/question.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'alumni', component: AlumniComponent },
       { path: 'surveys', component: SurveysComponent },
+      { path: 'surveys/:surveyId', component: QuestionComponent },
       { path: 'events', component: EventsComponent },
       { path: 'logs', component: LogsComponent },
     ],

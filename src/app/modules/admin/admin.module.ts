@@ -17,6 +17,8 @@ import { AlumniComponent } from './pages/alumni/alumni.component';
 import { EventsComponent } from './pages/events/events.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
 import { AlumComponent } from './pages/alum/alum.component';
+import { QuestionComponent } from './components/question/question.component';
+import { AdminPieChartComponent } from './components/admin-pie-chart/admin-pie-chart.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { AlumComponent } from './pages/alum/alum.component';
     AlumniComponent,
     EventsComponent,
     SurveysComponent,
-    AlumComponent
+    AlumComponent,
+    QuestionComponent,
+    AdminPieChartComponent,
   ],
   imports: [
     CommonModule,

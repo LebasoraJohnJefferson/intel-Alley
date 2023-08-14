@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseURL: 'https://intel-alley-backend-production.up.railway.app',
+  baseURL: 'https://intel-alley-api.onrender.com',
 };
 
 export const developersProfile = {

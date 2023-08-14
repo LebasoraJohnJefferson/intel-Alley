@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { Router } from '@angular/router';
+import { SurveyService } from '../../shared/services/survey.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-surveys',
@@ -9,57 +11,83 @@ import { Router } from '@angular/router';
   styleUrls: ['./surveys.component.scss'],
 })
 export class SurveysComponent implements OnInit {
-  students: any = [];
+  surveys: any = [];
   courses: any = [];
 
   createAccountModal: boolean = false;
   submitLoading: boolean = false;
-
   createForm!: FormGroup;
-
+  loadingDeleteSurveyById:number = -1
+  surveyId:number = -1
   cols: any[] = [];
   exportColumns: any[] = [];
-  selectedStudents: any[] = [];
+  selectedSurvey: any[] = [];
 
   constructor(
     private router: Router,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private _surveyService:SurveyService
   ) {}
 
   importedStudents: any[] = [];
-
+  
   ngOnInit(): void {
-    this.getStudents();
+    this.getSurvey();
 
     this.createForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      studentID: new FormControl('', [Validators.required]),
-      course: new FormControl('', [Validators.required]),
-      section: new FormControl('', [Validators.required]),
-      year: new FormControl('', [Validators.required]),
-      password: new FormControl('', Validators.required),
+      surveyName: new FormControl('', [Validators.required]),
+      dueDate: new FormControl('', [Validators.required]),
+      isActive: new FormControl(''),
+      description: new FormControl('',[Validators.required]),
     });
 
     this.cols = [
-      { field: 'StudentCredential.schoolId', header: 'Student ID' },
-      { field: 'name', header: 'Name' },
-      { field: 'StudentCredential.Course.acronym', header: 'Course' },
-      { field: 'StudentCredential.section', header: 'Section' },
-      { field: 'StudentCredential.year', header: 'Year' },
-      { field: 'email', header: 'Email' },
+      { field: 'surveyName', header: 'Name' },
+      { field: 'User.name', header: 'Admin' },
+      { field: 'isActive', header: 'Active' },
+      { field: 'dueDate', header: 'Due Date' }
     ];
   }
 
-  getStudents() {
-    // this.studentService.getStudents().subscribe(
-    //   (response: any) => {
-    //     this.students = response;
-    //   },
-    //   (error: any) => {}
-    // );
+  getSurvey() {
+    this._surveyService.getSurvey().subscribe({
+      next:(data)=>{
+        this.surveys = data.surveys
+      },error:(err)=>{
+        console.log(err)
+      } 
+    })
   }
 
+
+  openForm(isOpen:boolean,surveyId:number){
+    this.createForm.reset()
+    if(surveyId != -1){
+      const getSurvey = this.surveys.filter((survey:any)=>{
+        return survey.id == surveyId
+      })
+      this.createForm.controls['dueDate'].setValue(moment(getSurvey[0].dueDate).local().format('YYYY-MM-DD'))
+      this.createForm.controls['surveyName'].setValue(getSurvey[0].surveyName)
+      this.createForm.controls['isActive'].setValue(getSurvey[0].isActive)
+      this.createForm.controls['description'].setValue(getSurvey[0].description)
+    }
+    this.createAccountModal = isOpen
+    this.surveyId = surveyId
+  }
+
+  deleteSurvey(surveyId:number){
+    this.loadingDeleteSurveyById = surveyId
+    this._surveyService.deleteSurvey(surveyId).subscribe({
+      next:(res)=>{
+        this.getSurvey()
+        this.loadingDeleteSurveyById = -1
+        this.toast.success("Successfully deleted!")
+      },error:(err)=>{
+        this.loadingDeleteSurveyById = -1
+        console.log(err)
+      }
+    })
+  }
 
 
   onSubmit() {
@@ -69,20 +97,42 @@ export class SurveysComponent implements OnInit {
     }
 
     this.submitLoading = true;
-
-    // this.studentService.createStudentAccount(this.createForm.value).subscribe(
-    //   (response: any) => {
-    //     this.submitLoading = false;
-    //     this.createForm.reset();
-    //     this.createAccountModal = false;
-    //     this.getStudents();
-    //     this.toast.success(response.message);
-    //   },
-    //   (error: any) => {
-    //     this.submitLoading = false;
-    //     this.toast.error(error.error.message);
-    //   }
-    // );
+    
+    if(this.surveyId ==-1){
+      const isActiveTemp = this.createForm.controls['isActive'].value == null ? false : true
+      this.createForm.controls['isActive'].setValue(isActiveTemp)
+      console.log(this.createForm.value)
+      this._surveyService.createSurvey(this.createForm.value).subscribe({
+          next:(response: any) => {
+            this.submitLoading = false;
+            this.createForm.reset();
+            this.createAccountModal = false;
+            this.getSurvey();
+            this.toast.success(response.message);
+          },
+          error:(error: any) => {
+            this.submitLoading = false;
+            this.toast.error(error.error.message);
+          }
+        }
+      );
+    }else{
+      this._surveyService.editSurvey(this.createForm.value,this.surveyId).subscribe({
+        next:(response: any) => {
+          this.submitLoading = false;
+          this.createForm.reset();
+          this.createAccountModal = false;
+          this.getSurvey();
+          this.toast.success(response.message);
+        },
+        error:(err: any) => {
+          this.submitLoading = false;
+          this.toast.error(err.error.message)
+        }
+      }
+    );
+    }
+    
   }
 
 
