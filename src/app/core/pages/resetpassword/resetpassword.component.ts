@@ -58,7 +58,7 @@ export class ResetpasswordComponent {
           },
           next: (res) => {
             this.toast.success(res.message);
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login?type=alumni']);
           },
         });
     }
