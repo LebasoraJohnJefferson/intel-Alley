@@ -18,7 +18,6 @@ import { EventsComponent } from './pages/events/events.component';
 import { SurveyContentComponent } from './components/survey-content/survey-content.component';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { EventContentComponent } from './components/event-content/event-content.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
@@ -37,11 +36,10 @@ import { CustomSurveyComponent } from './components/custom-survey/custom-survey.
     EventsComponent,
     SurveyContentComponent,
     SurveyFormComponent,
-    EventContentComponent,
     BarChartComponent,
     DateAgoPipe,
     PieChartComponent,
-    CustomSurveyComponent 
+    CustomSurveyComponent
   ],
   imports: [
     CommonModule,

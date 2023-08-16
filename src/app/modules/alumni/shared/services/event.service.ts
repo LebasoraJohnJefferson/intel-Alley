@@ -9,33 +9,32 @@ const BASEURL = environment.baseURL;
 const HELPER = new JwtHelperService();
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventService {
-
   constructor(private _http: HttpClient, private router: Router) {}
 
-  getComment(eventId:number):Observable<any> {
-    return this._http.get(`${BASEURL}/api/event/comment/${eventId}`);
+  // getComment(eventId: number): Observable<any> {
+  //   return this._http.get(`${BASEURL}/api/event/comment/${eventId}`);
+  // }
+
+  postComment(data: any, eventId: number): Observable<any> {
+    return this._http.post(`${BASEURL}/api/event/comment/${eventId}`, data);
   }
 
-  postComment(data: any,eventId:number):Observable<any> {
-    return this._http.post(`${BASEURL}/api/event/comment/${eventId}`,data);
-  }
-
-  deleteComment(commentId:number):Observable<any>{
+  deleteComment(commentId: number): Observable<any> {
     return this._http.delete(`${BASEURL}/api/event/comment/${commentId}`);
   }
 
-  editComment(commentId:number,data:any):Observable<any>{
-    return this._http.put(`${BASEURL}/api/event/comment/${commentId}`,data);
+  editComment(commentId: number, data: any): Observable<any> {
+    return this._http.put(`${BASEURL}/api/event/comment/${commentId}`, data);
   }
 
-  getEvents():Observable<any>{
-    return this._http.get(`${BASEURL}/api/event/`)
+  getEvents(): Observable<any> {
+    return this._http.get(`${BASEURL}/api/event/`);
   }
 
-  likes(eventId:number){
-    return this._http.post(`${BASEURL}/api/event/like/${eventId}`,'')
+  likes(eventId: number) {
+    return this._http.post(`${BASEURL}/api/event/like/${eventId}`, '');
   }
 }

@@ -19,6 +19,8 @@ export class EventsComponent implements OnInit {
   isCommentEdit: boolean = true;
   editCommentById: number = 0;
   eventId: number = -1;
+
+  user: any = [];
   comments: any = [];
   events: any = [];
 
@@ -43,7 +45,7 @@ export class EventsComponent implements OnInit {
   openComment(index: number) {
     this.openCommentThroughIndex =
       index == this.openCommentThroughIndex ? -1 : index;
-    if (this.openCommentThroughIndex != -1) this.getComment(index);
+    // if (this.openCommentThroughIndex != -1) this.getComment(index);
   }
 
   getEvents() {
@@ -61,19 +63,19 @@ export class EventsComponent implements OnInit {
     });
   }
 
-  getComment(eventId: number) {
-    this.eventId = eventId;
-    this._eventService.getComment(eventId).subscribe({
-      next: (res) => {
-        this.comments = res.comments;
-      },
-    });
-  }
+  // getComment(eventId: number) {
+  //   this.eventId = eventId;
+  //   this._eventService.getComment(eventId).subscribe({
+  //     next: (res) => {
+  //       this.comments = res.comments;
+  //     },
+  //   });
+  // }
 
   deleteComment(commentId: number) {
     this._eventService.deleteComment(commentId).subscribe({
       next: (res) => {
-        this.getComment(this.eventId);
+        // this.getComment(this.eventId);
         this.events = this.events.map((event: any) => {
           if (event.id === this.eventId) {
             event.commentCount -= 1;
@@ -102,7 +104,7 @@ export class EventsComponent implements OnInit {
         next: (res) => {
           this.toast.success('Post successfully updated!');
           this.editCommentById = -1;
-          this.getComment(this.eventId);
+          // this.getComment(this.eventId);
         },
         error: (err) => {
           console.log(err.error);
@@ -111,6 +113,14 @@ export class EventsComponent implements OnInit {
   }
 
   postComment(eventId: number) {
+    this.events.forEach((event: any) => {
+      if(event.id == eventId) {
+        event.Comments.unshift({
+          ...this.commentForm.value
+        })
+      }
+    });
+
     if (this.commentForm.valid) {
       this.isCommentSending = true;
       this._eventService
@@ -122,8 +132,8 @@ export class EventsComponent implements OnInit {
           },
           complete: () => {
             if (this.openCommentThroughIndex != -1)
-              this.getComment(this.openCommentThroughIndex);
-            this.isCommentSending = false;
+              // this.getComment(this.openCommentThroughIndex);
+              this.isCommentSending = false;
             this.commentForm.reset();
           },
           next: () => {
