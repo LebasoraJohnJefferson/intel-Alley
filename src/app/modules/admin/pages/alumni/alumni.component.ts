@@ -168,14 +168,10 @@ export class AlumniComponent implements OnInit {
       columns: columns,
       body: data,
       didDrawPage: (dataArg) => {
-        doc.text(
-          '\nEvsu Election System Voters',
-          dataArg.settings.margin.top,
-          10
-        );
+        doc.text('\nIntel Alley: Alumni', dataArg.settings.margin.top, 10);
       },
     });
-    doc.save('EvsuElection_Voters.pdf');
+    doc.save('IntelAlley_Alumni.pdf');
   }
 
   exportExcel() {
@@ -186,7 +182,7 @@ export class AlumniComponent implements OnInit {
         bookType: 'xlsx',
         type: 'array',
       });
-      this.saveAsExcelFile(excelBuffer, 'EvsuElection_Voters');
+      this.saveAsExcelFile(excelBuffer, 'IntelAlley_Alumni');
     });
   }
 
