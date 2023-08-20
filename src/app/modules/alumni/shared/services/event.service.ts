@@ -14,9 +14,9 @@ const HELPER = new JwtHelperService();
 export class EventService {
   constructor(private _http: HttpClient, private router: Router) {}
 
-  // getComment(eventId: number): Observable<any> {
-  //   return this._http.get(`${BASEURL}/api/event/comment/${eventId}`);
-  // }
+  getComment(eventId: number): Observable<any> {
+    return this._http.get(`${BASEURL}/api/event/comment/${eventId}`);
+  }
 
   postComment(data: any, eventId: number): Observable<any> {
     return this._http.post(`${BASEURL}/api/event/comment/${eventId}`, data);

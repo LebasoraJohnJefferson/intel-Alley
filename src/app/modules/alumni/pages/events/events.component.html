@@ -169,20 +169,20 @@
         >
           <div
             class="shadow-md border rounded-md bg-white p-3"
-            *ngFor="let comment of event.Comments"
+            *ngFor="let comment of comments"
           >
             <span class="flex items-center justify-between">
               <div class="flex items-center gap-2 mx-2">
                 <img
-                  *ngIf="comment.User.image"
-                  [src]="comment.User.image"
+                  *ngIf="comment.User?.image"
+                  [src]="comment.User?.image"
                   alt="profile"
                   class="w-8 h-8 object-cover rounded-full border-2 border-red-500"
                 />
                 <img
-                  *ngIf="!comment.User.image"
+                  *ngIf="!comment.User?.image"
                   [src]="
-                    comment.User.role == 'admin'
+                    comment.User?.role == 'admin'
                       ? defaultAdminImage
                       : defaultAlumniImage
                   "
@@ -192,7 +192,7 @@
                 <div class="flex items-center gap-2">
                   <div>
                     <div class="text-slate-700 text-sm font-bold">
-                      {{ comment.User.name }}
+                      {{ comment.User?.name }}
                       <span
                         class="text-[10px] text-slate-400"
                         *ngIf="comment.createdAt != comment.updatedAt"
@@ -201,7 +201,7 @@
                     </div>
                     <div class="flex items-center">
                       <div class="text-xs flex items-center gap-2">
-                        {{ comment.User.email }}
+                        {{ comment.User?.email }}
                       </div>
                       <span class="px-1"> · </span>
 

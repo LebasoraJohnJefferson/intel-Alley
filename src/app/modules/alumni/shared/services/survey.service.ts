@@ -16,7 +16,11 @@ export class SurveyService {
   constructor(private _http: HttpClient, private router: Router) {}
 
   employed(uploadFilePoorOfEmp:File,uploadFileCertificateOfEmp:File,data: any):Observable<any> {
-    return this._http.post(`${BASEURL}/api/survey/employed`, data);
+    const formData = new FormData()
+    formData.append('data', JSON.stringify(data)); 
+    if(uploadFilePoorOfEmp) formData.append('uploadFilePoorOfEmp', uploadFilePoorOfEmp);
+    if(uploadFileCertificateOfEmp) formData.append('uploadFileCertificateOfEmp', uploadFileCertificateOfEmp);
+    return this._http.post(`${BASEURL}/api/survey/employed`, formData);
   }
 
 
@@ -24,8 +28,11 @@ export class SurveyService {
     return this._http.post(`${BASEURL}/api/survey/unemployed`, data);
   }
   
-  selfEmployed(uploadFileProofOfSelfEmploy:File,data: any): any {
-    return this._http.post(`${BASEURL}/api/survey/selfEmployed`, data);
+  selfEmployed(file:any,data: any): any {
+    const formData = new FormData()
+    formData.append('data', JSON.stringify(data)); 
+    if(file) formData.append('proofOfSelfEmployFile', file);
+    return this._http.post(`${BASEURL}/api/survey/selfEmployed`, formData);
   }
 
 

@@ -1,5 +1,5 @@
 import { Component,EventEmitter,OnInit, Output } from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, Validators,FormGroup,FormControl} from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { SurveyService } from '../../shared/services/survey.service';
 
@@ -29,6 +29,8 @@ export class SurveyFormComponent implements OnInit {
     isSelectedDegreeRelative:any;
     particularsValue:any;
     isSubmitting:boolean = false
+
+    selfEmployInfo!: FormGroup;
 
     categories: any[] = [
         { name: 'Employed', key: 'Employed' },
@@ -252,12 +254,9 @@ export class SurveyFormComponent implements OnInit {
         })
       });
 
-      selfEmployInfo = this._formBuilder.group({
-        proofOfSelfEmployFile:['',Validators.required],
-        businessName:['',Validators.required],
-        address:['',Validators.required],
-        natureOfBusiness :['',Validators.required],
-      })
+      
+
+      
 
       unEmploy=this._formBuilder.group({
         reasonOfUnEmploy:['',Validators.required]
@@ -281,7 +280,12 @@ export class SurveyFormComponent implements OnInit {
       ) {}
 
       ngOnInit() {
-        
+        this.selfEmployInfo = new FormGroup({
+          businessName: new FormControl('', [Validators.required]),
+          address: new FormControl('', [Validators.required]),
+          natureOfBusiness: new FormControl('', [Validators.required]),
+          proofOfSelfEmployFile: new FormControl(),
+        });
       }
 
 
@@ -305,12 +309,14 @@ export class SurveyFormComponent implements OnInit {
 
       changeOccupationClass(value:any){
         this.isOtherOccupation = value == 'Other'
-        this.selectedOccupation = [value];
+        this.selectedOccupation = value == 'Other' ? [] : [value];
+        this.employmentInfo.controls['reason']?.setValue('')
       }
       
       changeCauseOfHiring(value:any){
         this.isOtherCurrentJob = value == 'Other'
-        this.selectedReasonOfHiring = [value];
+        this.employmentInfo.controls['reasonOfHiring']?.setValue('')
+        this.selectedReasonOfHiring = value == 'Other' ? [] : [value];
       }
 
       changeJobStatus(value:any){
@@ -378,6 +384,8 @@ export class SurveyFormComponent implements OnInit {
         if(event.target.files[0]){
           this.uploadFileProofOfSelfEmploy = event.target.files[0]
         }
+       
+
         if(!event.target.files[0] || event.target.files[0].length == 0) {
           this.toast.warning('You must select an File');
           return;
@@ -404,7 +412,7 @@ export class SurveyFormComponent implements OnInit {
         if(this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs'
         if(this.generalInfo.controls.contactNumber.invalid && errorMsg!='') errorMsg = 'Contact number inputs error'
         if(this.educationalBG.controls.elementary.invalid || this.educationalBG.controls.secondary.invalid || this.educationalBG.controls.tertiary.invalid) errorMsg+= errorMsg != '' ? '<br/>Educational Background Empty Inputs' : 'Educational Background Empty Inputs'  
-        // if(this.employmentInfo.invalid && this.selfEmployInfo.invalid && this.unEmploy.invalid) errorMsg+= errorMsg != '' ? '<br/>Employment Information Empty Inputs' : 'Employment Information Empty Inputs'
+        if(this.showEmploymentStatusForm == '') errorMsg+= errorMsg != '' ? '<br/>Employment Information Empty Inputs' : 'Employment Information Empty Inputs'
         if(this.recommendation.invalid) errorMsg+= errorMsg != '' ? '<br/>Final Survey Empty Inputs' : 'Final Survey Empty Inputs'  
         if(errorMsg!=''){
           this.toast.warning(errorMsg)
@@ -444,6 +452,7 @@ export class SurveyFormComponent implements OnInit {
             history:this.workHistoryFB.value,
             recommend:this.recommendation.value
           }
+
           this._surveyService.selfEmployed(this.uploadFileProofOfSelfEmploy,temp).subscribe({
             next:(res:any)=>{
               this.submitSurveyEmit.emit()
@@ -455,7 +464,7 @@ export class SurveyFormComponent implements OnInit {
               this.toast.warning(err.error.message || err.message)
             },
             complete:()=>{
-
+              this.isSubmitting = false
             }
           })
         }else if(this.showEmploymentStatusForm == 'Unemployed'){
