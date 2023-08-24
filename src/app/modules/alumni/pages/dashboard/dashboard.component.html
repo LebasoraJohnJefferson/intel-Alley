@@ -12,7 +12,10 @@
       >
         <div class="md:h-[100px] h-full flex items-center">
           <div class="w-5/6">
-            <app-bar-chart ></app-bar-chart>
+            <app-bar-chart 
+              [female]="overview.gender?.female" 
+              [male]="overview.gender?.male" 
+              [totalAlumni]="overview.gender?.female + overview.gender?.male"></app-bar-chart>
           </div>
         </div>
 
@@ -32,7 +35,7 @@
 
         <div class="">
           <h1 class="text-5xl lg:text-6xl font-black text-slate-800 text-end">
-            12
+            {{overview.eventCount}}
           </h1>
           <p class="text-end text-sm text-slate-600 font-semibold mt-1">
             Posted 

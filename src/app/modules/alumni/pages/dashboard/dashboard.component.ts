@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlumniService } from '../../shared/services/alumni.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { OverviewService } from '../../shared/services/overview.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -12,12 +14,14 @@ export class DashboardComponent implements OnInit {
   profile: any = [];
   name: string = 'Alumnus';
   date: any;
+  overview:any
   greetingState: number = 0;
   greeting: Array<string> = ['Morning', 'Afternoon', 'Evening', 'Night'];
   constructor(
     public router: Router,
     private alumniService: AlumniService,
-    public toast: HotToastService
+    public toast: HotToastService,
+    private _overviewService:OverviewService
   ) {}
 
   getUser() {
@@ -28,8 +32,17 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  getOverView(){
+    this._overviewService.getOverVIew().subscribe({
+      next:(res)=>{
+        this.overview =res
+      },
+    })
+  }
+
   ngOnInit(): void {
     this.getUser();
+    this.getOverView()
     this.date = new Date();
 
     if (this.date.getHours() > 5 && this.date.getHours() <= 12)

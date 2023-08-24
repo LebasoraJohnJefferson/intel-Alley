@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit,Input } from '@angular/core';
 
 @Component({
   selector: 'app-bar-chart',
@@ -9,7 +9,9 @@ export class BarChartComponent implements OnInit {
 
   basicData: any;
   basicOptions: any;
-  totalAlumni:number =865
+  @Input() female:number =0
+  @Input() male:number = 0
+  @Input() totalAlumni:number =0
 
 
   ngOnInit() {
@@ -19,10 +21,10 @@ export class BarChartComponent implements OnInit {
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
     this.basicData = {
-        labels: ['Active', 'Inactive', ],
+        labels: ['male', 'female', ],
         datasets: [
           { 
-              data: [540, 325],
+              data: [this.male, this.female],
               backgroundColor: [ 'rgba(75, 192, 192, 0.2)','rgba(255, 159, 64, 0.2)'],
               borderColor: [ 'rgb(75, 192, 192)','rgb(255, 159, 64)'],
               borderWidth: 1
@@ -40,7 +42,7 @@ export class BarChartComponent implements OnInit {
                 }
             },title: {
               display: true,
-              text: `Total Alumni ${this.totalAlumni}`, // Add your desired title here
+              text: `Alumni info updates : ${this.totalAlumni}`, // Add your desired title here
               color: textColor,
               font: {
                 size: 14
