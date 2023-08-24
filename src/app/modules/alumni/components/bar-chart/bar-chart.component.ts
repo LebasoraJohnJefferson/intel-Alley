@@ -1,4 +1,4 @@
-import { Component,OnInit,Input } from '@angular/core';
+import { Component,OnInit,Input,ChangeDetectorRef  } from '@angular/core';
 
 @Component({
   selector: 'app-bar-chart',
@@ -9,13 +9,26 @@ export class BarChartComponent implements OnInit {
 
   basicData: any;
   basicOptions: any;
-  @Input() female:number =0
-  @Input() male:number = 0
-  @Input() totalAlumni:number =0
+  @Input() femaleChild:number =0
+  @Input() maleChild:number = 0
+  @Input() totalAlumniChild:number =0
 
+  constructor(
+    private cdr: ChangeDetectorRef
+  ){
+
+  }
+
+  ngOnChanges(){
+    this.pieChart()
+  }
 
   ngOnInit() {
-    const documentStyle = getComputedStyle(document.documentElement);
+    
+    }
+
+    pieChart(){
+        const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--text-color');
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
     const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
@@ -24,7 +37,7 @@ export class BarChartComponent implements OnInit {
         labels: ['male', 'female', ],
         datasets: [
           { 
-              data: [this.male, this.female],
+              data: [this.maleChild, this.femaleChild],
               backgroundColor: [ 'rgba(75, 192, 192, 0.2)','rgba(255, 159, 64, 0.2)'],
               borderColor: [ 'rgb(75, 192, 192)','rgb(255, 159, 64)'],
               borderWidth: 1
@@ -42,7 +55,7 @@ export class BarChartComponent implements OnInit {
                 }
             },title: {
               display: true,
-              text: `Alumni info updates : ${this.totalAlumni}`, // Add your desired title here
+              text: `Alumni info updates : ${this.totalAlumniChild}`, // Add your desired title here
               color: textColor,
               font: {
                 size: 14
@@ -71,5 +84,6 @@ export class BarChartComponent implements OnInit {
             }
         }
     };
-}
+    this.cdr.detectChanges();
+    }
 }

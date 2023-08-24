@@ -14,7 +14,9 @@ export class DashboardComponent implements OnInit {
   profile: any = [];
   name: string = 'Alumnus';
   date: any;
-  overview:any
+  female:number =0
+  male:number = 0
+  eventCount:number =0
   greetingState: number = 0;
   greeting: Array<string> = ['Morning', 'Afternoon', 'Evening', 'Night'];
   constructor(
@@ -22,7 +24,8 @@ export class DashboardComponent implements OnInit {
     private alumniService: AlumniService,
     public toast: HotToastService,
     private _overviewService:OverviewService
-  ) {}
+  ) {
+  }
 
   getUser() {
     this.alumniService.getProfile().subscribe({
@@ -32,10 +35,13 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+
   getOverView(){
     this._overviewService.getOverVIew().subscribe({
       next:(res)=>{
-        this.overview =res
+        this.female = res?.gender?.female || 0
+        this.male = res?.gender?.male || 0
+        this.eventCount = res.eventCount
       },
     })
   }
