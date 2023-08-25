@@ -1,0 +1,42 @@
+<div class="relative z-40 mt-10 pb-20">
+    <div class="">
+      <h1 class="font-bold text-xl md:text-3xl text-white">Analytics</h1>
+      <p class="text-slate-100 text-[12px]">Information about the system</p>
+    </div>
+    <div class="mt-5">
+        <div>
+            <ol class="grid grid-cols-3 gap-2">
+                <li routerLink="/admin/analytics" class="flex hover:bg-slate-100 cursor-pointer gap-4 items-center justify-center shadow-md rounded py-2 border">
+                    <div class="text-slate-500 flex flex-col items-center justify-center">
+                        <i class="fal fa-briefcase text-[25px]"></i>
+                        <h1 class="font-black  text-[14px]  text-end">Employment</h1>
+                    </div>
+                    <div class="text-slate-700 text-2xl lg:text-4xl font-bold">
+                        523
+                    </div>
+                </li>
+                <li routerLink="/admin/analytics/survey" class="flex hover:bg-slate-100 cursor-pointer gap-4 items-center justify-center shadow-md rounded py-2 border">
+                    <div class="text-slate-500 flex flex-col items-center justify-center">
+                        <i class="fal fa-chart-pie text-[25px]"></i>
+                        <h1 class="font-black  text-[14px]  text-end">Survey</h1>
+                    </div>
+                    <div class="text-slate-700 text-2xl lg:text-4xl font-bold">
+                        250
+                    </div>
+                </li>
+                <li class="flex hover:bg-slate-100 cursor-pointer gap-4 items-center justify-center shadow-md rounded py-2 border">
+                    <div class="text-slate-500 flex flex-col items-center justify-center">
+                        <i class="fal fa-layer-group text-[25px]"></i>
+                        <h1 class="font-black  text-[14px]  text-end">Others</h1>
+                    </div>
+                    <div class="text-slate-700 text-2xl lg:text-4xl font-bold">
+                        315
+                    </div>
+                </li>
+            </ol>
+        </div>
+        <div class="mt-5">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

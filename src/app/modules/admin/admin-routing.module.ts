@@ -12,6 +12,9 @@ import { AlumniComponent } from './pages/alumni/alumni.component';
 import { LogsComponent } from './pages/logs/logs.component';
 import { AlumComponent } from './pages/alum/alum.component';
 import { QuestionComponent } from './components/question/question.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { EmploymentComponent } from './components/analytics/employment/employment.component';
+import { SurveyComponent } from './components/analytics/survey/survey.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,10 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'alumni', component: AlumniComponent },
+      { path: 'analytics', component: AnalyticsComponent ,children: [
+        {path:'',component:EmploymentComponent},
+        {path:'survey',component:SurveyComponent}
+      ]},
       { path: 'surveys', component: SurveysComponent },
       { path: 'surveys/:surveyId', component: QuestionComponent },
       { path: 'events', component: EventsComponent },

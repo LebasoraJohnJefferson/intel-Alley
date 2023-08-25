@@ -19,7 +19,9 @@ import { SurveysComponent } from './pages/surveys/surveys.component';
 import { AlumComponent } from './pages/alum/alum.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AdminPieChartComponent } from './components/admin-pie-chart/admin-pie-chart.component';
-
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { SurveyComponent } from './components/analytics/survey/survey.component';
+import { EmploymentComponent } from './components/analytics/employment/employment.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,9 @@ import { AdminPieChartComponent } from './components/admin-pie-chart/admin-pie-c
     AlumComponent,
     QuestionComponent,
     AdminPieChartComponent,
+    AnalyticsComponent,
+    SurveyComponent,
+    EmploymentComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +48,7 @@ import { AdminPieChartComponent } from './components/admin-pie-chart/admin-pie-c
     CoreModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class AdminModule { }
