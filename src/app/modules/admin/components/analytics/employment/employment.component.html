@@ -6,7 +6,10 @@
             <li (click)="changeSelectedRoute('Unemployed')" [class]="routeSelected=='Unemployed' ? ' cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Unemployed</li>
         </ol>
     </div>
-    <div class="flex items-center justify-center w-full">
+    <div *ngIf="isLoading" class="flex items-center justify-center w-full">
+        <img src="../../../../../../assets/loading.gif" class="w-[200px] h-[200px]" alt="">
+    </div>
+    <div *ngIf="!isLoading" class="flex items-center justify-center w-full">
         <div class="w-[25rem] md:w-[650px]">
             <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
         </div>

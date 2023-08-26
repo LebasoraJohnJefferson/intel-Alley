@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AnalyticService } from '../../../shared/services/analytic.service';
 
 @Component({
   selector: 'app-employment',
@@ -12,34 +13,59 @@ export class EmploymentComponent {
     lineStylesData: any;
     basicOptions: any;
     routeSelected:string = 'Employed'
+    femaleData:number[] = []
+    maleData:number[] = []
+    isLoading:boolean = false
 
 
-    constructor() {}
+    constructor(
+        private _analyticService:AnalyticService
+    ) {}
 
-    changeSelectedRoute(route:string){
-        this.routeSelected = route
+    changeSelectedRoute(status:string){
+        this.routeSelected = status
+        this.showData(status)
+    }
+
+    showData(status:string){
+        this.isLoading = true
+        this._analyticService.usersTookTheSurvey(status).subscribe({
+            next:(res)=>{
+                this.isLoading = false
+                this.maleData = res.male
+                this.femaleData = res.female
+                this.viewChart()
+            },complete:()=>{
+                this.isLoading = false
+            }
+        })
     }
 
 
     ngOnInit() {
+      this.showData(this.routeSelected)
+    }
+
+    viewChart(){
         this.basicData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
             datasets: [
                 {
                     label: 'Male',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    data: this.maleData,
                     fill: false,
                     borderColor: '#42A5F5',
                     tension: .4
                 },
                 {
                     label: 'Female',
-                    data: [28, 48, 40, 19, 86, 27, 90],
+                    data: this.femaleData,
                     fill: false,
                     borderColor: '#FF00FF',
                     tension: .4
                 }
             ]
         };
+        
     }
 }
