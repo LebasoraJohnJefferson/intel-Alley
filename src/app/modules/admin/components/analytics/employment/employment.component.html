@@ -1,9 +1,9 @@
 <div class="flex md:flex-row flex-col">
     <div>
         <ol class="grid text-center grid-cols-3 md:border-r-2 md:border-r-red-500 p-2 md:grid-cols-1 px-3 mb-5 gap-y-5 gap-x-2 text-[14px] font-bold">
-            <li class="bg-red-100 py-1 rounded w-full grid">Employed</li>
-            <li>Self Employed</li>
-            <li>Unemployed</li>
+            <li (click)="changeSelectedRoute('Employed')" [class]="routeSelected=='Employed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Employed</li>
+            <li (click)="changeSelectedRoute('SelfEmployed')" [class]="routeSelected=='SelfEmployed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Self Employed</li>
+            <li (click)="changeSelectedRoute('Unemployed')" [class]="routeSelected=='Unemployed' ? ' cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Unemployed</li>
         </ol>
     </div>
     <div class="flex items-center justify-center w-full">

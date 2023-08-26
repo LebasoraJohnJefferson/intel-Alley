@@ -6,18 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./employment.component.scss']
 })
 export class EmploymentComponent {
-  basicData: any;
-
+    basicData: any;
     multiAxisData: any;
-
     multiAxisOptions: any;
-
     lineStylesData: any;
-
     basicOptions: any;
+    routeSelected:string = 'Employed'
 
 
     constructor() {}
+
+    changeSelectedRoute(route:string){
+        this.routeSelected = route
+    }
+
 
     ngOnInit() {
         this.basicData = {

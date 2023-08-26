@@ -25,19 +25,24 @@ export class HeaderComponent implements OnInit {
       icon: 'fal fa-chart-line',
     },
     {
+      title: 'Analytics',
+      route: 'analytics',
+      icon: 'pi pi-chart-bar',
+    },
+    {
       title: 'Alumni',
       route: 'alumni',
-      icon: 'fal fa-pallet',
+      icon: 'fal fa-id-card',
     },
     {
       title: 'Events',
       route: 'events',
-      icon: 'fal fa-pallet',
+      icon: 'fal fa-newspaper',
     },
     {
       title: 'Surveys',
       route: 'surveys',
-      icon: 'fal fa-pallet',
+      icon: 'fal fa-scroll',
     },
     {
       title: 'Logs',
