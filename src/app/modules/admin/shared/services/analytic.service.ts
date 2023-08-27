@@ -19,4 +19,12 @@ export class AnalyticService {
   usersTookTheSurvey(status: any): Observable<any> {
     return this.http.get(`${BASEURL}/api/analytic/employment/${status}`);
   }
+
+  surveyOverView(): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/employment`);
+  }
+
+  surveyLabel(): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/surveyLabel`);
+  }
 }

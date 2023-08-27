@@ -16,6 +16,7 @@ export class EmploymentComponent {
     femaleData:number[] = []
     maleData:number[] = []
     isLoading:boolean = false
+    employmentsCount:number = 0
 
 
     constructor(
@@ -34,6 +35,7 @@ export class EmploymentComponent {
                 this.isLoading = false
                 this.maleData = res.male
                 this.femaleData = res.female
+                this.employmentsCount = res.employmentsCount
                 this.viewChart()
             },complete:()=>{
                 this.isLoading = false
@@ -53,15 +55,17 @@ export class EmploymentComponent {
                 {
                     label: 'Male',
                     data: this.maleData,
-                    fill: false,
+                    fill: true,
                     borderColor: '#42A5F5',
+                    backgroundColor:'rgba(66, 165, 245 ,0.1)',
                     tension: .4
                 },
                 {
                     label: 'Female',
                     data: this.femaleData,
-                    fill: false,
+                    fill: true,
                     borderColor: '#FF00FF',
+                    backgroundColor:'rgba(255, 0, 255,0.1)',
                     tension: .4
                 }
             ]
