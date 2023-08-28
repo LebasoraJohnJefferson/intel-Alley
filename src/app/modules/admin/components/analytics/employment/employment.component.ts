@@ -17,6 +17,7 @@ export class EmploymentComponent {
     maleData:number[] = []
     isLoading:boolean = false
     employmentsCount:number = 0
+    label:string[]=[]
 
 
     constructor(
@@ -35,6 +36,7 @@ export class EmploymentComponent {
                 this.isLoading = false
                 this.maleData = res.male
                 this.femaleData = res.female
+                this.label = res.label
                 this.employmentsCount = res.employmentsCount
                 this.viewChart()
             },complete:()=>{
@@ -50,7 +52,7 @@ export class EmploymentComponent {
 
     viewChart(){
         this.basicData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+            labels: this.label,
             datasets: [
                 {
                     label: 'Male',

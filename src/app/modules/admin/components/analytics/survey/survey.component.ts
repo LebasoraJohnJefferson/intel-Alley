@@ -14,13 +14,13 @@ export class SurveyComponent {
     lineStylesData: any;
     basicOptions: any;
     routeSelected:string = ''
-    femaleData:number[] = []
-    maleData:number[] = []
+    dataLabel:string[]=['0','1']
+    surveys:string[] = []
+    data:number[] = [0,1]
     isLoading:boolean = true
-    isDataLoading:boolean = true
     employmentsCount:number = 0
     isNoSurvey:boolean = false
-    surveys:string[] = []
+    label:string = ''
     
 
 
@@ -33,6 +33,7 @@ export class SurveyComponent {
            this.surveys = await res.label
           this.isNoSurvey = this.surveys?.length == 0
           this.getSurvey()
+          this.changeSelectedRoute('')
         },complete:()=>{
           this.isLoading = false
         }
@@ -40,7 +41,6 @@ export class SurveyComponent {
     }
 
     getSurvey(){
-      this.isDataLoading = true
     }
 
     changeSelectedRoute(status:string){
@@ -49,6 +49,7 @@ export class SurveyComponent {
     }
 
     showData(status:string){
+      this.viewChart()
     }
 
 
@@ -58,22 +59,14 @@ export class SurveyComponent {
 
     viewChart(){
         this.basicData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July','August','September','October','November','December'],
+            labels: this.dataLabel,
             datasets: [
                 {
-                    label: 'Male',
-                    data: this.maleData,
+                    label: this.label,
+                    data: this.data,
                     fill: true,
-                    borderColor: '#42A5F5',
-                    backgroundColor:'rgba(66, 165, 245 ,0.1)',
-                    tension: .4
-                },
-                {
-                    label: 'Female',
-                    data: this.femaleData,
-                    fill: true,
-                    borderColor: '#FF00FF',
-                    backgroundColor:'rgba(255, 0, 255,0.1)',
+                    borderColor: '#0DF726',
+                    backgroundColor:'rgba(13, 247, 38 ,0.1)',
                     tension: .4
                 }
             ]
