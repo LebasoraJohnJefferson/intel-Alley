@@ -27,4 +27,8 @@ export class AnalyticService {
   surveyLabel(): Observable<any> {
     return this.http.get(`${BASEURL}/api/analytic/surveyLabel`);
   }
+
+  getDataSet(surveyId:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/surveyData/${surveyId}`);
+  }
 }

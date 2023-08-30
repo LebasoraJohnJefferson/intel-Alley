@@ -1,7 +1,8 @@
 <div  *ngIf="!isLoading"  class="flex md:flex-row flex-col">
     <div *ngIf="!isNoSurvey">
         <ol class="flex flex-row md:flex-col gap-2 max-h-[300px] md:overflow-y-auto overflow-y-visible md:overflow-x-visible overflow-x-auto text-center md:border-r-2 md:border-r-red-500 py-2 px-3 mb-5 gap-y-5 gap-x-2 text-[14px] font-bold">
-            <li (click)="changeSelectedRoute(survey)" *ngFor="let survey of surveys" [class]="routeSelected==survey ? 'cursor-pointer bg-slate-200 p-1 rounded max-w-[200px] grid' : 'cursor-pointer p-1 max-w-[200px] rounded grid'">{{survey | titlecase}}</li>
+            <li (click)="getSurvey(survey.id)" *ngFor="let survey of surveys" [class]="routeSelected==survey.id ? 'cursor-pointer bg-slate-200 p-1 rounded max-w-[200px] grid' : 'cursor-pointer p-1 max-w-[200px] rounded grid'">{{survey.surveyName | titlecase}}</li>
+            
         </ol>
     </div>
     <div class="flex items-center justify-center w-full">
