@@ -36,10 +36,15 @@ export class SidebarComponent implements OnInit {
       icon: 'fal fa-scroll',
     },
     {
+      title: 'Files',
+      route: 'files',
+      icon: 'fal fa-folder-tree',
+    },
+    {
       title: 'Logs',
       route: 'logs',
       icon: 'fal fa-pallet',
-    },
+    }
   ];
 
   constructor(private route: ActivatedRoute, private router: Router) {}

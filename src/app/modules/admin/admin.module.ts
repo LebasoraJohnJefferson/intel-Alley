@@ -22,6 +22,9 @@ import { AdminPieChartComponent } from './components/admin-pie-chart/admin-pie-c
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { SurveyComponent } from './components/analytics/survey/survey.component';
 import { EmploymentComponent } from './components/analytics/employment/employment.component';
+import { FilesComponent } from './pages/files/files.component';
+import { EmployedComponent } from './components/files/employed/employed.component';
+import { EmployedFilesComponent } from './components/files/employed-files/employed-files.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { EmploymentComponent } from './components/analytics/employment/employmen
     AnalyticsComponent,
     SurveyComponent,
     EmploymentComponent,
+    FilesComponent,
+    EmployedComponent,
+    EmployedFilesComponent,
   ],
   imports: [
     CommonModule,
