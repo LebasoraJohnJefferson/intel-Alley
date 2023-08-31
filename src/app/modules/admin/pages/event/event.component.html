@@ -1,0 +1,125 @@
+<div class="relative z-40 mt-10 pb-20">
+  <div class="">
+    <div class="flex items-center gap-4">
+      <div class="">
+        <div
+          (click)="goBack()"
+          class="bg-slate-700 w-[40px] h-[40px] text-white rounded-full grid place-items-center hover:bg-gray-600 transition-all cursor-pointer"
+        >
+          <div class="fal fa-arrow-left"></div>
+        </div>
+      </div>
+      <button
+        (click)="deleteEvent()"
+        class="bg-slate-700 text-white hover:bg-red-500 border border-slate-800 h-fit px-2 py-1 text-sm rounded-md"
+      >
+        <i class="fad fa-trash mr-1"></i>
+        Delete
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-10 pb-10">
+    <div class="p-2 bg-gray-200 rounded" *ngIf="event.image">
+      <img
+        class="rounded w-full h-[280px] lg:h-[450px] object-cover"
+        [src]="event.image"
+        alt="profile"
+      />
+    </div>
+
+    <div class="mt-8">
+      <div class="">
+        <h1 class="font-bold text-3xl">{{ event.title }}</h1>
+        <p>{{ event.description }}</p>
+
+        <div class="grid gap-1 mb-4 mt-5">
+          <div class="flex items-center">
+            <div
+              class="text-[10px] font-semibold flex items-center justify-center w-[70px] bg-green-100 text-green-600 rounded px-2 py-1"
+            >
+              <i class="pi pi-map"></i>
+              <p class="ml-1">WHERE</p>
+            </div>
+            <span class="mx-2 text-[12px]">{{ event.venue }}</span>
+          </div>
+          <div class="flex items-center">
+            <div
+              class="text-[10px] font-semibold flex items-center justify-center w-[70px] bg-green-100 text-green-600 rounded px-2 py-1"
+            >
+              <i class="pi pi-calendar-minus"></i>
+              <p class="ml-1">WHEN</p>
+            </div>
+            <span class="mx-2 text-[12px]">{{ dateFormat(event.date) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="">
+        <div *ngIf="event.Comments.length != 0" class="">
+          <h1 class="mt-5 mb-2">Comments</h1>
+
+          <div
+            class="max-h-[300px] overflow-y-auto grid gap-2 px-2 border rounded-md mt-2 shadow-md py-2"
+
+          >
+            <div
+              class="shadow-md border rounded-md bg-white p-3"
+              *ngFor="let comment of event.Comments"
+            >
+              <span class="flex items-center justify-between">
+                <div class="flex items-center gap-2 mx-2">
+                  <img
+                    *ngIf="comment.User?.image"
+                    [src]="comment.User?.image"
+                    alt="profile"
+                    class="w-8 h-8 object-cover rounded-full border-2 border-red-500"
+                  />
+                  <img
+                    *ngIf="!comment.User?.image"
+                    [src]="
+                      comment.User?.role == 'admin'
+                        ? defaultAdminImage
+                        : defaultAlumniImage
+                    "
+                    alt="profile"
+                    class="w-8 h-8 object-cover rounded-full border-2 border-red-500"
+                  />
+                  <div class="flex items-center gap-2">
+                    <div>
+                      <div class="text-slate-700 text-sm font-bold capitalize">
+                        {{ comment.User?.name }}
+                        <span
+                          class="text-[10px] text-slate-400"
+                          *ngIf="comment.createdAt != comment.updatedAt"
+                          >(edited)</span
+                        >
+                      </div>
+                      <div class="flex items-center">
+                        <div class="text-xs flex items-center gap-2">
+                          {{ comment.User?.email }}
+                        </div>
+                        <span class="px-1"> · </span>
+
+                        <div
+                          class="text-[10px] justify-end py-1 flex items-center gap-2"
+                        >
+                          {{ dateFormat(event.updatedAt) }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </span>
+              <p class="text-[12px]">
+                {{ comment.commentContext }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

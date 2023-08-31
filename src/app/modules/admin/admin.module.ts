@@ -22,6 +22,7 @@ import { AdminPieChartComponent } from './components/admin-pie-chart/admin-pie-c
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { SurveyComponent } from './components/analytics/survey/survey.component';
 import { EmploymentComponent } from './components/analytics/employment/employment.component';
+import { EventComponent } from './pages/event/event.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { EmploymentComponent } from './components/analytics/employment/employmen
     AnalyticsComponent,
     SurveyComponent,
     EmploymentComponent,
+    EventComponent,
   ],
   imports: [
     CommonModule,

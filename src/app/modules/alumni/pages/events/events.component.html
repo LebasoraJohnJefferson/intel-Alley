@@ -29,273 +29,277 @@
 
     <div
       *ngIf="events.length != 0 && !isLoadingEvent"
-      class="grid gap-2 lg:flex lg:justify-between"
+      class="lg:flex lg:justify-between"
     >
-      <article
-        class="w-full lg:w-[680px] mx-auto lg:mx-0 shadow-md rounded-md border p-4"
-        *ngFor="let event of events"
-      >
-        <div class="flex justify-between items-center w-full">
-          <span class="flex items-center gap-2 mx-2">
-            <img
-              src="../../../../../assets/images/admin.png"
-              alt="profile"
-              class="w-12 h-12 object-cover rounded-full border-2 border-slate-500"
-            />
-            <div>
-              <div class="text-slate-700 font-bold">Admin</div>
-              <div class="text-[11px] text-slate-500 flex items-center gap-1">
-                <i class="pi pi-globe"></i>
-                <span>{{ event.updatedAt | date }}</span>
-                <span
-                  class="text-[10px] text-slate-400"
-                  *ngIf="event.createdAt != event.updatedAt"
-                  >(edited)</span
-                >
-              </div>
-            </div>
-          </span>
-          <span class="relative" *ngIf="isAdmin">
-            <i class="pi pi-ellipsis-v" (click)="op.toggle($event)"></i>
-            <p-overlayPanel #op>
-              <ng-template pTemplate>
-                <div class="md:max-w-[200px]">
-                  <div class="grid my-2 min-w-[100px]">
-                    <div class="grid grid-col-1">
-                      <div
-                        class="flex gap-2 items-center hover:text-orange-500 cursor-pointer"
-                      >
-                        <i class="pi pi-pencil"></i>
-                        <p>Edit</p>
-                      </div>
-                      <div
-                        class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer"
-                      >
-                        <i class="pi pi-trash"></i>
-                        <p>Delete</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </p-overlayPanel>
-          </span>
-        </div>
-
-        <div class="mt-2">
-          <div class="">
-            <div class="">
-              <div
-                class="text-[10px] font-semibold flex items-center justify-center w-fit bg-green-50 text-green-600 rounded px-2 py-1"
-              >
-                <i class="pi pi-info-circle"></i>
-                <p class="ml-1">WHAT</p>
-              </div>
-
-              <div class="mt-2 mb-6">
-                <div class="font-semibold text-2xl text-slate-800">
-                  {{ event.title | titlecase }}
-                </div>
-
-                <p class="text-[12px]">{{ event.description }}</p>
-              </div>
-
-              <div class="grid gap-1 mb-4">
-                <div class="flex items-center">
-                  <div
-                    class="text-[10px] font-semibold flex items-center justify-center w-[70px] bg-green-100 text-green-600 rounded px-2 py-1"
-                  >
-                    <i class="pi pi-map"></i>
-                    <p class="ml-1">WHERE</p>
-                  </div>
-                  <span class="mx-2 text-[12px]">{{ event.venue }}</span>
-                </div>
-                <div class="flex items-center">
-                  <div
-                    class="text-[10px] font-semibold flex items-center justify-center w-[70px] bg-green-100 text-green-600 rounded px-2 py-1"
-                  >
-                    <i class="pi pi-calendar-minus"></i>
-                    <p class="ml-1">WHEN</p>
-                  </div>
-                  <span class="mx-2 text-[12px]">{{
-                    dateFormat(event.date)
-                  }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="p-3 bg-gray-200 rounded" *ngIf="event.image">
-          <img
-            class="rounded w-full h-[280px] object-cover"
-            [src]="event.image"
-            alt="profile"
-          />
-        </div>
-        <div class="mt-4 flex items-center gap-2">
-          <span
-            (click)="openComment(event.id)"
-            class="flex items-center gap-1 hover:bg-slate-100 cursor-pointer p-1 rounded-md"
-          >
-            <p
-              [class]="
-                openCommentThroughIndex != event.id
-                  ? 'pi pi-comments text-blue-500 hover:text-blue-300'
-                  : 'pi pi-comments text-green-500 hover:text-green-300'
-              "
-            ></p>
-            <span class="text-slate-700 text-sm"
-              ><span *ngIf="event.commentCount">{{ event.commentCount }}</span>
-              Comments</span
-            >
-          </span>
-          <span class="flex items-center gap-1" (click)="likes(event.id)">
-            <p
-              [ngClass]="
-                event.userLikesEvent
-                  ? 'pi pi-star-fill text-yellow-500 hover:text-yellow-300'
-                  : 'pi pi-star text-yellow-500 hover:text-yellow-300'
-              "
-            ></p>
-            <span class="text-slate-700 text-sm"
-              >{{ event.likeCount }} Likes</span
-            >
-          </span>
-        </div>
-        <div
-          *ngIf="openCommentThroughIndex == event.id"
-          class="max-h-[300px] overflow-y-auto grid gap-2 px-2 border rounded-md bg-slate-50 mt-2 shadow-md py-2"
+      <div class="grid gap-2">
+        <article
+          class="w-full lg:w-[680px] mx-auto lg:mx-0 shadow-md rounded-md border p-4"
+          *ngFor="let event of events"
         >
-          <div
-            class="shadow-md border rounded-md bg-white p-3"
-            *ngFor="let comment of comments"
-          >
-            <span class="flex items-center justify-between">
-              <div class="flex items-center gap-2 mx-2">
-                <img
-                  *ngIf="comment.User?.image"
-                  [src]="comment.User?.image"
-                  alt="profile"
-                  class="w-8 h-8 object-cover rounded-full border-2 border-red-500"
-                />
-                <img
-                  *ngIf="!comment.User?.image"
-                  [src]="
-                    comment.User?.role == 'admin'
-                      ? defaultAdminImage
-                      : defaultAlumniImage
-                  "
-                  alt="profile"
-                  class="w-8 h-8 object-cover rounded-full border-2 border-red-500"
-                />
-                <div class="flex items-center gap-2">
-                  <div>
-                    <div class="text-slate-700 text-sm font-bold">
-                      {{ comment.User?.name }}
-                      <span
-                        class="text-[10px] text-slate-400"
-                        *ngIf="comment.createdAt != comment.updatedAt"
-                        >(edited)</span
-                      >
-                    </div>
-                    <div class="flex items-center">
-                      <div class="text-xs flex items-center gap-2">
-                        {{ comment.User?.email }}
-                      </div>
-                      <span class="px-1"> · </span>
-
-                      <div
-                        class="text-[10px] justify-end py-1 flex items-center gap-2"
-                      >
-                        {{ comment.updatedAt | dateAgo }}
-                      </div>
-                    </div>
-                  </div>
+          <div class="flex justify-between items-center w-full">
+            <span class="flex items-center gap-2 mx-2">
+              <img
+                src="../../../../../assets/images/admin.png"
+                alt="profile"
+                class="w-12 h-12 object-cover rounded-full border-2 border-slate-500"
+              />
+              <div>
+                <div class="text-slate-700 font-bold">Admin</div>
+                <div class="text-[11px] text-slate-500 flex items-center gap-1">
+                  <i class="pi pi-globe"></i>
+                  <span>{{ event.updatedAt | date }}</span>
+                  <span
+                    class="text-[10px] text-slate-400"
+                    *ngIf="event.createdAt != event.updatedAt"
+                    >(edited)</span
+                  >
                 </div>
               </div>
-              <span
-                class="relative"
-                *ngIf="comment.belongsToCurrentUser || isAdmin"
-              >
-                <i class="pi pi-ellipsis-v" (click)="op2.toggle($event)"></i>
-                <p-overlayPanel #op2>
-                  <ng-template pTemplate>
-                    <div class="md:max-w-[200px]">
-                      <div class="grid my-2 min-w-[100px]">
-                        <div class="grid grid-col-1">
-                          <div
-                            class="flex gap-2 items-center hover:text-orange-500 cursor-pointer"
-                            (click)="
-                              editComment(comment.id, comment.commentContext)
-                            "
-                          >
-                            <i class="pi pi-pencil"></i>
-                            <p>Edit</p>
-                          </div>
-                          <div
-                            class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer"
-                            (click)="deleteComment(comment.id)"
-                          >
-                            <i class="pi pi-trash"></i>
-                            <p>Delete</p>
-                          </div>
+            </span>
+            <span class="relative" *ngIf="isAdmin">
+              <i class="pi pi-ellipsis-v" (click)="op.toggle($event)"></i>
+              <p-overlayPanel #op>
+                <ng-template pTemplate>
+                  <div class="md:max-w-[200px]">
+                    <div class="grid my-2 min-w-[100px]">
+                      <div class="grid grid-col-1">
+                        <div
+                          class="flex gap-2 items-center hover:text-orange-500 cursor-pointer"
+                        >
+                          <i class="pi pi-pencil"></i>
+                          <p>Edit</p>
+                        </div>
+                        <div
+                          class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer"
+                        >
+                          <i class="pi pi-trash"></i>
+                          <p>Delete</p>
                         </div>
                       </div>
                     </div>
-                  </ng-template>
-                </p-overlayPanel>
-              </span>
+                  </div>
+                </ng-template>
+              </p-overlayPanel>
             </span>
-            <hr class="my-2" />
+          </div>
+
+          <div class="mt-2">
             <div class="">
-              <p *ngIf="comment.id != editCommentById" class="text-[12px]">
-                {{ comment.commentContext }}
-              </p>
-              <form
-                [formGroup]="commentEditForm"
-                *ngIf="comment.id == editCommentById"
-                (ngSubmit)="commitEditComment()"
-              >
-                <input
-                  class="bg-slate-100 text-mw-full rounded py-1 pInputText borderoutline-0"
-                  pInputText
-                  formControlName="commentContext"
-                />
-              </form>
+              <div class="">
+                <div
+                  class="text-[10px] font-semibold flex items-center justify-center w-fit bg-green-50 text-green-600 rounded px-2 py-1"
+                >
+                  <i class="pi pi-info-circle"></i>
+                  <p class="ml-1">WHAT</p>
+                </div>
+
+                <div class="mt-2 mb-6">
+                  <div class="font-semibold text-2xl text-slate-800">
+                    {{ event.title | titlecase }}
+                  </div>
+
+                  <p class="text-[12px]">{{ event.description }}</p>
+                </div>
+
+                <div class="grid gap-1 mb-4">
+                  <div class="flex items-center">
+                    <div
+                      class="text-[10px] font-semibold flex items-center justify-center w-[70px] bg-green-100 text-green-600 rounded px-2 py-1"
+                    >
+                      <i class="pi pi-map"></i>
+                      <p class="ml-1">WHERE</p>
+                    </div>
+                    <span class="mx-2 text-[12px]">{{ event.venue }}</span>
+                  </div>
+                  <div class="flex items-center">
+                    <div
+                      class="text-[10px] font-semibold flex items-center justify-center w-[70px] bg-green-100 text-green-600 rounded px-2 py-1"
+                    >
+                      <i class="pi pi-calendar-minus"></i>
+                      <p class="ml-1">WHEN</p>
+                    </div>
+                    <span class="mx-2 text-[12px]">{{
+                      dateFormat(event.date)
+                    }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <form
-          *ngIf="openCommentThroughIndex == event.id"
-          class="mt-3 flex"
-          [formGroup]="commentForm"
-          (ngSubmit)="postComment(event.id)"
-        >
-          <textarea
-            class="w-full text-xs shadow-md rounded border-outline-0 max-h-[200px] min-h-[80px]"
-            type="text"
-            placeholder="Enter your thoughts about this ..."
-            pInputText
-            formControlName="commentContext"
-            required
-          ></textarea>
-          <button
-            *ngIf="isCommentSending"
-            class="h-fit bg-gray-200 p-3 shadow-lg border-slate-600 border rounded mx-2 flex justify-center items-center"
-            type="submit"
+
+          <div class="p-3 bg-gray-200 rounded" *ngIf="event.image">
+            <img
+              class="rounded w-full h-[280px] object-cover"
+              [src]="event.image"
+              alt="profile"
+            />
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            <span
+              (click)="openComment(event.id)"
+              class="flex items-center gap-1 hover:bg-slate-100 cursor-pointer p-1 rounded-md"
+            >
+              <p
+                [class]="
+                  openCommentThroughIndex != event.id
+                    ? 'pi pi-comments text-blue-500 hover:text-blue-300'
+                    : 'pi pi-comments text-green-500 hover:text-green-300'
+                "
+              ></p>
+              <span class="text-slate-700 text-sm"
+                ><span *ngIf="event.commentCount">{{
+                  event.commentCount
+                }}</span>
+                Comments</span
+              >
+            </span>
+            <span class="flex items-center gap-1" (click)="likes(event.id)">
+              <p
+                [ngClass]="
+                  event.userLikesEvent
+                    ? 'pi pi-star-fill text-yellow-500 hover:text-yellow-300'
+                    : 'pi pi-star text-yellow-500 hover:text-yellow-300'
+                "
+              ></p>
+              <span class="text-slate-700 text-sm"
+                >{{ event.likeCount }} Likes</span
+              >
+            </span>
+          </div>
+          <div
+            *ngIf="openCommentThroughIndex == event.id"
+            class="max-h-[300px] overflow-y-auto grid gap-2 px-2 border rounded-md bg-slate-50 mt-2 shadow-md py-2"
           >
-            <i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
-          </button>
-          <button
-            *ngIf="!isCommentSending"
-            class="h-fit bg-gray-200 shadow-lg p-3 border rounded mx-2 hover:text-green-500 hover:bg-green-100 flex justify-center items-center"
-            type="submit"
+            <div
+              class="shadow-md border rounded-md bg-white p-3"
+              *ngFor="let comment of comments"
+            >
+              <span class="flex items-center justify-between">
+                <div class="flex items-center gap-2 mx-2">
+                  <img
+                    *ngIf="comment.User?.image"
+                    [src]="comment.User?.image"
+                    alt="profile"
+                    class="w-8 h-8 object-cover rounded-full border-2 border-red-500"
+                  />
+                  <img
+                    *ngIf="!comment.User?.image"
+                    [src]="
+                      comment.User?.role == 'admin'
+                        ? defaultAdminImage
+                        : defaultAlumniImage
+                    "
+                    alt="profile"
+                    class="w-8 h-8 object-cover rounded-full border-2 border-red-500"
+                  />
+                  <div class="flex items-center gap-2">
+                    <div>
+                      <div class="text-slate-700 text-sm font-bold">
+                        {{ comment.User?.name }}
+                        <span
+                          class="text-[10px] text-slate-400"
+                          *ngIf="comment.createdAt != comment.updatedAt"
+                          >(edited)</span
+                        >
+                      </div>
+                      <div class="flex items-center">
+                        <div class="text-xs flex items-center gap-2">
+                          {{ comment.User?.email }}
+                        </div>
+                        <span class="px-1"> · </span>
+
+                        <div
+                          class="text-[10px] justify-end py-1 flex items-center gap-2"
+                        >
+                          {{ comment.updatedAt | dateAgo }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span
+                  class="relative"
+                  *ngIf="comment.belongsToCurrentUser || isAdmin"
+                >
+                  <i class="pi pi-ellipsis-v" (click)="op2.toggle($event)"></i>
+                  <p-overlayPanel #op2>
+                    <ng-template pTemplate>
+                      <div class="md:max-w-[200px]">
+                        <div class="grid my-2 min-w-[100px]">
+                          <div class="grid grid-col-1">
+                            <div
+                              class="flex gap-2 items-center hover:text-orange-500 cursor-pointer"
+                              (click)="
+                                editComment(comment.id, comment.commentContext)
+                              "
+                            >
+                              <i class="pi pi-pencil"></i>
+                              <p>Edit</p>
+                            </div>
+                            <div
+                              class="flex gap-2 mt-2 items-center hover:text-red-500 cursor-pointer"
+                              (click)="deleteComment(comment.id)"
+                            >
+                              <i class="pi pi-trash"></i>
+                              <p>Delete</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </p-overlayPanel>
+                </span>
+              </span>
+              <hr class="my-2" />
+              <div class="">
+                <p *ngIf="comment.id != editCommentById" class="text-[12px]">
+                  {{ comment.commentContext }}
+                </p>
+                <form
+                  [formGroup]="commentEditForm"
+                  *ngIf="comment.id == editCommentById"
+                  (ngSubmit)="commitEditComment()"
+                >
+                  <input
+                    class="bg-slate-100 text-mw-full rounded py-1 pInputText borderoutline-0"
+                    pInputText
+                    formControlName="commentContext"
+                  />
+                </form>
+              </div>
+            </div>
+          </div>
+          <form
+            *ngIf="openCommentThroughIndex == event.id"
+            class="mt-3 flex"
+            [formGroup]="commentForm"
+            (ngSubmit)="postComment(event.id)"
           >
-            <i class="pi pi-send" style="font-size: 1.5rem"></i>
-          </button>
-        </form>
-      </article>
+            <textarea
+              class="w-full text-xs shadow-md rounded border-outline-0 max-h-[200px] min-h-[80px]"
+              type="text"
+              placeholder="Enter your thoughts about this ..."
+              pInputText
+              formControlName="commentContext"
+              required
+            ></textarea>
+            <button
+              *ngIf="isCommentSending"
+              class="h-fit bg-gray-200 p-3 shadow-lg border-slate-600 border rounded mx-2 flex justify-center items-center"
+              type="submit"
+            >
+              <i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
+            </button>
+            <button
+              *ngIf="!isCommentSending"
+              class="h-fit bg-gray-200 shadow-lg p-3 border rounded mx-2 hover:text-green-500 hover:bg-green-100 flex justify-center items-center"
+              type="submit"
+            >
+              <i class="pi pi-send" style="font-size: 1.5rem"></i>
+            </button>
+          </form>
+        </article>
+      </div>
 
       <div class="hidden lg:grid">asds</div>
     </div>

@@ -7,6 +7,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
 import { EventsComponent } from './pages/events/events.component';
+import { EventComponent } from './pages/event/event.component';
 import { AccountComponent } from './pages/account/account.component';
 import { AlumniComponent } from './pages/alumni/alumni.component';
 import { LogsComponent } from './pages/logs/logs.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'surveys', component: SurveysComponent },
       { path: 'surveys/:surveyId', component: QuestionComponent },
       { path: 'events', component: EventsComponent },
+      { path: 'event', component: EventComponent },
       { path: 'logs', component: LogsComponent },
     ],
   },
