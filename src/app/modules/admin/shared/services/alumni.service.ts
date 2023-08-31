@@ -30,11 +30,11 @@ export class AlumniService {
     return this.http.get(`${BASEURL}/api/user/alumni/${alumId}`);
   }
 
-  updateAlumStatus(data: any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/user/alumni`);
+  updateAlumStatus(data: any): any {
+    return this.http.post(`${BASEURL}/api/user/alumni/status`, data);
   }
 
-  deleteAccount(alumId: any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/user/alumni`);
+  deleteAccount(userId: any): Observable<any> {
+    return this.http.delete(`${BASEURL}/api/user/alumni/${userId}`);
   }
 }
