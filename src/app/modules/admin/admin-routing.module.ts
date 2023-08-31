@@ -16,6 +16,9 @@ import { QuestionComponent } from './components/question/question.component';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { EmploymentComponent } from './components/analytics/employment/employment.component';
 import { SurveyComponent } from './components/analytics/survey/survey.component';
+import { FilesComponent } from './pages/files/files.component';
+import { EmployedComponent } from './components/files/employed/employed.component';
+import { EmployedFilesComponent } from './components/files/employed-files/employed-files.component';
 
 const routes: Routes = [
   {
@@ -25,6 +28,9 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'alumni', component: AlumniComponent },
+      { path: 'files', component: FilesComponent },
+      { path: 'files/employed', component: EmployedComponent },
+      { path: 'files/employed/:userId', component: EmployedFilesComponent },
       { path: 'analytics', component: AnalyticsComponent ,children: [
         {path:'',component:EmploymentComponent},
         {path:'survey',component:SurveyComponent}

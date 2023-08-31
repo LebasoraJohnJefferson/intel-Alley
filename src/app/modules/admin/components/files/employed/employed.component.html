@@ -1,0 +1,36 @@
+<div class="relative z-40 mt-10 pb-20">
+    <div class="">
+      <h1 class="font-bold text-xl md:text-3xl text-white">Files</h1>
+      <p class="text-slate-100 text-[12px]">Information about the system</p>
+    </div>
+    <div class="mt-5">
+        <div>
+            <ol class="flex gap-4 items-center">
+                <li routerLink="/admin/files" class="flex items-center cursor-pointer hover:text-slate-500">
+                    <i class="fal fa-folder mr-1"></i>
+                    <p class="text-[12px]">Files</p>
+                </li>
+                <li class="text-bold text-xl flex items-center justify-center">
+                    <i class="fal text-[13px] fa-greater-than"></i>
+                </li>
+                <li class="flex items-center cursor-pointer hover:text-slate-500">
+                    <i class="fal fa-folder-open mr-1"></i>
+                    <p class="text-[12px]">Employed</p>
+                </li>
+            </ol>
+        </div>
+        <div class="mt-10">
+            <ol *ngIf="isLoading">
+                <li class="flex">
+                    <div routerLink="/admin/files/employed/{{file.User.id}}" *ngFor="let file of files" class="flex items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
+                        <i class="fal fa-folder text-5xl"></i>
+                        <p class="text-bold text-[12px]">{{file.User.name}}</p>
+                    </div>
+                </li>
+            </ol>
+            <div *ngIf="!isLoading" class="w-full h-full flex items-center justify-center">
+                <img src="../../../../../../assets/loading.gif" class="w-[150px] h-[150px]" alt="">
+            </div>
+        </div>
+    </div>
+</div>

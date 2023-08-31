@@ -9,6 +9,7 @@ import { AnalyticService } from '../../shared/services/analytic.service';
 export class AnalyticsComponent {
 
   employmentCount:number = 0
+  countCustomSurvey:number = 0
 
   constructor(
     private _analyticService:AnalyticService
@@ -21,6 +22,7 @@ export class AnalyticsComponent {
       next:(data)=>{
         console.log(data)
         this.employmentCount = data.surveyCount
+        this.countCustomSurvey = data.countCustomSurvey
       }
     })
   }
