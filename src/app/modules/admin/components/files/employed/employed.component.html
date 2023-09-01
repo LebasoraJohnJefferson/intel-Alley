@@ -26,7 +26,7 @@
                         <i class="fal fa-folder text-5xl"></i>
                         <p class="text-bold text-[12px]">{{file.User.name}}</p>
                     </div>
-                    <div *ngIf="!files" class="w-full flex flex-col justify-center items-center">
+                    <div *ngIf="!files.length" class="w-full flex flex-col justify-center items-center">
                         <img class="w-[18rem] h-[18rem]" src="../../../../../../assets/images/noFilesWithNPC.jpg" alt="">
                         <p class="font-bold mt-1">Empty File(s)</p>
                     </div>
