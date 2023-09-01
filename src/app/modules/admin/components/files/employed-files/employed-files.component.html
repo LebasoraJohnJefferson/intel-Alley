@@ -44,7 +44,7 @@
                         <p class="text-bold text-[12px]">proof of Self Employ</p>
                     </a>
                 </li>
-                <li class="flex" *ngIf="!filesInfo">
+                <li class="flex" *ngIf="!filesInfo.Employed && filesInfo.SelfEmployed">
                     <div class="w-full flex flex-col justify-center items-center">
                         <img class="w-[18rem] h-[18rem]" src="../../../../../../assets/images/NoFile.jpg" alt="">
                         <p class="font-bold mt-1">Empty File(s)</p>
