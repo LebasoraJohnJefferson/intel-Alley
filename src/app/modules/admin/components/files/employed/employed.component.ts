@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FilesService } from '../../../shared/services/files.service';
+import { ActivatedRoute  } from '@angular/router'
+
 
 @Component({
   selector: 'app-employed',
@@ -9,14 +11,17 @@ import { FilesService } from '../../../shared/services/files.service';
 export class EmployedComponent {
     files:any;
     isLoading:boolean = false
+    status:any;
 
   constructor(
-    private _filesService:FilesService
+    private _filesService:FilesService,
+    public routes:ActivatedRoute
   ){
-    this._filesService.getUserEmployed().subscribe({
+    this.status = this.routes.snapshot.paramMap.get('status')
+    this._filesService.getUserEmployment(this.status).subscribe({
       next:(res)=>{
-        this.isLoading=true
         this.files = res
+        this.isLoading=true
       },complete:()=>{
         this.isLoading=true
       }

@@ -15,13 +15,13 @@ export class FilesService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getUserEmployed(): Observable<any> {
-    return this.http.get(`${BASEURL}/api/files/employed`);
+  getUserEmployment(status:any): Observable<any> {
+    return this.http.post(`${BASEURL}/api/files/getEmployment`,{'status':status});
   }
 
 
-  getFiles(userId:any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/files/fileInfo/${userId}`);
+  getFiles(userId:any,status:any): Observable<any> {
+    return this.http.post(`${BASEURL}/api/files/fileInfo/${userId}`,{'status':status});
   }
 
 }

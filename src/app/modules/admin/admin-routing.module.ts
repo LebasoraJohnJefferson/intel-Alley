@@ -28,8 +28,8 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'alumni', component: AlumniComponent },
       { path: 'files', component: FilesComponent },
-      { path: 'files/employed', component: EmployedComponent },
-      { path: 'files/employed/:userId', component: EmployedFilesComponent },
+      { path: 'files/:status', component: EmployedComponent },
+      { path: 'files/:status/:userId', component: EmployedFilesComponent },
       { path: 'analytics', component: AnalyticsComponent ,children: [
         {path:'',component:EmploymentComponent},
         {path:'survey',component:SurveyComponent}
