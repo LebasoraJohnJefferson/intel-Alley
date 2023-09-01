@@ -65,8 +65,6 @@ export class AlumComponent implements OnInit {
         this.alum = response;
         this.isLoading = false;
 
-        console.log(response);
-
         this.status = response.status == 'active' ? true : false;
       },
       (error: any) => {}
@@ -93,7 +91,7 @@ export class AlumComponent implements OnInit {
     this.alumniService.deleteAccount(this.alum.id).subscribe(
       (response: any) => {
         this.toast.success(response.message);
-        this.router.navigate([`/admin/alum`]);
+        this.router.navigate([`/admin/alumni`]);
       },
       (error: any) => {
         this.toast.error('Something went wrong');

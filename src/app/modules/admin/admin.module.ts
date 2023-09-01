@@ -22,6 +22,7 @@ import { AdminPieChartComponent } from './components/admin-pie-chart/admin-pie-c
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { SurveyComponent } from './components/analytics/survey/survey.component';
 import { EmploymentComponent } from './components/analytics/employment/employment.component';
+import { EventComponent } from './pages/event/event.component';
 import { FilesComponent } from './pages/files/files.component';
 import { EmployedComponent } from './components/files/employed/employed.component';
 import { EmployedFilesComponent } from './components/files/employed-files/employed-files.component';
@@ -43,6 +44,7 @@ import { EmployedFilesComponent } from './components/files/employed-files/employ
     AnalyticsComponent,
     SurveyComponent,
     EmploymentComponent,
+    EventComponent,
     FilesComponent,
     EmployedComponent,
     EmployedFilesComponent,

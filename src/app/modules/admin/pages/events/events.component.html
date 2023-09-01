@@ -16,19 +16,10 @@
             [autoLayout]="true"
             [paginator]="true"
             [rows]="10"
-            selectionMode="multiple"
             [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
             [rowsPerPageOptions]="[10, 25, 50]"
             styleClass="p-datatable-gridlines"
-            [globalFilterFields]="[
-              'StudentCredential.schoolId',
-              'name',
-              'email',
-              'StudentCredential.section',
-              'StudentCredential.year',
-              'StudentCredential.Course.acronym'
-            ]"
           >
             <ng-template pTemplate="caption">
               <div class="grid gap-2 md:flex md:justify-between">

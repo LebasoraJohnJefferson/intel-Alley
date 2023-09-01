@@ -21,4 +21,12 @@ export class EventsService {
   getEvents(): any {
     return this.http.get(`${BASEURL}/api/event`);
   }
+
+  getEvent(eventId: any): Observable<any> {
+    return this.http.get(`${BASEURL}/api/event/${eventId}`);
+  }
+
+  deleteEvent(eventId: any) {
+    return this.http.delete(`${BASEURL}/api/event/${eventId}`);
+  }
 }

@@ -41,8 +41,6 @@ export class EventsComponent implements OnInit {
     this.eventService.getEvents().subscribe(
       (response: any) => {
         this.events = response.events;
-
-        console.log(response);
       },
       (error: any) => {}
     );

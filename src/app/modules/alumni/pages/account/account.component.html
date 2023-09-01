@@ -148,14 +148,7 @@
         </div>
 
         <div class="flex items-center">
-          <button
-            (click)="logout()"
-            *ngIf="profile.AlumniCredential.isPasswordChanged == false"
-            class="bg-red-100 mr-3 hover:bg-red-200 border border-red-200 h-fit px-2 py-1 text-sm rounded-md font-semibold"
-          >
-            <i class="fad fa-sign-out mr-1"></i>
-            Logout
-          </button>
+
 
           <div
             (click)="op.toggle($event)"
