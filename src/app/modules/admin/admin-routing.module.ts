@@ -19,6 +19,9 @@ import { SurveyComponent } from './components/analytics/survey/survey.component'
 import { FilesComponent } from './pages/files/files.component';
 import { EmployedComponent } from './components/files/employed/employed.component';
 import { EmployedFilesComponent } from './components/files/employed-files/employed-files.component';
+import { EmployedAnalyticsComponent } from './components/analytics-employment/employed-analytics/employed-analytics.component';
+import { SelfEmployedAnalyticsComponent } from './components/analytics-employment/self-employed-analytics/self-employed-analytics.component';
+import { UnemployedAnalyticsComponent } from './components/analytics-employment/unemployed-analytics/unemployed-analytics.component';
 
 const routes: Routes = [
   {
@@ -32,7 +35,11 @@ const routes: Routes = [
       { path: 'files/:status', component: EmployedComponent },
       { path: 'files/:status/:userId', component: EmployedFilesComponent },
       { path: 'analytics', component: AnalyticsComponent ,children: [
-        {path:'',component:EmploymentComponent},
+        {path:'',component:EmploymentComponent,children:[
+          {path:'',component:EmployedAnalyticsComponent},
+          {path:'unemployed',component:UnemployedAnalyticsComponent},
+          {path:'self-employed',component:SelfEmployedAnalyticsComponent}
+        ]},
         {path:'survey',component:SurveyComponent}
       ]},
       { path: 'surveys', component: SurveysComponent },

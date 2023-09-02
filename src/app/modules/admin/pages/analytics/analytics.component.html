@@ -3,36 +3,32 @@
       <h1 class="font-bold text-xl md:text-3xl text-white">Analytics</h1>
       <p class="text-slate-100 text-[12px]">Information about the system</p>
     </div>
-    <div class="mt-5">
+    <div class="mt-5 ">
         <div>
-            <ol class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                <li routerLink="/admin/analytics" class="flex hover:bg-slate-100 cursor-pointer gap-4 items-center justify-center shadow-md rounded py-2 border">
-                    <div class="text-slate-500 flex flex-col items-center justify-center">
-                        <i class="fal fa-briefcase text-[18px] md:text-[20px]"></i>
-                        <h1 class="font-black  text-[8px] md:text-[14px]  text-end">Employments</h1>
-                    </div>
-                    <div class="text-slate-700 text-lg md:text-4xl font-bold">
-                        {{employmentCount}}
-                    </div>
-                </li>
-                <li routerLink="/admin/analytics/survey" class="flex hover:bg-slate-100 cursor-pointer gap-4 items-center justify-center shadow-md rounded py-2 border">
-                    <div class="text-slate-500 flex flex-col items-center justify-center">
-                        <i class="fal fa-chart-pie text-[18px] md:text-[20px]"></i>
-                        <h1 class="font-black  text-[8px] md:text-[14px]  text-end">Surveys</h1>
-                    </div>
-                    <div class="text-slate-700 text-lg lg:text-4xl font-bold">
-                        {{countCustomSurvey}}
+            <ol class="flex gap-x-5 border-b-2">
+                <li (click)="changeRoute('employment')" routerLink="/admin/analytics" [class]="currentRoute == 'employment' ? 'w-[150px]  flex text-blue-500  cursor-pointer gap-4 items-center justify-center  px-1 py-2 border-b-2 border-blue-500' : 'w-[150px]   flex text-slate-500  cursor-pointer gap-4 items-center justify-center  rounded py-2' ">
+                    <div class=" flex flex-col items-center justify-center">
+                        <div class="flex items-center justify-center gap-x-2">
+                            <i class="fal fa-briefcase text-[16px] "></i>
+                            <div class="text-lg md:text-lg font-bold">
+                                {{employmentCount}}
+                            </div>
+                        </div>
+                        <h1 class="font-black  text-[10px]   text-end">Employment</h1>
                     </div>
                 </li>
-                <li class="flex hover:bg-slate-100 cursor-pointer gap-4 items-center justify-center shadow-md rounded py-2 border">
-                    <div class="text-slate-500 flex flex-col items-center justify-center">
-                        <i class="fal fa-layer-group text-[18px] md:text-[20px]"></i>
-                        <h1 class="font-black  text-[8px] md:text-[14px]   text-end">Others</h1>
-                    </div>
-                    <div class="text-slate-700 text-lg lg:text-4xl font-bold">
-                        315
+                <li (click)="changeRoute('survey')" routerLink="/admin/analytics/survey" [class]="currentRoute == 'survey' ? 'w-[150px]  flex text-blue-500  cursor-pointer gap-4 items-center justify-center  px-1 py-2 border-b-2 border-blue-500' : 'w-[150px]  flex text-slate-500  cursor-pointer gap-4 items-center justify-center  rounded py-2' ">
+                    <div class=" flex flex-col items-center justify-center">
+                        <div class="flex items-center justify-center gap-x-2">
+                            <i class="fal fa-chart-pie text-[16px] "></i>
+                            <div class="text-lg md:text-lg font-bold">
+                                {{countCustomSurvey}}
+                            </div>
+                        </div>
+                        <h1 class="font-black  text-[10px]   text-end">Surveys</h1>
                     </div>
                 </li>
+                
             </ol>
         </div>
         <div class="mt-5">

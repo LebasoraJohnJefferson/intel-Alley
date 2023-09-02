@@ -26,6 +26,9 @@ import { EventComponent } from './pages/event/event.component';
 import { FilesComponent } from './pages/files/files.component';
 import { EmployedComponent } from './components/files/employed/employed.component';
 import { EmployedFilesComponent } from './components/files/employed-files/employed-files.component';
+import { EmployedAnalyticsComponent } from './components/analytics-employment/employed-analytics/employed-analytics.component';
+import { UnemployedAnalyticsComponent } from './components/analytics-employment/unemployed-analytics/unemployed-analytics.component';
+import { SelfEmployedAnalyticsComponent } from './components/analytics-employment/self-employed-analytics/self-employed-analytics.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { EmployedFilesComponent } from './components/files/employed-files/employ
     FilesComponent,
     EmployedComponent,
     EmployedFilesComponent,
+    EmployedAnalyticsComponent,
+    UnemployedAnalyticsComponent,
+    SelfEmployedAnalyticsComponent,
   ],
   imports: [
     CommonModule,
