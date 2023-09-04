@@ -29,6 +29,9 @@ import { EmployedFilesComponent } from './components/files/employed-files/employ
 import { EmployedAnalyticsComponent } from './components/analytics-employment/employed-analytics/employed-analytics.component';
 import { UnemployedAnalyticsComponent } from './components/analytics-employment/unemployed-analytics/unemployed-analytics.component';
 import { SelfEmployedAnalyticsComponent } from './components/analytics-employment/self-employed-analytics/self-employed-analytics.component';
+import { AnalyticBarChartComponent } from './components/analytics-employment/analytic-bar-chart/analytic-bar-chart.component';
+import { AnalyticPieChartComponent } from './components/analytics-employment/analytic-pie-chart/analytic-pie-chart.component';
+import { AnalyticPolarAreaChartComponent } from './components/analytics-employment/analytic-polar-area-chart/analytic-polar-area-chart.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { SelfEmployedAnalyticsComponent } from './components/analytics-employmen
     EmployedAnalyticsComponent,
     UnemployedAnalyticsComponent,
     SelfEmployedAnalyticsComponent,
+    AnalyticBarChartComponent,
+    AnalyticPieChartComponent,
+    AnalyticPolarAreaChartComponent,
   ],
   imports: [
     CommonModule,

@@ -1,77 +1,113 @@
 <div>
-    <div>
-        <p class="my-7 flex items-center justify-center font-extrabold text-slate-800 ">Employed Overview</p>
-    </div>
-    <div class="my-7 flex flex-wrap gap-2">
+    <div class="my-7 flex flex-wrap gap-3 w-full">
 
-
-        <article class="border h-fit min-w-[200px] shadow-md mx-auto rounded p-3">
-            <div class="font-bold">Job Status</div>
-            <div class="mt-2">
-                <ol class="gap-2 text-[12px]">
-                    <li class="flex items-center gap-2  ">
-                        <p>Permanent</p>
-                        <p>321</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Temporary</p>
-                        <p>121</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Contractual</p>
-                        <p>121</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Job Order/Casual/COS</p>
-                        <p>121</p>
-                    </li>
-                </ol>
-            </div>
-        </article> 
-
-        <article class="flex flex-col h-fit min-w-[200px] mx-auto  border shadow-md rounded p-3">
-            <div class="font-bold">Type of organization</div>
-            <div class="mt-2">
-                <ol class="gap-2 text-[12px]">
-                    <li class="flex items-center gap-2  ">
-                        <p>Private</p>
-                        <p>321</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Government</p>
-                        <p>121</p>
-                    </li>
-                </ol>
-            </div>
-        </article>
-
-        <article class="border h-fit min-w-[200px] mx-auto  shadow-md rounded p-3">
-            <div class="font-bold">How did you come to know about your current job?</div>
-            <div class="mt-2">
-                <ol class="gap-2 text-[12px]">
-                    <li class="flex items-center gap-2  ">
-                        <p>Through friends and relatives</p>
-                        <p>321</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Advertisement in media</p>
-                        <p>121</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Walk-in Applicant</p>
-                        <p>121</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Arrange by school job placement officer</p>
-                        <p>121</p>
-                    </li>
-                    <li class="flex items-center gap-2 ">
-                        <p>Others</p>
-                        <p>121</p>
-                        <i class="fal text-blue-700 hover:text-red-700 cursor-pointer font-bold fa-eye"></i>
-                    </li>
-                </ol>
-            </div>
-        </article> 
+        <div class="gap-2 flex flex-wrap mx-auto p-3">
+            <article class="  max-w-[17rem] max-h-[20rem] overflow-y-auto   mx-auto rounded p-3">
+                <div class="font-bold text-center">Work Experience</div>
+                <app-analytic-bar-chart  indexAxis="y" [label]="['0-6 months','7 months - 1 year','2 years - 3 years','4 years - 5 years','6 years - 7 years','8 years - 9 years','10 years & onwards']"></app-analytic-bar-chart>
+            </article> 
+            
+            <article class=" max-w-[17rem] max-h-[20rem]  mx-auto rounded p-3">
+                <div class="font-bold text-center">Job Status</div>
+                <app-analytic-pie-chart [label]="['Permanent','Temporary','Contractual','Job Order/Casual/COS']"></app-analytic-pie-chart>
+            </article> 
+    
+            <article class="  max-w-[17rem] max-h-[20rem]   mx-auto rounded p-3">
+                <div class="font-bold text-center">Type of organization</div>
+                <app-analytic-pie-chart [label]="['Private','Government']"></app-analytic-pie-chart>
+            </article> 
+        </div>
+       
+            
+        <div class="grid lg:grid-cols-2 px-3 gap-2 w-full">
+            <article class=" w-full mx-auto h-fit  rounded p-3">
+                <div class="font-bold">How did you come to know about your current job?</div>
+                <div class="mt-2">
+                    <ol class="gap-2 text-[12px]">
+                        <li class="flex items-center gap-2  ">
+                            <p>Through friends and relatives</p>
+                            <p>321</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Advertisement in media</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Walk-in Applicant</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Arrange by school job placement officer</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Others</p>
+                            <p>121</p>
+                            <i class="fal text-blue-700 hover:text-red-700 cursor-pointer font-bold fa-eye"></i>
+                        </li>
+                    </ol>
+                </div>
+            </article> 
+            <article class="h-fit  w-full mx-auto  rounded p-3 ">
+                <div class="font-bold">Occupational Classification</div>
+                <div class="mt-2 grid-cols-1">
+                    <ol class="gap-2 text-[12px]">
+                        <li class="flex items-center gap-2  ">
+                            <p>System Analyst</p>
+                            <p>321</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>System Integration</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>It Audit Assistant</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>QA Specialist</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Web Applications Developer</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Computer Programmer</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Junior Database Administrator</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Multimeida Specialist</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Technical Support Specialist</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Network Engineer</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Systems Administrator</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Junior Information Security Administrator</p>
+                            <p>121</p>
+                        </li>
+                        <li class="flex items-center gap-2 ">
+                            <p>Others</p>
+                            <p>121</p>
+                            <i class="fal text-blue-700 hover:text-red-700 cursor-pointer font-bold fa-eye"></i>
+                        </li>
+                    </ol>
+                </div>
+            </article> 
+        </div>
     </div>
 </div>

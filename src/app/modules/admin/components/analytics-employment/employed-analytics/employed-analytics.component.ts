@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./employed-analytics.component.scss']
 })
 export class EmployedAnalyticsComponent {
-
+  
 }

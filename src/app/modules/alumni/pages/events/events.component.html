@@ -29,9 +29,9 @@
 
     <div
       *ngIf="events.length != 0 && !isLoadingEvent"
-      class="lg:flex lg:justify-between"
+      class="flex flex-col items-center"
     >
-      <div class="grid gap-2">
+      <div class="flex flex-col items-center gap-2 w-full">
         <article
           class="w-full lg:w-[680px] mx-auto lg:mx-0 shadow-md rounded-md border p-4"
           *ngFor="let event of events"
@@ -128,11 +128,12 @@
           </div>
 
           <div class="p-3 bg-gray-200 rounded" *ngIf="event.image">
-            <img
+            <a [href]="event.image" target="_blank"><img
               class="rounded w-full h-[280px] object-cover"
               [src]="event.image"
               alt="profile"
             />
+          </a>
           </div>
           <div class="mt-4 flex items-center gap-2">
             <span
@@ -167,7 +168,7 @@
             </span>
           </div>
           <div
-            *ngIf="openCommentThroughIndex == event.id"
+            *ngIf="openCommentThroughIndex == event.id && comments?.length !=0"
             class="max-h-[300px] overflow-y-auto grid gap-2 px-2 border rounded-md bg-slate-50 mt-2 shadow-md py-2"
           >
             <div
@@ -300,8 +301,6 @@
           </form>
         </article>
       </div>
-
-      <div class="hidden lg:grid">asds</div>
     </div>
   </div>
 </div>
