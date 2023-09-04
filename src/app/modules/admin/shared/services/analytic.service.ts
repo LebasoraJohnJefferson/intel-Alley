@@ -31,4 +31,14 @@ export class AnalyticService {
   getDataSet(surveyId:number): Observable<any> {
     return this.http.get(`${BASEURL}/api/analytic/surveyData/${surveyId}`);
   }
+
+
+  otherEmployedDetails(): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/employedAnalytic`);
+  }
+
+
+  otherAnswer(field:any): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/viewOthers/${field}`);
+  }
 }

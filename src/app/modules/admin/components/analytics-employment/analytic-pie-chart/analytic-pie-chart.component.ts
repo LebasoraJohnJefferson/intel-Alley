@@ -1,27 +1,36 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-analytic-pie-chart',
   templateUrl: './analytic-pie-chart.component.html',
   styleUrls: ['./analytic-pie-chart.component.scss']
 })
-export class AnalyticPieChartComponent implements OnInit{
-  data: any;
-  @Input() label:string [] = []
+export class AnalyticPieChartComponent {
+  info: any;
+  @Input() label:any = []
+  @Input() data:any = []
+  @Input() color:any = []
 
     options: any;
 
-    ngOnInit() {
+    constructor(){
+
+    }
+
+    ngOnChanges() {
+        this.viewChart()
+    }
+
+    viewChart(){
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
 
-        this.data = {
+        this.info = {
             labels: this.label,
             datasets: [
                 {
-                    data: [540, 325, 702],
-                    backgroundColor: [documentStyle.getPropertyValue('--blue-500'), documentStyle.getPropertyValue('--yellow-500'), documentStyle.getPropertyValue('--green-500')],
-                    hoverBackgroundColor: [documentStyle.getPropertyValue('--blue-400'), documentStyle.getPropertyValue('--yellow-400'), documentStyle.getPropertyValue('--green-400')]
+                    data: this.data,
+                    backgroundColor: this.color
                 }
             ]
         };
@@ -29,12 +38,13 @@ export class AnalyticPieChartComponent implements OnInit{
         this.options = {
             plugins: {
                 legend: {
+                    position:'bottom',
                     labels: {
                         usePointStyle: true,
                         color: textColor
                     }
                 }
-            }
-        };
+            },
+        }
     }
 }

@@ -2,112 +2,86 @@
     <div class="my-7 flex flex-wrap gap-3 w-full">
 
         <div class="gap-2 flex flex-wrap mx-auto p-3">
-            <article class="  max-w-[17rem] max-h-[20rem] overflow-y-auto   mx-auto rounded p-3">
-                <div class="font-bold text-center">Work Experience</div>
-                <app-analytic-bar-chart  indexAxis="y" [label]="['0-6 months','7 months - 1 year','2 years - 3 years','4 years - 5 years','6 years - 7 years','8 years - 9 years','10 years & onwards']"></app-analytic-bar-chart>
+            
+            <article class=" border shadow-md max-w-[17rem] h-fit overflow-y-auto   mx-auto rounded p-3">
+                <div class="font-bold text-center">Number of years in the company</div>
+                <app-analytic-pie-chart  [label]="data?.workExpLabel" [data]="data?.workExpData" [color]="data?.workExpColor"></app-analytic-pie-chart >
+            </article> 
+            <article class="border shadow-md max-w-[17rem] h-fit mx-auto rounded p-3">
+                <div class="font-bold text-center">Job Status</div>
+                <app-analytic-pie-chart [label]="data?.jobStatusLabel" [data]="data?.jobStatusData" [color]="data?.jobStatusColor"></app-analytic-pie-chart>
             </article> 
             
-            <article class=" max-w-[17rem] max-h-[20rem]  mx-auto rounded p-3">
-                <div class="font-bold text-center">Job Status</div>
-                <app-analytic-pie-chart [label]="['Permanent','Temporary','Contractual','Job Order/Casual/COS']"></app-analytic-pie-chart>
-            </article> 
-    
-            <article class="  max-w-[17rem] max-h-[20rem]   mx-auto rounded p-3">
+            <article class="border shadow-md  max-w-[17rem] h-fit   mx-auto rounded p-3">
                 <div class="font-bold text-center">Type of organization</div>
-                <app-analytic-pie-chart [label]="['Private','Government']"></app-analytic-pie-chart>
+                <app-analytic-pie-chart [label]="data?.typeOfOrgChosenLabel" [data]="data?.typeOfOrgChosenData" [color]="data?.typeOfOrgChosenColor"></app-analytic-pie-chart>
             </article> 
         </div>
        
-            
-        <div class="grid lg:grid-cols-2 px-3 gap-2 w-full">
-            <article class=" w-full mx-auto h-fit  rounded p-3">
-                <div class="font-bold">How did you come to know about your current job?</div>
-                <div class="mt-2">
-                    <ol class="gap-2 text-[12px]">
-                        <li class="flex items-center gap-2  ">
-                            <p>Through friends and relatives</p>
-                            <p>321</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Advertisement in media</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Walk-in Applicant</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Arrange by school job placement officer</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Others</p>
-                            <p>121</p>
-                            <i class="fal text-blue-700 hover:text-red-700 cursor-pointer font-bold fa-eye"></i>
-                        </li>
-                    </ol>
+        <div class="grid grid-cols-1 gap-2 w-full p-3">
+            <article class="w-full mb-2">
+                <div class="font-bold text-center ">
+                    Job Source
+                </div>
+                
+                <app-analytic-bar-chart class="w-full"  indexAxis="y" [label]="data?.jobSourceLabel" [info]="data?.jobSourceData"></app-analytic-bar-chart>
+                
+                <div (click)="viewOthers('OtherReasonOfHiring')" class="flex items-center text-slate-800 text-[12px] cursor-pointer hover:text-white justify-center px-3 py-1 rounded bg-slate-200 hover:bg-green-500">
+                    View Other
+                    <i class="fal fa-eye ml-1"></i>
                 </div>
             </article> 
-            <article class="h-fit  w-full mx-auto  rounded p-3 ">
-                <div class="font-bold">Occupational Classification</div>
-                <div class="mt-2 grid-cols-1">
-                    <ol class="gap-2 text-[12px]">
-                        <li class="flex items-center gap-2  ">
-                            <p>System Analyst</p>
-                            <p>321</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>System Integration</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>It Audit Assistant</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>QA Specialist</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Web Applications Developer</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Computer Programmer</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Junior Database Administrator</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Multimeida Specialist</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Technical Support Specialist</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Network Engineer</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Systems Administrator</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Junior Information Security Administrator</p>
-                            <p>121</p>
-                        </li>
-                        <li class="flex items-center gap-2 ">
-                            <p>Others</p>
-                            <p>121</p>
-                            <i class="fal text-blue-700 hover:text-red-700 cursor-pointer font-bold fa-eye"></i>
-                        </li>
-                    </ol>
+            <article class="w-full mb-2">
+                <div class="font-bold text-center">
+                    Occupational Classification
+                </div>
+                <app-analytic-bar-chart class="w-full" indexAxis="y" [label]="data?.occupClassLabel" [info]="data?.occupClassData" ></app-analytic-bar-chart>
+                <div (click)="viewOthers('OtherOccupClass')" class="flex items-center text-slate-800 text-[12px] cursor-pointer hover:text-white justify-center px-3 py-1 rounded bg-slate-200 hover:bg-green-500">
+                    View Other
+                    <i class="fal fa-eye ml-1"></i>
                 </div>
             </article> 
         </div>
+        <div class="w-full">
+            <article class="md:w-[680px] w-full h-fit mx-auto rounded p-3">
+                <div class="font-bold text-center">
+                    Income Range per Month
+                </div>
+                <app-analytic-bar-chart  indexAxis="x" [label]="data?.monthlyIncomeLabel" [info]="data?.monthlyIncomeData" ></app-analytic-bar-chart>
+            </article> 
+        </div>
+
     </div>
 </div>
+<p-dialog
+      header="Other {{title}}"
+      [(visible)]="createEventModal"
+      [modal]="true"
+      [style]="{ maxWidth: '400px', width: '400px', maxHeight:'450px', height:'450px' }"
+    >
+    <ol *ngIf="others.length != 0">
+        <li *ngFor="let other of others">
+            <div [routerLink]="['/admin/alum']" [queryParams]="{ id: other?.Employed?.IsSurveyTaken?.User?.id }" class="flex items-center gap-2 mb-2 text-slate-800 text-[14px] font-bold">
+                <img [src]="other?.Employed?.IsSurveyTaken?.User?.image ? other?.Employed?.IsSurveyTaken?.User?.image : '../../../../../../assets/images/student.png'" class="w-[27px] h-[27px] rounded-full border border-red-500"  alt="">
+                <div class="flex flex-col items-centers">
+                    <p>{{other?.Employed?.IsSurveyTaken?.User?.name}}</p>
+                    <p class=" text-[10px] text-blue-500">{{other?.Employed?.IsSurveyTaken?.User?.email}}</p>
+                </div>
+            </div>
+            <div class="rounded bg-slate-100 p-2">
+                {{other?.otherOccup}}
+                {{other?.reasonOfHiring}}
+                <p class="flex items-center justify-end w-full gap-2 text-blue-500 text-[10px]">
+                    <i class="fal fa-globe"></i> 
+                    {{other.updatedAt | dateAgo}}
+                </p>
+            </div>
+        </li>
+    </ol>
+    <ol *ngIf="others.length == 0">
+        <li class="flex items-center justify-center flex-col">
+            <img src="../../../../../../assets/images/NoFile.jpg" class="w-[20rem] h-[20rem]" alt="">
+            <p class="font-bold text-[12px] gap-2">No Other {{title}}</p>
+        </li>
+    </ol>
+</p-dialog>
