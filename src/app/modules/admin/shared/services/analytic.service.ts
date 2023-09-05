@@ -38,6 +38,15 @@ export class AnalyticService {
   }
 
 
+  otherUnemployedDetails(): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/unemployedAnalytic`);
+  }
+
+  otherSelfEmployedDetails(): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/selfEmployedAnalytic`);
+  }
+
+
   otherAnswer(field:any): Observable<any> {
     return this.http.get(`${BASEURL}/api/analytic/viewOthers/${field}`);
   }

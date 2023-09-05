@@ -22,15 +22,16 @@ export class AnalyticPieChartComponent {
     }
 
     viewChart(){
+        const isNoTakers = this.data?.every((element:number) => element === 0)
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
 
         this.info = {
-            labels: this.label,
+            labels: !isNoTakers ? this.label : ['no data'],
             datasets: [
                 {
-                    data: this.data,
-                    backgroundColor: this.color
+                    data: !isNoTakers ?  this.data : [100],
+                    backgroundColor: !isNoTakers ? this.color : ['#D7D7F1']
                 }
             ]
         };

@@ -3,10 +3,7 @@
 
         <div class="gap-2 flex flex-wrap mx-auto p-3">
             
-            <article class=" border shadow-md max-w-[17rem] h-fit overflow-y-auto   mx-auto rounded p-3">
-                <div class="font-bold text-center">Number of years in the company</div>
-                <app-analytic-pie-chart  [label]="data?.workExpLabel" [data]="data?.workExpData" [color]="data?.workExpColor"></app-analytic-pie-chart >
-            </article> 
+            
             <article class="border shadow-md max-w-[17rem] h-fit mx-auto rounded p-3">
                 <div class="font-bold text-center">Job Status</div>
                 <app-analytic-pie-chart [label]="data?.jobStatusLabel" [data]="data?.jobStatusData" [color]="data?.jobStatusColor"></app-analytic-pie-chart>
@@ -16,6 +13,12 @@
                 <div class="font-bold text-center">Type of organization</div>
                 <app-analytic-pie-chart [label]="data?.typeOfOrgChosenLabel" [data]="data?.typeOfOrgChosenData" [color]="data?.typeOfOrgChosenColor"></app-analytic-pie-chart>
             </article> 
+            <article class="border shadow-md max-w-[17rem] h-fit mx-auto rounded p-3">
+                <div class="font-bold text-center">Job Related to the EVSU Degree</div>
+                <app-analytic-pie-chart  [label]="data?.isDegreeRelativeTakenInEVSULabel" [data]="data?.isDegreeRelativeTakenInEVSUData" [color]="data?.isDegreeRelativeTakenInEVSUColor"></app-analytic-pie-chart >
+            </article> 
+
+            
         </div>
        
         <div class="grid grid-cols-1 gap-2 w-full p-3">
@@ -48,6 +51,14 @@
                     Income Range per Month
                 </div>
                 <app-analytic-bar-chart  indexAxis="x" [label]="data?.monthlyIncomeLabel" [info]="data?.monthlyIncomeData" ></app-analytic-bar-chart>
+            </article> 
+        </div>
+        <div class="w-full">
+            <article class="md:w-[680px] w-full h-fit mx-auto rounded p-3">
+                <div class="font-bold text-center">
+                    Number of years in the company
+                </div>
+                <app-analytic-bar-chart  [label]="data?.workExpLabel" [info]="data?.workExpData"></app-analytic-bar-chart >
             </article> 
         </div>
 
