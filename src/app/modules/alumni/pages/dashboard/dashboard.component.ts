@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   female:number =0
   male:number = 0
   eventCount:number =0
+  surveyCount:number =0
   greetingState: number = 0;
   greeting: Array<string> = ['Morning', 'Afternoon', 'Evening', 'Night'];
   constructor(
@@ -42,6 +43,7 @@ export class DashboardComponent implements OnInit {
         this.female = res?.gender?.female || 0
         this.male = res?.gender?.male || 0
         this.eventCount = res.eventCount
+        this.surveyCount = res.surveyCount
       },
     })
   }
