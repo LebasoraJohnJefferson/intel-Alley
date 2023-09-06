@@ -5,9 +5,10 @@
             
         </ol>
     </div>
-    <div class="flex items-center justify-center w-full">
-        <div class="w-[22rem] md:w-[650px]">
-            <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+    <div class="flex flex-col items-center justify-center w-full">
+        <div class="w-[22rem] md:w-[650px] my-2" *ngFor="let result of results">
+            <p class="text-slate-800 font-bold text-center w-full">{{result.title | titlecase}}</p>
+            <p-chart type="line" [data]="result.data" [options]="basicOptions"></p-chart>
         </div>
     </div>
 </div>

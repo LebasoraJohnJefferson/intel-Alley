@@ -14,14 +14,14 @@ export class SurveyComponent {
     lineStylesData: any;
     basicOptions: any;
     routeSelected:number = 0
-    dataLabel:string[]=['0','1']
+    dataLabel:string[]=[]
     surveys:any[] = []
     data:number[] = [0,1]
     isLoading:boolean = true
     employmentsCount:number = 0
     isNoSurvey:boolean = false
     label:string = ''
-    
+    results:any=[]
 
 
     constructor(
@@ -54,10 +54,7 @@ export class SurveyComponent {
     viewChart(surveyId:number){
       this._analyticService.getDataSet(surveyId).subscribe({
         next:(res)=>{
-          this.basicData = {
-            labels: res.label,
-            datasets: res.dataSet
-        };
+          this.results = res
         }
       })
     }
