@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   getUser() {
     this.alumniService.getProfile().subscribe({
       next: (res: any) => {
-        this.name = res.user.name;
+        this.name = res?.user?.name;
       },
     });
   }
@@ -42,8 +42,8 @@ export class DashboardComponent implements OnInit {
       next:(res)=>{
         this.female = res?.gender?.female || 0
         this.male = res?.gender?.male || 0
-        this.eventCount = res.eventCount
-        this.surveyCount = res.surveyCount
+        this.eventCount = res?.eventCount
+        this.surveyCount = res?.surveyCount
       },
     })
   }

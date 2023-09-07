@@ -52,7 +52,6 @@ export class EventsComponent implements OnInit {
     this._eventService.getEvents().subscribe({
       next: (data: any) => {
         this.isLoadingEvent = false;
-        console.log(data);
         this.events = data.events;
       },
       error: (err) => {
