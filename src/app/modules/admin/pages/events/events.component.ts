@@ -13,8 +13,9 @@ import * as moment from 'moment';
 export class EventsComponent implements OnInit {
   events: any = [];
   previewImg: any;
-
-  createEventModal: boolean = false;
+  
+  isShowConfirmation:boolean = false
+  createEventModal: boolean = true;
   submitLoading: boolean = false;
 
   createForm!: FormGroup;
@@ -71,6 +72,7 @@ export class EventsComponent implements OnInit {
 
         this.createEventModal = false;
         this.submitLoading = false;
+        this.createForm.reset()
         this.getEvents();
       },
       (error: any) => {
@@ -80,6 +82,18 @@ export class EventsComponent implements OnInit {
       }
     );
   }
+
+  approval(){
+    this.isShowConfirmation = true
+    this.submitLoading = true;
+  }
+
+  cancelApproval(){
+    this.isShowConfirmation  = false
+    this.submitLoading = false;
+  }
+
+  
 
   dateFormat(date: any) {
     return moment(date).fromNow();

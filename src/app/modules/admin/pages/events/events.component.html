@@ -82,9 +82,9 @@
     >
       <div class="mt-3">
         <form
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="approval()"
           [formGroup]="createForm"
-          class="w-full grid gap-2"
+          class="w-full grid gap-2 relative"
         >
           <input
             #imageInput
@@ -167,6 +167,17 @@
                   [src]="previewImg"
                   class="h-40 w-full rounded object-cover border-2 border-slate-200"
                 />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isShowConfirmation" class="absolute flex-col flex justify-center items-center  w-full h-full bg-gray-800 bg-opacity-50 rounded ">
+            <div class="bg-slate-200 py-3 px-2 rounded shadow">
+              <div class="h-fit w-fit py-2">
+                <p>Are you sure you want to post this event?</p>
+              </div>
+              <div class="w-full flex justify-around">
+                <span (click)="onSubmit()" class="text-white bg-green-600 hover:bg-green-400 px-3 py-1 rounded cursor-pointer">YES</span>
+                <span (click)="cancelApproval()" class="text-white bg-red-600 hover:bg-red-400 px-3 py-1 rounded cursor-pointer">NO</span>
               </div>
             </div>
           </div>
