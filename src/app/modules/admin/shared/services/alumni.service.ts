@@ -37,4 +37,17 @@ export class AlumniService {
   deleteAccount(userId: any): Observable<any> {
     return this.http.delete(`${BASEURL}/api/user/alumni/${userId}`);
   }
+
+  getTemporaryDeletedUser(): Observable<any> {
+    return this.http.get(`${BASEURL}/api/user/alumni/temporaryDelete`);
+  }
+
+  recoverAccount(userId:number):Observable<any> {
+    return this.http.put(`${BASEURL}/api/user/alumni/recoverAccount/${userId}`,'');
+  }
+
+  deletePermanent(userId:number):Observable<any> {
+    return this.http.delete(`${BASEURL}/api/user/alumni/deletePermanent/${userId}`);
+  }
+
 }

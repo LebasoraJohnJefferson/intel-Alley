@@ -60,6 +60,15 @@
                     />
 
                     <button
+                      (click)="retrieve()"
+                      class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                    >
+                      <i class="fad fa-users mr-1"></i>
+                      Retrieve
+                    </button>
+
+
+                    <button
                       (click)="importInput.click()"
                       class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
                     >
@@ -244,7 +253,7 @@
           </div>
 
           <div class="w-full">
-            <label class="block text-[12px] font-medium text-gray-700"
+            <label class="block text-[12px] font-medium text-gray-700"s
               >Password</label
             >
             <div class="mt-1 relative rounded-md shadow-sm w-full">
@@ -292,5 +301,37 @@
         </form>
       </div>
     </p-dialog>
+
+    <!-- delete user -->
+    <p-dialog
+      header="Deleted User"
+      [(visible)]="isShowDeletedUser"
+      [modal]="true"
+      [style]="{ maxWidth: '400px', width: '400px' }"
+    >
+    <ol>
+      <li *ngFor="let user of deletedUsers" class="flex overflow-x-hidden items-center gap-2 w-full border-2 shadow-md rounded flex-col px-3 py-2">
+        <div class="flex items-center gap-3 w-full">
+          <img [src]="user?.image ? user?.image : '../../../../../assets/images/student.png'" class="h-[5rem] w-[5rem] rounded border border-red-500" alt="">
+          <div class="flex  flex-col  justify-center px-3 w-full">
+            <p class=" font-[800]">{{user?.name | titlecase}}</p>
+            <p class="text-[12px] text-blue-500 mb-2">{{user?.email}}</p>
+            <div class="flex w-full justify-around w-full flex-col items-center text-[12px] text-white">
+              <button [disabled]="isRecovering || isDeletingPermanent" (click)="recover(user.id)"  class="rounded px-3 w-full flex items-center justify-center gap-2 py-1 bg-green-600 hover:bg-green-400 shadow-md border cursor-pointer">
+                <i *ngIf="isRecovering" class="pi pi-spin pi-spinner" style="font-size: 1rem"></i> {{ isRecovering ? 'Processing...' : 'Recover'}}
+              </button>
+              <button [disabled]="isRecovering || isDeletingPermanent" (click)="deletePermanently(user.id)" class="rounded px-3 w-full flex items-center justify-center gap-2 py-1 bg-red-600 hover:bg-red-400 shadow-md border cursor-pointer">
+                <i *ngIf="isDeletingPermanent" class="pi pi-spin pi-spinner" style="font-size: 1rem"></i> {{ isDeletingPermanent ? 'Processing...' : 'Delete Permanently'}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li *ngIf="deletedUsers.length == 0">
+        <img src="../../../../../assets//images/noDeleteUser.jpg" alt="">
+        <div class="text-slate-800 font-bold my-1 w-full text-center"> No Data</div>
+      </li>
+    </ol>
+  </p-dialog>
   </div>
 </div>

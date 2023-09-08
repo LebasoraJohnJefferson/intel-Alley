@@ -15,7 +15,7 @@ export class EventsComponent implements OnInit {
   previewImg: any;
   
   isShowConfirmation:boolean = false
-  createEventModal: boolean = true;
+  createEventModal: boolean = false;
   submitLoading: boolean = false;
 
   createForm!: FormGroup;

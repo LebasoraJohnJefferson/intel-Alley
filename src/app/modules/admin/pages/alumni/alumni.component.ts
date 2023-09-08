@@ -19,9 +19,12 @@ import { AlumniService } from '../../shared/services/alumni.service';
 export class AlumniComponent implements OnInit {
   alumni: any = [];
   courses: any = [];
-
+  deletedUsers:any= []
   createAccountModal: boolean = false;
+  isShowDeletedUser: boolean = false;
   submitLoading: boolean = false;
+  isRecovering:boolean = false
+  isDeletingPermanent:boolean = false
 
   createForm!: FormGroup;
 
@@ -64,6 +67,47 @@ export class AlumniComponent implements OnInit {
       dataKey: col.field,
     }));
   }
+
+  retrieve(){
+    this.isShowDeletedUser = true
+    this.alumniService.getTemporaryDeletedUser().subscribe({
+      next:(res)=>{
+        this.deletedUsers = res
+      }
+    })
+  }
+
+  deletePermanently(userId:number){
+    this.isDeletingPermanent = true
+    this.alumniService.deletePermanent(userId).subscribe({
+      next:(res)=>{
+        this.isDeletingPermanent = false
+        this.retrieve()
+        this.getAlumni()
+        this.toast.success("Successfully Deleted!")
+      },
+      error:(err)=>{
+        this.isDeletingPermanent = false
+        this.toast.error(err)
+      }
+    })
+  }
+
+  recover(userId:number){
+    this.isRecovering = true
+    this.alumniService.recoverAccount(userId).subscribe({
+      next:(res)=>{
+        this.isRecovering = false
+        this.retrieve()
+        this.getAlumni()
+        this.toast.success(res.message)
+      },
+      error:(err)=>{
+        this.isRecovering = false
+        this.toast.error(err)
+      }
+    })
+  } 
 
   getCourses() {
     this.courseService.getAll().subscribe((response: any) => {
