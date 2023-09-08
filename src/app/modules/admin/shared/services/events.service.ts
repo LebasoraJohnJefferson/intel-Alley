@@ -18,6 +18,10 @@ export class EventsService {
     return this.http.post(`${BASEURL}/api/event`, data);
   }
 
+  postComment(data: any, eventId: number): Observable<any> {
+    return this.http.post(`${BASEURL}/api/event/comment/${eventId}`, data);
+  }
+
   getEvents(): any {
     return this.http.get(`${BASEURL}/api/event`);
   }
@@ -28,5 +32,9 @@ export class EventsService {
 
   deleteEvent(eventId: any) {
     return this.http.delete(`${BASEURL}/api/event/${eventId}`);
+  }
+
+  deleteComment(commentId: number): Observable<any> {
+    return this.http.delete(`${BASEURL}/api/event/comment/${commentId}`);
   }
 }

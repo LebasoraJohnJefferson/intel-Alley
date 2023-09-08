@@ -422,7 +422,22 @@ export class SurveyFormComponent implements OnInit {
         }
 
         
+        
         if(this.showEmploymentStatusForm == 'Employed'){
+
+
+          
+          if(this.uploadFilePoorOfEmp?.type !== 'application/pdf' && !this.uploadFilePoorOfEmp?.type?.startsWith('image/')){
+            this.isSubmitting = false
+            return this.toast.warning("Pls, upload a file that has format of pdf or image in proof of employment")
+          }
+
+          if(this.uploadFileCertificateOfEmp?.type !== 'application/pdf' && !this.uploadFileCertificateOfEmp?.type?.startsWith('image/')){
+            this.isSubmitting = false
+            return this.toast.warning("Pls, upload a file that has format of pdf or image in certificate of employment")
+          }
+
+
           let temp:any = {
             general:this.generalInfo.value,
             education:this.educationalBG.value,
@@ -446,6 +461,13 @@ export class SurveyFormComponent implements OnInit {
           })
         }else if(this.showEmploymentStatusForm == 'Self-employed'){
           
+          if(this.uploadFileProofOfSelfEmploy){
+            if(this.uploadFileProofOfSelfEmploy?.type !== 'application/pdf' && !this.uploadFileProofOfSelfEmploy?.type?.startsWith('image/')){
+              this.isSubmitting = false
+              return this.toast.warning("Pls, upload a file that has format of pdf or image in proof of employment")
+            }
+          }
+
           let temp:any = {
             general:this.generalInfo.value,
             education:this.educationalBG.value,

@@ -21,7 +21,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700">Secondary Email</label>
+            <label class="block text-sm font-medium text-gray-700">email</label>
 
             <div class="mt-1 relative">
               <input
@@ -244,7 +244,7 @@
                   If employed 
                   <i>(Attach file for proof of employment)</i> :
                 </label>
-                <input type="file" formControlName="proofOfEmp"  class="hidden" (change)="uploadProof($event)" name="proofOfEmployment"/>
+                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg" formControlName="proofOfEmp"  class="hidden" (change)="uploadProof($event)" name="proofOfEmployment"/>
                 <button
                   (click)="clickUploadProof()"
                   class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
@@ -460,7 +460,7 @@
                   <label class="block text-sm my-2 font-medium text-gray-700">
                     (Attach files- ID’s or Certificate of Employment)
                   </label>
-                  <input type="file" formControlName="CertificateOfEmploy"  class="hidden" (change)="uploadCertificateOfEmp($event)" name="CertificateOfEmployment"/>
+                  <input type="file" accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg" formControlName="CertificateOfEmploy"  class="hidden" (change)="uploadCertificateOfEmp($event)" name="CertificateOfEmployment"/>
                   <button
                     (click)="clickUploadCertificateOfEmployment()"
                     class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
@@ -484,7 +484,7 @@
                   If Self- employed 
                   <i>(Attach file for proof but Optional)</i> :
                 </label>
-                <input type="file" formControlName="proofOfSelfEmployFile" class="hidden" (change)="uploadProofOfSelfEmploy($event)" name="proofOfSelfEmploy"/>
+                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg" formControlName="proofOfSelfEmployFile" class="hidden" (change)="uploadProofOfSelfEmploy($event)" name="proofOfSelfEmploy"/>
                 <button
                   (click)="clickUploadSelfEmploy()"
                   class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"

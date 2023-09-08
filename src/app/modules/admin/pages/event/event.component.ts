@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from '../../shared/services/events.service';
@@ -17,12 +17,17 @@ export class EventComponent implements OnInit {
   eventId: any;
   defaultAlumniImage: string = '../../../../assets/images/student.png';
   defaultAdminImage: string = '../../../../assets/images/admin.png';
+  isCommentSending:boolean = false
+  commentForm = this._formBuilder.group({
+    commentContext: ['', Validators.required],
+  });
 
   constructor(
     private route: ActivatedRoute,
     public location: Location,
     private toast: HotToastService,
-    private eventService: EventsService
+    private eventService: EventsService,
+    private _formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +47,40 @@ export class EventComponent implements OnInit {
       },
       (error: any) => {}
     );
+  }
+
+  deleteComment(commentId:number){
+    this.eventService.deleteComment(commentId).subscribe({
+      next:(res)=>{
+        this.getEvent()
+        this.toast.success('Successfully Deleted!');
+      },error:(err)=>{
+        this.toast.warning(err.error)
+      }
+    })
+  }
+
+  editComment(commentId:number){
+    this.toast.warning("under construction")
+  }
+
+  postComment(eventId:number){
+    if (this.commentForm.valid) {
+      this.isCommentSending = true;
+      this.eventService
+        .postComment(this.commentForm.value, eventId)
+        .subscribe({
+          error: (err) => {
+            console.log(err.error);
+            this.isCommentSending = false;
+          },
+          next: (res) => {
+            this.getEvent()
+            this.isCommentSending = false;
+            this.commentForm.reset();
+          },
+        });
+    }
   }
 
   dateFormat(date: any) {

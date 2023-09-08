@@ -18,12 +18,12 @@ export class SidebarComponent implements OnInit {
     {
       title: 'Surveys',
       route: 'surveys',
-      icon: 'fal fa-pallet',
+      icon: 'fal fa-scroll',
     },
     {
       title: 'Events',
       route: 'events',
-      icon: 'fal fa-pallet',
+      icon: 'fal fa-newspaper',
     },
     {
       title: 'About',
