@@ -17,7 +17,7 @@ export class EventsComponent implements OnInit {
   isShowConfirmation:boolean = false
   createEventModal: boolean = false;
   submitLoading: boolean = false;
-
+  isCommitting:boolean = false
   createForm!: FormGroup;
 
   constructor(
@@ -66,18 +66,23 @@ export class EventsComponent implements OnInit {
       return;
     }
 
+    this.isCommitting = true
+    
     this.eventService.createEvent(this.createForm.value).subscribe(
       (response: any) => {
         this.toast.success(response.message);
-
+        
+        this.isCommitting = false
         this.createEventModal = false;
         this.submitLoading = false;
+        this.isShowConfirmation = false;
         this.createForm.reset()
         this.getEvents();
       },
       (error: any) => {
         this.toast.error(error.error.message);
-
+        
+        this.isCommitting = false
         this.submitLoading = false;
       }
     );

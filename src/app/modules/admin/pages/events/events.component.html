@@ -176,8 +176,11 @@
                 <p>Are you sure you want to post this event?</p>
               </div>
               <div class="w-full flex justify-around">
-                <span (click)="onSubmit()" class="text-white bg-green-600 hover:bg-green-400 px-3 py-1 rounded cursor-pointer">YES</span>
-                <span (click)="cancelApproval()" class="text-white bg-red-600 hover:bg-red-400 px-3 py-1 rounded cursor-pointer">NO</span>
+                <button [disabled]="isCommitting" (click)="onSubmit()" class="text-white bg-green-600 hover:bg-green-400 px-3 py-1 rounded cursor-pointer">
+                <p *ngIf="!isCommitting">YES</p>
+                <p *ngIf="isCommitting"><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></p>
+              </button>
+                <button  (click)="cancelApproval()" class="text-white bg-red-600 hover:bg-red-400 px-3 py-1 rounded cursor-pointer">NO</button>
               </div>
             </div>
           </div>
