@@ -37,4 +37,10 @@ export class EventsService {
   deleteComment(commentId: number): Observable<any> {
     return this.http.delete(`${BASEURL}/api/event/comment/${commentId}`);
   }
+
+  editComment(commentId: number, data: any): Observable<any> {
+    return this.http.put(`${BASEURL}/api/event/comment/${commentId}`, data);
+  }
+
+
 }

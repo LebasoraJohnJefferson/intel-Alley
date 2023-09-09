@@ -167,7 +167,7 @@
                           <div class="grid grid-col-1">
                             <div
                               *ngIf="comment.belongsToCurrentUser"
-                              (click)="editComment(comment.id)"
+                              (click)="openEditCommentById(comment.id,comment.commentContext)"
                               class="flex gap-2 items-center hover:text-orange-500 cursor-pointer"
                               
                             >
@@ -189,9 +189,12 @@
                   </span>
                 </div>
               </span>
-              <p class="text-[12px] p-3">
+              <p *ngIf="selectedCommentToBeEdit != comment.id" class="text-[12px] p-3">
                 {{ comment.commentContext }}
               </p>
+              <form (ngSubmit)="commitEditComment()" [formGroup]="editCommentForm" *ngIf="selectedCommentToBeEdit == comment.id" class="w-full h-fit flex px-3 my-1">
+                <input formControlName="commentContext" type="text" placeholder="Enter comment" class="w-full rounded p-2 text-slate-800 text-[12px] bg-gray-100 outline-0  border-2" id="">
+              </form>
             </div>
           </div>
         </div>

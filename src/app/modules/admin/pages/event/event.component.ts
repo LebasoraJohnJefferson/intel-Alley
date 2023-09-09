@@ -15,10 +15,16 @@ import * as moment from 'moment';
 export class EventComponent implements OnInit {
   event: any = [];
   eventId: any;
+  selectedCommentToBeEdit:number = -1
   defaultAlumniImage: string = '../../../../assets/images/student.png';
   defaultAdminImage: string = '../../../../assets/images/admin.png';
   isCommentSending:boolean = false
+
   commentForm = this._formBuilder.group({
+    commentContext: ['', Validators.required],
+  });
+
+  editCommentForm = this._formBuilder.group({
     commentContext: ['', Validators.required],
   });
 
@@ -60,8 +66,23 @@ export class EventComponent implements OnInit {
     })
   }
 
-  editComment(commentId:number){
-    this.toast.warning("under construction")
+  openEditCommentById(commentId:number,commentContext:string){
+    this.selectedCommentToBeEdit = commentId == this.selectedCommentToBeEdit ? - 1 : commentId
+    this.editCommentForm.controls.commentContext.setValue(commentContext)
+  }
+
+  commitEditComment(){
+    if(this.editCommentForm.valid && this.selectedCommentToBeEdit != -1){
+      this.eventService.editComment(this.selectedCommentToBeEdit,this.editCommentForm.value).subscribe({
+        next:(res)=>{
+          this.getEvent()
+          this.toast.success(res?.message)
+          this.selectedCommentToBeEdit = -1
+        },error:(err)=>{
+          this.toast.warning(err.message)
+        }
+      })
+    }
   }
 
   postComment(eventId:number){

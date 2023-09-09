@@ -26,6 +26,7 @@ export class EmployedAnalyticsComponent {
     this.createEventModal = true
     this._analyticService.otherAnswer(field).subscribe((res)=>{
       this.others = res
+      console.log(this.others)
     })
   }
 
