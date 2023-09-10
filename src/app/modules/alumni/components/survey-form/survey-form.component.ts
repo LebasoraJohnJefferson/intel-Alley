@@ -507,7 +507,7 @@ export class SurveyFormComponent implements OnInit {
             },
             error:(err:any)=>{
               this.isSubmitting = false
-              this.toast.success(err.error.message || err.message)
+              this.toast.warning(err.error.message || err.message)
             },
             complete:()=>{
 

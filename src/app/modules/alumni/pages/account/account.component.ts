@@ -156,6 +156,7 @@ export class AccountComponent implements OnInit {
         };
         console.log(response?.user?.IsSurveyTaken?.GeneralInfo)
         this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]
+        console.log(this.generalInfo)
         this.submitLoading = false;
 
         if (response.user.image != null) {
@@ -166,6 +167,10 @@ export class AccountComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  capitalize(str:any) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   goBack(): void {

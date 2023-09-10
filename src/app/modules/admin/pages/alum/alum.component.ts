@@ -13,9 +13,12 @@ import { AlumniService } from '../../shared/services/alumni.service';
 })
 export class AlumComponent implements OnInit {
   alumId: any;
-  alum: any = [];
+  alum: any=[];
   profile: any = [];
-
+  courses:any;
+  generalInformation:any;
+  workHistory:any;
+  educationalBG:any;
   actionModal: boolean = false;
   isLoading: boolean = true;
   defaultImg: any = '../../../../../assets/images/admin.png';
@@ -59,10 +62,36 @@ export class AlumComponent implements OnInit {
     );
   }
 
+  getObjectKeys(obj: any): string[] {
+    return obj ? Object.keys(obj) : [];
+  }
+
   getAlum() {
     this.alumniService.getAlum(this.alumId).subscribe(
       (response: any) => {
+        console.log(response)
         this.alum = response;
+        this.courses = {
+          'Course':response?.AlumniCredential?.Course?.title,
+          'Email':response?.email,
+          'Student ID number':response?.AlumniCredential?.studentId,
+          'Employment Status': response?.IsSurveyTaken?.type
+        };
+        if(response?.IsSurveyTaken?.GeneralInfo){
+          this.generalInformation = {
+            'Address':response?.IsSurveyTaken?.GeneralInfo?.address,
+            'Birth Day':this.momentMDY(response?.IsSurveyTaken?.GeneralInfo?.birthDay),
+            'Civil Status':response?.IsSurveyTaken?.GeneralInfo?.civilStatus,
+            'Contact Number':response?.IsSurveyTaken?.GeneralInfo?.contactNumber,
+            'Secondary Email':response?.IsSurveyTaken?.GeneralInfo?.secondaryEmail,
+            'Gender':response?.IsSurveyTaken?.GeneralInfo?.sex,
+          }
+        }
+
+        this.educationalBG = response?.IsSurveyTaken.EducationBackGs
+        this.workHistory = response?.IsSurveyTaken?.WorkHistoryOneUps
+
+
         this.isLoading = false;
 
         this.status = response.status == 'active' ? true : false;
@@ -77,6 +106,10 @@ export class AlumComponent implements OnInit {
 
   momentFormatLLL(date: any) {
     return moment(date).format('lll');
+  }
+
+  momentMDY(date: any) {
+    return moment(date).format('ll');
   }
 
   dateFormat(date: any) {

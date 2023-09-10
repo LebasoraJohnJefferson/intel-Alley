@@ -127,7 +127,7 @@
 
           <div class="mt-5 lg:mt-20 mx-auto text-center lg:text-start">
             <h1 class="font-semibold text-2xl capitalize">
-              {{ profile.name }}
+              {{ profile?.name }}
             </h1>
             <div class="lg:flex items-center">
               <div class="text-[10px] flex items-center w-fit mx-auto lg:mx-0">
@@ -189,7 +189,7 @@
             Email:
           </td>
           <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-            {{ profile.email }}
+            {{ profile?.email }}
           </td>
         </tr>
         <tr>
@@ -212,7 +212,7 @@
             <p
               class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
             >
-              {{profile?.IsSurveyTaken?.type | titlecase}}
+              {{profile?.IsSurveyTaken?.type ? capitalize(profile?.IsSurveyTaken?.type) : 'N/A' }}
             </p>
           </td>
         </tr>
@@ -225,7 +225,7 @@
           class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
         >
           <div
-            *ngIf="generalInfo?.length == 0"
+            *ngIf="!generalInfo[0]"
             class="h-[200px] grid place-items-center"
           >
             <div class="">
@@ -238,30 +238,30 @@
             </div>
           </div>
 
-          <div class="mb-2 font-semibold pl-6">Basic Information</div>
-          <p-timeline [value]="generalInfo" align="left" class="w-full py-1">
+          <div *ngIf="generalInfo[0]" class="mb-2 font-semibold pl-6">Basic Information</div>
+          <p-timeline *ngIf="generalInfo[0]" [value]="generalInfo" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>
                   <div  class="font-semibold text-[10px] flex items-center gap-2">
                     <p class="p-1 border rounded shadow bg-purple-700 text-white">Email:</p>
-                    <p class="text-[12px]">{{ log.secondaryEmail }}</p>
+                    <p class="text-[12px]">{{ log?.secondaryEmail }}</p>
                   </div>
                   <div  class="font-semibold text-[10px] flex items-center gap-2">
                     <p class="p-1 border rounded shadow bg-purple-700 text-white">Address:</p>
-                    <p class="text-[12px]">{{ log.address }}</p>
+                    <p class="text-[12px]">{{ log?.address }}</p>
                   </div>
                   <div  class="font-semibold text-[10px] flex items-center gap-2">
                     <p class="p-1 border rounded shadow bg-purple-700 text-white">Contact Number:</p>
-                    <p class="text-[12px]">{{ log.contactNumber }}</p>
+                    <p class="text-[12px]">{{ log?.contactNumber }}</p>
                   </div>
                   <div  class="font-semibold text-[10px] flex items-center gap-2">
                     <p class="p-1 border rounded shadow bg-purple-700 text-white">Gender:</p>
-                    <p class="text-[12px]">{{ log.sex }}</p>
+                    <p class="text-[12px]">{{ log?.sex }}</p>
                   </div>
                   <div  class="font-semibold text-[10px] flex items-center gap-2">
                     <p class="p-1 border rounded shadow bg-purple-700 text-white">Birth Day:</p>
-                    <p class="text-[12px]">{{ log.birthDay | date:'longDate' }}</p>
+                    <p class="text-[12px]">{{ log?.birthDay | date:'longDate' }}</p>
                   </div>
                 </ng-container>
               </div>

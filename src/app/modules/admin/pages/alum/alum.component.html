@@ -1,7 +1,7 @@
 <div class="w-full">
   <div class="bg-slate-800 w-full h-[230px] absolute z-10"></div>
 
-  <div class="max-w-[1200px] mx-auto relative z-20 p-5 pb-10">
+  <div class="max-w-[1200px] mx-auto relative z-20 p-5  pb-10">
     <div
       class="flex w-[40px] h-[40px] rounded-full items-center justify-center font-semibold text-white bg-slate-900 py-2 px-3 cursor-pointer hover:bg-slate-900/50 hover:shadow-md transition-all"
       (click)="goBack()"
@@ -28,7 +28,7 @@
           <div class="bg-slate-900 w-fit rounded-full">
             <img
               [src]="
-                alum.image == null || alum.length == 0 ? defaultImg : alum.image
+                alum.image == null || alum?.length == 0 ? defaultImg : alum.image
               "
               alt=""
               class="w-[200px] h-[200px] rounded-full object-cover"
@@ -55,76 +55,141 @@
         </div>
       </div>
 
-      <div class="grid mt-16 mb-20">
-        <div class="grid gap-5 md:grid-cols-[1fr_400px]">
-          <div class="grid gap-4 h-fit">
-            <div class="text-[12px]">
-              Account Created: {{ momentFormatLLL(alum.createdAt) }}
-            </div>
-
-            <div class="">
-              <div class="text-sm text-slate-900 mb-2">Student ID number</div>
-              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
-                {{ alum.AlumniCredential.studentId }}
+      <div class="grid md:grid-cols-2 grid-cols-1 mt-16 relative mb-20">
+        <div class="flex flex-wrap w-full gap-3">
+          <div class="grid gap-3 h-fit py-2 mx-auto rounded md:w-[16rem] w-full border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600">Course and Student Information</h1>
+            <div class="flex gap-2 items-center text-[11px]" *ngFor="let course of getObjectKeys(courses)">
+              <div class="text-slate-900  py-1 font-bold">{{course}}</div>
+              <div class="bg-slate-100 break-all py-1 px-3 rounded-md w-fit ">
+                {{ courses[course] ? courses[course] : 'N/A' }}
               </div>
             </div>
+          </div>
 
-            <div class="">
-              <div class="text-sm text-slate-900 mb-2">Name</div>
-              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
-                {{ alum.name }}
+          <div *ngIf="generalInformation" class="grid gap-3 h-fit py-2 md:w-[16rem] w-full  mx-auto rounded  border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600">General Information</h1>
+            <div class="flex gap-2 items-center text-[11px]" *ngFor="let info of getObjectKeys(generalInformation)">
+              <div class="text-slate-900 py-1  font-bold">{{info}}</div>
+              <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                {{ generalInformation[info] }}
               </div>
             </div>
+          </div>
 
-            <div class="">
-              <div class="text-sm text-slate-900 mb-2">Course</div>
-              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
-                {{ alum.AlumniCredential.Course.title }}
+          <div *ngIf="educationalBG" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600">Educational Background</h1>
+            <div class=" gap-2 grid grid-cols-4 w-full text-[11px]" *ngFor="let education of educationalBG">
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Degree:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ education.degree }}
+                </div>
+              </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">University:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ education.university }}
+                </div>
+              </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Highest Level:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ education.highLvl }}
+                </div>
+              </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Year Graduated:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ momentMDY(education.yearGraduated) }}
+                </div>
               </div>
             </div>
+          </div>
 
-            <div class="">
-              <div class="text-sm text-slate-900 mb-2">Email</div>
-              <div class="bg-slate-100 py-1 px-3 rounded-md w-fit text-sm">
-                {{ alum.email }}
+          <div *ngIf="workHistory" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600">WORK HISTORY</h1>
+            <div class=" gap-2 grid grid-cols-3 w-full text-[11px]" *ngFor="let work of workHistory">
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Name of Company:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ work.NameOfCompany }}
+                </div>
               </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Address:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ work.Address }}
+                </div>
+              </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Year Employed:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ momentMDY(work.YearEmployed) }}
+                </div>
+              </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Designation:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ work.Designation }}
+                </div>
+              </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Monthly Income:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ work.MonthlyIncome }}
+                </div>
+              </div>
+              <div>
+                <div class="text-slate-900 py-1  font-bold">Number of Years Served:</div>
+                <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                  {{ momentMDY(work.NumOfYrServed) }}
+                </div>
+              </div>
+              <hr class="col-span-3 my-1 border-1" *ngIf="workHistory?.length > 1" />
+              
             </div>
           </div>
 
           <hr class="md:hidden" />
 
-          <div class="mt-5 md:mt-0">
-            <div class="mb-2 font-semibold pl-6">Logs</div>
+        </div>
 
-            <div
-              class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
-            >
+        <div class="relative w-full">
+          <div class="sticky top-0 w-full">
+            <div class="mt-5 md:mt-0 px-3 mx-3">
+              <div class="mb-2 font-semibold pl-6">Logs</div>
+    
               <div
-                *ngIf="alum.Logs.length == 0"
-                class="h-[200px] grid place-items-center"
+                class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
               >
-                <div class="">
-                  <img
-                    src="../../../../../assets/images/empty-box.png"
-                    alt=""
-                    class="w-[80px] h-[80px] object-cover mx-auto"
-                  />
-                  <p class="text-[12px] text-center mt-2">No log(s) yet.</p>
-                </div>
-              </div>
-
-              <p-timeline [value]="alum.Logs" align="left">
-                <ng-template pTemplate="content" let-log>
-                  <div class="mb-1">
-                    <div class="text-[10px] md:text-[11px]">
-                      {{ dateFormat(log.createdAt) }}
-                    </div>
-                    <div class="text-[12px] md:text-sm">
-                      {{ log.description }}
-                    </div>
+                <div
+                  *ngIf="alum?.Logs?.length == 0"
+                  class="h-[200px] grid place-items-center"
+                >
+                  <div class="">
+                    <img
+                      src="../../../../../assets/images/empty-box.png"
+                      alt=""
+                      class="w-[80px] h-[80px] object-cover mx-auto"
+                    />
+                    <p class="text-[12px] text-center mt-2">No log(s) yet.</p>
                   </div>
-                </ng-template>
-              </p-timeline>
+                </div>
+    
+                <p-timeline [value]="alum.Logs" align="left">
+                  <ng-template pTemplate="content" let-log>
+                    <div class="mb-1">
+                      <div class="text-[10px] md:text-[11px]">
+                        {{ dateFormat(log.createdAt) }}
+                      </div>
+                      <div class="text-[12px] md:text-sm">
+                        {{ log.description }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-timeline>
+              </div>
             </div>
           </div>
         </div>
