@@ -18,9 +18,8 @@ export class AccountComponent implements OnInit {
   editModal: boolean = false;
   submitLoading: boolean = false;
   courses: any;
-  defaultImg: any = '../../../../../assets/images/admin.png';
+  defaultImg: any = '../../../../../assets/images/student.png';
   previewImg: any = '';
-
   isLoading: boolean = true;
 
   changePassData: any = {
@@ -28,25 +27,7 @@ export class AccountComponent implements OnInit {
     newpass: null,
   };
 
-  history: any = [
-    {
-      createdAt: new Date(),
-      job: 'Web Developer',
-      description: 'lorem ipsum dolor',
-    },
-    {
-      createdAt: new Date(),
-      job: 'Web Developer',
-      description:
-        'lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor',
-    },
-    {
-      createdAt: new Date(),
-      job: 'Web Developer',
-      description:
-        'lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor',
-    },
-  ];
+  generalInfo: any ;
 
   changePasswordModal: boolean = false;
 
@@ -173,6 +154,8 @@ export class AccountComponent implements OnInit {
           image: response.user.image,
           email: response.user.email,
         };
+        console.log(response?.user?.IsSurveyTaken?.GeneralInfo)
+        this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]
         this.submitLoading = false;
 
         if (response.user.image != null) {

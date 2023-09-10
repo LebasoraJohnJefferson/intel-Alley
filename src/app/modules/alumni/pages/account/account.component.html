@@ -104,17 +104,9 @@
   </p-dialog>
 </div>
 
-<div class="">
-  <div class="p-5 max-w-[1200px] mx-auto">
-    <div
-      *ngIf="true"
-      class="flex w-[40px] h-[40px] rounded-full items-center justify-center border border-gray-200 text-slate-800 font-semibold my-10 cursor-pointer hover:bg-gray-300 transition-all"
-      (click)="goBack()"
-    >
-      <i class="fal fa-arrow-left"></i>
-    </div>
-
-    <div class="relative">
+<div class="flex flex-col w-full">
+  <div class="p-5 w-full mx-auto relative">
+    <div class="relative h-[340px]">
       <img
         src="../../../../../assets/images/background.jpg"
         alt=""
@@ -122,10 +114,10 @@
       />
 
       <div
-        class="flex items-center md:justify-between p-5 px-8 pt-0 relative -top-16"
+        class="flex items-center md:justify-between p-5 px-8 pt-0 relative -top-16 -translate-y-3"
       >
         <div class="md:flex relative w-fit mx-auto md:mx-0">
-          <div class="bg-slate-50/50 w-fit h-fit rounded-full md:mr-4">
+          <div class="bg-slate-50/50 w-fit h-fit rounded-full border-2 border-red-500 md:mr-4">
             <img
               [src]="profile.image == null ? defaultImg : profile.image"
               alt=""
@@ -147,115 +139,139 @@
           </div>
         </div>
 
-        <div class="flex items-center">
-
-
+        <div class="absolute flex items-center flex-col gap-2 -top-10 right-5">
           <div
             (click)="op.toggle($event)"
-            class="absolute -top-32 lg:top-0 right-3 lg:right-0 lg:relative bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
+            class="bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
           >
             <i class="fal fa-cog text-2xl"></i>
           </div>
-        </div>
-      </div>
-
-      <div class="mb-5" *ngIf="profile">
-        <div class="bg-slate-50 p-1 rounded-md w-fit">
-          <table class="border border-gray-300 w-fit">
-            <tr class="w-fit">
-              <td class="border border-gray-300 p-1 w-fit px-2 text-[12px]">
-                ID number:
-              </td>
-              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.AlumniCredential.studentId }}
-              </td>
-            </tr>
-
-            <tr>
-              <td class="border border-gray-300 p-1 px-2 text-[12px]">
-                Course:
-              </td>
-              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.AlumniCredential.Course.title }}
-              </td>
-            </tr>
-
-            <tr>
-              <td class="border border-gray-300 p-1 px-2 text-[12px]">
-                Email:
-              </td>
-              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                {{ profile.email }}
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 p-1 px-2 text-[12px]">
-                Academic Status:
-              </td>
-              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                <p
-                  class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
-                >
-                  Graduate
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td class="border border-gray-300 p-1 px-2 text-[12px]">
-                Employment Status:
-              </td>
-              <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
-                <p
-                  class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
-                >
-                  Unemployed
-                </p>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <hr />
-
-      <div *ngif="" class="mt-10 mb-20">
-        <div class="mt-5 md:mt-0">
-          <div class="mb-2 font-semibold pl-6">Employment History</div>
-
           <div
-            class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
+            *ngIf="true"
+            class="bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
+            (click)="goBack()"
           >
-            <div
-              *ngIf="history.length == 0"
-              class="h-[200px] grid place-items-center"
-            >
-              <div class="">
-                <img
-                  src="../../../../../assets/images/empty-box.png"
-                  alt=""
-                  class="w-[80px] h-[80px] object-cover mx-auto"
-                />
-                <p class="text-[12px] text-center mt-2">No data</p>
-              </div>
-            </div>
-
-            <p-timeline [value]="history" align="left">
-              <ng-template pTemplate="content" let-log>
-                <div class="mb-1">
-                  <div class="text-[10px] md:text-[11px]">
-                    {{ dateFormat(log.createdAt) }}
-                  </div>
-                  <div class="font-semibold text-[12px] md:text-sm">
-                    {{ log.job }}
-                  </div>
-                  <p class="text-[11px]">{{ log.description }}</p>
-                </div>
-              </ng-template>
-            </p-timeline>
+            <i class="fal fa-arrow-left"></i>
           </div>
         </div>
       </div>
+
+
+
+      
     </div>
+  </div>
+  
+  <div class="mb-5 flex justify-around items-center gap-2 mx-4 px-4 md:flex-row flex-col" *ngIf="profile">
+    
+    <div class="bg-slate-50 p-1 rounded-md w-fit h-fit">
+      <table class="border border-gray-300 w-fit">
+        <tr class="w-fit">
+          <td class="border border-gray-300 p-1 w-fit px-2 text-[12px]">
+            ID number:
+          </td>
+          <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
+            {{ profile?.AlumniCredential?.studentId }}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="border border-gray-300 p-1 px-2 text-[12px]">
+            Course:
+          </td>
+          <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
+            {{ profile?.AlumniCredential?.Course?.title }}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="border border-gray-300 p-1 px-2 text-[12px]">
+            Email:
+          </td>
+          <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
+            {{ profile.email }}
+          </td>
+        </tr>
+        <tr>
+          <td class="border border-gray-300 p-1 px-2 text-[12px]">
+            Academic Status:
+          </td>
+          <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
+            <p
+              class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
+            >
+              Graduate
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td class="border border-gray-300 p-1 px-2 text-[12px]">
+            Employment Status:
+          </td>
+          <td class="border border-gray-300 p-1 px-2 text-[12px] w-fit">
+            <p
+              class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
+            >
+              {{profile?.IsSurveyTaken?.type | titlecase}}
+            </p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="flex w-full">
+      <div class="mt-5 md:mt-0 w-full">
+
+        <div
+          class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
+        >
+          <div
+            *ngIf="generalInfo?.length == 0"
+            class="h-[200px] grid place-items-center"
+          >
+            <div class="">
+              <img
+                src="../../../../../assets/images/empty-box.png"
+                alt=""
+                class="w-[80px] h-[80px] object-cover mx-auto"
+              />
+              <p class="text-[12px] text-center mt-2">No data</p>
+            </div>
+          </div>
+
+          <div class="mb-2 font-semibold pl-6">Basic Information</div>
+          <p-timeline [value]="generalInfo" align="left" class="w-full py-1">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1">
+                <ng-container>
+                  <div  class="font-semibold text-[10px] flex items-center gap-2">
+                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Email:</p>
+                    <p class="text-[12px]">{{ log.secondaryEmail }}</p>
+                  </div>
+                  <div  class="font-semibold text-[10px] flex items-center gap-2">
+                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Address:</p>
+                    <p class="text-[12px]">{{ log.address }}</p>
+                  </div>
+                  <div  class="font-semibold text-[10px] flex items-center gap-2">
+                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Contact Number:</p>
+                    <p class="text-[12px]">{{ log.contactNumber }}</p>
+                  </div>
+                  <div  class="font-semibold text-[10px] flex items-center gap-2">
+                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Gender:</p>
+                    <p class="text-[12px]">{{ log.sex }}</p>
+                  </div>
+                  <div  class="font-semibold text-[10px] flex items-center gap-2">
+                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Birth Day:</p>
+                    <p class="text-[12px]">{{ log.birthDay | date:'longDate' }}</p>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-timeline>
+                     
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
