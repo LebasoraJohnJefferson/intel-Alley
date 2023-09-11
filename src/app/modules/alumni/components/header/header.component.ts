@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 
 import { AuthService } from 'src/app/core/shared/services/auth.service';
 import { AlumniService } from '../../shared/services/alumni.service';
@@ -44,7 +45,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private alumniService: AlumniService
+    private alumniService: AlumniService,
+    public router:Router,
+    public toast:HotToastService,
   ) {}
 
   ngOnInit(): void {
@@ -65,6 +68,11 @@ export class HeaderComponent implements OnInit {
     this.alumniService.getProfile().subscribe(
       (response: any) => {
         this.user = response.user;
+        if(!this.user){
+          localStorage.removeItem('token');
+          this.router.navigate(['/login'])
+          this.toast.warning("Unauthorized User")
+        }
       },
       (error: any) => {
         console.log(error);

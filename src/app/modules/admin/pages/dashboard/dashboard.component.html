@@ -10,48 +10,142 @@
   </h1>
 
   <div class="mt-20 pb-10">
-    <div class="grid lg:grid-cols-3 gap-5">
+    <div class="grid lg:grid-cols-2 gap-5">
       <a
-        href="/elections"
+        routerLink="/admin/alumni"
         class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
       >
         <div class="h-[100px]">
           <img
-            src="../../../../../assets/images/forgot-password.png"
+            src="../../../../../assets/images/student2.png"
             alt=""
             class="w-[100px]"
           />
         </div>
 
         <div class="">
-          <h1 class="text-5xl lg:text-6xl font-black text-slate-800 text-end">
-            122
+          <h1 class="text-3xl lg:text-2xl font-black text-slate-800 text-end">
+            Alumni
           </h1>
-          <p class="text-end text-sm text-slate-600 font-semibold mt-1">
-            314
-          </p>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-green-500 font-semibold mt-1">
+              Active
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.users?.active ? overview?.users?.active : 0}}
+            </p>
+          </div>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-red-500 font-semibold mt-1">
+              Inactivate
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.users?.inactive ? overview?.users?.inactive : 0}}
+            </p>
+          </div>
         </div>
       </a>
 
       <a
-        href="/polls"
+        href="/admin/surveys"
         class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
       >
         <div class="h-[100px]">
           <img
-            src="../../../../../assets/images/forgot-password.png"
+            src="../../../../../assets/images/survey2.png"
             alt=""
             class="w-[100px]"
           />
         </div>
 
         <div class="">
-          <h1 class="text-5xl lg:text-6xl font-black text-slate-800 text-end">
-            12
+          <h1 class="text-3xl lg:text-2xl font-black text-slate-800 text-end">
+            Surveys
           </h1>
-          <p class="text-end text-sm text-slate-600 font-semibold mt-1">
-            Active 
-          </p>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-green-500 font-semibold mt-1">
+              Active
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.surveys?.active ? overview?.surveys?.active : 0}}
+            </p>
+          </div>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-red-500 font-semibold mt-1">
+              Inactivated
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.surveys?.inactive ? overview?.surveys?.inactive : 0}}
+            </p>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/admin/events"
+        class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+      >
+        <div class="h-[100px]">
+          <img
+            src="../../../../../assets/images/calendar.png"
+            alt=""
+            class="w-[100px]"
+          />
+        </div>
+
+        <div class="">
+          <h1 class="text-3xl lg:text-2xl font-black text-slate-800 text-end">
+            Events
+          </h1>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-green-500 font-semibold mt-1">
+              Active
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.events?.active ? overview?.events?.active : 0}}
+            </p>
+          </div>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-red-500 font-semibold mt-1">
+              Inactivated
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.events?.inactive ? overview?.events?.inactive : 0}}
+            </p>
+          </div>
+        </div>
+      </a>
+      <a
+        href="/admin/files"
+        class="bg-white shadow-lg border-4 border-gray-200 p-5 px-8 h-fit rounded-2xl grid grid-cols-2 gap-1 items-center cursor-pointer hover:bg-slate-50 transition-all"
+      >
+        <div class="h-[100px]">
+          <img
+            src="../../../../../assets/images/folder.png"
+            alt=""
+            class="w-[100px]"
+          />
+        </div>
+
+        <div class="">
+          <h1 class="text-3xl lg:text-2xl font-black text-slate-800 text-end">
+            Files
+          </h1>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-green-500 font-semibold mt-1">
+              Employed
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.files?.employed ? overview?.files?.employed  : 0}}
+            </p>
+          </div>
+          <div class="flex gap-2 justify-end">
+            <p class="text-end text-sm text-red-500 font-semibold mt-1">
+              Self Employed
+            </p>
+            <p class="text-end text-sm text-slate-600 font-semibold mt-1">
+              {{overview?.files?.selfEmployed ? overview?.files?.selfEmployed  : 0}}
+            </p>
+          </div>
         </div>
       </a>
     </div>

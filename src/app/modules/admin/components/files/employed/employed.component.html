@@ -21,7 +21,7 @@
         </div>
         <div class="mt-10">
             <ol *ngIf="isLoading">
-                <li class="flex">
+                <li class="flex gap-4">
                     <div routerLink="/admin/files/{{status}}/{{file.User.id}}" *ngFor="let file of files" class="flex items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
                         <i class="fal fa-folder text-5xl"></i>
                         <p class="text-bold text-[12px]">{{file.User.name}}</p>
