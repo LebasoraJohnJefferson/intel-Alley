@@ -18,10 +18,24 @@ export class AlumComponent implements OnInit {
   courses:any;
   generalInformation:any;
   workHistory:any;
+  professionalExam:any;
+  unemployedInfo:any;
+  selfEmployed:any;
+  employed:any;
+  workExpDictionary:any={
+    'workEpx0_6':'0-6 months',
+    'workEpx7_1y':'7 months - 1 year',
+    'workEpx2y_3y':'2 years - 3 years',
+    'workEpx4y_5y':'4 years - 5 years',
+    'workEpx6y_7y':'6 years - 7 years',
+    'workEpx8y_9y':'8 years - 9 years',
+    'workEpx10y_more':'10 years & onwards'
+  }
+  
   educationalBG:any;
   actionModal: boolean = false;
   isLoading: boolean = true;
-  defaultImg: any = '../../../../../assets/images/admin.png';
+  defaultImg: any = '../../../../../assets/images/student.png';
 
   status: boolean = false;
   submitLoading: boolean = false;
@@ -88,8 +102,12 @@ export class AlumComponent implements OnInit {
           }
         }
 
-        this.educationalBG = response?.IsSurveyTaken.EducationBackGs
+        this.educationalBG = response?.IsSurveyTaken?.EducationBackGs
         this.workHistory = response?.IsSurveyTaken?.WorkHistoryOneUps
+        this.unemployedInfo = response?.IsSurveyTaken?.Unemployed
+        this.employed = response?.IsSurveyTaken?.Employed
+        this.selfEmployed = response?.IsSurveyTaken?.SelfEmployed
+        this.professionalExam = response?.IsSurveyTaken?.ProfessionalExams
 
 
         this.isLoading = false;

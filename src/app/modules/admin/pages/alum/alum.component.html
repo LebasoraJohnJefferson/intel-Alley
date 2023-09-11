@@ -25,7 +25,7 @@
     <div *ngIf="alum" class="mt-20 lg:mt-24">
       <div class="flex justify-between items-center">
         <div class="md:flex">
-          <div class="bg-slate-900 w-fit rounded-full">
+          <div class="bg-slate-200 border-2 border-red-500 w-fit rounded-full">
             <img
               [src]="
                 alum.image == null || alum?.length == 0 ? defaultImg : alum.image
@@ -77,6 +77,32 @@
             </div>
           </div>
 
+          <div *ngIf="professionalExam && professionalExam.length != 0" class="grid gap-3 h-fit py-2 w-full  mx-auto rounded  border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600"> Professional Examination/s Passed</h1>
+            <div class="">
+              <div class="grid grid-cols-3 gap-2 mx-1 text-[11px]" *ngFor="let exam of professionalExam">
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Name of Examination (PRC, CSC and TESDA)</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{exam?.examName}}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Year of Examination</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{momentMDY(exam?.yearOfExam)}}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Rank/Rating (Optional)</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{exam?.rating ? exam?.rating : 'N/A'}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div *ngIf="educationalBG" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
             <h1 class="font-bold text-[14px] text-blue-600">Educational Background</h1>
             <div class=" gap-2 grid grid-cols-4 w-full text-[11px]" *ngFor="let education of educationalBG">
@@ -107,7 +133,8 @@
             </div>
           </div>
 
-          <div *ngIf="workHistory" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
+
+          <div *ngIf="workHistory?.length != 0 && workHistory" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
             <h1 class="font-bold text-[14px] text-blue-600">WORK HISTORY</h1>
             <div class=" gap-2 grid grid-cols-3 w-full text-[11px]" *ngFor="let work of workHistory">
               <div>
@@ -137,7 +164,7 @@
               <div>
                 <div class="text-slate-900 py-1  font-bold">Monthly Income:</div>
                 <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
-                  {{ work.MonthlyIncome }}
+                  {{ work.MonthlyIncome != 0 ? work.MonthlyIncome : 'N/A' }}
                 </div>
               </div>
               <div>
@@ -151,45 +178,224 @@
             </div>
           </div>
 
-          <hr class="md:hidden" />
-
-        </div>
-
-        <div class="relative w-full">
-          <div class="sticky top-0 w-full">
-            <div class="mt-5 md:mt-0 px-3 mx-3">
-              <div class="mb-2 font-semibold pl-6">Logs</div>
-    
-              <div
-                class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
-              >
-                <div
-                  *ngIf="alum?.Logs?.length == 0"
-                  class="h-[200px] grid place-items-center"
-                >
-                  <div class="">
-                    <img
-                      src="../../../../../assets/images/empty-box.png"
-                      alt=""
-                      class="w-[80px] h-[80px] object-cover mx-auto"
-                    />
-                    <p class="text-[12px] text-center mt-2">No log(s) yet.</p>
+          <div *ngIf="unemployedInfo" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600">Employment Information (Unemployed)</h1>
+            <div class=" gap-2 grid grid-cols-1 w-full text-[11px]">
+              <div class="grid grid-cols-1">
+                  <div class="text-slate-900 py-1  font-bold">Reason:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{unemployedInfo?.reason}}
                   </div>
                 </div>
-    
-                <p-timeline [value]="alum.Logs" align="left">
-                  <ng-template pTemplate="content" let-log>
-                    <div class="mb-1">
-                      <div class="text-[10px] md:text-[11px]">
-                        {{ dateFormat(log.createdAt) }}
-                      </div>
-                      <div class="text-[12px] md:text-sm">
-                        {{ log.description }}
-                      </div>
-                    </div>
-                  </ng-template>
-                </p-timeline>
+            </div>
+          </div>
+
+          <div *ngIf="employed" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600">Employment Information (Employed)</h1>
+            <div class=" gap-2 grid grid-cols-1 w-full text-[11px]">
+
+              <div class="grid grid-cols-3">
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Name of the Organization:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{employed?.orgName}}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Address:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{employed?.orgAddress}}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Type of Organization:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{employed?.typeOfOrgChosen}}
+                  </div>
+                </div>
               </div>
+
+
+              <div class="grid grid-cols-3">
+                <div>
+                  <div class="text-slate-900  py-1  font-bold">Occupational Classification:</div>
+                  <div class="bg-slate-100 gap-1 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{employed?.OtherOccupClass?.otherOccup ? employed?.OtherOccupClass?.otherOccup : employed?.occupClass}}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Job Status:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{employed?.jobStatus}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="py-1 w-full text-blue-500 font-bold my-1">Work Experience:</div>
+              <div>
+                <div class="grid grid-cols-3 border gap-2 p-2 rounded" *ngFor="let emp of employed?.WorkExps" >
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Employment after Graduation:</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{workExpDictionary[emp?.rangeOfYear]}}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Nature of Work:</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{emp?.natureOfWork}}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Job Status:</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{emp.jobStatus}}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Job Related to the Degree Earned:</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{emp.JobRelatedToDegree}}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Enrolled in other Degree Courses:</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{emp.enrolledOtherCourses}}
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+              <div class="py-1 w-full text-blue-500 font-bold my-1">Designation or Work Position:</div>
+              <div>
+                <div class="grid grid-cols-2 border gap-2 p-2 rounded"  >
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Designation or Work Position:</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{employed?.workPosition}}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Number of years in the company:</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{employed?.yrsInCompany}}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Awards or recognitions received (please specify):</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{employed?.awards}}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div class="text-slate-900 py-1  font-bold">Monthly Income Range::</div>
+                    <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                      {{employed?.monthlyIncome}}
+                    </div>
+                  </div>
+                  
+              </div>
+            </div>
+
+            <div>
+              <div class="grid grid-cols-1 border gap-2 p-2 rounded"  >
+
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">How did you come to know about your current job?:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{employed?.OtherReasonOfHiring?.reasonOfHiring ?  employed?.OtherReasonOfHiring?.reasonOfHiring : employed?.otherReasonOfHiring}}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-slate-900 py-1  font-bold">Is your current job related to the degree earned from EVSU??:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{ employed?.isDegreeRelativeTakenInEVSU ? 'Yes' : "No"}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          
+          <hr class="md:hidden" />
+          
+        </div>
+        
+       
+
+          <div *ngIf="selfEmployed" class="grid gap-3 h-fit py-2  w-full  mx-auto rounded  border shadow-md px-3 flex">
+            <h1 class="font-bold text-[14px] text-blue-600">Employment Information (Self Employed)</h1>
+            <div class=" gap-2 grid grid-cols-1 w-full text-[11px]">
+              <div class="grid grid-cols-1">
+                  <div class="text-slate-900 py-1  font-bold">Name of Business:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{selfEmployed?.businessName}}
+                  </div>
+              </div>
+              <div class="grid grid-cols-1">
+                  <div class="text-slate-900 py-1  font-bold">Address:</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{selfEmployed?.address}}
+                  </div>
+              </div>
+              <div class="grid grid-cols-1">
+                  <div class="text-slate-900 py-1  font-bold">Nature of Business (please specify)::</div>
+                  <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
+                    {{selfEmployed?.natureOfBusiness}}
+                  </div>
+              </div>
+            </div>
+          </div>
+          
+
+      </div>
+      <div class="relative w-full">
+        <div class="sticky top-0 w-full">
+          <div class="mt-5 md:mt-0 px-3 mx-3">
+            <div class="mb-2 font-semibold pl-6">Logs</div>
+  
+            <div
+              class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
+            >
+              <div
+                *ngIf="alum?.Logs?.length == 0"
+                class="h-[200px] grid place-items-center"
+              >
+                <div class="">
+                  <img
+                    src="../../../../../assets/images/empty-box.png"
+                    alt=""
+                    class="w-[80px] h-[80px] object-cover mx-auto"
+                  />
+                  <p class="text-[12px] text-center mt-2">No log(s) yet.</p>
+                </div>
+              </div>
+  
+              <p-timeline [value]="alum.Logs" align="left">
+                <ng-template pTemplate="content" let-log>
+                  <div class="mb-1">
+                    <div class="text-[10px] md:text-[11px]">
+                      {{ dateFormat(log.createdAt) }}
+                    </div>
+                    <div class="text-[12px] md:text-sm">
+                      {{ log.description }}
+                    </div>
+                  </div>
+                </ng-template>
+              </p-timeline>
             </div>
           </div>
         </div>
