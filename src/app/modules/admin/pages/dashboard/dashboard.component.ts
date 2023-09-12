@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
     this._overviewService.getAdminOverView().subscribe({
       next:(res)=>{
         this.overview =res
-        console.log(res)
       }
     })
   }
