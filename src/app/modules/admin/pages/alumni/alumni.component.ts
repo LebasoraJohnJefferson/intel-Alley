@@ -24,6 +24,7 @@ export class AlumniComponent implements OnInit {
   isShowDeletedUser: boolean = false;
   submitLoading: boolean = false;
   isRecovering:boolean = false
+  loading:boolean = true
   isDeletingPermanent:boolean = false
 
   createForm!: FormGroup;

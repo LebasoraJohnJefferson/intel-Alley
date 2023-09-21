@@ -81,7 +81,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout('alumni');
+    let confirm = window.confirm("Are you sure you want to logout?")
+    if(confirm) this.authService.logout('alumni');
   }
 
   openCloseNavOverlay() {
