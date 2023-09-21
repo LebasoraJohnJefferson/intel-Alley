@@ -16,8 +16,8 @@ export class AnalyticService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  usersTookTheSurvey(status: any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/employment/${status}`);
+  usersTookTheSurvey(status: any,year:any): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/employment/${status}/${year}`);
   }
 
   surveyOverView(): Observable<any> {
@@ -38,12 +38,12 @@ export class AnalyticService {
   }
 
 
-  otherUnemployedDetails(): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/unemployedAnalytic`);
+  otherUnemployedDetails(year:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/unemployedAnalytic/${year}`);
   }
 
-  otherSelfEmployedDetails(): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/selfEmployedAnalytic`);
+  otherSelfEmployedDetails(year:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/selfEmployedAnalytic/${year}`);
   }
 
 

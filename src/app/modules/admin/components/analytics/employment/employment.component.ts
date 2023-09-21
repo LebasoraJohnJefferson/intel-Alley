@@ -47,7 +47,10 @@ export class EmploymentComponent {
 
     showData(status:string){
         this.isLoading = true
-        this._analyticService.usersTookTheSurvey(status).subscribe({
+        this.route.queryParams.subscribe((value) => {
+            this.newDate = value['year'] ? value['year'] : new Date().getFullYear();
+        });
+        this._analyticService.usersTookTheSurvey(status,this.newDate).subscribe({
             next:(res)=>{
                 this.isLoading = false
                 this.maleData = res.male
@@ -57,24 +60,22 @@ export class EmploymentComponent {
                 this.viewChart()
             },complete:()=>{
                 this.isLoading = false
+            },error:()=>{
+                this.isLoading = false
             }
         })
     }
 
-    ngOnChanges(){
-        
-    }
+
 
 
     ngOnInit() {
-        this.changeSelectedRoute('Employed')
-        for(let year = 2023; year >= 2000; year--) {
+        
+        this.changeSelectedRoute(this.routeSelected)
+        for(let year = new Date().getFullYear(); year >= 2000; year--) {
             this.years.push(year);
         }
-        this.route.queryParams.subscribe((value) => {
-            this.newDate = value['year'] ? value['year'] : new Date().getFullYear();
-        });
-      this.showData(this.routeSelected)
+        this.showData(this.routeSelected)
     }
 
     viewChart(){

@@ -9,7 +9,7 @@
                     >
                         <i class="fal fa-calendar" ></i> {{newDate}}
                         <p-overlayPanel #op>
-                            <ol class="max-h-[200px] overflow-y-auto bg-white">
+                            <ol (click)="changeSelectedRoute(routeSelected)" class="max-h-[200px] overflow-y-auto bg-white">
                                 <li 
                                 [routerLink]="currentRoute"
                                 [queryParams]="{ year: year }"
