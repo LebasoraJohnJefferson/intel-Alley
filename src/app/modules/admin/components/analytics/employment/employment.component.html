@@ -3,9 +3,23 @@
         <div class="relative">
             <div class="sticky top-20">
                 <ol class="grid text-center grid-cols-3 md:border-r-2 md:border-r-red-500 p-2 md:grid-cols-1 px-3 mb-5 gap-y-5 gap-x-2 text-[14px] font-bold">
-                    <li routerLink="/admin/analytics" (click)="changeSelectedRoute('Employed')" [class]="routeSelected=='Employed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Employed</li>
-                    <li routerLink="/admin/analytics/self-employed" (click)="changeSelectedRoute('SelfEmployed')" [class]="routeSelected=='SelfEmployed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Self Employed</li>
-                    <li routerLink="/admin/analytics/unemployed" (click)="changeSelectedRoute('Unemployed')" [class]="routeSelected=='Unemployed' ? ' cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Unemployed</li>
+                    <li class="flex items-center relative gap-2 justify-center hover:bg-purple-600 px-3 py-1 bg-purple-800 text-white cursor-pointer rounded"
+                    
+                    (click)="op.toggle($event,targetEl)" #targetEl
+                    >
+                        <i class="fal fa-calendar" ></i> {{newDate}}
+                        <p-overlayPanel #op>
+                            <ol class="max-h-[200px] overflow-y-auto bg-white">
+                                <li 
+                                [routerLink]="currentRoute"
+                                [queryParams]="{ year: year }"
+                                class="px-2 mx-1 rounded cursor-pointer hover:bg-slate-200 text-slate-800 text-[14px] my-1" *ngFor="let year of years">{{year}}</li>
+                            </ol>
+                        </p-overlayPanel>
+                    </li>
+                    <li routerLink="/admin/analytics" [queryParams]="{ year: newDate }" (click)="changeSelectedRoute('Employed')" [class]="routeSelected=='Employed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Employed</li>
+                    <li routerLink="/admin/analytics/self-employed" [queryParams]="{ year: newDate }" (click)="changeSelectedRoute('SelfEmployed')" [class]="routeSelected=='SelfEmployed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Self Employed</li>
+                    <li routerLink="/admin/analytics/unemployed" [queryParams]="{ year: newDate }" (click)="changeSelectedRoute('Unemployed')" [class]="routeSelected=='Unemployed' ? ' cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Unemployed</li>
                 </ol>
             </div>
         </div>

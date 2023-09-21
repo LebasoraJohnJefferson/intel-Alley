@@ -33,8 +33,8 @@ export class AnalyticService {
   }
 
 
-  otherEmployedDetails(): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/employedAnalytic`);
+  otherEmployedDetails(year:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/employedAnalytic/${year}`);
   }
 
 

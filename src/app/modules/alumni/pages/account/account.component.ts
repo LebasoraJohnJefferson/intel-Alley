@@ -154,9 +154,7 @@ export class AccountComponent implements OnInit {
           image: response.user.image,
           email: response.user.email,
         };
-        console.log(response?.user?.IsSurveyTaken?.GeneralInfo)
         this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]
-        console.log(this.generalInfo)
         this.submitLoading = false;
 
         if (response.user.image != null) {
