@@ -17,8 +17,9 @@ export class AccountComponent implements OnInit {
   submitLoading: boolean = false;
   courses: any;
   defaultImg: any = '../../../../../assets/images/admin.png';
+  defaultImgAlumni: any = '../../../../../assets/images/student.png';
   previewImg: any = '';
-
+  feedbacks:any= []
   isLoading: boolean = true;
 
   modalData: any = [];
@@ -136,7 +137,7 @@ export class AccountComponent implements OnInit {
     this.adminService.getProfile().subscribe(
       (response: any) => {
         this.profile = response.user;
-
+        // this.feedbacks = response.feedBack
         this.modalData = {
           name: response.user.name,
           image: response.user.image,

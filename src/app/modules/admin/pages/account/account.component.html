@@ -105,24 +105,18 @@
 </div>
 
 <div class="">
-  <div *ngIf="true" class="p-5 max-w-[1200px] mx-auto">
-    <div
-      *ngIf="true"
-      class="flex w-[40px] h-[40px] rounded-full items-center justify-center border border-gray-200 text-slate-800 font-semibold my-10 cursor-pointer hover:bg-gray-300 transition-all"
-      (click)="goBack()"
-    >
-      <i class="fal fa-arrow-left"></i>
-    </div>
+  <div *ngIf="true" class="w-full">
+    
 
     <div class="relative">
       <img
         src="../../../../../assets/images/background.jpg"
         alt=""
-        class="h-[150px] lg:h-[200px] object-cover w-full rounded-2xl"
+        class="h-[150px] lg:h-[200px] object-cover w-full"
       />
 
       <div
-        class="flex items-center md:justify-between p-5 px-8 pt-0 relative -top-16"
+        class="flex items-center md:justify-between p-5 px-8 pt-0 relative md:-top-40 -top-32"
       >
         <div class="md:flex relative w-fit mx-auto md:mx-0">
           <div class="bg-slate-50/50 w-fit h-fit rounded-full md:mr-4">
@@ -146,26 +140,60 @@
             </div>
           </div>
         </div>
-
-        <div class="flex items-center">
-          <button
-            (click)="logout()"
-            *ngIf="profile.isPasswordChange == false"
-            class="bg-red-100 mr-3 hover:bg-red-200 border border-red-200 h-fit px-2 py-1 text-sm rounded-md font-semibold"
-          >
-            <i class="fad fa-sign-out mr-1"></i>
-            Logout
-          </button>
-
+        
+        <div class="absolute  lg:top-0 right-3 lg:right-0 lg:relative">
           <div
-            (click)="op.toggle($event)"
-            class="absolute -top-32 lg:top-0 right-3 lg:right-0 lg:relative bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
+            *ngIf="true"
+            class="flex w-[40px] h-[40px] rounded-full items-center justify-center border border-gray-200 bg-gray-200 text-slate-800 font-semibold my-2 hover:bg-gray-200/80 cursor-pointer  transition-all"
+            (click)="goBack()"
           >
-            <i class="fal fa-cog text-2xl"></i>
+            <i class="fal fa-arrow-left"></i>
+          </div>
+          <div class="flex items-center">
+            <button
+              (click)="logout()"
+              *ngIf="profile.isPasswordChange == false"
+              class="bg-red-100 mr-3 hover:bg-red-200 border border-red-200 h-fit px-2 py-1 text-sm rounded-md font-semibold"
+            >
+              <i class="fad fa-sign-out mr-1"></i>
+              Logout
+            </button>
+            
+            <div
+              (click)="op.toggle($event)"
+              class=" bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
+            >
+              <i class="fal fa-cog text-2xl"></i>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="w-full h-full relative md:-translate-y-32 -translate-y-28">
+    <h2 class="font-bold text-slate-800 font-semibold px-2 py-1 mx-4 rounded bg-slate-800 text-white w-fit">FEEDBACK</h2>
+    <ol class="flex px-5 py-5 flex-wrap gap-4">
+      <li *ngFor="let feedback of feedbacks" class=" max-w-[18rem] md:mr-auto mx-auto min-w-[18rem] max-h-[250px] rounded overflow-y-auto p-2 border-2">
+        <section class="">
+          <div class="flex text-slate-800 gap-2 px-3 items-center">
+            <img [src]="feedback?.IsSurveyTaken?.User?.image ? feedback?.IsSurveyTaken?.User?.image : defaultImgAlumni" class="h-8 w-8 rounded-full border border-red-400" alt="">
+            <div class="flex flex-col items-center">
+              <p class="text-slate-800 font-semibold text-[14px]">{{feedback?.IsSurveyTaken?.User?.name}}</p>
+              <p class="font-semibold text-[9px] text-blue-500">@{{feedback?.IsSurveyTaken?.User?.name}}</p>
+            </div>
+          </div>
+          <p class="mt-2 text-slate-800 text-[13px] px-1">
+            {{feedback?.context}}
+          </p>
+        </section>
+      </li>
+      <li class="m-auto" *ngIf="!feedbacks.length">
+         <div class="flex items-center justify-between flex-col">
+            <img src="../../../../../assets/images/feedback.png" class="w-[10rem] h-[10rem]" alt="">
+            <h3 class=" text-slate-800 font-semibold my-2">No FeedBack(s)</h3>
+         </div>
+      </li>
+    </ol>
   </div>
 </div>
 
