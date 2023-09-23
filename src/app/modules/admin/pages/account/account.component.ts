@@ -137,7 +137,7 @@ export class AccountComponent implements OnInit {
     this.adminService.getProfile().subscribe(
       (response: any) => {
         this.profile = response.user;
-        // this.feedbacks = response.feedBack
+        this.feedbacks = response.feedBack
         this.modalData = {
           name: response.user.name,
           image: response.user.image,
