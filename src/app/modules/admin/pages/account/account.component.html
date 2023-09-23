@@ -175,7 +175,8 @@
     <ol class="flex px-5 py-5 flex-wrap gap-4">
       <li *ngFor="let feedback of feedbacks" class=" max-w-[18rem] md:mr-auto mx-auto min-w-[18rem] max-h-[250px] rounded overflow-y-auto p-2 border-2">
         <section class="">
-          <div class="flex text-slate-800 gap-2 px-3 items-center">
+          <div [routerLink]="['/admin/alum']"
+          [queryParams]="{ id: feedback?.IsSurveyTaken?.User?.id }" class="flex cursor-pointer text-slate-800 gap-2 px-3 items-center">
             <img [src]="feedback?.IsSurveyTaken?.User?.image ? feedback?.IsSurveyTaken?.User?.image : defaultImgAlumni" class="h-8 w-8 rounded-full border border-red-400" alt="">
             <div class="flex flex-col items-center">
               <p class="text-slate-800 font-semibold text-[14px]">{{feedback?.IsSurveyTaken?.User?.name}}</p>
