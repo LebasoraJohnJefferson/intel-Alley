@@ -41,6 +41,7 @@ export class EmploymentComponent {
     changeSelectedRoute(status:string){
         this.routeSelected = status
         this.showData(status)
+        console.log(status)
         this.currentRoute = this.routingObj[status]
     }
     

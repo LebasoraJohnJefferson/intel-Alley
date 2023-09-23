@@ -13,9 +13,9 @@
                 <li class="text-bold text-xl flex items-center justify-center">
                     <i class="fal text-[13px] fa-greater-than"></i>
                 </li>
-                <li routerLink="/admin/files/employed" class="flex items-center cursor-pointer hover:text-slate-500">
+                <li routerLink="/admin/files/{{status}}" class="flex items-center cursor-pointer hover:text-slate-500">
                     <i class="fal fa-folder mr-1"></i>
-                    <p class="text-[12px]">Employed</p>
+                    <p class="text-[12px]">{{status == 'selfEmployed' ? 'Self Employed' : status | titlecase}}</p>
                 </li>
                 <li class="text-bold text-xl flex items-center justify-center">
                     <i class="fal text-[13px] fa-greater-than"></i>
@@ -31,16 +31,19 @@
                 <li class="flex gap-2" *ngIf="filesInfo && filesInfo.Employed">
                     <a [href]="filesInfo.Employed?.CertificateOfEmploy" target="_blank" download class="flex overflow-auto w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
                         <i class="fal fa-file text-5xl"></i>
+                        <p class="text-bold text-[10px] text-blue-700">({{filesInfo?.Employed?.fileNameOfProof ? filesInfo?.Employed?.fileNameOfProof : 'File name not set'}})</p>
                         <p class="text-bold text-[12px]">proof of employment</p>
                     </a>
                     <a [href]="filesInfo.Employed?.proofOfEmp" target="_blank" download class="flex overflow-hidden w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
                         <i class="fal fa-file text-5xl"></i>
+                        <p class="text-bold text-[10px] text-blue-700">({{filesInfo?.Employed?.fileNameOfCertificate ? filesInfo?.Employed?.fileNameOfCertificate : 'File name not set'}})</p>
                         <p class="text-bold text-[12px]">Certificate of Employment</p>
                     </a>
                 </li>
-                <li class="flex" *ngIf="filesInfo && filesInfo.SelfEmployed && filesInfo.SelfEmployed?.proofOfSelfEmployFile">
-                    <a [href]="filesInfo.SelfEmployed?.proofOfSelfEmployFile" target="_blank" download class="flex overflow-auto w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
+                <li class="flex" >
+                    <a [href]="filesInfo.SelfEmployed?.proofOfSelfEmployFile" *ngIf="filesInfo && filesInfo.SelfEmployed && filesInfo.SelfEmployed?.proofOfSelfEmployFile" target="_blank" download class="flex overflow-auto w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
                         <i class="fal fa-file text-5xl"></i>
+                        <p class="text-bold text-[10px] text-blue-700">({{filesInfo?.SelfEmployed?.fileName ? filesInfo?.SelfEmployed?.fileName : 'File name not set'}})</p>
                         <p class="text-bold text-[12px]">proof of Self Employ</p>
                     </a>
                 </li>
