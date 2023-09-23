@@ -47,7 +47,7 @@ export class AnalyticService {
   }
 
 
-  otherAnswer(field:any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/viewOthers/${field}`);
+  otherAnswer(field:any,year:any): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/viewOthers/${field}/${year}`);
   }
 }

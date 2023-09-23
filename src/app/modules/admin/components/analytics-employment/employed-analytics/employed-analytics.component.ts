@@ -53,7 +53,7 @@ export class EmployedAnalyticsComponent implements OnInit{
   viewOthers(field:any){
     this.title = field == 'OtherOccupClass' ? 'Occupation' : 'Job Source'
     this.createEventModal = true
-    this._analyticService.otherAnswer(field).subscribe((res)=>{
+    this._analyticService.otherAnswer(field,this.newDate).subscribe((res)=>{
       this.others = res
       console.log(this.others)
     })
