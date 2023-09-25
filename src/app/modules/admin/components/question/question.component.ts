@@ -135,7 +135,7 @@ export class QuestionComponent implements OnInit {
   }
 
   openForm(questionId:number){
-    this.questionIdTOBeEdited = this.questionIdTOBeEdited == -1 ? questionId : -1
+    this.questionIdTOBeEdited = questionId
     this.createAccountModal = true
   }
 
