@@ -60,6 +60,11 @@ export class SidebarComponent implements OnInit {
     );
   }
 
+
+  ngDoCheck(): void{
+    this.getCurrentRouteURL(this.route.snapshot.children[0].routeConfig?.path);
+  }
+
   getCurrentRouteURL(route: any) {
     route == '' ? (this.currentRoute = '/') : (this.currentRoute = route);
 

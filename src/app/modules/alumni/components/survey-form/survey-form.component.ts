@@ -426,15 +426,18 @@ export class SurveyFormComponent implements OnInit {
         if(this.showEmploymentStatusForm == 'Employed'){
 
 
-          
-          if(this.uploadFilePoorOfEmp?.type !== 'application/pdf' && !this.uploadFilePoorOfEmp?.type?.startsWith('image/')){
-            this.isSubmitting = false
-            return this.toast.warning("Pls, upload a file that has format of pdf or image in proof of employment")
+          if(this.uploadFilePoorOfEmp){
+            if(this.uploadFilePoorOfEmp?.type !== 'application/pdf' && !this.uploadFilePoorOfEmp?.type?.startsWith('image/')){
+              this.isSubmitting = false
+              return this.toast.warning("Pls, upload a file that has format of pdf or image in proof of employment")
+            }
           }
 
-          if(this.uploadFileCertificateOfEmp?.type !== 'application/pdf' && !this.uploadFileCertificateOfEmp?.type?.startsWith('image/')){
-            this.isSubmitting = false
-            return this.toast.warning("Pls, upload a file that has format of pdf or image in certificate of employment")
+          if(this.uploadFileCertificateOfEmp){
+            if(this.uploadFileCertificateOfEmp?.type !== 'application/pdf' && !this.uploadFileCertificateOfEmp?.type?.startsWith('image/')){
+              this.isSubmitting = false
+              return this.toast.warning("Pls, upload a file that has format of pdf or image in certificate of employment")
+            }
           }
 
 
