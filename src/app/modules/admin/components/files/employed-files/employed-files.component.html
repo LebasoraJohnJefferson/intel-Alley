@@ -29,12 +29,12 @@
         <div class="mt-10">
             <ol *ngIf="isLoading">
                 <li class="flex gap-2" *ngIf="filesInfo && filesInfo.Employed">
-                    <a [href]="filesInfo.Employed?.CertificateOfEmploy" target="_blank" download class="flex overflow-auto w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
+                    <a *ngIf="filesInfo?.Employed?.CertificateOfEmploy" [href]="filesInfo.Employed?.CertificateOfEmploy" target="_blank" download class="flex overflow-auto w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
                         <i class="fal fa-file text-5xl"></i>
                         <p class="text-bold text-[10px] text-blue-700">({{filesInfo?.Employed?.fileNameOfProof ? filesInfo?.Employed?.fileNameOfProof : 'File name not set'}})</p>
                         <p class="text-bold text-[12px]">proof of employment</p>
                     </a>
-                    <a [href]="filesInfo.Employed?.proofOfEmp" target="_blank" download class="flex overflow-hidden w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
+                    <a *ngIf="filesInfo?.Employed?.proofOfEmp" [href]="filesInfo.Employed?.proofOfEmp" target="_blank" download class="flex overflow-hidden w-[150px] items-center hover:text-slate-500 justify-center flex-col cursor-pointer">
                         <i class="fal fa-file text-5xl"></i>
                         <p class="text-bold text-[10px] text-blue-700">({{filesInfo?.Employed?.fileNameOfCertificate ? filesInfo?.Employed?.fileNameOfCertificate : 'File name not set'}})</p>
                         <p class="text-bold text-[12px]">Certificate of Employment</p>
@@ -47,7 +47,7 @@
                         <p class="text-bold text-[12px]">proof of Self Employ</p>
                     </a>
                 </li>
-                <li class="flex" *ngIf="!filesInfo.Employed &&  !filesInfo.SelfEmployed?.proofOfSelfEmployFile">
+                <li class="flex" *ngIf="!filesInfo?.Employed?.CertificateOfEmploy && !filesInfo?.Employed?.proofOfEmp && !filesInfo.SelfEmployed?.proofOfSelfEmployFile">
                     <div class="w-full flex flex-col justify-center items-center">
                         <img class="w-[18rem] h-[18rem]" src="../../../../../../assets/images/NoFile.jpg" alt="">
                         <p class="font-bold mt-1">Empty File(s)</p>
