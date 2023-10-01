@@ -24,7 +24,8 @@
                 <li class="flex gap-4 flex-wrap">
                     <div routerLink="/admin/files/{{status}}/{{file.User.id}}" *ngFor="let file of files" class="flex items-center hover:text-slate-500 justify-center flex-col cursor-pointer group">
                         <i class="fal fa-folder text-5xl"></i>
-                        <p class="text-bold w-[100px] text-center truncate group-hover:text-clip group-hover:break-all text-[12px]">{{file.User.name}}</p>
+                        <p class="text-bold w-[100px] text-center truncate group-hover:hidden text-[12px]">{{file.User.name}}</p>
+                        <p class="text-bold min-w-[100px] text-center group-hover:inline-block hidden text-[12px]">{{file.User.name}}</p>
                     </div>
                     <div *ngIf="!files.length" class="w-full flex flex-col justify-center items-center">
                         <img class="w-[18rem] h-[18rem]" src="../../../../../../assets/images/noFilesWithNPC.jpg" alt="">
