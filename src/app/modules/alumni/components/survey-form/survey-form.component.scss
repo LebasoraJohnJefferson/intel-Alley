@@ -12,6 +12,8 @@
 
 ::ng-deep .p-password {
     @apply w-full;
+  
+  
   }
   
   ::ng-deep .p-inputtext {
@@ -24,7 +26,7 @@
   
   ::ng-deep .p-inputtext:enabled:focus {
     @apply border-gray-400;
-    // box-shadow: 0 0 0 0.2rem rgb(206, 204, 204);
+    box-shadow: 0 0 0 0.2rem rgb(206, 204, 204);
   }
 
 #mat{
