@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlumniRoutingModule } from './alumni-routing.module';
 import { PrimengModule } from '../primeng/primeng.module';
 import { CoreModule } from 'src/app/core/core.module';
+import {CheckboxModule} from 'primeng/checkbox';
+
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -46,6 +48,7 @@ import { CustomSurveyComponent } from './components/custom-survey/custom-survey.
     AlumniRoutingModule,
     PrimengModule,
     ReactiveFormsModule,
+    CheckboxModule,
     FormsModule,
     HttpClientModule,
     CoreModule,
