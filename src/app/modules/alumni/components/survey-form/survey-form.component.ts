@@ -44,12 +44,6 @@ export class SurveyFormComponent implements OnInit {
     Designation: 'Designation',
     NumOfYrServed: 'Years Served',
     MonthlyIncome: 'Monthly Income (Optional)',
-    elementary: 'Elementary',
-    secondary: 'Secondary',
-    tertiary: 'Tertiary',
-    baccalaureate: 'Baccalaureate',
-    master: 'Master',
-    doctorate: 'Doctorate',
   };
 
   categories: any[] = [
