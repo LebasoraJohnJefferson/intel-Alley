@@ -1,672 +1,993 @@
-  <mat-stepper id="mat" class="bg-white border border-red-200 rounded shadow-lg py-2"  #stepper orientation="vertical">
-  
-    <mat-step [stepControl]="generalInfo" >
-        <ng-template matStepLabel>
-            <span class="text-black font-bold">General Information</span>
-        </ng-template>
-        <form [formGroup]="generalInfo" class="grid gap-3" >
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Address</label>
+<mat-stepper
+  id="mat"
+  class="bg-white border border-red-200 rounded shadow-lg py-2"
+  #stepper
+  orientation="vertical"
+>
+  <mat-step [stepControl]="generalInfo">
+    <ng-template matStepLabel>
+      <span class="text-black font-bold">General Information</span>
+    </ng-template>
+    <form [formGroup]="generalInfo" class="grid gap-3">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Address</label>
 
-            <div class="mt-1 relative">
-              <input
-                class="w-full border rounded outline-0"
-                type="text"
-                formControlName="address"
-                placeholder="Your address"
-                pInputText
-                required
-              />
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700">email</label>
-
-            <div class="mt-1 relative">
-              <input
-                class="w-full border rounded outline-0"
-                type="text"
-                formControlName="secondaryEmail"
-                placeholder="Enter email"
-                pInputText
-                required
-              />
-            </div>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Contract Number</label>
-
-            <div class="mt-1 relative">
-              <input
-                class="w-full border rounded outline-0"
-                type="number"
-                formControlName="contactNumber"
-                placeholder="E.G: (9423*******)"
-                pInputText
-                required
-              />
-            </div>
-          </div>
-          <div class="grid grid-cols-3 gap-2">
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Civil Status</label>
-              <select class="mt-1 relative" placeholder="Civil Status" pInputText formControlName="civilStatus">
-                <option value="Single" selected >Single</option>
-                <option value="Engaged">Engaged</option>
-                <option value="Married">Married</option>
-                <option value="windowed">Windowed</option>
-                <option value="separated">Separated</option>
-                <option value="divorced">Divorced</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Sex</label>
-              <select class="mt-1 relative" placeholder="Civil Status" pInputText formControlName="sex">
-                <option value="male" selected >Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700">Birth Day</label>
-              <input class="w-full border rounded outline-0"
-              type="date"
-              formControlName="birthDay"
-              pInputText
-              required />
-            </div>
-          </div>
-        </form>
-        
-        <button
-            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
-    </mat-step>
-
-
-
-    <mat-step [stepControl]="educationalBG" class="mb-2" label="Fill out your address">
-        <ng-template matStepLabel>
-            <span class="text-black font-bold">Educational Background</span>
-        </ng-template>
-        <p class="text-[12px] text-red-500">Fill out the given questionnaire. Indicate NA if not applicable.</p>
-      <div class="w-full flex justify-start px-3">
-        <label class="block text-base font-bold my-2 text-gray-700 text-center">A.) Educational Attainment</label>
+        <div class="mt-1 relative">
+          <input
+            class="w-full border rounded outline-0"
+            type="text"
+            formControlName="address"
+            placeholder="Your address"
+            pInputText
+            required
+          />
+        </div>
       </div>
-      <form [formGroup]="educationalBG" class="grid gap-3" >
-        <div class="overflow-x-auto">
-          <table class="md:w-full w-[60rem] grid ">
-            <tr class="grid grid-cols-4 gap-2">
-              <th class="block text-sm font-medium text-gray-700">Degree</th>
-              <th class="block text-sm font-medium text-gray-700">University / College</th>
-              <th class="block text-sm font-medium text-gray-700">Highest Level/Units Earned (if not graduated)</th>
-              <th class="block text-sm font-medium text-gray-700">Year Graduated</th>
-            </tr>
-            <tr [formGroupName]="EducationalBG.key" *ngFor="let EducationalBG of eduBG" class="grid grid-cols-4  gap-2">
-              <td class="block text-sm font-medium text-gray-700 text-center">{{EducationalBG.name}}</td>
-              <td>
-                <input
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">email</label>
+
+        <div class="mt-1 relative">
+          <input
+            class="w-full border rounded outline-0"
+            type="text"
+            formControlName="secondaryEmail"
+            placeholder="Enter email"
+            pInputText
+            required
+          />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700"
+          >Contract Number</label
+        >
+
+        <div class="mt-1 relative">
+          <input
+            class="w-full border rounded outline-0"
+            type="number"
+            formControlName="contactNumber"
+            placeholder="E.G: (9423*******)"
+            pInputText
+            required
+          />
+        </div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-2">
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Civil Status</label
+          >
+          <select
+            class="mt-1 relative"
+            placeholder="Civil Status"
+            pInputText
+            formControlName="civilStatus"
+          >
+            <option value="Single" selected>Single</option>
+            <option value="Engaged">Engaged</option>
+            <option value="Married">Married</option>
+            <option value="windowed">Windowed</option>
+            <option value="separated">Separated</option>
+            <option value="divorced">Divorced</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Sex</label>
+          <select
+            class="mt-1 relative"
+            placeholder="Civil Status"
+            pInputText
+            formControlName="sex"
+          >
+            <option value="male" selected>Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700"
+            >Birth Day</label
+          >
+          <input
+            class="w-full border rounded outline-0"
+            type="date"
+            formControlName="birthDay"
+            pInputText
+            required
+          />
+        </div>
+      </div>
+    </form>
+
+    <button
+      class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+      mat-button
+      matStepperNext
+    >
+      <p>Next</p>
+      <i class="pi pi-arrow-circle-right"></i>
+    </button>
+  </mat-step>
+
+  <mat-step
+    [stepControl]="educationalBG"
+    class="mb-2"
+    label="Fill out your address"
+  >
+    <ng-template matStepLabel>
+      <span class="text-black font-bold">Educational Background</span>
+    </ng-template>
+    <p class="text-[12px] text-red-500">
+      Fill out the given questionnaire. Indicate NA if not applicable.
+    </p>
+    <div class="w-full flex justify-start px-3">
+      <label class="block text-base font-bold my-2 text-gray-700 text-center"
+        >A.) Educational Attainment</label
+      >
+    </div>
+    <form [formGroup]="educationalBG" class="grid gap-3">
+      <div class="overflow-x-auto">
+        <table class="md:w-full w-[60rem] grid">
+          <tr class="grid grid-cols-4 gap-2">
+            <th class="block text-sm font-medium text-gray-700">Degree</th>
+            <th class="block text-sm font-medium text-gray-700">
+              University / College
+            </th>
+            <th class="block text-sm font-medium text-gray-700">
+              Highest Level/Units Earned (if not graduated)
+            </th>
+            <th class="block text-sm font-medium text-gray-700">
+              Year Graduated
+            </th>
+          </tr>
+          <tr
+            [formGroupName]="EducationalBG.key"
+            *ngFor="let EducationalBG of eduBG"
+            class="grid grid-cols-4 gap-2"
+          >
+            <td class="block text-sm font-medium text-gray-700 text-center">
+              {{ EducationalBG.name }}
+            </td>
+            <td>
+              <input
                 class="w-full border rounded outline-0"
                 type="text"
                 pInputText
                 formControlName="university"
                 required
               />
-              </td>
-              <td>
-                <input
+            </td>
+            <td>
+              <input
                 class="w-full border rounded outline-0"
                 type="text"
                 pInputText
                 formControlName="highLvl"
                 required
               />
-              </td>
-              <td>
-                <input
+            </td>
+            <td>
+              <input
                 class="w-full border rounded outline-0"
                 type="date"
                 pInputText
                 formControlName="yearGraduated"
                 required
               />
-              </td>
-            </tr>
-          </table>
-            
-          <div class="w-full flex justify-start px-3 my-2">
-            <label class="block text-base font-bold my-2 text-gray-700 text-center">B.) Professional Examination/s Passed</label>
-          </div>
-          <table class="md:w-full w-[60rem] grid ">
-            <tr class="grid grid-cols-3 gap-2 my-1">
-              <th class="block text-sm font-medium text-gray-700">Name of Examination (PRC, CSC and TESDA)</th>
-              <th class="block text-sm font-medium text-gray-700">Year of Examination</th>
-              <th class="block text-sm font-medium text-gray-700">Rank/Rating (Optional)</th>
-            </tr>
-            <tr  formGroupName="profExam1" class="grid grid-cols-3 gap-2">
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="examName"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="date"
-                pInputText
-                formControlName="yearOfExam"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="number"
-                pInputText
-                formControlName="rating"
-                required
-              />
-              </td>
-            </tr>
-            <tr formGroupName="profExam2"  class="grid grid-cols-3 gap-2">
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="examName"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="date"
-                pInputText
-                formControlName="yearOfExam"
-                required
-              />
-              </td>
-              <td>
-                <input
-                class="w-full border rounded outline-0"
-                type="number"
-                pInputText
-                formControlName="rating"
-                required
-              />
-              </td>
-            </tr>
-          </table>
-        </div>
+            </td>
+          </tr>
+        </table>
 
-      </form>
-      <div class="flex gap-2">
-        <button
-            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
-        <button
-            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
+        <div class="w-full flex justify-start px-3 my-2">
+          <label
+            class="block text-base font-bold my-2 text-gray-700 text-center"
+            >B.) Professional Examination/s Passed</label
+          >
+        </div>
+        <table class="md:w-full w-[60rem] grid">
+          <tr class="grid grid-cols-3 gap-2 my-1">
+            <th class="block text-sm font-medium text-gray-700">
+              Name of Examination (PRC, CSC and TESDA)
+            </th>
+            <th class="block text-sm font-medium text-gray-700">
+              Year of Examination
+            </th>
+            <th class="block text-sm font-medium text-gray-700">
+              Rank/Rating (Optional)
+            </th>
+          </tr>
+          <tr formGroupName="profExam1" class="grid grid-cols-3 gap-2">
+            <td>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="examName"
+                required
+              />
+            </td>
+            <td>
+              <input
+                class="w-full border rounded outline-0"
+                type="date"
+                pInputText
+                formControlName="yearOfExam"
+                required
+              />
+            </td>
+            <td>
+              <input
+                class="w-full border rounded outline-0"
+                type="number"
+                pInputText
+                formControlName="rating"
+                required
+              />
+            </td>
+          </tr>
+          <tr formGroupName="profExam2" class="grid grid-cols-3 gap-2">
+            <td>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                pInputText
+                formControlName="examName"
+                required
+              />
+            </td>
+            <td>
+              <input
+                class="w-full border rounded outline-0"
+                type="date"
+                pInputText
+                formControlName="yearOfExam"
+                required
+              />
+            </td>
+            <td>
+              <input
+                class="w-full border rounded outline-0"
+                type="number"
+                pInputText
+                formControlName="rating"
+                required
+              />
+            </td>
+          </tr>
+        </table>
       </div>
-    </mat-step>
+    </form>
+    <div class="flex gap-2">
+      <button
+        class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        matStepperPrevious
+      >
+        <i class="pi pi-arrow-circle-left"></i>
+        <p>Back</p>
+      </button>
+      <button
+        class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        matStepperNext
+      >
+        <p>Next</p>
+        <i class="pi pi-arrow-circle-right"></i>
+      </button>
+    </div>
+  </mat-step>
 
-
-    <mat-step [stepControl]="employmentInfo">
-        <ng-template matStepLabel>
-            <span class="text-black font-bold">Employment Information</span>
-        </ng-template>
-        <p class="text-[12px] text-red-500">Fill out the given questionnaire. Indicate NA if not applicable.</p>
-        <div class="w-full flex justify-start px-3">
-          <label class="block text-base font-bold my-2 text-gray-700 text-center">A.) Current Employment Status</label>
+  <mat-step [stepControl]="employmentInfo">
+    <ng-template matStepLabel>
+      <span class="text-black font-bold">Employment Information</span>
+    </ng-template>
+    <p class="text-[12px] text-red-500">
+      Fill out the given questionnaire. Indicate NA if not applicable.
+    </p>
+    <div class="w-full flex justify-start px-3">
+      <label class="block text-base font-bold my-2 text-gray-700 text-center"
+        >A.) Current Employment Status</label
+      >
+    </div>
+    <div class="md:w-full grid">
+      <div class="grid grid-cols-1 gap-2 md:-full">
+        <label class="block text-sm my-2 font-medium text-gray-700"
+          >Are you currently</label
+        >
+        <div
+          class="flex md:flex-row flex-col md:items-center items-start gap-2"
+        >
+          <div
+            *ngFor="let category of categories"
+            class="flex items-center flex-nowrap gap-2 mx-1"
+          >
+            <p-checkbox
+              (onChange)="changeEmploymentStatus(category.name)"
+              name="{{ category.name }}"
+              [value]="category.name"
+              [(ngModel)]="selectedCategories"
+              [inputId]="category.key"
+            ></p-checkbox>
+            <label
+              class="block text-sm font-medium text-gray-700"
+              [for]="category.key"
+              >{{ category.name }}</label
+            >
+          </div>
         </div>
-        <div class="md:w-full grid">
-          <div class="grid grid-cols-1 gap-2 md:-full">
-            <label class="block text-sm my-2 font-medium text-gray-700">Are you currently</label>
-            <div class="flex md:flex-row flex-col  md:items-center items-start gap-2">
-              <div *ngFor="let category of categories" class="flex items-center flex-nowrap gap-2 mx-1">
-                  <p-checkbox (onChange)="changeEmploymentStatus(category.name)" name="{{category.name}}" [value]="category.name" [(ngModel)]="selectedCategories" [inputId]="category.key"></p-checkbox>
-                  <label class="block text-sm font-medium text-gray-700" [for]="category.key">{{ category.name }}</label>
+      </div>
+    </div>
+    <form [formGroup]="employmentInfo" class="grid">
+      <div class="gap-3">
+        <div
+          class="flex gap-2 my-1 flex-col"
+          *ngIf="showEmploymentStatusForm == 'Employed'"
+        >
+          <div class="flex gap-2">
+            <label class="block text-sm my-2 font-medium text-gray-700">
+              If employed
+              <i>(Attach file for proof of employment)</i> :
+            </label>
+            <input
+              type="file"
+              accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg"
+              formControlName="proofOfEmp"
+              class="hidden"
+              (change)="uploadProof($event)"
+              name="proofOfEmployment"
+            />
+            <button
+              (click)="clickUploadProof()"
+              class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+            >
+              <i class="pi pi-cloud-upload"></i>
+              File
+            </button>
+          </div>
+          <ol>
+            <li>
+              <div class="block text-sm font-medium text-gray-700 my-2">
+                Name of the Organization:
+              </div>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Enter Organization name..."
+                formControlName="orgName"
+                pInputText
+                required
+              />
+            </li>
+            <li>
+              <div class="block text-sm font-medium text-gray-700 my-2">
+                Address:
+              </div>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Enter Organization address"
+                formControlName="orgAddress"
+                pInputText
+                required
+              />
+            </li>
+            <li class="flex gap-2 my-2">
+              <label class="block text-sm my-2 font-medium text-gray-700"
+                >Type of Organization</label
+              >
+              <div
+                *ngFor="let typeOfOrg of typeOfOrganization"
+                class="flex items-center gap-2 mx-1"
+              >
+                <p-checkbox
+                  (onChange)="changeTypeOfOrganization(typeOfOrg.name)"
+                  formControlName="typeOfOrgChosen"
+                  name="{{ typeOfOrg.name }}"
+                  [value]="typeOfOrg.name"
+                  [(ngModel)]="selectedTypeOfOrganization"
+                  [inputId]="typeOfOrg.key"
+                ></p-checkbox>
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  [for]="typeOfOrg.key"
+                  >{{ typeOfOrg.name }}</label
+                >
+              </div>
+            </li>
+          </ol>
+          <div class="w-full flex-col justify-start px-3">
+            <label class="block text-base font-bold my-2 text-gray-700"
+              >B.) Occupational Classification
+            </label>
+            <div *ngIf="!isOtherOccupation">
+              <div
+                *ngFor="let typeOfOrg of occupationClass"
+                class="flex mt-1 items-center gap-2 mx-1"
+              >
+                <p-checkbox
+                  (onChange)="changeOccupationClass(typeOfOrg.name)"
+                  formControlName="occupClass"
+                  name="{{ typeOfOrg.name }}"
+                  [value]="typeOfOrg.name"
+                  [(ngModel)]="selectedOccupation"
+                  [inputId]="typeOfOrg.key"
+                ></p-checkbox>
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  [for]="typeOfOrg.key"
+                  >{{ typeOfOrg.name }}</label
+                >
+              </div>
+            </div>
+            <div *ngIf="isOtherOccupation">
+              <div class="flex gap-2 text-sm items-center">
+                <div class="block font-medium text-gray-700 my-2">
+                  pls. specify:
+                </div>
+                <div
+                  (click)="changeOccupationClass('')"
+                  class="block font-medium text-gray-700 my-2 hover:bg-blue-200 cursor-pointer bg-gray-200 px-2 py-1 rounded"
+                >
+                  undo <i class="pi pi-undo"></i>
+                </div>
+              </div>
+              <div>
+                <input
+                  class="w-full border rounded outline-0"
+                  type="text"
+                  placeholder="Enter Other Occupation..."
+                  pInputText
+                  formControlName="reason"
+                  required
+                />
               </div>
             </div>
           </div>
-        </div>
-        <form [formGroup]="employmentInfo" class="grid " >
-          <div class="gap-3">
-            
-            <div class="flex gap-2 my-1 flex-col" *ngIf="showEmploymentStatusForm=='Employed'">
-              <div class="flex gap-2 ">
-                <label class="block text-sm my-2 font-medium text-gray-700">
-                  If employed 
-                  <i>(Attach file for proof of employment)</i> :
-                </label>
-                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg" formControlName="proofOfEmp"  class="hidden" (change)="uploadProof($event)" name="proofOfEmployment"/>
-                <button
-                  (click)="clickUploadProof()"
-                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+          <div class="w-full flex justify-start px-3">
+            <div class="md:w-full w-[25rem] grid overflow-x-auto">
+              <label class="block text-sm my-2 font-medium text-gray-700"
+                >Job Status</label
+              >
+              <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
+                <div
+                  *ngFor="let job of jobStatus"
+                  class="flex items-center gap-2 mx-1"
                 >
-                  <i class="pi pi-cloud-upload"></i>
-                  File
-                </button>
+                  <p-checkbox
+                    (onChange)="changeJobStatus(job.name)"
+                    formControlName="jobStatus"
+                    name="{{ job.name }}"
+                    [value]="job.name"
+                    [(ngModel)]="selectedJobStatus"
+                    [inputId]="job.key"
+                  ></p-checkbox>
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    [for]="job.key"
+                    >{{ job.name }}</label
+                  >
+                </div>
               </div>
-              <ol>
-                <li>
-                  <div class="block text-sm font-medium text-gray-700 my-2">Name of the Organization: </div>
+            </div>
+          </div>
+          <div class="w-full flex justify-start px-3">
+            <label
+              class="block text-base font-bold my-2 text-gray-700 text-center"
+              >C.) Work Experience</label
+            >
+          </div>
+          <div class="grid grid-cols-1 overflow-x-auto">
+            <table class="md:w-full w-[80rem] grid">
+              <tr class="grid grid-cols-5 gap-2">
+                <th class="block text-sm font-medium text-gray-700">
+                  Employment after Graduation
+                </th>
+                <th class="block text-sm font-medium text-gray-700">
+                  Nature of Work
+                </th>
+                <th class="block text-sm font-medium text-gray-700">
+                  Job Status
+                </th>
+                <th class="block text-sm font-medium text-gray-700">
+                  Job Related to the Degree Earned
+                </th>
+                <th class="block text-sm font-medium text-gray-700">
+                  Enrolled in other Degree Courses
+                </th>
+              </tr>
+              <tr
+                [formGroupName]="work.key"
+                *ngFor="let work of workExp"
+                class="grid grid-cols-5 gap-2"
+              >
+                <td
+                  class="block text-sm font-medium text-gray-700 m-auto text-center"
+                >
+                  {{ work.name }}
+                </td>
+                <td>
                   <input
-                  class="w-full border rounded outline-0"
-                  type="text"
-                  placeholder="Enter Organization name..."
-                  formControlName="orgName"
-                  pInputText
-                  required
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    pInputText
+                    formControlName="natureOfWork"
                   />
-                </li>
-                <li>
-                  <div class="block text-sm font-medium text-gray-700 my-2">Address: </div>
+                </td>
+                <td>
                   <input
-                  class="w-full border rounded outline-0"
-                  type="text"
-                  placeholder="Enter Organization address"
-                  formControlName="orgAddress"
-                  pInputText
-                  required
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    pInputText
+                    formControlName="jobStatus"
                   />
-                </li>
-                <li class="flex gap-2 my-2">
-                  <label class="block text-sm my-2 font-medium text-gray-700">Type of Organization</label>
-                  <div *ngFor="let typeOfOrg of typeOfOrganization" class="flex items-center gap-2 mx-1">
-                    <p-checkbox (onChange)="changeTypeOfOrganization(typeOfOrg.name)" formControlName="typeOfOrgChosen" name="{{typeOfOrg.name}}" [value]="typeOfOrg.name" [(ngModel)]="selectedTypeOfOrganization" [inputId]="typeOfOrg.key"></p-checkbox>
-                    <label class="block text-sm font-medium text-gray-700" [for]="typeOfOrg.key">{{ typeOfOrg.name }}</label>
+                </td>
+                <td>
+                  <input
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    pInputText
+                    formControlName="JobRelatedToDegree"
+                  />
+                </td>
+                <td>
+                  <input
+                    class="w-full border rounded outline-0"
+                    type="text"
+                    pInputText
+                    formControlName="enrolledOtherCourses"
+                  />
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="w-full flex justify-start px-3">
+            <label
+              class="block text-base font-bold my-1 text-gray-700 text-center"
+              >D.) Designation or Work Position:
+            </label>
+          </div>
+          <div>
+            <div class="flex gap-2 text-sm items-center">
+              <div class="block font-medium text-gray-700 my-2">
+                Designation or Work Position:
+              </div>
+            </div>
+            <div>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Enter Designation or Work Position..."
+                pInputText
+                formControlName="workPosition"
+                required
+              />
+            </div>
+            <div class="my-2">
+              <label class="block text-sm font-medium text-gray-700"
+                >Number of years in the company</label
+              >
+              <select
+                class="mt-1 relative"
+                placeholder="Enter Number Of year"
+                pInputText
+                formControlName="yrsInCompany"
+              >
+                <option value="Below1" selected>below 1</option>
+                <option value="1To5">1-5</option>
+                <option value="6To10">6-10</option>
+                <option value="11To15">11-15</option>
+                <option value="16To20">16-20</option>
+                <option value="21To25">21-25</option>
+                <option value="25Above">above 25</option>
+              </select>
+            </div>
+            <div class="flex gap-2 text-sm items-center">
+              <div class="block font-medium text-gray-700 my-1">
+                Awards or recognitions received (please specify):
+              </div>
+            </div>
+            <div>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Enter Awards or recognitions received..."
+                pInputText
+                formControlName="awards"
+                required
+              />
+            </div>
+            <div class="my-2">
+              <label class="block text-sm font-medium text-gray-700"
+                >Monthly Income Range</label
+              >
+              <select
+                class="mt-1 relative"
+                placeholder="Enter Number Of year"
+                pInputText
+                formControlName="monthlyIncome"
+              >
+                <option value="Below10k" selected>Below ₱10,000</option>
+                <option value="10kTo20k">₱10,000 - ₱20,000</option>
+                <option value="21kTo30k">₱21,000 - ₱30,000</option>
+                <option value="31kTo40k">₱31,000 - ₱40,000</option>
+                <option value="40kTo50k">₱41,000 - ₱50,000</option>
+                <option value="51kTo60k">₱51,000 - ₱60,000</option>
+                <option value="61kTo70k">₱61,000 – ₱70,000</option>
+                <option value="70kAbove">₱71,000 above</option>
+              </select>
+            </div>
+            <div class="w-full flex-col justify-start px-3">
+              <label class="block text-base font-bold my-2 text-gray-700"
+                >E.) How did you come to know about your current job?
+              </label>
+              <div *ngIf="!isOtherCurrentJob">
+                <div
+                  *ngFor="let reason of reasonOfHiringList"
+                  class="flex mt-1 items-center gap-2 mx-1"
+                >
+                  <p-checkbox
+                    (onChange)="changeCauseOfHiring(reason.name)"
+                    formControlName="otherReasonOfHiring"
+                    name="{{ reason.name }}"
+                    [value]="reason.name"
+                    [(ngModel)]="selectedReasonOfHiring"
+                    [inputId]="reason.key"
+                  ></p-checkbox>
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    [for]="reason.key"
+                    >{{ reason.name }}</label
+                  >
+                </div>
+              </div>
+              <div *ngIf="isOtherCurrentJob">
+                <div class="flex gap-2 text-sm items-center">
+                  <div class="block font-medium text-gray-700 my-2">
+                    pls. specify:
                   </div>
-                </li>
-              </ol>
-              <div class="w-full flex-col justify-start px-3">
-                <label class="block text-base font-bold my-2 text-gray-700">B.) Occupational Classification </label>
-                <div *ngIf="!isOtherOccupation">
-                  <div *ngFor="let typeOfOrg of occupationClass" class="flex mt-1 items-center gap-2 mx-1">
-                    <p-checkbox (onChange)="changeOccupationClass(typeOfOrg.name)" formControlName="occupClass" name="{{typeOfOrg.name}}" [value]="typeOfOrg.name" [(ngModel)]="selectedOccupation" [inputId]="typeOfOrg.key"></p-checkbox>
-                    <label class="block text-sm font-medium text-gray-700" [for]="typeOfOrg.key">{{ typeOfOrg.name }}</label>
+                  <div
+                    (click)="changeCauseOfHiring('')"
+                    class="block font-medium text-gray-700 my-2 hover:bg-blue-200 cursor-pointer bg-gray-200 px-2 py-1 rounded"
+                  >
+                    undo <i class="pi pi-undo"></i>
                   </div>
                 </div>
-                <div *ngIf="isOtherOccupation">
-                  <div  class="flex gap-2 text-sm items-center " >
-                    <div class="block font-medium text-gray-700 my-2">pls. specify:</div>
-                    <div (click)="changeOccupationClass('')"  class="block font-medium text-gray-700 my-2 hover:bg-blue-200 cursor-pointer bg-gray-200 px-2 py-1 rounded">undo   <i class="pi pi-undo"></i> </div>
-                  </div>
-                  <div>
-                    <input
+                <div>
+                  <input
                     class="w-full border rounded outline-0"
                     type="text"
                     placeholder="Enter Other Occupation..."
                     pInputText
-                    formControlName="reason"
-                    required
-                    />
-                  </div>
-                  </div>
-              </div>
-              <div class="w-full flex justify-start px-3">
-                <div class="md:w-full w-[25rem] grid overflow-x-auto">
-                  <label class="block text-sm my-2 font-medium text-gray-700">Job Status</label>
-                  <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
-                    <div *ngFor="let job of jobStatus" class="flex items-center gap-2 mx-1">
-                        <p-checkbox (onChange)="changeJobStatus(job.name)" formControlName="jobStatus" name="{{job.name}}" [value]="job.name" [(ngModel)]="selectedJobStatus" [inputId]="job.key"></p-checkbox>
-                        <label class="block text-sm font-medium text-gray-700" [for]="job.key">{{ job.name }}</label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="w-full flex justify-start px-3">
-                <label class="block text-base font-bold my-2 text-gray-700 text-center">C.) Work Experience</label>
-              </div>
-              <div class="grid grid-cols-1 overflow-x-auto">
-                <table class="md:w-full w-[80rem] grid">
-                  <tr class="grid grid-cols-5 gap-2">
-                    <th class="block text-sm font-medium text-gray-700">Employment after Graduation</th>
-                    <th class="block text-sm font-medium text-gray-700">Nature of Work</th>
-                    <th class="block text-sm font-medium text-gray-700">Job Status</th>
-                    <th class="block text-sm font-medium text-gray-700">Job Related to the Degree Earned </th>
-                    <th class="block text-sm font-medium text-gray-700">Enrolled in other Degree Courses</th>
-                  </tr>
-                  <tr [formGroupName]="work.key" *ngFor='let work of workExp' class="grid grid-cols-5  gap-2">
-                    <td class="block text-sm font-medium text-gray-700 m-auto text-center">{{work.name}}</td>
-                    <td>
-                      <input
-                      class="w-full border rounded outline-0"
-                      type="text"
-                      pInputText
-                      formControlName="natureOfWork"
-                    />
-                    </td>
-                    <td>
-                      <input
-                      class="w-full border rounded outline-0"
-                      type="text"
-                      pInputText
-                      formControlName="jobStatus"
-                    />
-                    </td>
-                    <td>
-                      <input
-                      class="w-full border rounded outline-0"
-                      type="text"
-                      pInputText
-                      formControlName="JobRelatedToDegree"
-                    />
-                    </td>
-                    <td>
-                      <input
-                      class="w-full border rounded outline-0"
-                      type="text"
-                      pInputText
-                      formControlName="enrolledOtherCourses"
-                    />
-                    </td>
-                  </tr>                 
-                </table>
-              </div>
-              <div class="w-full flex justify-start px-3">
-                <label class="block text-base font-bold my-1 text-gray-700 text-center">D.) Designation or Work Position: </label>
-              </div>
-              <div >
-                <div  class="flex gap-2 text-sm items-center " >
-                  <div class="block font-medium text-gray-700 my-2">Designation or Work Position:</div>
-                </div>
-                <div>
-                  <input
-                  class="w-full border rounded outline-0"
-                  type="text"
-                  placeholder="Enter Designation or Work Position..."
-                  pInputText
-                  formControlName="workPosition"
-                  required
-                  />
-                </div>
-                <div class="my-2">
-                  <label class="block text-sm font-medium text-gray-700">Number of years in the company</label>
-                  <select class="mt-1 relative" placeholder="Enter Number Of year" pInputText formControlName="yrsInCompany">
-                    <option value="Below1" selected >below 1</option>
-                    <option value="1To5">1-5</option>
-                    <option value="6To10">6-10</option>
-                    <option value="11To15">11-15</option>
-                    <option value="16To20">16-20</option>
-                    <option value="21To25">21-25</option>
-                    <option value="25Above">above  25</option>
-                  </select>
-                </div>
-                <div  class="flex gap-2 text-sm items-center " >
-                  <div class="block font-medium text-gray-700 my-1">Awards or recognitions received (please specify): </div>
-                </div>
-                <div>
-                  <input
-                    class="w-full border rounded outline-0"
-                    type="text"
-                    placeholder="Enter Awards or recognitions received..."
-                    pInputText
-                    formControlName="awards"
+                    formControlName="reasonOfHiring"
                     required
                   />
                 </div>
-                <div class="my-2">
-                  <label class="block text-sm font-medium text-gray-700">Monthly Income Range</label>
-                  <select class="mt-1 relative" placeholder="Enter Number Of year" pInputText formControlName="monthlyIncome">
-                    <option value="Below10k" selected >Below ₱10,000</option>
-                    <option value="10kTo20k">₱10,000 -  ₱20,000</option>
-                    <option value="21kTo30k">₱21,000 -  ₱30,000</option>
-                    <option value="31kTo40k">₱31,000 -  ₱40,000</option>
-                    <option value="40kTo50k">₱41,000 - ₱50,000</option>
-                    <option value="51kTo60k">₱51,000 - ₱60,000</option>
-                    <option value="61kTo70k">₱61,000 – ₱70,000</option>
-                    <option value="70kAbove">₱71,000 above</option>
-                  </select>
-                </div>
-                <div class="w-full flex-col justify-start px-3">
-                  <label class="block text-base font-bold my-2 text-gray-700">E.) How did you come to know about your current job? </label>
-                  <div *ngIf="!isOtherCurrentJob">
-                    <div *ngFor="let reason of reasonOfHiringList" class="flex mt-1 items-center gap-2 mx-1">
-                      <p-checkbox (onChange)="changeCauseOfHiring(reason.name)" formControlName="otherReasonOfHiring" name="{{reason.name}}" [value]="reason.name" [(ngModel)]="selectedReasonOfHiring" [inputId]="reason.key"></p-checkbox>
-                      <label class="block text-sm font-medium text-gray-700" [for]="reason.key">{{ reason.name }}</label>
-                    </div>
-                  </div>
-                  <div *ngIf="isOtherCurrentJob">
-                    <div  class="flex gap-2 text-sm items-center " >
-                      <div class="block font-medium text-gray-700 my-2">pls. specify:</div>
-                      <div (click)="changeCauseOfHiring('')"  class="block font-medium text-gray-700 my-2 hover:bg-blue-200 cursor-pointer bg-gray-200 px-2 py-1 rounded">undo   <i class="pi pi-undo"></i> </div>
-                    </div>
-                    <div>
-                      <input
-                      class="w-full border rounded outline-0"
-                      type="text"
-                      placeholder="Enter Other Occupation..."
-                      pInputText
-                      formControlName="reasonOfHiring"
-                      required
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="flex gap-2 my-2">
-                  <label class="block text-sm my-2 font-medium text-gray-700">Is your current job related to the degree earned from EVSU?</label>
-                  <div *ngFor="let isDegreeRelative of isJobIsBaseOnDegreeTaken" class="flex items-center gap-2 mx-1">
-                    <p-checkbox (onChange)="changeIsDegreeRelative(isDegreeRelative.key)" formControlName="isDegreeRelativeTakenInEVSU" name="{{isDegreeRelative.name}}" [value]="isDegreeRelative.key" [(ngModel)]="isSelectedDegreeRelative" [inputId]="isDegreeRelative.key"></p-checkbox>
-                    <label class="block text-sm font-medium text-gray-700" [for]="isDegreeRelative.key">{{ isDegreeRelative.name }}</label>
-                  </div>
-                </div>
-                <div class="flex gap-2 ">
-                  <label class="block text-sm my-2 font-medium text-gray-700">
-                    (Attach files- ID’s or Certificate of Employment)
-                  </label>
-                  <input type="file" accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg" formControlName="CertificateOfEmploy"  class="hidden" (change)="uploadCertificateOfEmp($event)" name="CertificateOfEmployment"/>
-                  <button
-                    (click)="clickUploadCertificateOfEmployment()"
-                    class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
-                  >
-                    <i class="pi pi-cloud-upload"></i>
-                    File
-                  </button>
-                </div>
               </div>
-              
             </div>
-            
-          </div>
-        </form>
-        
-        <form  [formGroup]="selfEmployInfo" class="grid ">
-          <div class="gap-3">
-            <div class="flex gap-2 my-1 flex-col" *ngIf="showEmploymentStatusForm=='Self-employed'">
-              <div class="flex gap-2 ">
-                <label class="block text-sm my-2 font-medium text-gray-700">
-                  If Self- employed 
-                  <i>(Attach file for proof but Optional)</i> :
-                </label>
-                <input type="file" accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg" formControlName="proofOfSelfEmployFile" class="hidden" (change)="uploadProofOfSelfEmploy($event)" name="proofOfSelfEmploy"/>
-                <button
-                  (click)="clickUploadSelfEmploy()"
-                  class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+            <div class="flex gap-2 my-2">
+              <label class="block text-sm my-2 font-medium text-gray-700"
+                >Is your current job related to the degree earned from
+                EVSU?</label
+              >
+              <div
+                *ngFor="let isDegreeRelative of isJobIsBaseOnDegreeTaken"
+                class="flex items-center gap-2 mx-1"
+              >
+                <p-checkbox
+                  (onChange)="changeIsDegreeRelative(isDegreeRelative.key)"
+                  formControlName="isDegreeRelativeTakenInEVSU"
+                  name="{{ isDegreeRelative.name }}"
+                  [value]="isDegreeRelative.key"
+                  [(ngModel)]="isSelectedDegreeRelative"
+                  [inputId]="isDegreeRelative.key"
+                ></p-checkbox>
+                <label
+                  class="block text-sm font-medium text-gray-700"
+                  [for]="isDegreeRelative.key"
+                  >{{ isDegreeRelative.name }}</label
                 >
-                  <i class="pi pi-cloud-upload"></i>
-                  File
-                </button>
-                </div>
-                <div>
-                  <div  class="flex gap-2 text-sm items-center " >
-                    <div class="block font-medium text-gray-700">Name of Business:</div>
-                  </div>
-                  <div>
-                    <input
-                    class="w-full border rounded outline-0"
-                    type="text"
-                    placeholder="Enter name of the business..."
-                    formControlName="businessName"
-                    pInputText
-                    required
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div  class="flex gap-2 text-sm items-center " >
-                    <div class="block font-medium text-gray-700">Address: </div>
-                  </div>
-                  <div>
-                    <input
-                    class="w-full border rounded outline-0"
-                    type="text"
-                    placeholder="Enter name of the business..."
-                    formControlName="address"
-                    pInputText
-                    required
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div  class="flex gap-2 text-sm items-center " >
-                    <div class="block font-medium text-gray-700">Nature of Business (please specify): </div>
-                  </div>
-                  <div>
-                    <input
-                    class="w-full border rounded outline-0"
-                    type="text"
-                    placeholder="Enter name of the business..."
-                    formControlName="natureOfBusiness"
-                    pInputText
-                    required
-                    />
-                  </div>
-                </div>
-            </div>
-          </div>
-        </form>
-
-        <form [formGroup]="unEmploy"  class="grid ">
-          <div class="gap-3">
-            <div class="flex gap-2 my-1 flex-col" *ngIf="showEmploymentStatusForm=='Unemployed'">
-              <div>
-                <div  class="flex gap-2 text-sm items-center my-1 " >
-                  <div class="block font-medium text-gray-700">If Unemployed:</div>
-                </div>
-                <div>
-                  <textarea
-                  class="w-full border rounded outline-0"
-                  type="text"
-                  placeholder="Please state your reason/s why you are unemployed..."
-                  pInputText
-                  formControlName="reasonOfUnEmploy"
-                  required
-                  ></textarea>
-                </div>
               </div>
             </div>
+            <div class="flex gap-2">
+              <label class="block text-sm my-2 font-medium text-gray-700">
+                (Attach files- ID’s or Certificate of Employment)
+              </label>
+              <input
+                type="file"
+                accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg"
+                formControlName="CertificateOfEmploy"
+                class="hidden"
+                (change)="uploadCertificateOfEmp($event)"
+                name="CertificateOfEmployment"
+              />
+              <button
+                (click)="clickUploadCertificateOfEmployment()"
+                class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+              >
+                <i class="pi pi-cloud-upload"></i>
+                File
+              </button>
+            </div>
           </div>
-        </form>
-
-
-
-        <div class="flex gap-2">
-          <button
-              class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-              mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
-          <button
-              class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-              mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
         </div>
-    </mat-step>
-
-
-    <mat-step [stepControl]="fourthFormGroup">
-      <ng-template matStepLabel>
-        <span class="text-black font-bold">WORK HISTORY</span>
-      </ng-template>
-      <p class="text-[12px] text-red-500">Fill out the given questionnaire. Indicate NA if not applicable.</p>
-      <div class="w-full flex justify-start px-3">
-        <label class="block text-base font-bold my-2 text-gray-700 text-center">For those with one (1) year and above past employment</label>
       </div>
-      <form [formGroup]="workHistoryFB" class="md:w-full grid grid-cols-1 md:overflow-x-hidden overflow-x-scroll">
-        <table class="grid md:w-full w-[100rem]">
-          <tr class="grid grid-cols-6">
-            <th class="block text-sm font-medium text-gray-700">Name of Company</th>
-            <th class="block text-sm font-medium text-gray-700">Address</th>
-            <th class="block text-sm font-medium text-gray-700">Year Employed</th>
-            <th class="block text-sm font-medium text-gray-700">Designation</th>
-            <th class="block text-sm font-medium text-gray-700">Number of Years Served</th>
-            <th class="block text-sm font-medium text-gray-700">Monthly Income (Optional)</th>
-          </tr>
-          <tr>
-            <td *ngFor="let work of workHistory" [formGroupName]="work.name" class="grid grid-cols-6 gap-2">
-              <div *ngFor="let workInput of work.nameOfInputs">
-                <input *ngIf="workInput !='MonthlyIncome'"
-                      class="w-full border rounded outline-0"
-                      type="{{workInput == 'NumOfYrServed' || workInput == 'YearEmployed' ? 'date' : 'text'}}"
-                      [formControlName]="workInput"
-                      pInputText
-                      required
-                      />
-                <input *ngIf="workInput =='MonthlyIncome'"
+    </form>
+
+    <form [formGroup]="selfEmployInfo" class="grid">
+      <div class="gap-3">
+        <div
+          class="flex gap-2 my-1 flex-col"
+          *ngIf="showEmploymentStatusForm == 'Self-employed'"
+        >
+          <div class="flex gap-2">
+            <label class="block text-sm my-2 font-medium text-gray-700">
+              If Self- employed
+              <i>(Attach file for proof but Optional)</i> :
+            </label>
+            <input
+              type="file"
+              accept=".pdf, .jpg, .jpeg, .png, .gif, .bmp, .tiff, .svg"
+              formControlName="proofOfSelfEmployFile"
+              class="hidden"
+              (change)="uploadProofOfSelfEmploy($event)"
+              name="proofOfSelfEmploy"
+            />
+            <button
+              (click)="clickUploadSelfEmploy()"
+              class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+            >
+              <i class="pi pi-cloud-upload"></i>
+              File
+            </button>
+          </div>
+          <div>
+            <div class="flex gap-2 text-sm items-center">
+              <div class="block font-medium text-gray-700">
+                Name of Business:
+              </div>
+            </div>
+            <div>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Enter name of the business..."
+                formControlName="businessName"
+                pInputText
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <div class="flex gap-2 text-sm items-center">
+              <div class="block font-medium text-gray-700">Address:</div>
+            </div>
+            <div>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Enter name of the business..."
+                formControlName="address"
+                pInputText
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <div class="flex gap-2 text-sm items-center">
+              <div class="block font-medium text-gray-700">
+                Nature of Business (please specify):
+              </div>
+            </div>
+            <div>
+              <input
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Enter name of the business..."
+                formControlName="natureOfBusiness"
+                pInputText
+                required
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <form [formGroup]="unEmploy" class="grid">
+      <div class="gap-3">
+        <div
+          class="flex gap-2 my-1 flex-col"
+          *ngIf="showEmploymentStatusForm == 'Unemployed'"
+        >
+          <div>
+            <div class="flex gap-2 text-sm items-center my-1">
+              <div class="block font-medium text-gray-700">If Unemployed:</div>
+            </div>
+            <div>
+              <textarea
+                class="w-full border rounded outline-0"
+                type="text"
+                placeholder="Please state your reason/s why you are unemployed..."
+                pInputText
+                formControlName="reasonOfUnEmploy"
+                required
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="flex gap-2">
+      <button
+        class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        matStepperPrevious
+      >
+        <i class="pi pi-arrow-circle-left"></i>
+        <p>Back</p>
+      </button>
+      <button
+        class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        matStepperNext
+      >
+        <p>Next</p>
+        <i class="pi pi-arrow-circle-right"></i>
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="fourthFormGroup">
+    <ng-template matStepLabel>
+      <span class="text-black font-bold">Work History</span>
+    </ng-template>
+    <p class="text-[12px] text-red-500">
+      Fill out the given questionnaire. Indicate NA if not applicable.
+    </p>
+    <div class="w-full flex justify-start px-3">
+      <label class="block text-base font-bold my-2 text-gray-700 text-center"
+        >For those with one (1) year and above past employment</label
+      >
+    </div>
+    <form
+      [formGroup]="workHistoryFB"
+      class="md:w-full grid grid-cols-1 md:overflow-x-hidden overflow-x-scroll"
+    >
+      <table class="grid md:w-full">
+        <tr class="hidden md:grid grid-cols-6">
+          <th class="block text-sm font-medium text-gray-700">
+            Name of Company
+          </th>
+          <th class="block text-sm font-medium text-gray-700">Address</th>
+          <th class="block text-sm font-medium text-gray-700">Year Employed</th>
+          <th class="block text-sm font-medium text-gray-700">Designation</th>
+          <th class="block text-sm font-medium text-gray-700">
+            Number of Years Served
+          </th>
+          <th class="block text-sm font-medium text-gray-700">
+            Monthly Income (Optional)
+          </th>
+        </tr>
+        <tr class="2">
+          <td
+            *ngFor="let work of workHistory"
+            [formGroupName]="work.name"
+            class="grid md:grid-cols-6 gap-2 relative"
+          >
+            <div *ngFor="let workInput of work.nameOfInputs" class="w-full">
+              <label for="" class="font-thin text-xs md:hidden">{{
+                getInputLabel(workInput)
+              }}</label>
+
+              <input
+                *ngIf="workInput != 'MonthlyIncome'"
+                class="w-full border rounded outline-0"
+                type="{{
+                  workInput == 'NumOfYrServed' || workInput == 'YearEmployed'
+                    ? 'date'
+                    : 'text'
+                }}"
+                [formControlName]="workInput"
+                pInputText
+                required
+              />
+
+              <input
+                *ngIf="workInput == 'MonthlyIncome'"
                 class="w-full border rounded outline-0"
                 type="number"
                 [formControlName]="workInput"
                 pInputText
                 required
-                />
-              </div>
-            </td>
-          </tr>
-        </table>
-      </form>
-      
-      <div class="flex gap-2">
-        <button
-            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
-        <button
-            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            mat-button matStepperNext><p>Next</p><i class="pi pi-arrow-circle-right"></i></button>
-      </div>
-    </mat-step>
+              />
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
 
-    <mat-step [stepControl]="fifthFormGroup">
-      <ng-template matStepLabel>
-        <span class="text-black font-bold">Final Survey</span>
-      </ng-template>
-      <div class="w-full flex justify-start px-3">
-        <label class="block text-base font-bold my-2 text-gray-700 text-center">We would appreciate an HONEST feedback.</label>
+    <div class="flex gap-2">
+      <button
+        class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        matStepperPrevious
+      >
+        <i class="pi pi-arrow-circle-left"></i>
+        <p>Back</p>
+      </button>
+      <button
+        class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        matStepperNext
+      >
+        <p>Next</p>
+        <i class="pi pi-arrow-circle-right"></i>
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="fifthFormGroup">
+    <ng-template matStepLabel>
+      <span class="text-black font-bold">Final Survey</span>
+    </ng-template>
+    <div class="w-full flex justify-start px-3">
+      <label class="block text-base font-bold my-2 text-gray-700 text-center"
+        >We would appreciate an HONEST feedback.</label
+      >
+    </div>
+    <div class="flex gap-2 text-sm items-center my-1">
+      <div class="block font-medium text-gray-700">
+        Please provide your suggestions/recommendations to further improve your
+        course curriculum and for the betterment of the university/institution.
       </div>
-      <div  class="flex gap-2 text-sm items-center my-1 " >
-        <div class="block font-medium text-gray-700">Please provide your suggestions/recommendations to further improve your course curriculum and for the betterment of the university/institution.</div>
-      </div>
-      <form [formGroup]="recommendation">
-        <textarea
-            formControlName="context"
-            class="w-full border rounded outline-0"
-            type="text"
-            pInputText
-            required
-        ></textarea>
-      </form>
-      <i class="block font-medium text-xs text-red-500 text-end w-full mt-3 text-gray-700">Thank you for your continued support and cooperation<i class="pi pi-heart-fill mx-3"></i></i>
-      <div class="flex gap-2">
-        <button
-            class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            mat-button matStepperPrevious><i class="pi pi-arrow-circle-left"></i><p>Back</p></button>
-        <button
-            class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            mat-button (click)="stepper.reset()"><p>Reset</p></button>
-            <button *ngIf="isSubmitting"
-            class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all w-24 px-3"
-            >
-            <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
-          </button>
-            <button *ngIf="!isSubmitting" (click)="submitSurvey()"
-            class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all  px-3"
-            ><p>Submit</p></button>
-      </div>
-      
-    </mat-step>
-  </mat-stepper>
-  
+    </div>
+    <form [formGroup]="recommendation">
+      <textarea
+        formControlName="context"
+        class="w-full border rounded outline-0"
+        type="text"
+        pInputText
+        required
+      ></textarea>
+    </form>
+    <i class="block font-medium text-xs text-end w-full mt-3 text-gray-700"
+      >Thank you for your continued support and cooperation<i
+        class="pi pi-heart-fill mx-3"
+      ></i
+    ></i>
+    <div class="flex gap-2 text-sm">
+      <button
+        class="grid grid-cols-2 mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        matStepperPrevious
+      >
+        <i class="pi pi-arrow-circle-left"></i>
+        <p>Back</p>
+      </button>
+      <button
+        class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+        mat-button
+        (click)="stepper.reset()"
+      >
+        <p>Reset</p>
+      </button>
+      <button
+        *ngIf="isSubmitting"
+        class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all w-24 px-3"
+      >
+        <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
+      </button>
+      <button
+        *ngIf="!isSubmitting"
+        (click)="submitSurvey()"
+        class="grid mt-3 place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all px-3"
+      >
+        <p>Submit</p>
+      </button>
+    </div>
+  </mat-step>
+</mat-stepper>

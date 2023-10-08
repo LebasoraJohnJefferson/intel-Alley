@@ -3,35 +3,54 @@
     <h1 class="font-bold text-xl md:text-3xl text-white">Surveys</h1>
     <p class="text-slate-100 text-[12px]">Information about the system</p>
   </div>
-  <div class="flex mt-10">    
+  <div class="flex mt-10">
     <div class="">
-      <label class="block text-sm font-medium text-gray-700 w-[200px]">Select Survey</label>
-      <select (change)="formChange($event)" class="mt-1 relative" placeholder="Civil Status" pInputText >
+      <label class="block text-sm font-medium text-gray-700 w-[200px]"
+        >Select Survey</label
+      >
+      <select
+        (change)="formChange($event)"
+        class="mt-1 relative"
+        placeholder="Civil Status"
+        pInputText
+      >
         <option value="-1" selected *ngIf="!isSurveyTaken">Default</option>
-        <option [value]="_survey.id" *ngFor="let _survey of surveyArray" >{{_survey.surveyName}}</option>
-        <option selected *ngIf="isSurveyTaken && surveyArray.length == 0">no survey</option>
+        <option [value]="_survey.id" *ngFor="let _survey of surveyArray">
+          {{ _survey.surveyName }}
+        </option>
+        <option selected *ngIf="isSurveyTaken && surveyArray.length == 0">
+          no survey
+        </option>
       </select>
     </div>
   </div>
-  <div class="mt-10 pb-10 ">
-    <div class="font-semibold text-lg md:text-xl mb-5 text-slate-800 ">
-      
-
+  <div class="mt-10 pb-10">
+    <div class="font-semibold text-lg md:text-xl mb-5 text-slate-800">
       <!-- show answer analytics -->
-      <ng-container *ngIf="isSurveyTaken  && surveyId == -1">
+      <ng-container *ngIf="isSurveyTaken && surveyId == -1">
         <app-survey-content></app-survey-content>
       </ng-container>
 
-      <app-custom-survey (refreshSurvey)="refreshSurveyTrigger(-1)"  *ngIf="surveyId != -1" [toFillUp]="toFillUp[0]">
-
+      <app-custom-survey
+        (refreshSurvey)="refreshSurveyTrigger(-1)"
+        *ngIf="surveyId != -1"
+        [toFillUp]="toFillUp[0]"
+      >
       </app-custom-survey>
       <ng-container *ngIf="!isSurveyTaken && surveyId == -1">
         <app-survey-form (submitSurveyEmit)="submitSurvey()"></app-survey-form>
       </ng-container>
     </div>
   </div>
-  <div *ngIf="surveyId == -1 && isSurveyTaken" class="flex flex-col justify-center items-center w-full">
+  <div
+    *ngIf="surveyId == -1 && isSurveyTaken"
+    class="flex flex-col justify-center items-center w-full"
+  >
     <p class="font-bold text-xl pt-3">No Survey(s) Found!</p>
-    <img src="../../../../../assets/images/noSurvey.jpg" class="h-64 w-64"  alt="no survey">
+    <img
+      src="../../../../../assets/images/noSurvey.jpg"
+      class="h-64 w-64"
+      alt="no survey"
+    />
   </div>
 </div>

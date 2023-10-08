@@ -1,12 +1,15 @@
-<div class="flex-full w-full flex flex-wrap  gap-y-2">
-    <div class="border  border-red-200 grid m-auto grid-cols-1 w-[20rem]   px-2 shadow-md rounded border" *ngFor="let report of reports">
-        <span class="text-[16px] w-full h-full flex items-center">
-            <p class="mt-2 text-center w-full text-slate-800 text-[14px]">
-                {{report.question}}
-            </p>
-        </span>
-        <div class=" flex items-center  w-full">
-            <app-pie-chart [result]="report.result"></app-pie-chart>
-        </div>
+<div class="flex-full w-full flex flex-wrap gap-y-2">
+  <div
+    class="border border-red-200 grid m-auto grid-cols-1 w-[20rem] px-2 shadow-md rounded"
+    *ngFor="let report of reports"
+  >
+    <span class="text-[16px] w-full h-full flex items-center">
+      <p class="mt-2 text-center w-full text-slate-800 text-[14px]">
+        {{ report.question }}
+      </p>
+    </span>
+    <div class="flex items-center w-full">
+      <app-pie-chart [result]="report.result"></app-pie-chart>
     </div>
+  </div>
 </div>
