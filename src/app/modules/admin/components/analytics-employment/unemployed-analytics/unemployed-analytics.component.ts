@@ -16,7 +16,7 @@ export class UnemployedAnalyticsComponent {
     private _analyticService:AnalyticService,
     private route: ActivatedRoute
   ){
-    
+
   }
 
   ngOnInit(): void {
@@ -40,7 +40,6 @@ export class UnemployedAnalyticsComponent {
     this._analyticService.otherUnemployedDetails(year).subscribe({
       next:(res)=>{
         this.unemployedDetails = res
-        console.log(this.unemployedDetails)
       }
     })
   }

@@ -31,7 +31,7 @@ export class AlumComponent implements OnInit {
     'workEpx8y_9y':'8 years - 9 years',
     'workEpx10y_more':'10 years & onwards'
   }
-  
+
   educationalBG:any;
   actionModal: boolean = false;
   isLoading: boolean = true;
@@ -83,7 +83,6 @@ export class AlumComponent implements OnInit {
   getAlum() {
     this.alumniService.getAlum(this.alumId).subscribe(
       (response: any) => {
-        console.log(response)
         this.alum = response;
         this.courses = {
           'Course':response?.AlumniCredential?.Course?.title,

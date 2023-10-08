@@ -30,7 +30,7 @@ export class SurveysComponent implements OnInit {
   ) {}
 
   importedStudents: any[] = [];
-  
+
   ngOnInit(): void {
     this.getSurvey();
 
@@ -55,7 +55,7 @@ export class SurveysComponent implements OnInit {
         this.surveys = data.surveys
       },error:(err)=>{
         console.log(err)
-      } 
+      }
     })
   }
 
@@ -97,11 +97,10 @@ export class SurveysComponent implements OnInit {
     }
 
     this.submitLoading = true;
-    
+
     if(this.surveyId ==-1){
       const isActiveTemp = this.createForm.controls['isActive'].value == null ? false : true
       this.createForm.controls['isActive'].setValue(isActiveTemp)
-      console.log(this.createForm.value)
       this._surveyService.createSurvey(this.createForm.value).subscribe({
           next:(response: any) => {
             this.submitLoading = false;
@@ -132,7 +131,7 @@ export class SurveysComponent implements OnInit {
       }
     );
     }
-    
+
   }
 
 

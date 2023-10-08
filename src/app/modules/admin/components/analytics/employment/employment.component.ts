@@ -41,10 +41,9 @@ export class EmploymentComponent {
     changeSelectedRoute(status:string){
         this.routeSelected = status
         this.showData(status)
-        console.log(status)
         this.currentRoute = this.routingObj[status]
     }
-    
+
 
     showData(status:string){
         this.isLoading = true
@@ -71,7 +70,7 @@ export class EmploymentComponent {
 
 
     ngOnInit() {
-        
+
         this.changeSelectedRoute(this.routeSelected)
         for(let year = new Date().getFullYear(); year >= 2000; year--) {
             this.years.push(year);
@@ -101,6 +100,6 @@ export class EmploymentComponent {
                 }
             ]
         };
-        
+
     }
 }

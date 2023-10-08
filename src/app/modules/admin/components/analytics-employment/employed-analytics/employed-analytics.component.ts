@@ -19,7 +19,7 @@ export class EmployedAnalyticsComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router
   ){
-    
+
   }
 
   getData(year:number){
@@ -49,13 +49,12 @@ export class EmployedAnalyticsComponent implements OnInit{
   ngOnInit(): void {
     this.changeParams()
   }
-  
+
   viewOthers(field:any){
     this.title = field == 'OtherOccupClass' ? 'Occupation' : 'Job Source'
     this.createEventModal = true
     this._analyticService.otherAnswer(field,this.newDate).subscribe((res)=>{
       this.others = res
-      console.log(this.others)
     })
   }
 
