@@ -96,7 +96,7 @@ export class SurveyFormComponent implements OnInit {
     { name: 'Permanent', key: 'Permanent' },
     { name: 'Temporary', key: 'Temporary' },
     { name: 'Contractual', key: 'Contractual' },
-    { name: 'Job Order/Casual/COS', key: 'Order/Casual/COS' },
+    { name: 'Order/Casual/COS', key: 'Order/Casual/COS' }
   ];
 
   eduBG: any = [
@@ -199,9 +199,9 @@ export class SurveyFormComponent implements OnInit {
       yearGraduated: ['', Validators.required],
     }),
     tertiary: this._formBuilder.group({
-      university: ['', Validators.required],
-      highLvl: ['', Validators.required],
-      yearGraduated: ['', Validators.required],
+      university: [''],
+      highLvl: [''],
+      yearGraduated: [''],
     }),
     baccalaureate: this._formBuilder.group({
       university: [''],
@@ -442,8 +442,7 @@ export class SurveyFormComponent implements OnInit {
       errorMsg = 'Contact number inputs error';
     if (
       this.educationalBG.controls.elementary.invalid ||
-      this.educationalBG.controls.secondary.invalid ||
-      this.educationalBG.controls.tertiary.invalid
+      this.educationalBG.controls.secondary.invalid
     )
       errorMsg +=
         errorMsg != ''
