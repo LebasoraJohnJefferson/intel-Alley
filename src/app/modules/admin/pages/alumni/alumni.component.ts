@@ -240,7 +240,7 @@ export class AlumniComponent implements OnInit {
     });
     FileSaver.saveAs(
       data,
-      'EvsuElection_Voters' +
+      'Alumni_credentials' +
         '_export_' +
         new Date().getTime() +
         EXCEL_EXTENSION
