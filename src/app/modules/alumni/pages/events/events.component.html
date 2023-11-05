@@ -16,7 +16,7 @@
       />
     </div>
 
-    <article *ngIf="events.length == 0 && !isLoadingEvent">
+    <article *ngIf="events?.length == 0 && !isLoadingEvent">
       <div class="flex items-center justify-center w-full h-full flex-col">
         <img
           src="../../../../../assets/images/empty-event.png"
@@ -28,7 +28,7 @@
     </article>
 
     <div
-      *ngIf="events.length != 0 && !isLoadingEvent"
+      *ngIf="events?.length != 0 && !isLoadingEvent"
       class="flex flex-col items-center"
     >
       <div class="flex flex-col items-center gap-2 w-full">

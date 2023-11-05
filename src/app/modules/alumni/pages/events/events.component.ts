@@ -49,7 +49,7 @@ export class EventsComponent implements OnInit {
 
   getEvents() {
     this.isLoadingEvent = true;
-    this._eventService.getEvents().subscribe({
+    this._eventService.getUserEvents().subscribe({
       next: (data: any) => {
         this.isLoadingEvent = false;
         this.events = data.events;
