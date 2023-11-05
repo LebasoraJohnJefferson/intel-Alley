@@ -120,6 +120,7 @@ export class AlumniComponent implements OnInit {
     this.alumniService.getAlumni().subscribe(
       (response: any) => {
         this.alumni = response;
+        console.log(response)
       },
       (error: any) => {}
     );
@@ -194,18 +195,16 @@ export class AlumniComponent implements OnInit {
       { title: 'Name', dataKey: 'name' },
       { title: 'Email', dataKey: 'email' },
       { title: 'Course', dataKey: 'course' },
-      { title: 'Section', dataKey: 'section' },
       { title: 'Year', dataKey: 'year' },
     ];
 
     this.alumni.map((item: any) => {
       data.push({
-        studentId: item.StudentCredential.schoolId,
+        studentId: item.AlumniCredential?.studentId,
         name: item.name,
         email: item.email,
-        course: item.StudentCredential.Course.acronym,
-        section: item.StudentCredential.section,
-        year: item.StudentCredential.year,
+        course: item.AlumniCredential?.Course?.acronym,
+        year: item.AlumniCredential?.gradClass,
       });
     });
 
@@ -223,7 +222,7 @@ export class AlumniComponent implements OnInit {
     import('xlsx').then((xlsx) => {
       let filteredAlumni  = this.alumni.map((alumData:any)=>{
         const { password, isDeleted, createdAt, updatedAt,AlumniCredential, ...rest } = alumData;
-        return rest;
+        return {...rest,"courseId":AlumniCredential?.Course?.id,"studentId":AlumniCredential.studentId,"gradClass":AlumniCredential.gradClass};
       })
       const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
       const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
