@@ -222,7 +222,7 @@ export class AlumniComponent implements OnInit {
   exportExcel() {
     import('xlsx').then((xlsx) => {
       let filteredAlumni  = this.alumni.map((alumData:any)=>{
-        const { password, isDeleted, createdAt, updatedAt, ...rest } = alumData;
+        const { password, isDeleted, createdAt, updatedAt,AlumniCredential, ...rest } = alumData;
         return rest;
       })
       const worksheet = xlsx.utils.json_to_sheet(filteredAlumni );
