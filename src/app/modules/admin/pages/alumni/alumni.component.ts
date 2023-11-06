@@ -59,7 +59,7 @@ export class AlumniComponent implements OnInit {
       { field: 'AlumniCredential.studentId', header: 'Student ID' },
       { field: 'name', header: 'Name' },
       { field: 'AlumniCredential.Course.acronym', header: 'Course' },
-      { field: 'class', header: 'Class' },
+      { field: 'AlumniCredential.gradClass', header: 'Class' },
       { field: 'email', header: 'Email' },
     ];
 
