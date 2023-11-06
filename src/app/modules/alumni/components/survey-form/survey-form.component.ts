@@ -190,12 +190,12 @@ export class SurveyFormComponent implements OnInit {
   educationalBG = this._formBuilder.group({
     elementary: this._formBuilder.group({
       university: ['', Validators.required],
-      highLvl: ['', Validators.required],
+      highLvl: [''],
       yearGraduated: ['', Validators.required],
     }),
     secondary: this._formBuilder.group({
       university: ['', Validators.required],
-      highLvl: ['', Validators.required],
+      highLvl: [''],
       yearGraduated: ['', Validators.required],
     }),
     tertiary: this._formBuilder.group({
@@ -441,8 +441,10 @@ export class SurveyFormComponent implements OnInit {
     if (this.generalInfo.controls.contactNumber.invalid && errorMsg != '')
       errorMsg = 'Contact number inputs error';
     if (
-      this.educationalBG.controls.elementary.invalid ||
-      this.educationalBG.controls.secondary.invalid
+      this.educationalBG.controls.elementary.controls['university'].invalid ||
+      this.educationalBG.controls.elementary.controls['yearGraduated'].invalid ||
+      this.educationalBG.controls.secondary.controls['university'].invalid ||
+      this.educationalBG.controls.secondary.controls['yearGraduated'].invalid
     )
       errorMsg +=
         errorMsg != ''
