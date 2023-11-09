@@ -34,6 +34,11 @@ export class EventService {
     return this._http.get(`${BASEURL}/api/event/`);
   }
 
+
+  getUserEvents(): Observable<any> {
+    return this._http.get(`${BASEURL}/api/event/alumni`);
+  }
+
   likes(eventId: number) {
     return this._http.post(`${BASEURL}/api/event/like/${eventId}`, '');
   }

@@ -453,8 +453,10 @@ export class SurveyFormComponent implements OnInit {
     if (this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs';
     if (this.generalInfo.controls.contactNumber.invalid && errorMsg != '') errorMsg = 'Contact number inputs error';
     if (
-      this.educationalBG.controls.elementary.invalid ||
-      this.educationalBG.controls.secondary.invalid
+      this.educationalBG.controls.elementary.controls['university'].invalid ||
+      this.educationalBG.controls.elementary.controls['yearGraduated'].invalid ||
+      this.educationalBG.controls.secondary.controls['university'].invalid ||
+      this.educationalBG.controls.secondary.controls['yearGraduated'].invalid
     )
       errorMsg +=
         errorMsg != ''
