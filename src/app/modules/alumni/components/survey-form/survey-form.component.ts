@@ -35,7 +35,17 @@ export class SurveyFormComponent implements OnInit {
   particularsValue: any;
   isSubmitting: boolean = false;
 
+  isCompanyShow:boolean = false
+
   selfEmployInfo!: FormGroup;
+
+  yearGraduated:number[]=[]
+
+  boolenCategory:any = [
+    { name: 'Yes', key: '1' },
+    { name: 'No', key: '0' }
+  ]
+
 
   items: any = {
     NameOfCompany: 'Company',
@@ -45,6 +55,7 @@ export class SurveyFormComponent implements OnInit {
     NumOfYrServed: 'Years Served',
     MonthlyIncome: 'Monthly Income (Optional)',
   };
+  
 
   categories: any[] = [
     { name: 'Employed', key: 'Employed' },
@@ -190,32 +201,26 @@ export class SurveyFormComponent implements OnInit {
   educationalBG = this._formBuilder.group({
     elementary: this._formBuilder.group({
       university: ['', Validators.required],
-      highLvl: ['', Validators.required],
       yearGraduated: ['', Validators.required],
     }),
     secondary: this._formBuilder.group({
       university: ['', Validators.required],
-      highLvl: ['', Validators.required],
       yearGraduated: ['', Validators.required],
     }),
     tertiary: this._formBuilder.group({
       university: [''],
-      highLvl: [''],
       yearGraduated: [''],
     }),
     baccalaureate: this._formBuilder.group({
       university: [''],
-      highLvl: [''],
       yearGraduated: [''],
     }),
     master: this._formBuilder.group({
       university: [''],
-      highLvl: [''],
       yearGraduated: [''],
     }),
     doctorate: this._formBuilder.group({
       university: [''],
-      highLvl: [''],
       yearGraduated: [''],
     }),
     profExam1: this._formBuilder.group({
@@ -236,6 +241,7 @@ export class SurveyFormComponent implements OnInit {
     jobStatus: ['', Validators.required],
     workPosition: ['', Validators.required],
     orgName: ['', Validators.required],
+    orgNumber:[Validators.required, Validators.pattern(/^(\9)\d{9}$/)],
     orgAddress: ['', Validators.required],
     yrsInCompany: ['', Validators.required],
     awards: ['', Validators.required],
@@ -316,6 +322,13 @@ export class SurveyFormComponent implements OnInit {
       natureOfBusiness: new FormControl('', [Validators.required]),
       proofOfSelfEmployFile: new FormControl(),
     });
+    for( let i = 1990; i <= new Date().getFullYear();i++){
+      this.yearGraduated.push(i)
+    }
+  }
+
+  showCompanyOthers(event:any){
+    this.isCompanyShow=event.target.checked
   }
 
   getInputLabel(key: any) {
@@ -438,8 +451,7 @@ export class SurveyFormComponent implements OnInit {
     this.isSubmitting = true;
     let errorMsg = '';
     if (this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs';
-    if (this.generalInfo.controls.contactNumber.invalid && errorMsg != '')
-      errorMsg = 'Contact number inputs error';
+    if (this.generalInfo.controls.contactNumber.invalid && errorMsg != '') errorMsg = 'Contact number inputs error';
     if (
       this.educationalBG.controls.elementary.invalid ||
       this.educationalBG.controls.secondary.invalid
@@ -465,6 +477,10 @@ export class SurveyFormComponent implements OnInit {
     }
 
     if (this.showEmploymentStatusForm == 'Employed') {
+      if (this.employmentInfo.controls.orgNumber.invalid){
+        this.isSubmitting = false;
+        return  this.toast.warning('Contact number of organization is incorrect');
+      }
       if (this.uploadFilePoorOfEmp) {
         if (
           this.uploadFilePoorOfEmp?.type !== 'application/pdf' &&

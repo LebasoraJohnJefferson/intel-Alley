@@ -75,7 +75,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700">Sex</label>
+          <label class="block text-sm font-medium text-gray-700">Gender</label>
           <select
             class="mt-1 relative"
             placeholder="Civil Status"
@@ -131,13 +131,10 @@
     <form [formGroup]="educationalBG" class="grid gap-3">
       <div class="overflow-x-auto">
         <table class="md:w-full grid gap-4">
-          <tr class="hidden md:grid grid-cols-4 gap-2">
+          <tr class="hidden md:grid grid-cols-3 gap-2">
             <th class="block text-sm font-medium text-gray-700"></th>
             <th class="block text-sm font-medium text-gray-700">
               University / College
-            </th>
-            <th class="block text-sm font-medium text-gray-700">
-              Highest Level/Units Earned (if not graduated)
             </th>
             <th class="block text-sm font-medium text-gray-700">
               Year Graduated
@@ -146,7 +143,7 @@
           <tr
             [formGroupName]="EducationalBG.key"
             *ngFor="let EducationalBG of eduBG"
-            class="grid md:grid-cols-4 md:gap-4"
+            class="grid md:grid-cols-3 md:gap-4"
           >
             <td class="block text-sm font-bold text-gray-700 md:text-center">
               {{ EducationalBG.name }}
@@ -163,28 +160,18 @@
             </td>
             <td>
               <label for="" class="font-thin text-xs md:hidden"
-                >Highest Level/Units Earned (if not graduated)
-              </label>
-
-              <input
-                class="w-full border rounded outline-0"
-                type="text"
-                pInputText
-                formControlName="highLvl"
-                required
-              />
-            </td>
-            <td>
-              <label for="" class="font-thin text-xs md:hidden"
                 >Year Graduated
               </label>
-              <input
+              <select pInputText required formControlName="yearGraduated" class="w-full border rounded outline-0">
+                <option  *ngFor="let year of yearGraduated" [value]="year">{{year}}</option>
+              </select>
+              <!-- <input
                 class="w-full border rounded outline-0"
-                type="date"
+                type="number"
                 pInputText
                 formControlName="yearGraduated"
                 required
-              />
+              /> -->
             </td>
           </tr>
         </table>
@@ -408,28 +395,52 @@
                 required
               />
             </li>
-            <li class="flex gap-2 my-2">
-              <label class="block text-sm my-2 font-medium text-gray-700"
-                >Type of Organization</label
-              >
-              <div
-                *ngFor="let typeOfOrg of typeOfOrganization"
-                class="flex items-center gap-2 mx-1"
-              >
-                <p-checkbox
-                  (onChange)="changeTypeOfOrganization(typeOfOrg.name)"
-                  formControlName="typeOfOrgChosen"
-                  name="{{ typeOfOrg.name }}"
-                  [value]="typeOfOrg.name"
-                  [(ngModel)]="selectedTypeOfOrganization"
-                  [inputId]="typeOfOrg.key"
-                ></p-checkbox>
-                <label
-                  class="block text-sm font-medium text-gray-700"
-                  [for]="typeOfOrg.key"
-                  >{{ typeOfOrg.name }}</label
-                >
+            <li>
+              <div class="block text-sm font-medium text-gray-700 my-2">
+                Organization contact number:
               </div>
+              <input
+                class="w-full border rounded outline-0"
+                type="number"
+                placeholder="Enter Organization address"
+                formControlName="orgNumber"
+                pInputText
+                required
+              />
+            </li>
+            <li class="flex gap-2 my-2 items-center">
+              <label class="block text-sm my-2 font-medium text-gray-700"
+                >Type of Company/Organization</label
+              >
+              <div *ngIf="!isCompanyShow" class="flex">
+                <div
+                  *ngFor="let typeOfOrg of typeOfOrganization"
+                  class="flex items-center gap-2 mx-1"
+                >
+                  <p-checkbox
+                    (onChange)="changeTypeOfOrganization(typeOfOrg.name)"
+                    formControlName="typeOfOrgChosen"
+                    name="{{ typeOfOrg.name }}"
+                    [value]="typeOfOrg.name"
+                    [(ngModel)]="selectedTypeOfOrganization"
+                    [inputId]="typeOfOrg.key"
+                  ></p-checkbox>
+                  <label
+                    class="block text-sm font-medium text-gray-700"
+                    [for]="typeOfOrg.key"
+                    >{{ typeOfOrg.name }}</label
+                  >
+                </div>
+              </div>
+              <div class="flex gap-1 items-center">
+                <input class="w-[18px] outline-0 border-2 border-gray-300 h-[18px] shadow-md " type="checkbox" (change)="showCompanyOthers($event)">
+                <label
+                    class="block text-sm font-medium text-gray-700"
+                    >Others</label>
+              </div>
+                <div *ngIf="isCompanyShow">
+                  <input formControlName="typeOfOrgChosen" pInputText  class="w-full py-2 h-[28px] border rounded outline-0" type="text">
+                </div>
             </li>
           </ol>
           <div class="w-full flex-col justify-start px-3">
@@ -481,30 +492,17 @@
             </div>
           </div>
           <div class="w-full flex justify-start px-3">
-            <div class="md:w-full w-[25rem] grid overflow-x-auto">
+            <div class="flex items-center gap-4">
               <label class="block text-sm my-2 font-medium text-gray-700"
                 >Job Status</label
               >
-              <div class="grid grid-cols-4 gap-2 md:w-full w-[60rem]">
-                <div
-                  *ngFor="let job of jobStatus"
-                  class="flex items-center gap-2 mx-1"
-                >
-                  <p-checkbox
-                    (onChange)="changeJobStatus(job.name)"
+                  <p-dropdown 
+                    [options]="jobStatus" 
+                    [(ngModel)]="selectedJobStatus" 
                     formControlName="jobStatus"
-                    name="{{ job.name }}"
-                    [value]="job.name"
-                    [(ngModel)]="selectedJobStatus"
-                    [inputId]="job.key"
-                  ></p-checkbox>
-                  <label
-                    class="block text-sm font-medium text-gray-700"
-                    [for]="job.key"
-                    >{{ job.name }}</label
-                  >
-                </div>
-              </div>
+                    optionLabel="name" 
+                    placeholder="Select a job status"></p-dropdown>
+                
             </div>
           </div>
           <div class="w-full flex justify-start px-3">
@@ -551,28 +549,34 @@
                   />
                 </td>
                 <td>
-                  <input
+                  <select
                     class="w-full border rounded outline-0"
-                    type="text"
+                    formControlName="jobStatus" 
                     pInputText
-                    formControlName="jobStatus"
-                  />
+                  >
+                    <option disabled></option>
+                    <option *ngFor="let job of jobStatus" value="{{job.key}}">{{job.name}}</option>
+                  </select>
                 </td>
                 <td>
-                  <input
-                    class="w-full border rounded outline-0"
-                    type="text"
-                    pInputText
-                    formControlName="JobRelatedToDegree"
-                  />
+                  <select
+                      class="w-full border rounded outline-0"
+                      formControlName="JobRelatedToDegree" 
+                      pInputText
+                    >
+                    <option class="text-slate-300" disabled ></option>
+                    <option *ngFor="let bool of boolenCategory" value="{{bool.key}}">{{bool.name}}</option>
+                  </select>
                 </td>
                 <td>
-                  <input
-                    class="w-full border rounded outline-0"
-                    type="text"
-                    pInputText
-                    formControlName="enrolledOtherCourses"
-                  />
+                  <select
+                      class="w-full border rounded outline-0"
+                      formControlName="enrolledOtherCourses" 
+                      pInputText
+                    >
+                    <option class="text-slate-300" disabled ></option>
+                    <option *ngFor="let bool of boolenCategory" value="{{bool.key}}">{{bool.name}}</option>
+                  </select>
                 </td>
               </tr>
             </table>
@@ -884,7 +888,7 @@
     </p>
     <div class="w-full flex justify-start px-3">
       <label class="block text-base font-bold my-2 text-gray-700 text-center"
-        >For those with one (1) year and above past employment</label
+        >For those with 1year and above past employment before you graduate</label
       >
     </div>
     <form
