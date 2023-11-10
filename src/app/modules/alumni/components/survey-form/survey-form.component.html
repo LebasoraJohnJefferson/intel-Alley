@@ -891,57 +891,39 @@
         >For those with 1year and above past employment before you graduate</label
       >
     </div>
-    <form
-      [formGroup]="workHistoryFB"
-      class="md:w-full grid grid-cols-1 md:overflow-x-hidden overflow-x-scroll"
-    >
+    <div>
+      <button (click)="addWorkHistoryFild()" class="px-2 flex items-center justify-center gap-1 py-1 rounded bg-slate-200 shadow-md text-[12px] ml-2 my-2 text-slate-700">
+        <i class="pi pi-plus-circle"></i>
+        Add more</button>
+    </div>
+    <form [formGroup]="workHistoryFB" class="md:w-full grid grid-cols-1 md:overflow-x-hidden overflow-x-scroll">
       <table class="grid md:w-full">
         <tr class="hidden md:grid grid-cols-6">
-          <th class="block text-sm font-medium text-gray-700">
-            Name of Company
-          </th>
+          <th class="block text-sm font-medium text-gray-700">Name of Company</th>
           <th class="block text-sm font-medium text-gray-700">Address</th>
           <th class="block text-sm font-medium text-gray-700">Year Employed</th>
           <th class="block text-sm font-medium text-gray-700">Designation</th>
-          <th class="block text-sm font-medium text-gray-700">
-            Number of Years Served
-          </th>
-          <th class="block text-sm font-medium text-gray-700">
-            Monthly Income (Optional)
-          </th>
+          <th class="block text-sm font-medium text-gray-700">Number of Years Served</th>
+          <th class="block text-sm font-medium text-gray-700">Monthly Income (Optional)</th>
         </tr>
         <tr class="2">
-          <td
-            *ngFor="let work of workHistory"
-            [formGroupName]="work.name"
-            class="grid md:grid-cols-6 gap-2 relative"
-          >
+          <td *ngFor="let work of workHistory" [formGroupName]="work.name" class="grid md:grid-cols-6 gap-2 relative">
             <div *ngFor="let workInput of work.nameOfInputs" class="w-full">
-              <label for="" class="font-thin text-xs md:hidden">{{
-                getInputLabel(workInput)
-              }}</label>
-
+              <label for="" class="font-thin text-xs md:hidden">{{ getInputLabelInWorkHistory(workInput) }}</label>
+  
               <input
-                *ngIf="workInput != 'MonthlyIncome'"
-                class="w-full border rounded outline-0"
-                type="{{
-                  workInput == 'NumOfYrServed' || workInput == 'YearEmployed'
-                    ? 'date'
-                    : 'text'
-                }}"
-                [formControlName]="workInput"
-                pInputText
-                required
-              />
+              *ngIf="workInput != 'NumOfYrServed' && workInput != 'YearEmployed'"
+              class="w-full border rounded outline-0"
+              [type]="workInput === 'MonthlyIncome' ? 'number' : 'text'"
+              [formControlName]="workInput"
+              pInputText
+              required
+            />
+          
+            <select *ngIf="workInput == 'NumOfYrServed' || workInput === 'YearEmployed'" pInputText required [formControlName]="workInput" class="w-full border rounded outline-0">
+              <option *ngFor="let year of yearGraduated" [value]="year">{{year}}</option>
+            </select>
 
-              <input
-                *ngIf="workInput == 'MonthlyIncome'"
-                class="w-full border rounded outline-0"
-                type="number"
-                [formControlName]="workInput"
-                pInputText
-                required
-              />
             </div>
           </td>
         </tr>

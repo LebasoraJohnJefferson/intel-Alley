@@ -138,53 +138,13 @@ export class SurveyFormComponent implements OnInit {
     { name: 'No', key: false },
   ];
 
-  workHistory: any = [
-    {
-      name: 'firstForm',
-      nameOfInputs: [
-        'NameOfCompany',
-        'Address',
-        'YearEmployed',
-        'Designation',
-        'NumOfYrServed',
-        'MonthlyIncome',
-      ],
-    },
-    // {
-    //   name: 'secondForm',
-    //   nameOfInputs: [
-    //     'NameOfCompany',
-    //     'Address',
-    //     'YearEmployed',
-    //     'Designation',
-    //     'NumOfYrServed',
-    //     'MonthlyIncome',
-    //   ],
-    // },
-  ];
+  workHistory: any[]=[];
+  workHistoryFB: any ;
 
   recommendation = this._formBuilder.group({
     context: ['', Validators.required],
   });
 
-  workHistoryFB: any = this._formBuilder.group({
-    firstForm: this._formBuilder.group({
-      NameOfCompany: [''],
-      Address: [''],
-      YearEmployed: [''],
-      Designation: [''],
-      NumOfYrServed: [''],
-      MonthlyIncome: [''],
-    }),
-    secondForm: this._formBuilder.group({
-      NameOfCompany: [''],
-      Address: [''],
-      YearEmployed: [''],
-      Designation: [''],
-      NumOfYrServed: [''],
-      MonthlyIncome: [''],
-    }),
-  });
 
   generalInfo = this._formBuilder.group({
     birthDay: ['', [Validators.required]],
@@ -313,7 +273,9 @@ export class SurveyFormComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public toast: HotToastService,
     private _surveyService: SurveyService
-  ) {}
+  ) {
+    this.createFormWOrkHistory()
+  }
 
   ngOnInit() {
     this.selfEmployInfo = new FormGroup({
@@ -447,7 +409,58 @@ export class SurveyFormComponent implements OnInit {
     if (element) element.click();
   }
 
+  createFormWOrkHistory(): void {
+    const formGroupConfig: any = {};
+
+    this.workHistory.forEach((workItem:any) => {
+      const formGroup: any = {};
+      workItem.nameOfInputs.forEach((input:any) => {
+        formGroup[input] = [''];
+      });
+
+      formGroupConfig[workItem.name] = this._formBuilder.group(formGroup);
+    });
+
+    this.workHistoryFB = this._formBuilder.group(formGroupConfig);
+  }
+
+
+  addWorkHistoryFild(){
+
+    const newFormName = `${this.workHistory.length + 1}Form`;
+
+    this.workHistory.push({
+      name: newFormName,
+      nameOfInputs: [
+        'NameOfCompany',
+        'Address',
+        'YearEmployed',
+        'Designation',
+        'NumOfYrServed',
+        'MonthlyIncome',
+      ],
+    });
+
+    const newFormGroup = this._formBuilder.group({
+      NameOfCompany: [''],
+      Address: [''],
+      YearEmployed: [''],
+      Designation: [''],
+      NumOfYrServed: [''],
+      MonthlyIncome: [''],
+    });
+
+    this.workHistoryFB?.addControl(newFormName, newFormGroup);
+  }
+
+  getInputLabelInWorkHistory(input: string): string {
+    return input;
+  }
+
+
+
   submitSurvey() {
+    console.log(this.workHistoryFB)
     this.isSubmitting = true;
     let errorMsg = '';
     if (this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs';
@@ -511,7 +524,7 @@ export class SurveyFormComponent implements OnInit {
         general: this.generalInfo.value,
         education: this.educationalBG.value,
         employInfo: this.employmentInfo.value,
-        history: this.workHistoryFB.value,
+        history: this.workHistoryFB?.value,
         recommend: this.recommendation.value,
       };
       this._surveyService
@@ -549,7 +562,7 @@ export class SurveyFormComponent implements OnInit {
         general: this.generalInfo.value,
         education: this.educationalBG.value,
         employInfo: this.selfEmployInfo.value,
-        history: this.workHistoryFB.value,
+        history: this.workHistoryFB?.value,
         recommend: this.recommendation.value,
       };
 
@@ -574,7 +587,7 @@ export class SurveyFormComponent implements OnInit {
         general: this.generalInfo.value,
         education: this.educationalBG.value,
         employInfo: this.unEmploy.value,
-        history: this.workHistoryFB.value,
+        history: this.workHistoryFB?.value,
         recommend: this.recommendation.value,
       };
       this._surveyService.unemployed(temp).subscribe({
