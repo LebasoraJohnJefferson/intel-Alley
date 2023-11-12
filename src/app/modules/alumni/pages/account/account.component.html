@@ -135,34 +135,27 @@
                   Alumni
                 </p>
               </div>
+              
             </div>
+            
           </div>
         </div>
-
-        <div class="absolute flex items-center flex-col gap-2 -top-10 right-5">
+        
+        <div class="absolute flex  items-end  translate-y-[50px] flex-col gap-2 -top-10 right-5">
           <div
             (click)="op.toggle($event)"
-            class="bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
+            class="bg-gray-200 w-[50px] h-[50px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
           >
             <i class="fal fa-cog text-2xl"></i>
           </div>
-          <div
-            *ngIf="true"
-            class="bg-gray-200 w-[40px] h-[40px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
-            (click)="goBack()"
-          >
-            <i class="fal fa-arrow-left"></i>
-          </div>
+          
         </div>
       </div>
-
-
-
+    
       
     </div>
   </div>
-  
-  <div class="mb-5 flex justify-around items-center gap-2 mx-4 px-4 md:flex-row flex-col" *ngIf="profile">
+  <div class="mb-5 flex justify-around  gap-2 mx-4 px-4 md:flex-row flex-col" *ngIf="profile">
     
     <div class="bg-slate-50 p-1 rounded-md w-fit h-fit">
       <table class="border border-gray-300 w-fit">
@@ -212,7 +205,7 @@
             <p
               class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
             >
-              {{profile?.IsSurveyTaken?.type ? capitalize(profile?.IsSurveyTaken?.type) : 'N/A' }}
+              {{profile?.IsSurveyTaken?.type && profile?.IsSurveyTaken?.isTaken ? capitalize(profile?.IsSurveyTaken?.type) : 'N/A' }}
             </p>
           </td>
         </tr>
@@ -225,7 +218,7 @@
           class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
         >
           <div
-            *ngIf="!generalInfo[0]"
+            *ngIf="!generalInfo[0] && !educationBG[0] && !workExpOneYearAbove && !feedBack || !profile?.IsSurveyTaken?.isTaken"
             class="h-[200px] grid place-items-center"
           >
             <div class="">
@@ -238,31 +231,215 @@
             </div>
           </div>
 
-          <div *ngIf="generalInfo[0]" class="mb-2 font-semibold pl-6">Basic Information</div>
-          <p-timeline *ngIf="generalInfo[0]" [value]="generalInfo" align="left" class="w-full py-1">
+          <div *ngIf="generalInfo[0] && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6">General Information</div>
+          <p-timeline *ngIf="generalInfo[0] && profile?.IsSurveyTaken?.isTaken" [value]="generalInfo" align="left" class="w-full py-1">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1 text-[13px]">
+                <ng-container>
+                  
+                  <span class="flex gap-2"><p class="font-bold">Email</p> {{ log?.secondaryEmail }}</span>
+                  <span class="flex gap-2"><p class="font-bold">Address</p> {{ log?.address }}</span>
+                  <span class="flex gap-2"><p class="font-bold">Contact Number</p> {{ log?.contactNumber }}</span>
+                  <span class="flex gap-2"><p class="font-bold">Gender</p> {{ log?.sex }}</span>
+                  <span class="flex gap-2"><p class="font-bold">Birth Day</p>{{ log?.birthDay | date:'longDate' }}</span>
+                  
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-timeline>
+
+
+
+
+          <div *ngIf="educationBG[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Educational Background</div>
+          <p-timeline *ngIf="educationBG[0] && profile?.IsSurveyTaken?.isTaken" [value]="educationBG" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>
-                  <div  class="font-semibold text-[10px] flex items-center gap-2">
-                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Email:</p>
-                    <p class="text-[12px]">{{ log?.secondaryEmail }}</p>
+                  <table class="w-full text-center">
+                    <tr class="grid grid-cols-3 text-[12px]">
+                      <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Degree</th>
+                      <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">University / College</th>
+                      <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Year Graduated</th>
+                    </tr>
+                    <tr class="grid grid-cols-3 even:bg-gray-200"  *ngFor ="let education of educationBG[0]">
+                      <td>{{education.degree}}</td>
+                      <td>{{education.university}}</td>
+                      <td>{{education.yearGraduated}}</td>
+                    </tr>
+                  </table>
+                </ng-container>
+                <p *ngIf="professionalExam[0]" class="font-bold text-[14px] my-5 bg-red-500 px-2 py-1 rounded w-fit text-slate-100">Professional Examination/s Passed</p>
+                <ng-container *ngIf="professionalExam[0]">
+                  <table class="w-full text-center">
+                    <tr class="grid grid-cols-3 text-[12px]">
+                      <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Name of Examination (PRC, CSC or TESDA)</th>
+                      <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Year of Examination</th>
+                      <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Rank/Rating</th>
+                    </tr>
+                    <tr class="grid grid-cols-3 even:bg-gray-200"  *ngFor ="let prof of professionalExam[0]">
+                      <td>{{prof.examName}}</td>
+                      <td>{{prof.yearOfExam | date:'mediumDate'}}</td>
+                      <td>{{prof.rating ? prof.rating : 'N/A'}}</td>
+                    </tr>
+                  </table>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-timeline>
+
+          <!-- employed -->
+
+          <div *ngIf="employed[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information</div>
+          <p-timeline *ngIf="employed[0] && profile?.IsSurveyTaken?.isTaken" [value]="employed" align="left" class="w-full py-1">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1 text-[13px]">
+                <ng-container>
+                  <div>
+                    <div  class="p-1 border rounded shadow bg-purple-700 text-white w-fit my-3">Organization Details</div>
+                    <div class="px-3">
+                      <span class="flex gap-2"><p class="font-bold">Name of Organization</p> {{employed[0]?.orgName}}</span>
+                      <span class="flex gap-2"><p class="font-bold">Address</p>{{employed[0]?.orgAddress}}</span>
+                      <span class="flex gap-2"><p class="font-bold">Organization contact number</p>{{employed[0]?.orgNumber}}</span>
+                      <span class="flex gap-2"><p class="font-bold">typeOfOrgChosen</p>{{employed[0]?.typeOfOrgChosen}}</span>
+                    </div>
                   </div>
-                  <div  class="font-semibold text-[10px] flex items-center gap-2">
-                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Address:</p>
-                    <p class="text-[12px]">{{ log?.address }}</p>
+                  <div>
+                    <div  class="p-1 border rounded shadow bg-purple-700 text-white w-fit my-3">Occupational Classification</div>
+                    <div class="px-3">
+                      <span class="flex gap-2"><p class="font-bold">Occupation name</p> {{employed[0]?.occupClass ? employed[0]?.occupClass : employed[0]?.OtherOccupClass }}</span>
+                      <span class="flex gap-2"><p class="font-bold">Job Status</p> {{employed[0]?.jobStatus}}</span>
+                    </div>
                   </div>
-                  <div  class="font-semibold text-[10px] flex items-center gap-2">
-                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Contact Number:</p>
-                    <p class="text-[12px]">{{ log?.contactNumber }}</p>
+                  
+                  <div>
+                    <div  class="p-1 border rounded shadow bg-purple-700 text-white w-fit my-3">Designation or Work Position</div>
+                    <div class="px-3">
+                      <span class="flex gap-2"><p class="font-bold">Designation or Work Position</p> {{employed[0]?.workPosition}}</span>
+                      <span class="flex gap-2"><p class="font-bold">Number of years in the company</p>{{employed[0]?.yrsInCompany}}</span>
+                      <span class="flex gap-2"><p class="font-bold">Awards or recognitions received</p>{{employed[0]?.awards}}</span>
+                      <span class="flex gap-2"><p class="font-bold">Monthly Income Range</p>{{employed[0]?.monthlyIncome}}</span>
+                    </div>
                   </div>
-                  <div  class="font-semibold text-[10px] flex items-center gap-2">
-                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Gender:</p>
-                    <p class="text-[12px]">{{ log?.sex }}</p>
+
+
+                  <div>
+                    <div  class="p-1 border rounded shadow bg-purple-700 text-white w-fit my-3">About the current job</div>
+                    <div class="px-3">
+                      <span class="flex gap-2"><p class="font-bold">How did you come to know about your current job?</p> {{employed[0]?.otherReasonOfHiring ? employed[0]?.otherReasonOfHiring : employed[0]?.OtherReasonOfHiring}}</span>
+                      <span class="flex gap-2"><p class="font-bold">Is your current job related to the degree earned from EVSU?</p> {{employed[0]?.isDegreeRelativeTakenInEVSU ? 'Yes' : 'No'}}</span>
+                    </div>
                   </div>
-                  <div  class="font-semibold text-[10px] flex items-center gap-2">
-                    <p class="p-1 border rounded shadow bg-purple-700 text-white">Birth Day:</p>
-                    <p class="text-[12px]">{{ log?.birthDay | date:'longDate' }}</p>
+
+
+                  <div *ngIf="employed[0].WorkExps">
+                    <div class="">
+                      <table class="w-full text-center mt-3">
+                        <tr class="grid grid-cols-5 text-[12px]">
+                          <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Employment after Graduation</th>
+                          <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Nature of Work</th>
+                          <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Job Status</th>
+                          <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Job Related to the Degree Earned</th>
+                          <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Enrolled in other Degree Courses</th>
+                        </tr>
+                        <tr class="grid grid-cols-5 even:bg-gray-200"  *ngFor ="let workExpTemp of employed[0].WorkExps">
+                          <td>{{workExp[workExpTemp?.rangeOfYear]}}</td>
+                          <td>{{workExpTemp?.natureOfWork}}</td>
+                          <td>{{workExpTemp?.jobStatus}}</td>
+                          <td>{{workExpTemp?.JobRelatedToDegree ? 'Yes' : 'No'}}</td>
+                          <td>{{workExpTemp?.enrolledOtherCourses ? 'Yes' : 'No'}}</td>
+                        </tr>
+                      </table>
+                    </div>
                   </div>
+                  <div *ngIf="employed[0]?.fileNameOfCertificate && employed[0]?.fileNameOfProof">
+                    <div  class="p-1 border rounded shadow bg-purple-700 text-white w-fit my-3">Files</div>
+                    <div class="px-3">
+                      <span class="flex gap-2">
+                        <p class="font-bold">Certificate of Employment</p> 
+                        <a class="text-blue-500" [href]="employed[0]?.CertificateOfEmploy" target="_blank" >{{employed[0]?.fileNameOfCertificate}}</a>
+                      </span>
+                      <span class="flex gap-2"><p class="font-bold">proof of employment</p> 
+                        <a class="text-blue-500" [href]="employed[0]?.proofOfEmp" target="_blank" >{{employed[0]?.fileNameOfProof}}</a></span>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-timeline>
+
+          <!-- selfEmployed -->
+          <div *ngIf="selfEmployed[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information </div>
+          <p-timeline *ngIf="selfEmployed[0]  && profile?.IsSurveyTaken?.isTaken" [value]="selfEmployed" align="left" class="w-full py-1">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1 ">
+                <ng-container>
+                  <div class="text-[13px]">
+                    <span class="flex gap-2"><p class="font-bold">Business name</p> {{  selfEmployed[0]?.businessName}}</span>
+                    <span class="flex gap-2"><p class="font-bold">Address</p> {{  selfEmployed[0].address}}</span>
+                    <span class="flex gap-2"><p class="font-bold">Nature of business</p> {{  selfEmployed[0].natureOfBusiness}}</span>
+                  </div>
+                  
+                  <div *ngIf="selfEmployed[0]?.proofOfSelfEmployFile"  class="font-semibold text-[10px] flex items-center gap-2">
+                    <p class="p-1 border rounded shadow bg-purple-700 text-white">proof of employment:</p>
+                    <a target="_blank" [href]="selfEmployed[0].proofOfSelfEmployFile" class="text-[12px] text-blue-500">{{selfEmployed[0].fileName}} (view)</a>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-timeline>
+
+
+          <!-- unemployed -->
+          <div *ngIf="unemployed[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information </div>
+          <p-timeline *ngIf="unemployed[0]  && profile?.IsSurveyTaken?.isTaken" [value]="unemployed" align="left" class="w-full py-1">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1">
+                <ng-container>
+                  <div  class="text-[13px] flex items-center gap-2  py-2">
+                    <span class="flex gap-2"><p class="font-bold">Reason of unemployed</p> {{ unemployed[0]?.reason }}</span>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-timeline>
+ 
+
+
+          <div *ngIf="workExpOneYearAbove[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5"> Work History</div>
+          <p-timeline *ngIf="workExpOneYearAbove[0]  && profile?.IsSurveyTaken?.isTaken" [value]="workExpOneYearAbove" align="left" class="w-full py-1">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1">
+                <ng-container>
+                  <table class="w-full text-center">
+                    <tr class="grid grid-cols-6 text-[12px]">
+                      <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Name of Company</th>
+                      <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Address</th>
+                      <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Year Employed</th>
+                      <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Designation</th>
+                      <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Number of Years Served</th>
+                      <th class="p-1 px-2 border rounded shadow bg-purple-700 text-white">Monthly Income (Optional)</th>
+                    </tr>
+                    <tr class="grid grid-cols-6 even:bg-gray-200"  *ngFor ="let work of workExpOneYearAbove[0]">
+                      <td>{{work.NameOfCompany}}</td>
+                      <td>{{work.Address}}</td>
+                      <td>{{work.YearEmployed}}</td>
+                      <td>{{work.Designation}}</td>
+                      <td>{{work.NumOfYrServed}}</td>
+                      <td>{{work.MonthlyIncome}}</td>
+                    </tr>
+                  </table>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-timeline>
+
+          <div *ngIf="feedBack[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5"> Feedback</div>
+          <p-timeline *ngIf="feedBack[0]  && profile?.IsSurveyTaken?.isTaken" [value]="feedBack" align="left" class="w-full py-1">
+            <ng-template pTemplate="content" let-log>
+              <div class="mb-1">
+                <ng-container>
+                  <div>{{feedBack[0][0].context}}</div>
                 </ng-container>
               </div>
             </ng-template>
@@ -291,6 +468,25 @@
           class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
         >
           <i class="fal fa-cog mr-1"></i>Change Password
+        </div>
+        <div
+          *ngIf="!isRetaking"
+          (click)="retaking()"
+          class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+        >
+          <i class="fal fa-cog mr-1"></i>Retake Survey
+        </div>
+        <div
+          *ngIf="isRetaking"
+          class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+        >
+          <i class="pi pi-spin pi-cog mr-1" style="font-size: 13px"></i>Retake Survey
+        </div>
+        <div
+        (click)="goBack()"
+          class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+        >
+        <i class="fal fa-arrow-left mr-1"></i>Go Back
         </div>
       </div>
     </div>

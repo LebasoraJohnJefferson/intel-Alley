@@ -50,6 +50,10 @@ export class SurveyService {
     return this._http.get(`${BASEURL}/api/survey/unAnswerSurvey`);
   }
 
+  retake(): any {
+    return this._http.put(`${BASEURL}/api/survey/retake`,"");
+  }
+
 
 
 }

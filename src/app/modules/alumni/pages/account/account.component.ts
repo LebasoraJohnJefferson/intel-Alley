@@ -6,6 +6,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { AuthService } from 'src/app/core/shared/services/auth.service';
 import { AlumniService } from '../../shared/services/alumni.service';
 import { CourseService } from 'src/app/core/shared/services/course.service';
+import { SurveyService } from '../../shared/services/survey.service';
 
 @Component({
   selector: 'app-account',
@@ -21,23 +22,57 @@ export class AccountComponent implements OnInit {
   defaultImg: any = '../../../../../assets/images/student.png';
   previewImg: any = '';
   isLoading: boolean = true;
-
+  isRetaking:boolean = false
   changePassData: any = {
     oldpass: null,
     newpass: null,
   };
 
-  generalInfo: any ;
+  generalInfo: any =[];
+  educationBG:any=[];
+  workExpOneYearAbove:any=[];
+  feedBack:any=[];
+  selfEmployed:any =[];
+  unemployed:any =[];
+  professionalExam:any =[]
+  employed:any =[]
 
   changePasswordModal: boolean = false;
+  workExp: any = {
+    'workEpx0_6':'0-6 months',
+    'workEpx7_1y':'7 months - 1 year',
+    'workEpx2y_3y':'2 years - 3 years',
+    'workEpx4y_5y':'4 years - 5 years',
+    'workEpx6y_7y':'6 years - 7 years',
+    'workEpx8y_9y':'8 years - 9 years',
+    'workEpx10y_more':'10 years & onwards'
+  };
 
   constructor(
     private toast: HotToastService,
     private router: Router,
     private authService: AuthService,
     private alumniService: AlumniService,
-    private courseService: CourseService
-  ) {}
+    private courseService: CourseService,
+    private _surveyService:SurveyService
+  ) {
+  }
+  
+
+  retaking(){
+    this.isRetaking = true
+    this._surveyService.retake().subscribe({
+      next:(res:any)=>{
+        this.toast.success(res.message)
+        this.isRetaking = false
+        this.router.navigate(['/surveys'])
+      },error:(error: any)=>{
+        console.log(error)
+        this.isRetaking = false
+        this.toast.warning("Request Denied, kindly check if you already taken the survey!")
+      }
+    })
+  }
 
   ngOnInit(): void {
     this.getProfile();
@@ -148,6 +183,7 @@ export class AccountComponent implements OnInit {
   getProfile() {
     this.alumniService.getProfile().subscribe(
       (response: any) => {
+        console.log(response)
         this.profile = response.user;
         this.modalData = {
           name: response.user.name,
@@ -155,6 +191,13 @@ export class AccountComponent implements OnInit {
           email: response.user.email,
         };
         this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]
+        this.educationBG = [response?.user?.IsSurveyTaken?.EducationBackGs]
+        this.workExpOneYearAbove = [response?.user?.IsSurveyTaken?.WorkHistoryOneUps]
+        this.feedBack = [response?.user?.IsSurveyTaken?.Feedbacks]
+        this.selfEmployed = [response?.user?.IsSurveyTaken?.SelfEmployed]
+        this.professionalExam = [response?.user?.IsSurveyTaken?.ProfessionalExams]
+        this.unemployed = [response?.user?.IsSurveyTaken?.Unemployed]
+        this.employed = [response?.user?.IsSurveyTaken?.Employed]
         this.submitLoading = false;
 
         if (response.user.image != null) {

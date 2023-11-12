@@ -912,15 +912,15 @@
               <label for="" class="font-thin text-xs md:hidden">{{ getInputLabelInWorkHistory(workInput) }}</label>
   
               <input
-              *ngIf="workInput != 'NumOfYrServed' && workInput != 'YearEmployed'"
+              *ngIf="workInput != 'YearEmployed'"
               class="w-full border rounded outline-0"
-              [type]="workInput === 'MonthlyIncome' ? 'number' : 'text'"
+              [type]="workInput === 'MonthlyIncome' || workInput ==='NumOfYrServed' ? 'number' : 'text'"
               [formControlName]="workInput"
               pInputText
               required
             />
           
-            <select *ngIf="workInput == 'NumOfYrServed' || workInput === 'YearEmployed'" pInputText required [formControlName]="workInput" class="w-full border rounded outline-0">
+            <select *ngIf=" workInput === 'YearEmployed'" pInputText required [formControlName]="workInput" class="w-full border rounded outline-0">
               <option *ngFor="let year of yearGraduated" [value]="year">{{year}}</option>
             </select>
 
