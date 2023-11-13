@@ -171,9 +171,15 @@
     </div>
   </div>
   <div class="w-full h-full relative md:-translate-y-32 -translate-y-28">
-    <h2 class="font-bold text-slate-800 font-semibold px-2 py-1 mx-4 rounded bg-slate-800 text-white w-fit">FEEDBACK</h2>
+    <div class="flex items-center gap-1">
+      <h2 class="font-bold text-slate-800 font-semibold px-2 py-1 mx-4 rounded bg-slate-800 text-white w-fit">FEEDBACK</h2> 
+      <select (change)="getFeedBackByYear($event)" class="rounded outline-0 bg-slate-200 px-2 py-1">
+        <option selected disabled class="text-slate-500">Select Year</option>
+        <option [value]="year" *ngFor="let year of years">{{year}}</option>
+      </select>
+    </div>
     <ol class="flex px-5 py-5 flex-wrap gap-4">
-      <li *ngFor="let feedback of feedbacks" class=" max-w-[18rem] md:mr-auto mx-auto min-w-[18rem] max-h-[250px] rounded overflow-y-auto p-2 border-2">
+      <li *ngFor="let feedback of feedbacks" class=" max-w-[18rem] md:mx-0 mx-auto min-w-[18rem] max-h-[250px] rounded overflow-y-auto p-2 border-2">
         <section class="">
           <div [routerLink]="['/admin/alum']"
           [queryParams]="{ id: feedback?.IsSurveyTaken?.User?.id }" class="flex cursor-pointer text-slate-800 gap-2 px-3 items-center">

@@ -22,6 +22,10 @@ export class AdminService {
     return this.http.get(`${BASEURL}/api/user/admin/profile`);
   }
 
+  getFeedBack(year:number):any{
+    return this.http.get(`${BASEURL}/api/user/admin/feedback/${year}`)
+  }
+
   updateProfile(data: any): any {
     return this.http.put(`${BASEURL}/api/user/admin/profile`, data);
   }

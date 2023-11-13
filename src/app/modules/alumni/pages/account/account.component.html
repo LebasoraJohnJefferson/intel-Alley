@@ -134,8 +134,10 @@
                 <p class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md">
                   Alumni
                 </p>
+                <select (change)="selectedRecord($event)" class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md outline-0">
+                  <option [value]="record.id" *ngFor="let record of records">{{momentMDY(record.createdAt)}}</option>
+                </select>
               </div>
-              
             </div>
             
           </div>
@@ -205,7 +207,7 @@
             <p
               class="mr-1 font-semibold text-white bg-red-500 py-1 px-2 rounded-md w-fit"
             >
-              {{profile?.IsSurveyTaken?.type && profile?.IsSurveyTaken?.isTaken ? capitalize(profile?.IsSurveyTaken?.type) : 'N/A' }}
+              {{employementType && isTaken ? capitalize(employementType) : 'N/A' }}
             </p>
           </td>
         </tr>
@@ -218,7 +220,7 @@
           class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
         >
           <div
-            *ngIf="!generalInfo[0] && !educationBG[0] && !workExpOneYearAbove && !feedBack || !profile?.IsSurveyTaken?.isTaken"
+            *ngIf="!generalInfo[0] && !educationBG[0] && !workExpOneYearAbove && !feedBack || !isTaken"
             class="h-[200px] grid place-items-center"
           >
             <div class="">
@@ -231,8 +233,8 @@
             </div>
           </div>
 
-          <div *ngIf="generalInfo[0] && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6">General Information</div>
-          <p-timeline *ngIf="generalInfo[0] && profile?.IsSurveyTaken?.isTaken" [value]="generalInfo" align="left" class="w-full py-1">
+          <div *ngIf="generalInfo[0] && isTaken" class="mb-2 font-semibold pl-6">General Information</div>
+          <p-timeline *ngIf="generalInfo[0] && isTaken" [value]="generalInfo" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1 text-[13px]">
                 <ng-container>
@@ -251,8 +253,8 @@
 
 
 
-          <div *ngIf="educationBG[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Educational Background</div>
-          <p-timeline *ngIf="educationBG[0] && profile?.IsSurveyTaken?.isTaken" [value]="educationBG" align="left" class="w-full py-1">
+          <div *ngIf="educationBG[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5">Educational Background</div>
+          <p-timeline *ngIf="educationBG[0] && isTaken" [value]="educationBG" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>
@@ -290,8 +292,8 @@
 
           <!-- employed -->
 
-          <div *ngIf="employed[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information</div>
-          <p-timeline *ngIf="employed[0] && profile?.IsSurveyTaken?.isTaken" [value]="employed" align="left" class="w-full py-1">
+          <div *ngIf="employed[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information</div>
+          <p-timeline *ngIf="employed[0] && isTaken" [value]="employed" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1 text-[13px]">
                 <ng-container>
@@ -369,8 +371,8 @@
           </p-timeline>
 
           <!-- selfEmployed -->
-          <div *ngIf="selfEmployed[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information </div>
-          <p-timeline *ngIf="selfEmployed[0]  && profile?.IsSurveyTaken?.isTaken" [value]="selfEmployed" align="left" class="w-full py-1">
+          <div *ngIf="selfEmployed[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information </div>
+          <p-timeline *ngIf="selfEmployed[0]  && isTaken" [value]="selfEmployed" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1 ">
                 <ng-container>
@@ -391,8 +393,8 @@
 
 
           <!-- unemployed -->
-          <div *ngIf="unemployed[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information </div>
-          <p-timeline *ngIf="unemployed[0]  && profile?.IsSurveyTaken?.isTaken" [value]="unemployed" align="left" class="w-full py-1">
+          <div *ngIf="unemployed[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5">Employment Information </div>
+          <p-timeline *ngIf="unemployed[0]  && isTaken" [value]="unemployed" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>
@@ -406,8 +408,8 @@
  
 
 
-          <div *ngIf="workExpOneYearAbove[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5"> Work History</div>
-          <p-timeline *ngIf="workExpOneYearAbove[0]  && profile?.IsSurveyTaken?.isTaken" [value]="workExpOneYearAbove" align="left" class="w-full py-1">
+          <div *ngIf="workExpOneYearAbove[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5"> Work History</div>
+          <p-timeline *ngIf="workExpOneYearAbove[0] && isTaken" [value]="workExpOneYearAbove" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>
@@ -434,8 +436,8 @@
             </ng-template>
           </p-timeline>
 
-          <div *ngIf="feedBack[0]  && profile?.IsSurveyTaken?.isTaken" class="mb-2 font-semibold pl-6 mt-5"> Feedback</div>
-          <p-timeline *ngIf="feedBack[0]  && profile?.IsSurveyTaken?.isTaken" [value]="feedBack" align="left" class="w-full py-1">
+          <div *ngIf="feedBack[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5"> Feedback</div>
+          <p-timeline *ngIf="feedBack[0]  && isTaken" [value]="feedBack" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>

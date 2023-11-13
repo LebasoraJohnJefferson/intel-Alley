@@ -22,12 +22,17 @@ export class AlumniService {
     return this.http.get(`${BASEURL}/api/user/alumni`);
   }
 
+
+  getRecords(userId:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/user/alumni/records/${userId}`);
+  }
+
   importAlumni(data: any): any {
     return this.http.post(`${BASEURL}/api/user/alumni/import`, data);
   }
 
-  getAlum(alumId: any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/user/alumni/${alumId}`);
+  getAlum(alumId: any,selectedRecord:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/user/alumni/${alumId}/${selectedRecord}`);
   }
 
   updateAlumStatus(data: any): any {

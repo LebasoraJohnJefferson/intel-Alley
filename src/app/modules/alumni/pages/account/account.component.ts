@@ -27,8 +27,13 @@ export class AccountComponent implements OnInit {
     oldpass: null,
     newpass: null,
   };
+  isTaken:boolean = false
+  employementType:string =''
+
+  records:any = []
 
   generalInfo: any =[];
+  chosenRecord:number=0;
   educationBG:any=[];
   workExpOneYearAbove:any=[];
   feedBack:any=[];
@@ -77,6 +82,11 @@ export class AccountComponent implements OnInit {
   ngOnInit(): void {
     this.getProfile();
     this.getCourses();
+    this.getListOfRecord()
+  }
+
+  momentMDY(date: any) {
+    return moment(date).format('ll');
   }
 
   logout() {
@@ -138,6 +148,23 @@ export class AccountComponent implements OnInit {
     );
   }
 
+  getListOfRecord(){
+    this.alumniService.getListOfRecords().subscribe({
+      next:(response:any)=>{
+        this.records = response.records
+        this.chosenRecord= this.records[0].id ?? 0
+        this.recordsBySurveyId()
+      },error:(err:any)=>{
+        console.log(err)
+      }
+    })
+  }
+
+  selectedRecord(event:any){
+    this.chosenRecord = event.target.value
+    this.recordsBySurveyId()
+  }
+
   onSubmit() {
     if (this.modalData.name == '') {
       return this.toast.info('Name is required.');
@@ -180,25 +207,39 @@ export class AccountComponent implements OnInit {
     };
   }
 
+  recordsBySurveyId(){
+    this.alumniService.recordsBySurveyId(this.chosenRecord).subscribe(
+      {
+        next:(response:any)=>{
+          console.log(response)
+          this.isTaken = response?.user?.IsSurveyTaken?.isTaken
+          this.employementType= response?.user?.IsSurveyTaken?.type
+          this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]
+          this.educationBG = [response?.user?.IsSurveyTaken?.EducationBackGs]
+          this.workExpOneYearAbove = [response?.user?.IsSurveyTaken?.WorkHistoryOneUps]
+          this.feedBack = [response?.user?.IsSurveyTaken?.Feedbacks]
+          this.selfEmployed = [response?.user?.IsSurveyTaken?.SelfEmployed]
+          this.professionalExam = [response?.user?.IsSurveyTaken?.ProfessionalExams]
+          this.unemployed = [response?.user?.IsSurveyTaken?.Unemployed]
+          this.employed = [response?.user?.IsSurveyTaken?.Employed]
+          this.submitLoading = false;
+        },error:(error:any)=>{
+          console.log(error)
+        }
+      }
+    )
+  }
+
   getProfile() {
     this.alumniService.getProfile().subscribe(
       (response: any) => {
-        console.log(response)
         this.profile = response.user;
         this.modalData = {
           name: response.user.name,
           image: response.user.image,
           email: response.user.email,
         };
-        this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]
-        this.educationBG = [response?.user?.IsSurveyTaken?.EducationBackGs]
-        this.workExpOneYearAbove = [response?.user?.IsSurveyTaken?.WorkHistoryOneUps]
-        this.feedBack = [response?.user?.IsSurveyTaken?.Feedbacks]
-        this.selfEmployed = [response?.user?.IsSurveyTaken?.SelfEmployed]
-        this.professionalExam = [response?.user?.IsSurveyTaken?.ProfessionalExams]
-        this.unemployed = [response?.user?.IsSurveyTaken?.Unemployed]
-        this.employed = [response?.user?.IsSurveyTaken?.Employed]
-        this.submitLoading = false;
+        
 
         if (response.user.image != null) {
           this.previewImg = response.user.image;

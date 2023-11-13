@@ -18,6 +18,11 @@ export class AlumniService {
     return this.http.get(`${BASEURL}/api/user/alumni/profile`);
   }
 
+
+  getRecordsById(surveyId:number): any {
+    return this.http.get(`${BASEURL}/api/user/alumni/profile/${surveyId}`);
+  }
+
   updateProfile(data: any): any {
     return this.http.put(`${BASEURL}/api/user/alumni/profile`, data);
   }
@@ -25,4 +30,13 @@ export class AlumniService {
   changePassword(data: any): any {
     return this.http.put(`${BASEURL}/api/user/alumni/changepassword`, data);
   }
+
+  getListOfRecords():any{
+    return this.http.get(`${BASEURL}/api/user/alumni/records`);
+  }
+
+  recordsBySurveyId(surveyId:number):any{
+    return this.http.get(`${BASEURL}/api/user/alumni/recordsBySurveyId/${surveyId}`);
+  }
+
 }

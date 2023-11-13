@@ -29,6 +29,9 @@ export class AccountComponent implements OnInit {
     newpass: null,
   };
 
+  selectedYear:number = new Date().getFullYear()
+  years:any = []
+
   changePasswordModal: boolean = false;
 
   constructor(
@@ -40,6 +43,11 @@ export class AccountComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProfile();
+
+    for(let i = new Date().getFullYear() ; i > 1990 ; i-- ){
+      this.years.push(i)
+    }
+    this.getFeedback()
   }
 
   logout() {
@@ -91,6 +99,11 @@ export class AccountComponent implements OnInit {
     );
   }
 
+  getFeedBackByYear(event:any){
+    this.selectedYear = event.target.value
+    this.getFeedback()
+  }
+
   onSubmit() {
     if (this.modalData.name == '') {
       return this.toast.info('Name is required.');
@@ -137,7 +150,6 @@ export class AccountComponent implements OnInit {
     this.adminService.getProfile().subscribe(
       (response: any) => {
         this.profile = response.user;
-        this.feedbacks = response.feedBack
         this.modalData = {
           name: response.user.name,
           image: response.user.image,
@@ -153,6 +165,16 @@ export class AccountComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getFeedback(){
+    this.adminService.getFeedBack(this.selectedYear).subscribe({
+      next:(response:any)=>{
+        this.feedbacks = response.feedBack
+      },error:(error:any)=>{
+        console.log(this.feedbacks)
+      }
+    })
   }
 
   goBack(): void {

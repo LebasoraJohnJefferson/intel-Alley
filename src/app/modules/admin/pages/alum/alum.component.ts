@@ -36,10 +36,10 @@ export class AlumComponent implements OnInit {
   actionModal: boolean = false;
   isLoading: boolean = true;
   defaultImg: any = '../../../../../assets/images/student.png';
-
+  records:any = []
   status: boolean = false;
   submitLoading: boolean = false;
-
+  selectedRecord:number=0;
   constructor(
     private location: Location,
     private route: ActivatedRoute,
@@ -52,8 +52,7 @@ export class AlumComponent implements OnInit {
     this.route.queryParams.subscribe((value) => {
       this.alumId = value['id'];
     });
-
-    this.getAlum();
+    this.getAllRecord()
   }
 
   setStatus() {
@@ -76,12 +75,29 @@ export class AlumComponent implements OnInit {
     );
   }
 
+  selectRecord(event:any){
+    this.selectedRecord=event.target.value
+    this.getAlum()
+  }
+
+  getAllRecord(){
+    this.alumniService.getRecords(this.alumId).subscribe({
+      next:(response)=>{
+        this.records = response?.records
+        if(this.records[0]) this.selectedRecord = this.records[0].id
+        this.getAlum();
+      },error:(err)=>{
+        console.log(err)
+      }
+    })
+  }
+
   getObjectKeys(obj: any): string[] {
     return obj ? Object.keys(obj) : [];
   }
 
   getAlum() {
-    this.alumniService.getAlum(this.alumId).subscribe(
+    this.alumniService.getAlum(this.alumId,this.selectedRecord).subscribe(
       (response: any) => {
         this.alum = response;
         this.courses = {
