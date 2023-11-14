@@ -271,8 +271,8 @@
                     </tr>
                   </table>
                 </ng-container>
-                <p *ngIf="professionalExam[0]" class="font-bold text-[14px] my-5 bg-red-500 px-2 py-1 rounded w-fit text-slate-100">Professional Examination/s Passed</p>
-                <ng-container *ngIf="professionalExam[0]">
+                <p *ngIf="professionalExam[0]?.length" class="font-bold text-[14px] my-5 bg-red-500 px-2 py-1 rounded w-fit text-slate-100">Professional Examination/s Passed</p>
+                <ng-container *ngIf="professionalExam[0]?.length">
                   <table class="w-full text-center">
                     <tr class="grid grid-cols-3 text-[12px]">
                       <th class="p-1 px-2 border rounded shadow  bg-purple-700 text-white">Name of Examination (PRC, CSC or TESDA)</th>
@@ -408,8 +408,8 @@
  
 
 
-          <div *ngIf="workExpOneYearAbove[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5"> Work History</div>
-          <p-timeline *ngIf="workExpOneYearAbove[0] && isTaken" [value]="workExpOneYearAbove" align="left" class="w-full py-1">
+          <div *ngIf="workExpOneYearAbove[0]?.length  && isTaken" class="mb-2 font-semibold pl-6 mt-5"> Work History</div>
+          <p-timeline *ngIf="workExpOneYearAbove[0]?.length && isTaken" [value]="workExpOneYearAbove" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>
@@ -436,8 +436,8 @@
             </ng-template>
           </p-timeline>
 
-          <div *ngIf="feedBack[0]  && isTaken" class="mb-2 font-semibold pl-6 mt-5"> Feedback</div>
-          <p-timeline *ngIf="feedBack[0]  && isTaken" [value]="feedBack" align="left" class="w-full py-1">
+          <div *ngIf="feedBack[0]?.length  && isTaken" class="mb-2 font-semibold pl-6 mt-5"> Feedback</div>
+          <p-timeline *ngIf="feedBack[0]?.length  && isTaken" [value]="feedBack" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1">
                 <ng-container>
