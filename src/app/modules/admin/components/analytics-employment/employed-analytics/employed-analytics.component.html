@@ -10,8 +10,14 @@
             </article> 
             
             <article class="border shadow-md  max-w-[17rem] h-fit   mx-auto rounded p-3">
-                <div class="font-bold text-center">Type of organization</div>
+                <div class="font-bold text-center flex items-center gap-2 justify-center">
+                    <div >
+                         Type of organization
+                    </div>
+                    <i (click)="viewOthers('typeOfOrg')" class="fal fa-eye ml-1 cursor-pointer hover:text-blue-500"></i>
+                </div>
                 <app-analytic-pie-chart [label]="data?.typeOfOrgChosenLabel" [data]="data?.typeOfOrgChosenData" [color]="data?.typeOfOrgChosenColor"></app-analytic-pie-chart>
+                
             </article> 
             <article class="border shadow-md max-w-[17rem] h-fit mx-auto rounded p-3">
                 <div class="font-bold text-center">Job Related to the EVSU Degree</div>
@@ -70,7 +76,7 @@
       [modal]="true"
       [style]="{ maxWidth: '400px', width: '400px', maxHeight:'450px', height:'450px' }"
     >
-    <ol *ngIf="others.length != 0">
+    <ol *ngIf="others.length != 0 && title != 'Type Of Organization'" >
         <li *ngFor="let other of others">
             <div [routerLink]="['/admin/alum']" [queryParams]="{ id: other?.Employed?.IsSurveyTaken?.User?.id }" class="flex items-center gap-2 mb-2 text-slate-800 text-[14px] font-bold">
                 <img [src]="other?.Employed?.IsSurveyTaken?.User?.image ? other?.Employed?.IsSurveyTaken?.User?.image : '../../../../../../assets/images/student.png'" class="w-[27px] h-[27px] rounded-full border border-red-500"  alt="">
@@ -82,6 +88,30 @@
             <div class="rounded bg-slate-100 p-2">
                 {{other?.otherOccup}}
                 {{other?.reasonOfHiring}}
+                <p class="flex items-center justify-end w-full gap-2 text-blue-500 text-[10px]">
+                    <i class="fal fa-globe"></i> 
+                    {{other.updatedAt | dateAgo}}
+                </p>
+            </div>
+        </li>
+    </ol>
+    <ol *ngIf="others.length == 0">
+        <li class="flex items-center justify-center flex-col">
+            <img src="../../../../../../assets/images/NoFile.jpg" class="w-[20rem] h-[20rem]" alt="">
+            <p class="font-bold text-[12px] gap-2">No Other {{title}}</p>
+        </li>
+    </ol>
+    <ol *ngIf="others.length != 0 && title == 'Type Of Organization'" >
+        <li *ngFor="let other of others">
+            <div [routerLink]="['/admin/alum']" [queryParams]="{ id: other?.IsSurveyTaken?.User?.id }" class="flex items-center gap-2 mb-2 text-slate-800 text-[14px] font-bold">
+                <img [src]="other?.IsSurveyTaken?.User?.image ? other?.IsSurveyTaken?.User?.image : '../../../../../../assets/images/student.png'" class="w-[27px] h-[27px] rounded-full border border-red-500"  alt="">
+                <div class="flex flex-col items-centers">
+                    <p>{{other?.IsSurveyTaken?.User?.name}}</p>
+                    <p class=" text-[10px] text-blue-500">{{other?.IsSurveyTaken?.User?.email}}</p>
+                </div>
+            </div>
+            <div class="rounded bg-slate-100 p-2">
+                {{other?.typeOfOrgChosen}}
                 <p class="flex items-center justify-end w-full gap-2 text-blue-500 text-[10px]">
                     <i class="fal fa-globe"></i> 
                     {{other.updatedAt | dateAgo}}

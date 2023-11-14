@@ -51,10 +51,16 @@ export class EmployedAnalyticsComponent implements OnInit{
   }
 
   viewOthers(field:any){
-    this.title = field == 'OtherOccupClass' ? 'Occupation' : 'Job Source'
+    let fieldObj:any = {
+      'OtherReasonOfHiring':'Job Source',
+      'OtherOccupClass':'Occupation',
+      'typeOfOrg':'Type Of Organization'
+    }
+    this.title = fieldObj[field]
     this.createEventModal = true
     this._analyticService.otherAnswer(field,this.newDate).subscribe((res)=>{
       this.others = res
+      console.log(res)
     })
   }
 
