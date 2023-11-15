@@ -19,11 +19,24 @@
                 </li>
             </ol>
         </div>
-        <div class="mt-10">
+        <div class="w-full">
+            <div class="mt-5 relative flex items-center  gap-2 rounded-md md:w-1/2 w-full">
+                <label class="block text-[12px] font-medium text-gray-700">Search</label>
+              <input
+                type="text"
+                (input)="searchFile($event)"
+                class="py-2 outline-none w-full block px-3 text-[12px] border-gray-400 rounded-md bg-slate-100"
+                placeholder="Search file name..."
+              />
+            </div>
+        <div class="mt-5">
             <ol *ngIf="isLoading">
                 <li class="flex gap-4 flex-wrap">
                     <div routerLink="/admin/files/{{status}}/{{file.User.id}}" *ngFor="let file of files" class="flex items-center hover:text-slate-500 justify-center flex-col cursor-pointer group">
-                        <i class="fal fa-folder text-5xl"></i>
+                        <div class="relative flex w-fit items-center justify-center">
+                            <i class="fal fa-folder text-5xl"></i>
+                            <span class="text-[10px] absolute w-fit">{{file?.createdAt | date:'shortDate'}}</span>
+                        </div>
                         <p class="text-bold w-[100px] text-center truncate group-hover:hidden text-[12px]">{{file.User.name}}</p>
                         <p class="text-bold min-w-[100px] text-center group-hover:inline-block hidden text-[12px]">{{file.User.name}}</p>
                     </div>
