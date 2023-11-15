@@ -75,7 +75,9 @@ export class SurveysComponent implements OnInit {
     this.surveyId = surveyId
   }
 
-  deleteSurvey(surveyId:number){
+  deleteSurvey(surveyId:number,surveyName:string){
+    const confirmation = confirm(`Are you sure you want to delete the survey named "${surveyName}"?`)
+    if(!confirmation) return
     this.loadingDeleteSurveyById = surveyId
     this._surveyService.deleteSurvey(surveyId).subscribe({
       next:(res)=>{

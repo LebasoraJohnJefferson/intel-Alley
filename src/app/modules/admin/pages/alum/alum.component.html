@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 grid-cols-1 mt-16 relative mb-20">
+      <div *ngIf="isDataLoaded" class="grid md:grid-cols-2 grid-cols-1 mt-16 relative mb-20">
         <div class="flex flex-wrap w-full gap-3">
           <div class="grid gap-3 h-fit py-2 mx-auto rounded md:w-[16rem] w-full border shadow-md px-3 flex">
             <h1 class="font-bold text-[14px] text-blue-600">Course and Student Information</h1>
@@ -398,6 +398,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div *ngIf="!isDataLoaded" class="flex w-full items-center justify-center mt-10">
+      <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
     </div>
   </div>
 </div>

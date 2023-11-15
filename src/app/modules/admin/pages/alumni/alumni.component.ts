@@ -194,15 +194,34 @@ export class AlumniComponent implements OnInit {
       { title: 'Student ID', dataKey: 'studentId' },
       { title: 'Name', dataKey: 'name' },
       { title: 'Email', dataKey: 'email' },
+
+      {title: 'Gender',dataKey:'gender'},
+      {title: 'Address',dataKey:'address'},
+      {title: 'Organization',dataKey:'organization'},
+      {title: 'Position',dataKey:'position'},
+
       { title: 'Course', dataKey: 'course' },
       { title: 'Year', dataKey: 'year' },
     ];
 
     this.alumni.map((item: any) => {
+      let org;
+      let position;
+
+      org = item?.IsSurveyTaken?.Employed ? item?.IsSurveyTaken?.Employed?.orgName : item?.IsSurveyTaken?.SelfEmployed?.businessName
+      position = item?.IsSurveyTaken?.SelfEmployed ? 'owner' : item?.IsSurveyTaken?.Employed?.workPosition 
+
       data.push({
         studentId: item.AlumniCredential?.studentId,
         name: item.name,
         email: item.email,
+
+        gender:item?.IsSurveyTaken?.GeneralInfo?.sex ?? 'N/A',
+        address:item?.IsSurveyTaken?.GeneralInfo?.address ?? 'N/A',
+        organization:org ?? 'N/A',
+        position:position ?? 'N/A',
+
+
         course: item.AlumniCredential?.Course?.acronym,
         year: item.AlumniCredential?.gradClass,
       });

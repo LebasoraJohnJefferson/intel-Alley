@@ -22,6 +22,7 @@ export class AlumComponent implements OnInit {
   unemployedInfo:any;
   selfEmployed:any;
   employed:any;
+  isDataLoaded:boolean = false
   workExpDictionary:any={
     'workEpx0_6':'0-6 months',
     'workEpx7_1y':'7 months - 1 year',
@@ -97,6 +98,7 @@ export class AlumComponent implements OnInit {
   }
 
   getAlum() {
+    this.isDataLoaded = false
     this.alumniService.getAlum(this.alumId,this.selectedRecord).subscribe(
       (response: any) => {
         this.alum = response;
@@ -126,6 +128,7 @@ export class AlumComponent implements OnInit {
 
 
         this.isLoading = false;
+        this.isDataLoaded = true
 
         this.status = response.status == 'active' ? true : false;
       },

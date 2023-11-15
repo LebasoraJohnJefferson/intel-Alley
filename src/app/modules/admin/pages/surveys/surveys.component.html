@@ -83,7 +83,7 @@
                   <div
                     class="cursor-pointer"
                   >
-                    <span *ngIf="loadingDeleteSurveyById != survey.id" (click)="deleteSurvey(survey.id)"><i class="pi pi-trash"></i> Delete</span>
+                    <span *ngIf="loadingDeleteSurveyById != survey.id" (click)="deleteSurvey(survey.id,survey.surveyName)"><i class="pi pi-trash"></i> Delete</span>
                     <span *ngIf="loadingDeleteSurveyById == survey.id" class="w-full">
                       <i class="pi pi-spin pi-spinner mx-auto" style="font-size: 14px"></i>
                     </span>
