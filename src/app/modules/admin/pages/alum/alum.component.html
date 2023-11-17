@@ -192,7 +192,7 @@
             <h1 class="font-bold text-[14px] text-blue-600">Employment Information (Employed)</h1>
             <div class=" gap-2 grid grid-cols-1 w-full text-[11px]">
 
-              <div class="grid grid-cols-3">
+              <div class="grid grid-cols-3 gap-1">
                 <div>
                   <div class="text-slate-900 py-1  font-bold">Name of the Organization:</div>
                   <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
@@ -214,7 +214,7 @@
               </div>
 
 
-              <div class="grid grid-cols-3">
+              <div class="grid grid-cols-3 gap-1">
                 <div>
                   <div class="text-slate-900  py-1  font-bold">Occupational Classification:</div>
                   <div class="bg-slate-100 gap-1 py-1 break-all  px-3 rounded-md w-fit ">
@@ -257,14 +257,14 @@
                   <div>
                     <div class="text-slate-900 py-1  font-bold">Job Related to the Degree Earned:</div>
                     <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
-                      {{emp.JobRelatedToDegree}}
+                      {{emp.JobRelatedToDegree ? "Yes" : "No"}}
                     </div>
                   </div>
 
                   <div>
                     <div class="text-slate-900 py-1  font-bold">Enrolled in other Degree Courses:</div>
                     <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
-                      {{emp.enrolledOtherCourses}}
+                      {{emp.enrolledOtherCourses ? "Yes" : "No"}}
                     </div>
                   </div>
               </div>
@@ -288,10 +288,10 @@
                     </div>
                   </div>
 
-                  <div>
+                  <div >
                     <div class="text-slate-900 py-1  font-bold">Awards or recognitions received (please specify):</div>
                     <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
-                      {{employed?.awards}}
+                      {{employed?.awards ? employed?.awards : "N/A"}}
                     </div>
                   </div>
 

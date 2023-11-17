@@ -204,7 +204,7 @@ export class SurveyFormComponent implements OnInit {
     orgNumber:[Validators.required, Validators.pattern(/^(\9)\d{9}$/)],
     orgAddress: ['', Validators.required],
     yrsInCompany: ['', Validators.required],
-    awards: ['', Validators.required],
+    awards: [''],
     monthlyIncome: ['', Validators.required],
     occupClass: ['', Validators.required],
     reason: [''],

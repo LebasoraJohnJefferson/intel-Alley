@@ -319,7 +319,7 @@
                     <div class="px-3">
                       <span class="flex gap-2"><p class="font-bold">Designation or Work Position</p> {{employed[0]?.workPosition}}</span>
                       <span class="flex gap-2"><p class="font-bold">Number of years in the company</p>{{employed[0]?.yrsInCompany}}</span>
-                      <span class="flex gap-2"><p class="font-bold">Awards or recognitions received</p>{{employed[0]?.awards}}</span>
+                      <span class="flex gap-2"><p class="font-bold">Awards or recognitions received</p>{{employed[0]?.awards ? employed[0]?.awards : 'N/A'}}</span>
                       <span class="flex gap-2"><p class="font-bold">Monthly Income Range</p>{{employed[0]?.monthlyIncome}}</span>
                     </div>
                   </div>
