@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <div *ngIf="generalInformation" class="grid gap-3 h-fit py-2 md:w-[16rem] w-full  mx-auto rounded  border shadow-md px-3 flex">
+          <div *ngIf="getObjectKeys(generalInformation)?.length" class="grid gap-3 h-fit py-2 md:w-[16rem] w-full  mx-auto rounded  border shadow-md px-3 flex">
             <h1 class="font-bold text-[14px] text-blue-600">General Information</h1>
             <div class="flex gap-2 items-center text-[11px]" *ngFor="let info of getObjectKeys(generalInformation)">
               <div class="text-slate-900 py-1  font-bold">{{info}}</div>
@@ -150,7 +150,7 @@
               <div>
                 <div class="text-slate-900 py-1  font-bold">Year Employed:</div>
                 <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
-                  {{ momentMDY(work.YearEmployed) }}
+                  {{ work.YearEmployed }}
                 </div>
               </div>
               <div>
@@ -168,7 +168,7 @@
               <div>
                 <div class="text-slate-900 py-1  font-bold">Number of Years Served:</div>
                 <div class="bg-slate-100 py-1 break-all  px-3 rounded-md w-fit ">
-                  {{ momentMDY(work.NumOfYrServed) }}
+                  {{ work.NumOfYrServed }}
                 </div>
               </div>
               <hr class="col-span-3 my-1 border-1" *ngIf="workHistory?.length > 1" />

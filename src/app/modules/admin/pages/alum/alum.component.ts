@@ -117,6 +117,8 @@ export class AlumComponent implements OnInit {
             'Secondary Email':response?.IsSurveyTaken?.GeneralInfo?.secondaryEmail,
             'Gender':response?.IsSurveyTaken?.GeneralInfo?.sex,
           }
+        }else{
+          this.generalInformation = {}
         }
 
         this.educationalBG = response?.IsSurveyTaken?.EducationBackGs
