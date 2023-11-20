@@ -42,7 +42,7 @@
               {{ alum.name }}
             </h1>
             <select *ngIf="records.length" (change)="selectRecord($event)" class="text-slate-700 text-[14px] outline-0 bg-slate-200 mt-1 rounded px-2 py-1" name="" id="">
-              <option *ngFor="let record of records" [value]="record.id">{{momentMDY(record.createdAt)}}</option>
+              <option *ngFor="let record of records" [value]="record.id">{{momentMDY(record.updatedAt)}} <p *ngIf="record.updatedAt!=record.createdAt" class="text-slate-500">(edited)</p></option>
             </select>
           </div>
         </div>

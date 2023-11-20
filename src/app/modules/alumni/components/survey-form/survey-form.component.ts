@@ -460,7 +460,6 @@ export class SurveyFormComponent implements OnInit {
 
 
   submitSurvey() {
-    console.log(this.workHistoryFB)
     this.isSubmitting = true;
     let errorMsg = '';
     if (this.generalInfo.invalid) errorMsg = 'General Info Empty Inputs';

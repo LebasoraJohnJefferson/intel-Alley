@@ -41,6 +41,7 @@ export class AccountComponent implements OnInit {
   unemployed:any =[];
   professionalExam:any =[]
   employed:any =[]
+  isYearChanges:boolean = false
 
   changePasswordModal: boolean = false;
   workExp: any = {
@@ -208,10 +209,11 @@ export class AccountComponent implements OnInit {
   }
 
   recordsBySurveyId(){
+    this.isYearChanges = false
     this.alumniService.recordsBySurveyId(this.chosenRecord).subscribe(
       {
         next:(response:any)=>{
-          console.log(response)
+          this.isYearChanges = true
           this.isTaken = response?.user?.IsSurveyTaken?.isTaken
           this.employementType= response?.user?.IsSurveyTaken?.type
           this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]

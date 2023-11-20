@@ -135,7 +135,7 @@
                   Alumni
                 </p>
                 <select (change)="selectedRecord($event)" class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md outline-0">
-                  <option [value]="record.id" *ngFor="let record of records">{{momentMDY(record.createdAt)}}</option>
+                  <option [value]="record.id" *ngFor="let record of records">{{momentMDY(record.updatedAt)}} <p *ngIf="record.updatedAt!=record.createdAt" class="text-slate-500">(edited)</p></option>
                 </select>
               </div>
             </div>
@@ -143,12 +143,18 @@
           </div>
         </div>
         
-        <div class="absolute flex  items-end  translate-y-[50px] flex-col gap-2 -top-10 right-5">
+        <div class="absolute flex  items-end  translate-y-[5px] flex-col gap-2 -top-10 right-5">
           <div
             (click)="op.toggle($event)"
             class="bg-gray-200 w-[50px] h-[50px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
           >
             <i class="fal fa-cog text-2xl"></i>
+          </div>
+          <div
+            (click)="goBack()"
+            class="bg-gray-200 w-[50px] h-[50px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
+          >
+            <i class="fal fa-arrow-left text-2xl"></i>
           </div>
           
         </div>
@@ -215,8 +221,11 @@
     </div>
     <div class="flex w-full">
       <div class="mt-5 md:mt-0 w-full">
-
+        <div *ngIf="!isYearChanges" class="max-h-[400px] min-h-[200px] flex items-center justify-center">
+          <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+        </div>
         <div
+          *ngIf="isYearChanges"
           class="max-h-[400px] min-h-[200px] overflow-y-auto p-2 border border-slate-100 rounded-md"
         >
           <div
@@ -232,6 +241,7 @@
               <p class="text-[12px] text-center mt-2">No data</p>
             </div>
           </div>
+
 
           <div *ngIf="generalInfo[0] && isTaken" class="mb-2 font-semibold pl-6">General Information</div>
           <p-timeline *ngIf="generalInfo[0] && isTaken" [value]="generalInfo" align="left" class="w-full py-1">
@@ -457,7 +467,7 @@
 <p-overlayPanel #op>
   <ng-template pTemplate>
     <div class="md:max-w-[400px]">
-      <div class="grid gap-1">
+      <div class="grid gap-1 relative">
         <div
           *ngIf="true"
           (click)="editModal = true; op.toggle($event)"
@@ -474,9 +484,13 @@
         <div
           *ngIf="!isRetaking"
           (click)="retaking()"
-          class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
+          class="text-[12px] flex items-center px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
         >
           <i class="fal fa-cog mr-1"></i>Retake Survey
+          <div class="group flex items-center justify-center">
+              <i class="pi pi-info-circle ml-1 hover:bg-red-500 w-fit h-fit rounded-full hover:text-[14px] hover:text-white text-red-400 text-[13px]"></i>
+              <p class="invisible  group-hover:visible  absolute -bottom-[55px] p-2 left-10 w-full bg-red-100 text-[10px] text-black rounded showdow-lg">Retake/Update Survey if you got another job within this year.</p>
+          </div>
         </div>
         <div
           *ngIf="isRetaking"
@@ -484,12 +498,8 @@
         >
           <i class="pi pi-spin pi-cog mr-1" style="font-size: 13px"></i>Retake Survey
         </div>
-        <div
-        (click)="goBack()"
-          class="text-[12px] px-2 py-2 hover:bg-slate-100 cursor-pointer transition-all"
-        >
-        <i class="fal fa-arrow-left mr-1"></i>Go Back
-        </div>
+        
+        
       </div>
     </div>
   </ng-template>
