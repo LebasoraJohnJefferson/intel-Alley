@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { HotToastService } from '@ngneat/hot-toast';
-
+import { DatePipe } from '@angular/common';
 import { AuthService } from 'src/app/core/shared/services/auth.service';
 import { AlumniService } from '../../shared/services/alumni.service';
 import { CourseService } from 'src/app/core/shared/services/course.service';
 import { SurveyService } from '../../shared/services/survey.service';
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-account',
@@ -18,9 +24,11 @@ export class AccountComponent implements OnInit {
   modalData: any = [];
   editModal: boolean = false;
   submitLoading: boolean = false;
+  isChangingGeneralInfo:boolean = false;
   courses: any;
   defaultImg: any = '../../../../../assets/images/student.png';
   previewImg: any = '';
+  isGeneralInfoSubmitting:boolean = false
   isLoading: boolean = true;
   isRetaking:boolean = false
   changePassData: any = {
@@ -54,7 +62,20 @@ export class AccountComponent implements OnInit {
     'workEpx10y_more':'10 years & onwards'
   };
 
+  generalInfoForm = this._formBuilder.group({
+    birthDay: ['', [Validators.required]],
+    address: ['', [Validators.required]],
+    secondaryEmail: ['', [Validators.required, Validators.email]],
+    contactNumber: [
+      '',
+      [Validators.required, Validators.pattern(/^(\9)\d{9}$/)],
+    ],
+    civilStatus: ['', [Validators.required]],
+    sex: ['', [Validators.required]],
+  });
+
   constructor(
+    private _formBuilder: FormBuilder,
     private toast: HotToastService,
     private router: Router,
     private authService: AuthService,
@@ -62,6 +83,29 @@ export class AccountComponent implements OnInit {
     private courseService: CourseService,
     private _surveyService:SurveyService
   ) {
+  }
+
+  changeGeneralInfo(){
+    this.isGeneralInfoSubmitting = true
+    if(this.generalInfoForm.valid){
+      this.toast.info("Under Construction")
+      this.isGeneralInfoSubmitting = false
+    }else{
+      let msg = ''
+      if(this.generalInfoForm.controls['secondaryEmail'].invalid) msg+= "Invalid email\n"
+      if(this.generalInfoForm.controls['contactNumber'].invalid) msg+= msg ? "and Invalid contact number\n" : "Invalid contact number\n"
+      if(this.generalInfoForm.controls['birthDay'].invalid) msg+= msg ? "and Invalid date for birth day\n" : "Invalid date for birth day\n"
+      
+      msg = msg ? msg : "Pls, fill-up all the necessary details"
+      this.toast.warning(msg)
+      this.isGeneralInfoSubmitting = false
+    }
+  }
+
+  openGeneralInfoForm(){
+    this.isChangingGeneralInfo = true
+    this.generalInfo[0].birthDay = moment(new Date(this.generalInfo[0].birthDay)).format('YYYY-MM-DD')
+    this.generalInfoForm.patchValue(this.generalInfo[0])
   }
   
 

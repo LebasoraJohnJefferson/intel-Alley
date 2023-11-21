@@ -242,8 +242,10 @@
             </div>
           </div>
 
-
-          <div *ngIf="generalInfo[0] && isTaken" class="mb-2 font-semibold pl-6">General Information</div>
+          <div class="flex items-center  gap-2 mb-2 ">
+            <div *ngIf="generalInfo[0] && isTaken" class="font-semibold pl-6">General Information</div>
+            <i (click)="openGeneralInfoForm()" class="pi pi-file-edit text-slate-700 cursor-pointer hover:text-blue-500" ></i>
+          </div>
           <p-timeline *ngIf="generalInfo[0] && isTaken" [value]="generalInfo" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>
               <div class="mb-1 text-[13px]">
@@ -505,6 +507,8 @@
   </ng-template>
 </p-overlayPanel>
 
+<!-- change profile -->
+
 <p-dialog
   header="Change Password"
   [(visible)]="changePasswordModal"
@@ -576,6 +580,136 @@
           </div>
 
           <span *ngIf="!submitLoading">Submit</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</p-dialog>
+
+
+<!-- change generalInfo  -->
+<p-dialog
+  header="Change General Info"
+  [(visible)]="isChangingGeneralInfo"
+  [modal]="true"
+  [style]="{ maxWidth: '400px', width: '400px' }"
+>
+  <div class="mt-3">
+    <form [formGroup]="generalInfoForm" (ngSubmit)="changeGeneralInfo()">
+      <div class="grid gap-2">
+        <div>
+          <label class="block text-[12px] font-medium text-gray-700"
+            >Email</label
+          >
+          <div class="mt-1 relative rounded-md">
+            <input
+              type="email"
+              class="outline-none block text-[12px] w-full p-3 rounded-md bg-slate-100"
+              placeholder="Enter your email"
+              formControlName="secondaryEmail"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <label class="block text-[12px] font-medium text-gray-700"
+            >Address</label
+          >
+          <div class="mt-1 relative rounded-md">
+            <input
+              type="text"
+              class="outline-none block text-[12px] w-full p-3 rounded-md bg-slate-100"
+              placeholder="Enter your address"
+              formControlName="address"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <label class="block text-[12px] font-medium text-gray-700"
+            >Contact Number</label
+          >
+          <div class="mt-1 relative rounded-md">
+            <input
+              type="number"
+              class="outline-none block text-[12px] w-full p-3 rounded-md bg-slate-100"
+              placeholder="Enter your contact number"
+              formControlName="contactNumber"
+              required
+            />
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-1">
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+              >Gender</label
+            >
+            <select formControlName="sex" class="bg-slate-200 w-full border-0 outline-0 rounded text-[12px] py-1">
+              <option disabled selected>Select your gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+            >Civil Status</label>
+            <select
+              class="bg-slate-200 border-0 w-full outline-0 rounded text-[12px] py-1"
+              formControlName="civilStatus"
+            >
+              <option disabled selected>Select your civil status</option>
+              <option value="Single" >Single</option>
+              <option value="Engaged">Engaged</option>
+              <option value="Married">Married</option>
+              <option value="windowed">Windowed</option>
+              <option value="separated">Separated</option>
+              <option value="divorced">Divorced</option>
+            </select>
+          </div>
+          <div class="w-full">
+            <label class="block text-[12px] font-medium text-gray-700"
+            >Birth Day</label>
+            <input
+              type="date"
+              class="bg-slate-200 border-0 w-full outline-0 rounded text-[12px] py-1 px-1"
+              formControlName="birthDay"
+              required
+            />
+          </div>
+        </div>
+
+     
+
+        <button
+          [disabled]="isGeneralInfoSubmitting"
+          class="mt-2 grid place-items-center bg-red-500 font-semibold rounded-md shadow-sm text-slate-50 py-2 border-red-600 hover:bg-red-500/80 transition-all w-full"
+        >
+          <div class="flex items-center w-fit mx-auto" *ngIf="isGeneralInfoSubmitting">
+            <svg
+              class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+
+            <span>Processing</span>
+          </div>
+
+          <span *ngIf="!isGeneralInfoSubmitting">Submit</span>
         </button>
       </div>
     </form>
