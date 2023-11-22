@@ -244,7 +244,7 @@
 
           <div class="flex items-center  gap-2 mb-2 ">
             <div *ngIf="generalInfo[0] && isTaken" class="font-semibold pl-6">General Information</div>
-            <i (click)="openGeneralInfoForm()" class="pi pi-file-edit text-slate-700 cursor-pointer hover:text-blue-500" ></i>
+            <i *ngIf="isLatestId" (click)="openGeneralInfoForm()" class="pi pi-file-edit text-slate-700 cursor-pointer hover:text-blue-500" ></i>
           </div>
           <p-timeline *ngIf="generalInfo[0] && isTaken" [value]="generalInfo" align="left" class="w-full py-1">
             <ng-template pTemplate="content" let-log>

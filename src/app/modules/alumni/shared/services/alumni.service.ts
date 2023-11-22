@@ -39,4 +39,9 @@ export class AlumniService {
     return this.http.get(`${BASEURL}/api/user/alumni/recordsBySurveyId/${surveyId}`);
   }
 
+
+  editGeneralInfo(info:any,surveyId:number):any{
+    return this.http.put(`${BASEURL}/api/user/alumni/generalInfo`,{info:info,surveyId:surveyId});
+  }
+
 }

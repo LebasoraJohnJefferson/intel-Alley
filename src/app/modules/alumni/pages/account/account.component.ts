@@ -50,7 +50,8 @@ export class AccountComponent implements OnInit {
   professionalExam:any =[]
   employed:any =[]
   isYearChanges:boolean = false
-
+  isLatestId:boolean = false
+  surveyId:number = 0
   changePasswordModal: boolean = false;
   workExp: any = {
     'workEpx0_6':'0-6 months',
@@ -88,7 +89,16 @@ export class AccountComponent implements OnInit {
   changeGeneralInfo(){
     this.isGeneralInfoSubmitting = true
     if(this.generalInfoForm.valid){
-      this.toast.info("Under Construction")
+      this.alumniService.editGeneralInfo(this.generalInfoForm.value,this.surveyId).subscribe({
+        next:(res:any)=>{
+          this.toast.success(res.message)
+          this.recordsBySurveyId()
+          this.isChangingGeneralInfo = false
+        },error:(err:any)=>{
+          let msg = err?.error?.message ?? "Pls, fill-up all the necessary details!"
+          this.toast.error(msg)
+        }
+      })
       this.isGeneralInfoSubmitting = false
     }else{
       let msg = ''
@@ -257,7 +267,8 @@ export class AccountComponent implements OnInit {
     this.alumniService.recordsBySurveyId(this.chosenRecord).subscribe(
       {
         next:(response:any)=>{
-          this.isYearChanges = true
+          this.isLatestId = response.isLatestId
+          this.surveyId = response?.user?.IsSurveyTaken?.id
           this.isTaken = response?.user?.IsSurveyTaken?.isTaken
           this.employementType= response?.user?.IsSurveyTaken?.type
           this.generalInfo = [response?.user?.IsSurveyTaken?.GeneralInfo]
@@ -268,6 +279,7 @@ export class AccountComponent implements OnInit {
           this.professionalExam = [response?.user?.IsSurveyTaken?.ProfessionalExams]
           this.unemployed = [response?.user?.IsSurveyTaken?.Unemployed]
           this.employed = [response?.user?.IsSurveyTaken?.Employed]
+          this.isYearChanges = true
           this.submitLoading = false;
         },error:(error:any)=>{
           console.log(error)
