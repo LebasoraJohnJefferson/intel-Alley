@@ -97,9 +97,9 @@ export class AccountComponent implements OnInit {
         },error:(err:any)=>{
           let msg = err?.error?.message ?? "Pls, fill-up all the necessary details!"
           this.toast.error(msg)
+          this.isGeneralInfoSubmitting = false
         }
       })
-      this.isGeneralInfoSubmitting = false
     }else{
       let msg = ''
       if(this.generalInfoForm.controls['secondaryEmail'].invalid) msg+= "Invalid email\n"
