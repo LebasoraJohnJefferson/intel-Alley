@@ -94,6 +94,7 @@ export class AccountComponent implements OnInit {
           this.toast.success(res.message)
           this.recordsBySurveyId()
           this.isChangingGeneralInfo = false
+          this.isGeneralInfoSubmitting = false
         },error:(err:any)=>{
           let msg = err?.error?.message ?? "Pls, fill-up all the necessary details!"
           this.toast.error(msg)
