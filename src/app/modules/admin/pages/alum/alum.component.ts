@@ -85,6 +85,7 @@ export class AlumComponent implements OnInit {
     this.alumniService.getRecords(this.alumId).subscribe({
       next:(response)=>{
         this.records = response?.records
+        console.log(this.records)
         if(this.records[0]) this.selectedRecord = this.records[0].id
         this.getAlum();
       },error:(err)=>{

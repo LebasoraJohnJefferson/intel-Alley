@@ -134,8 +134,8 @@
                 <p class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md">
                   Alumni
                 </p>
-                <select (change)="selectedRecord($event)" class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md outline-0">
-                  <option [value]="record.id" *ngFor="let record of records">{{momentMDY(record.updatedAt)}} <p *ngIf="momentMDY(record.updatedAt) != momentMDY(record.createdAt)" class="text-slate-500">(edited)</p></option>
+                <select *ngIf="records.length" (change)="selectedRecord($event)" class="mr-1 font-semibold bg-gray-100 py-1 px-2 rounded-md outline-0">
+                  <option [value]="record.id" *ngFor="let record of records">{{momentMDY(record.updatedAt)}} <p *ngIf="isUpdated && isTaken" class="text-slate-500">(edited)</p></option>
                 </select>
               </div>
             </div>
