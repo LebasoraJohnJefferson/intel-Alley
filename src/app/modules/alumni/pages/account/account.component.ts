@@ -51,7 +51,6 @@ export class AccountComponent implements OnInit {
   employed:any =[]
   isYearChanges:boolean = false
   isLatestId:boolean = false
-  isUpdated:boolean = false
   surveyId:number = 0
   changePasswordModal: boolean = false;
   workExp: any = {
@@ -269,7 +268,6 @@ export class AccountComponent implements OnInit {
     this.alumniService.recordsBySurveyId(this.chosenRecord).subscribe(
       {
         next:(response:any)=>{
-          this.isUpdated = response?.user?.IsSurveyTaken?.isUpdated
           this.isLatestId = response?.isLatestId
           this.surveyId = response?.user?.IsSurveyTaken?.id
           this.isTaken = response?.user?.IsSurveyTaken?.isTaken
