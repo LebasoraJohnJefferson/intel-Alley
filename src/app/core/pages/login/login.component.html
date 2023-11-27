@@ -1,4 +1,4 @@
-<div class="relative min-h-fit h-screen md:overflow-y-scroll md:pt-12">
+<div class="relative min-h-fit h-screen md:overflow-y-auto md:pt-12">
   <img
     src="../../../../assets/logo/evsu_logo_3.png"
     alt=""
@@ -6,23 +6,25 @@
   />
 
   <div class="">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-[1fr_400px] md:p-8">
-      <div class="hidden lg:block">
-        <div class="p-4 rounded-md w-fit pr-6 min-h-[96px]">
-          <img
-            src="../../../../assets/images/id-card.png"
-            alt=""
-            class="w-[150px] object-cover"
-          />
-        </div>
-
-        <div class="mt-10">
-          <h1 class="font-black text-5xl">
-            ALUMNI
-            <div class="">
-              <span class="text-red-500">Monitoring System</span>
-            </div>
-          </h1>
+    <div class=" mx-auto grid  lg:grid-cols-2 md:p-8">
+      <div class="hidden lg:flex justify-end">
+        <div>
+          <div class="p-4 rounded-md w-fit pr-6 min-h-[96px]">
+            <img
+              src="../../../../assets/images/id-card.png"
+              alt=""
+              class="w-[150px] object-cover"
+            />
+          </div>
+  
+          <div class="mt-10">
+            <h1 class="font-black text-5xl">
+              ALUMNI
+              <div class="">
+                <span class="text-red-500">Monitoring System</span>
+              </div>
+            </h1>
+          </div>
         </div>
       </div>
 
@@ -45,14 +47,14 @@
         </div>
 
         <div class="mt-[100px] md:mt-4">
-          <h1 class="font-bold text-slate-700 text-center text-[14px]">
+          <h1 class="font-bold text-slate-700 text-center text-[16px]">
             Choose Account Type
           </h1>
 
           <div class="grid grid-cols-[1fr_1fr] my-7 gap-6">
             <div
               (click)="changeLoginAcctType('alumni')"
-              class="min-h-[100px] h-fit relative grid place-items-center bg-white p-2 px-8 rounded-md shadow-md text-sm border-2 border-white cursor-pointer hover:border-slate-500 transition-all"
+              class="min-h-[100px] relative grid place-items-center bg-white p-2 px-8 rounded-md shadow-md text-sm border-2 border-white cursor-pointer hover:border-slate-500 transition-all"
               [ngClass]="
                 loginAcctType == 'alumni'
                   ? 'border-2 border-slate-500'
@@ -64,7 +66,7 @@
                 alt="student image"
                 class=""
               />
-              <h1 class="font-semibold mt-2">Alumni</h1>
+              <h1 class="font-semibold mt-2 text-[18px]">Alumni</h1>
 
               <div
                 class=""
@@ -79,7 +81,7 @@
             </div>
             <div
               (click)="changeLoginAcctType('admin')"
-              class="min-h-[100px] h-fit relative grid place-items-center bg-white p-2 px-8 rounded-md shadow-md text-sm border-2 border-white cursor-pointer hover:border-slate-500 transition-all"
+              class="min-h-[100px] relative grid place-items-center bg-white p-2 px-8 rounded-md shadow-md text-sm border-2 border-white cursor-pointer hover:border-slate-500 transition-all"
               [ngClass]="
                 loginAcctType == 'admin' ? 'border-slate-500' : 'border-white'
               "
@@ -88,7 +90,7 @@
                 src="../../../../assets/images/admin.png"
                 alt="admin image"
               />
-              <h1 class="font-semibold mt-2">Admin</h1>
+              <h1 class="font-semibold mt-2 text-[18px]">Admin</h1>
 
               <div
                 [ngClass]="
@@ -103,10 +105,10 @@
           </div>
 
           <div class="text-center mb-4">
-            <h2 class="capitalize text-[14px] font-semibold">
+            <h2 class="capitalize text-[16px] font-semibold">
               Hello {{ loginAcctType }}!
             </h2>
-            <p class="text-[11px]">Enter your credentials below to login.</p>
+            <p class="text-[13px]">Enter your credentials below to login.</p>
           </div>
         </div>
 
@@ -116,7 +118,7 @@
           class="grid gap-3"
         >
           <div>
-            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <label class="block text-[13px] font-medium text-gray-700">Email</label>
 
             <div class="mt-1 relative">
               <input
@@ -130,7 +132,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-gray-700"
+            <label class="block text-[13px] font-medium text-gray-700"
               >Password</label
             >
             <div class="mt-1 relative">
@@ -142,22 +144,11 @@
                 [feedback]="false"
               ></p-password>
             </div>
-
-            <div class="flex justify-between items-center mt-2">
-              <div class=""></div>
-              <p
-                routerLink="/forgotpassword"
-                class="text-[13px] cursor-pointer hover:text-red-500"
-              >
-                Forgot your password?
-              </p>
-            </div>
-          </div>
-
-          <button
+            
+            <button
             [disabled]="submitLoading"
             type="submit"
-            class="grid place-items-center cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all w-full"
+            class="grid place-items-center mt-5 cursor-pointer bg-slate-800 text-white font-semibold rounded-md py-2 hover:bg-slate-900/80 transition-all w-full"
           >
             <div class="flex items-center w-fit mx-autoo" *ngIf="submitLoading">
               <svg
@@ -186,6 +177,18 @@
 
             <span *ngIf="!submitLoading">Login</span>
           </button>
+
+            <div class="flex justify-between items-center mt-2">
+              <div class=""></div>
+              <p
+                routerLink="/forgotpassword"
+                class="text-[13px] cursor-pointer hover:text-red-500 text-blue-700"
+              >
+                Forgot your password?
+              </p>
+            </div>
+          </div>
+
         </form>
       </div>
     </div>
