@@ -26,6 +26,11 @@ export class SidebarComponent implements OnInit {
       icon: 'fal fa-newspaper',
     },
     {
+      title: 'Manual',
+      route: 'manual',
+      icon: 'fal fa-book',
+    },
+    {
       title: 'About',
       route: 'about',
       icon: 'fal fa-pallet',

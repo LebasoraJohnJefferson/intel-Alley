@@ -1,0 +1,22 @@
+<div class="relative z-40 mt-10 pb-20">
+    <div class="">
+      <h1 class="font-bold text-xl md:text-3xl text-white">Manual</h1>
+      <p class="text-slate-100 text-[12px]">Information about the system</p>
+    </div>
+    <article class="mt-5 flex flex-col">
+        <h2 class="font-bold text-center text-xl my-3">User Guide Manual for the Alumni / Graduate Side</h2>
+        <ol class="w-full" *ngFor="let info of manual">
+            <li class="flex flex-col items-center w-full px-5">
+                <section class="w-full">
+                    <h3 class="font-semibold text-[14px] text-white bg-purple-800 rounded shadow-md w-fit px-3 my-3 py-1">{{info.title}}</h3>
+                    <div class="my-2 p-2  bg-slate-100 rounded" *ngFor="let context of info.content">
+                        <p class="text-[14px] my-2 px-1 indent-[30px] my-2">
+                            {{context.description}}
+                        </p>
+                        <img class="w-[90%] h-20[rem] m-auto" loading="lazy" [src]="context.image" alt="">
+                    </div>
+                </section>
+            </li>
+        </ol>
+    </article>
+</div>

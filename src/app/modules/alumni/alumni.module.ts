@@ -25,6 +25,7 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { CustomSurveyComponent } from './components/custom-survey/custom-survey.component';
+import { ManualComponent } from './pages/manual/manual.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CustomSurveyComponent } from './components/custom-survey/custom-survey.
     BarChartComponent,
     DateAgoPipe,
     PieChartComponent,
-    CustomSurveyComponent
+    CustomSurveyComponent,
+    ManualComponent
   ],
   imports: [
     CommonModule,

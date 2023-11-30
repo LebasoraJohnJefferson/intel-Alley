@@ -9,6 +9,7 @@ import { AccountComponent } from './pages/account/account.component';
 import { AboutComponent } from './pages/about/about.component';
 import { SurveysComponent } from './pages/surveys/surveys.component';
 import { EventsComponent } from './pages/events/events.component';
+import { ManualComponent } from './pages/manual/manual.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'surveys', component: SurveysComponent },
       { path: 'events', component: EventsComponent },
       { path: 'about', component: AboutComponent },
+      { path: 'manual', component: ManualComponent },
     ],
   },
   { path: 'account', component: AccountComponent, canActivate: [AlumniGuard] },
