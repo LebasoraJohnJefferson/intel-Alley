@@ -33,6 +33,7 @@ import { AnalyticBarChartComponent } from './components/analytics-employment/ana
 import { AnalyticPieChartComponent } from './components/analytics-employment/analytic-pie-chart/analytic-pie-chart.component';
 import { AnalyticPolarAreaChartComponent } from './components/analytics-employment/analytic-polar-area-chart/analytic-polar-area-chart.component';
 import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
+import { ManualComponent } from './pages/manual/manual.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { DateAgoPipe } from './shared/pipes/date-ago.pipe';
     AnalyticBarChartComponent,
     AnalyticPieChartComponent,
     AnalyticPolarAreaChartComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    ManualComponent
   ],
   imports: [
     CommonModule,

@@ -22,6 +22,7 @@ import { EmployedFilesComponent } from './components/files/employed-files/employ
 import { EmployedAnalyticsComponent } from './components/analytics-employment/employed-analytics/employed-analytics.component';
 import { SelfEmployedAnalyticsComponent } from './components/analytics-employment/self-employed-analytics/self-employed-analytics.component';
 import { UnemployedAnalyticsComponent } from './components/analytics-employment/unemployed-analytics/unemployed-analytics.component';
+import { ManualComponent } from './pages/manual/manual.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'alumni', component: AlumniComponent },
+      { path: 'manual', component: ManualComponent },
       { path: 'files', component: FilesComponent },
       { path: 'files/:status', component: EmployedComponent },
       { path: 'files/:status/:userId', component: EmployedFilesComponent },
