@@ -29,10 +29,6 @@ export class UnemployedAnalyticsComponent {
   }
 
 
-  detectChanges(){
-    this.changeParams()
-  }
-
 
   changeParams(){
     this.route.queryParams.subscribe(params => {
