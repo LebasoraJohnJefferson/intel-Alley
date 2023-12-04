@@ -13,7 +13,7 @@
                                 <li 
                                 [routerLink]="currentRoute"
                                 [queryParams]="{ year: year }"
-                                class="px-2 mx-1 rounded cursor-pointer hover:bg-slate-200 text-slate-800 text-[14px] my-1" *ngFor="let year of years">{{year}}</li>
+                                class="px-2 mx-1 rounded cursor-pointer hover:bg-slate-200 text-slate-800 text-[14px] my-1" *ngFor="let year of filterBySurveyYearly">{{year}}</li>
                             </ol>
                         </p-overlayPanel>
                     </li>

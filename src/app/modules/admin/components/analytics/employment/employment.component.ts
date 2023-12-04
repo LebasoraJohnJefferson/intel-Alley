@@ -20,6 +20,7 @@ export class EmploymentComponent {
     employmentsCount:number = 0
     label:string[]=[]
     newDate:any;
+    filterBySurveyYearly:number[]=[]
     years:number[]=[]
     selectedYear:any;
     chosen:any;
@@ -59,7 +60,7 @@ export class EmploymentComponent {
     showData(status:string){
         this.isLoading = true
         this.route.queryParams.subscribe((value) => {
-            this.newDate = value['year'] ? value['year'] : new Date().getFullYear();
+            this.newDate = value['year'] ? value['year'] : 2020;
         });
         this._analyticService.usersTookTheSurvey(status,this.newDate,this.batch).subscribe({
             next:(res)=>{
@@ -83,9 +84,14 @@ export class EmploymentComponent {
     ngOnInit() {
 
         this.changeSelectedRoute(this.routeSelected)
-        for(let year = new Date().getFullYear(); year >= 2000; year--) {
+        const latestYear = new Date().getFullYear()
+        for(let year = latestYear; year >= 2000; year--) {
             this.years.push(year);
         }
+        for(let year = 2020 ; year <=latestYear; year ++){
+            this.filterBySurveyYearly.push(year)
+        }
+        
         this.showData(this.routeSelected)
     }
 
