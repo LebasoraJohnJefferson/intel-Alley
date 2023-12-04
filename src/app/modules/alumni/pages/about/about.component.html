@@ -49,51 +49,23 @@
       Researchers/Programmers
     </h2>
 
-    <div class="grid grid-cols-2 lg:flex gap-5">
-      <div class="py-5 rounded-lg">
+    <div class="flex items-center justify-center w-full gap-10 flex-wrap">
+      <div class="py-5 rounded-lg"  *ngFor="let developer of developers">
         <div
-          class="w-fit rounded-full h-fit mx-auto p-1 border-4 border-gray-200"
+          class="w-[15rem] rounded-full h-[15rem] mx-auto p-1 border-4 border-gray-200"
         >
           <img
-            [src]="developers.developerOne.profile"
+            [src]="developer.profile"
             alt=""
-            class="w-[100px] h-[100px] md:w-[150px] md:h-[150px] object-cover rounded-full"
+            class="w-full h-full  object-cover rounded-full"
           />
         </div>
         <h2 class="text-center mt-4 font-medium text-[12px] md:text-[15px]">
-          {{ developers.developerOne.name }}
+          {{ developer.name }}
         </h2>
       </div>
 
-      <div class="py-5 rounded-lg">
-        <div
-          class="w-fit rounded-full h-fit mx-auto p-1 border-4 border-gray-200"
-        >
-          <img
-            [src]="developers.developerOne.profile"
-            alt=""
-            class="w-[100px] h-[100px] md:w-[150px] md:h-[150px] object-cover rounded-full"
-          />
-        </div>
-        <h2 class="text-center mt-4 font-medium text-[12px] md:text-[15px]">
-          {{ developers.developerTwo.name }}
-        </h2>
-      </div>
-
-      <div class="py-5 rounded-lg col-span-2">
-        <div
-          class="w-fit rounded-full h-fit mx-auto p-1 border-4 border-gray-200"
-        >
-          <img
-            [src]="developers.developerThree.profile"
-            alt=""
-            class="w-[100px] h-[100px] md:w-[150px] md:h-[150px] object-cover rounded-full"
-          />
-        </div>
-        <h2 class="text-center mt-4 font-medium text-[12px] md:text-[15px]">
-          {{ developers.developerThree.name }}
-        </h2>
-      </div>
+      
     </div>
   </div>
 </div>

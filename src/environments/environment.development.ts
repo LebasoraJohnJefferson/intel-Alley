@@ -3,20 +3,17 @@ export const environment = {
   baseURL: 'http://localhost:3000',
 };
 
-export const developersProfile = {
-  developerOne: {
+export const developersProfile = [
+  {
     name: 'Alexis Luke Barlomento',
-    profile:
-      "../../../../../assets/developers/alex.png",
+    profile:"../../../../../assets/developers/alex.png",
   },
-  developerTwo: {
+  {
     name: 'Anjelo Villafranca',
-    profile:
-      '../../../../../assets/developres/anjelo.png',
+    profile:'../../../../../assets/developers/anjelo.png',
   },
-  developerThree: {
+   {
     name: 'Marlone Adalin',
-    profile:
-      '../../../../../assets/developers/marlone.png',
+    profile:'../../../../../assets/developers/marlone.jpg',
   },
-};
+];

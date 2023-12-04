@@ -8,4 +8,8 @@ import { developersProfile } from 'src/environments/environment';
 })
 export class AboutComponent {
   developers:any = developersProfile
+  constructor(){
+  console.log(developersProfile)
+
+  }
 }
