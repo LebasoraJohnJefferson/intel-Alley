@@ -63,7 +63,7 @@ export class ManualComponent {
       title:'Visualization of Data Analytics',
       content:[
         {
-          description:"You can see here the graph and visualization of the gathered data from the alumni. To view the data visualization go to Analytics dashboard. Click the “Calendar” to navigate different data analytics by year of alumni batch. Scroll down to view other data analytics. Click “Survey” for the data analytics of the custom survey.",
+          description:"You can see here the graph and visualization of the gathered data from the alumni. To view the data visualization go to Analytics dashboard. Click the “Calendar” to navigate different data analytics by year and you can “Filter” the analytics by year batch of alumni. Scroll down to view other data analytics. Click “Survey” for the data analytics of the custom survey.",
           image:'../../../../../assets/manual/admin/default-analytics.png'
         }
       ]
