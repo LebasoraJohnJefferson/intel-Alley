@@ -6,7 +6,7 @@ export const environment = {
 export const developersProfile = [
   {
     name: 'Alexis Luke Barlomento',
-    profile:"../../../../../assets/developers/alex.png",
+    profile:"../../../../../assets/developers/alex.jpg",
   },
   {
     name: 'Anjelo Villafranca',
