@@ -22,7 +22,7 @@ export class SelfEmployedAnalyticsComponent implements OnInit{
     
   }
 
-  detectChanges(){
+  ngDoCheck(){
     this.changeParams()
   }
 

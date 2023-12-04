@@ -24,6 +24,11 @@ export class UnemployedAnalyticsComponent {
     
   }
 
+  ngDoCheck(){
+    this.changeParams()
+  }
+
+
   detectChanges(){
     this.changeParams()
   }
