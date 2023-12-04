@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SelfEmployedAnalyticsComponent implements OnInit{
   selfEmployedDetails:any = []
   newDate:any;
+  batch:number = 0
   constructor(
     private _analyticService:AnalyticService,
     private route: ActivatedRoute,
@@ -23,19 +24,15 @@ export class SelfEmployedAnalyticsComponent implements OnInit{
 
 
   changeParams(){
-    this.route.queryParams.subscribe((value) => {
-      const yearString = value['year']
-      if(/^\d+$/.test(yearString)){
-        this.newDate = parseInt(yearString, 10);
-      }else{
-        this.newDate = new Date().getFullYear()
-      }
+    this.route.queryParams.subscribe(params => {
+      this.newDate = params['year'] ?? new Date().getFullYear()
+      this.batch = params['batch'] ?? 0;
       this.getData(this.newDate)
     });
   }
 
   getData(year:number){
-    this._analyticService.otherSelfEmployedDetails(year).subscribe({
+    this._analyticService.otherSelfEmployedDetails(year,this.batch).subscribe({
       next:(res)=>{
         this.selfEmployedDetails = res
       }

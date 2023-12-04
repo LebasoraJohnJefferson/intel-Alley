@@ -16,8 +16,8 @@ export class AnalyticService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  usersTookTheSurvey(status: any,year:any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/employment/${status}/${year}`);
+  usersTookTheSurvey(status: any,year:any,batch:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/employment/${status}/${year}?batch=${batch}`);
   }
 
   surveyOverView(): Observable<any> {
@@ -33,21 +33,21 @@ export class AnalyticService {
   }
 
 
-  otherEmployedDetails(year:number): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/employedAnalytic/${year}`);
+  otherEmployedDetails(year:number,batch:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/employedAnalytic/${year}?batch=${batch}`);
   }
 
 
-  otherUnemployedDetails(year:number): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/unemployedAnalytic/${year}`);
+  otherUnemployedDetails(year:number,batch:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/unemployedAnalytic/${year}?batch=${batch}`);
   }
 
-  otherSelfEmployedDetails(year:number): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/selfEmployedAnalytic/${year}`);
+  otherSelfEmployedDetails(year:number,batch:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/selfEmployedAnalytic/${year}?batch=${batch}`);
   }
 
 
-  otherAnswer(field:any,year:any): Observable<any> {
-    return this.http.get(`${BASEURL}/api/analytic/viewOthers/${field}/${year}`);
+  otherAnswer(field:any,year:any,batch:number): Observable<any> {
+    return this.http.get(`${BASEURL}/api/analytic/viewOthers/${field}/${year}?batch=${batch}`);
   }
 }

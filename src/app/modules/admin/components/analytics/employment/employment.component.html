@@ -27,6 +27,13 @@
             <img src="../../../../../../assets/loading.gif" class="w-[200px] h-[200px]" alt="">
         </div>
         <div *ngIf="!isLoading" class="flex items-center justify-center w-full flex-col">
+            <div class="w-full flex items-center gap-2">
+                <select (change)="selectedByBatch($event)" class="px-2 rounded bg-slate-200 mx-5 text-[12px] outline-0">
+                    <option selected disabled>Filter by Batch</option>
+                    <option value="0">Get All</option>
+                    <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                </select>
+            </div>
             <div>
                 <p class="my-1 flex items-center justify-center font-extrabold text-slate-800 ">{{routeSelected}} Overview</p>
             </div>

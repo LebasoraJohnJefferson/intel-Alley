@@ -14,6 +14,7 @@ export class EmployedAnalyticsComponent implements OnInit{
   others:any=[]
   createEventModal:boolean = false
   title:any;
+  batch:number = 0
   constructor(
     private _analyticService:AnalyticService,
     private route: ActivatedRoute,
@@ -23,7 +24,7 @@ export class EmployedAnalyticsComponent implements OnInit{
   }
 
   getData(year:number){
-    this._analyticService.otherEmployedDetails(year).subscribe({
+    this._analyticService.otherEmployedDetails(year,this.batch).subscribe({
       next:(res)=>{
         this.data =res
       }
@@ -31,15 +32,12 @@ export class EmployedAnalyticsComponent implements OnInit{
   }
 
   changeParams(){
-    this.route.queryParams.subscribe((value) => {
-      const yearString = value['year']
-      if(/^\d+$/.test(yearString)){
-        this.newDate = parseInt(yearString, 10);
-      }else{
-        this.newDate = new Date().getFullYear()
-      }
+    this.route.queryParams.subscribe(params => {
+      this.newDate = params['year'] ?? new Date().getFullYear()
+      this.batch = params['batch'] ?? 0;
       this.getData(this.newDate)
     });
+    
   }
 
   ngOnChanges(){
@@ -58,9 +56,8 @@ export class EmployedAnalyticsComponent implements OnInit{
     }
     this.title = fieldObj[field]
     this.createEventModal = true
-    this._analyticService.otherAnswer(field,this.newDate).subscribe((res)=>{
+    this._analyticService.otherAnswer(field,this.newDate,this.batch).subscribe((res)=>{
       this.others = res
-      console.log(res)
     })
   }
 

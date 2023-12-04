@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AnalyticService } from '../../../shared/services/analytic.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 
 @Component({
   selector: 'app-employment',
@@ -23,6 +23,7 @@ export class EmploymentComponent {
     years:number[]=[]
     selectedYear:any;
     chosen:any;
+    batch:number = 0
     currentRoute:any;
     routingObj:any = {
         'Employed':'/admin/analytics',
@@ -33,9 +34,19 @@ export class EmploymentComponent {
 
     constructor(
         private _analyticService:AnalyticService,
-        public route:ActivatedRoute
+        public route:ActivatedRoute,
+        private router: Router
     ) {
 
+    }
+
+    selectedByBatch(event:any){
+        this.batch = event.target.value
+        this.router.navigate([],{
+            queryParams:{batch:this.batch},
+            queryParamsHandling:'merge'
+        })
+        this.showData(this.routeSelected)
     }
 
     changeSelectedRoute(status:string){
@@ -50,7 +61,7 @@ export class EmploymentComponent {
         this.route.queryParams.subscribe((value) => {
             this.newDate = value['year'] ? value['year'] : new Date().getFullYear();
         });
-        this._analyticService.usersTookTheSurvey(status,this.newDate).subscribe({
+        this._analyticService.usersTookTheSurvey(status,this.newDate,this.batch).subscribe({
             next:(res)=>{
                 this.isLoading = false
                 this.maleData = res.male
