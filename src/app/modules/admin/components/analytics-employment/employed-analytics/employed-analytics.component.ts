@@ -41,15 +41,11 @@ export class EmployedAnalyticsComponent implements OnInit{
   }
 
   ngOnChanges(){
+    this.changeParams()
   }
 
   ngOnInit(): void {
-    // this.changeParams()
-  }
-
-  ngDoCheck(){
     this.changeParams()
-    
   }
 
   viewOthers(field:any){

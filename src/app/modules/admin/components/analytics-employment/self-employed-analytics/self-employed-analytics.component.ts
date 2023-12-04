@@ -18,11 +18,13 @@ export class SelfEmployedAnalyticsComponent implements OnInit{
     
   }
 
-  ngOnInit(): void {
-    
+ 
+
+  ngOnChanges(){
+    this.changeParams()
   }
 
-  ngDoCheck(){
+  ngOnInit(): void {
     this.changeParams()
   }
 
@@ -43,8 +45,5 @@ export class SelfEmployedAnalyticsComponent implements OnInit{
     })
   }
 
-  ngOnChanges(){
-    this.changeParams()
-  }
 
 }

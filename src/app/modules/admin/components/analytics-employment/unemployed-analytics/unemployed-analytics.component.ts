@@ -20,11 +20,12 @@ export class UnemployedAnalyticsComponent {
 
   }
 
-  ngOnInit(): void {
-    
+  
+  ngOnChanges(){
+    this.changeParams()
   }
 
-  ngDoCheck(){
+  ngOnInit(): void {
     this.changeParams()
   }
 
@@ -46,8 +47,5 @@ export class UnemployedAnalyticsComponent {
     })
   }
 
-  ngOnChanges(){
-    this.changeParams()
-  }
 
 }
