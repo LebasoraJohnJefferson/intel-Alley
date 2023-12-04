@@ -21,6 +21,10 @@ export class UnemployedAnalyticsComponent {
   }
 
   ngOnInit(): void {
+    
+  }
+
+  detectChanges(){
     this.changeParams()
   }
 

@@ -41,6 +41,9 @@ export class EmployedAnalyticsComponent implements OnInit{
   }
 
   ngOnChanges(){
+  }
+
+  detectChanges(){
     this.changeParams()
   }
 

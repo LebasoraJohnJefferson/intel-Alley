@@ -19,6 +19,10 @@ export class SelfEmployedAnalyticsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    
+  }
+
+  detectChanges(){
     this.changeParams()
   }
 
