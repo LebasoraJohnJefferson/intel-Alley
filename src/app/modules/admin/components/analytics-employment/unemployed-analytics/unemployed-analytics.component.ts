@@ -21,16 +21,14 @@ export class UnemployedAnalyticsComponent {
   }
 
   
-  // ngOnChanges(){
-  // }
-
-  ngOnInit(): void {
-    // this.changeParams()
-  }
-
-  ngDoCheck(): void{
+  ngOnChanges(){
     this.changeParams()
   }
+
+  ngOnInit(): void {
+    this.changeParams()
+  }
+
 
 
 

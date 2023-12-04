@@ -20,15 +20,11 @@ export class SelfEmployedAnalyticsComponent implements OnInit{
 
  
 
-  // ngOnChanges(){
-  //   this.changeParams()
-  // }
-
-  ngOnInit(): void {
-    // this.changeParams()
+  ngOnChanges(){
+    this.changeParams()
   }
 
-  ngDoCheck(): void{
+  ngOnInit(): void {
     this.changeParams()
   }
 
