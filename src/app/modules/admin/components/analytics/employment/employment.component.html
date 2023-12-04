@@ -17,9 +17,9 @@
                             </ol>
                         </p-overlayPanel>
                     </li>
-                    <li routerLink="/admin/analytics" [queryParams]="{ year: newDate }" (click)="changeSelectedRoute('Employed')" [class]="routeSelected=='Employed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Employed</li>
-                    <li routerLink="/admin/analytics/self-employed" [queryParams]="{ year: newDate }" (click)="changeSelectedRoute('SelfEmployed')" [class]="routeSelected=='SelfEmployed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Self Employed</li>
-                    <li routerLink="/admin/analytics/unemployed" [queryParams]="{ year: newDate }" (click)="changeSelectedRoute('Unemployed')" [class]="routeSelected=='Unemployed' ? ' cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Unemployed</li>
+                    <li routerLink="/admin/analytics" [queryParams]="{ year: newDate , batch:batch }" (click)="changeSelectedRoute('Employed')" [class]="routeSelected=='Employed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Employed</li>
+                    <li routerLink="/admin/analytics/self-employed" [queryParams]="{ year: newDate ,batch:batch }" (click)="changeSelectedRoute('SelfEmployed')" [class]="routeSelected=='SelfEmployed' ? 'cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Self Employed</li>
+                    <li routerLink="/admin/analytics/unemployed" [queryParams]="{ year: newDate ,batch:batch }" (click)="changeSelectedRoute('Unemployed')" [class]="routeSelected=='Unemployed' ? ' cursor-pointer bg-slate-200 p-1 rounded w-full grid' : 'cursor-pointer p-1 rounded w-full grid'">Unemployed</li>
                 </ol>
             </div>
         </div>
