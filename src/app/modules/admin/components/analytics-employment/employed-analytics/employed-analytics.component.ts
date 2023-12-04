@@ -40,11 +40,15 @@ export class EmployedAnalyticsComponent implements OnInit{
     
   }
 
-  ngOnChanges(){
-    this.changeParams()
-  }
+  // ngOnChanges(){
+  //   this.changeParams()
+  // }
 
   ngOnInit(): void {
+    // this.changeParams()
+  }
+
+  ngDoCheck(): void{
     this.changeParams()
   }
 
