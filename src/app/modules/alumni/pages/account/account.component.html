@@ -106,22 +106,17 @@
 
 <div class="flex flex-col w-full">
   <div class="p-5 w-full mx-auto relative">
-    <div class="relative h-[340px]">
-      <img
-        src="../../../../../assets/images/background.jpg"
-        alt=""
-        class="h-[150px] lg:h-[200px] object-cover w-full rounded-2xl"
-      />
-
+    <div class="relative h-[265px]">
+        <div class="h-[150px] lg:h-[200px] object-cover w-full rounded-2xl bg-[url('./assets/images/background.jpg')]">
       <div
-        class="flex items-center md:justify-between p-5 px-8 pt-0 relative -top-16 -translate-y-3"
+        class="flex items-center md:justify-between p-5 px-8 pt-0 relative"
       >
-        <div class="md:flex relative w-fit mx-auto md:mx-0">
+        <div class="md:flex relative w-fit translate-y-[40px] mx-auto md:mx-0">
           <div class="bg-slate-50/50 w-fit h-fit rounded-full border-2 border-red-500 md:mr-4">
             <img
               [src]="profile.image == null ? defaultImg : profile.image"
               alt=""
-              class="w-[200px] h-[200px] rounded-full object-cover mx-auto"
+              class="w-[150px] h-[150px] rounded-full object-cover mx-auto"
             />
           </div>
 
@@ -143,7 +138,7 @@
           </div>
         </div>
         
-        <div class="absolute flex  items-end  translate-y-[5px] flex-col gap-2 -top-10 right-5">
+        <div class="flex  items-end  translate-y-[30px] flex-col gap-2 -top-10 right-5">
           <div
             (click)="op.toggle($event)"
             class="bg-gray-200 w-[50px] h-[50px] rounded-full grid place-items-center text-gray-500 cursor-pointer hover:bg-gray-200/80 transition-all"
@@ -159,6 +154,9 @@
           
         </div>
       </div>
+
+        </div>
+      
     
       
     </div>
@@ -315,6 +313,7 @@
                       <span class="flex gap-2"><p class="font-bold">Name of Organization</p> {{employed[0]?.orgName}}</span>
                       <span class="flex gap-2"><p class="font-bold">Address</p>{{employed[0]?.orgAddress}}</span>
                       <span class="flex gap-2"><p class="font-bold">Organization contact number</p>{{employed[0]?.orgNumber}}</span>
+                      <span *ngIf="employed[0]?.orgEmail" class="flex gap-2"><p class="font-bold">Organization`s Email:</p>{{employed[0]?.orgEmail}}</span>
                       <span class="flex gap-2"><p class="font-bold">typeOfOrgChosen</p>{{employed[0]?.typeOfOrgChosen}}</span>
                     </div>
                   </div>

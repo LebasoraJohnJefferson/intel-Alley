@@ -203,6 +203,7 @@ export class SurveyFormComponent implements OnInit {
     orgName: ['', Validators.required],
     orgNumber:[Validators.required, Validators.pattern(/^(\9)\d{9}$/)],
     orgAddress: ['', Validators.required],
+    orgEmail: ['', Validators.email],
     yrsInCompany: ['', Validators.required],
     awards: [''],
     monthlyIncome: ['', Validators.required],
@@ -494,6 +495,10 @@ export class SurveyFormComponent implements OnInit {
       if (this.employmentInfo.controls.orgNumber.invalid){
         this.isSubmitting = false;
         return  this.toast.warning('Contact number of organization is incorrect');
+      }
+      if(this.employmentInfo.controls.orgEmail.invalid && this.employmentInfo.controls.orgEmail.value?.trim()?.length != 0){
+        this.isSubmitting = false;
+        return  this.toast.warning('Organization`s email invalid');
       }
       if (this.uploadFilePoorOfEmp) {
         if (
