@@ -100,13 +100,29 @@
                       <i class="fad fa-download mr-1"></i>
                       Excel
                     </button>
-                    <button
-                      (click)="exportPdf()"
-                      class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
-                    >
-                      <i class="fad fa-download mr-1"></i>
-                      PDF
-                    </button>
+                    <div class="relative">
+                      
+                      <button
+                        (click)="op.toggle($event)" #ThisElem
+                        class="bg-slate-100 hover:bg-slate-200 border border-slate-200 h-fit px-2 py-1 text-sm rounded-md"
+                      >
+                        <i class="fad fa-download mr-1"></i>
+                        PDF
+                      </button>
+                      <p-overlayPanel #op >
+                        <form class="w-[200px] h-full" [formGroup]="occupationSeletionForm">
+                          <p-multiSelect 
+                              [style]="{'width':'190px'}"
+                              [options]="optionPDF" 
+                              formControlName="occupation" 
+                              optionLabel="label" 
+                              placeholder="Select occupation"></p-multiSelect>
+                          <div class="w-full  flex justify-center items-center">
+                            <button (click)="exportPdf()" class="w-full text-[12px] bg-green-600 hover:bg-green-500 text-white px-2 py-1 rounded my-2">Download ({{this.occupationSeletionForm.value?.occupation.length == 0 ? 'All' : 'Selected'}})</button>
+                          </div>
+                        </form>
+                      </p-overlayPanel>
+                    </div>
                   </div>
 
                   <button
@@ -337,3 +353,5 @@
   </p-dialog>
   </div>
 </div>
+
+

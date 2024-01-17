@@ -18,13 +18,14 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { MenuModule } from 'primeng/menu';
 import { PasswordModule } from 'primeng/password';
 import { InputSwitchModule } from 'primeng/inputswitch';
-
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
   exports: [
     RatingModule,
+    MultiSelectModule,
     TimelineModule,
     CheckboxModule,
     TabMenuModule,

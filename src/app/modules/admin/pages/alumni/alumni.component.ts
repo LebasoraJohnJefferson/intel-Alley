@@ -26,8 +26,12 @@ export class AlumniComponent implements OnInit {
   isRecovering:boolean = false
   loading:boolean = true
   isDeletingPermanent:boolean = false
-
+  
   createForm!: FormGroup;
+  occupationSeletionForm!: FormGroup;
+  optionPDF:any=[]
+  exportPDFSelectedOptions:any=[]
+  
 
   cols: any[] = [];
   exportColumns: any[] = [];
@@ -45,7 +49,6 @@ export class AlumniComponent implements OnInit {
   ngOnInit(): void {
     this.getAlumni();
     this.getCourses();
-
     this.createForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -54,6 +57,10 @@ export class AlumniComponent implements OnInit {
       yearGraduated: new FormControl('', [Validators.required]),
       password: new FormControl(''),
     });
+
+    this.occupationSeletionForm = new FormGroup({
+      occupation: new FormControl([],[Validators.required]),
+    })
 
     this.cols = [
       { field: 'AlumniCredential.studentId', header: 'Student ID' },
@@ -76,6 +83,18 @@ export class AlumniComponent implements OnInit {
         this.deletedUsers = res
       }
     })
+  }
+
+  openPDFOptions(){
+    let tempOccupArray:any = []
+    this.alumni.forEach((data: any) => {
+      const occupationClass = data?.IsSurveyTaken?.Employed?.occupClass;
+      
+      if (occupationClass && !tempOccupArray.some((item:any) => item.value === occupationClass)) {
+        tempOccupArray.push({ label: occupationClass });
+      }
+    });
+    this.optionPDF = tempOccupArray
   }
 
   deletePermanently(userId:number){
@@ -120,6 +139,7 @@ export class AlumniComponent implements OnInit {
     this.alumniService.getAlumni().subscribe(
       (response: any) => {
         this.alumni = response;
+        this.openPDFOptions()
         console.log(response)
       },
       (error: any) => {}
@@ -203,30 +223,36 @@ export class AlumniComponent implements OnInit {
       { title: 'Course', dataKey: 'course' },
       { title: 'Year', dataKey: 'year' },
     ];
-
+    const occupation = this.occupationSeletionForm.value?.occupation
+  ? this.occupationSeletionForm.value?.occupation.map((data:any) => data.label)
+  : [];
     this.alumni.map((item: any) => {
       let org;
       let position;
 
       org = item?.IsSurveyTaken?.Employed ? item?.IsSurveyTaken?.Employed?.orgName : item?.IsSurveyTaken?.SelfEmployed?.businessName
       position = item?.IsSurveyTaken?.SelfEmployed ? 'owner' : item?.IsSurveyTaken?.Employed?.workPosition 
-
-      data.push({
-        studentId: item.AlumniCredential?.studentId,
-        name: item.name,
-        email: item.email,
-
-        gender:item?.IsSurveyTaken?.GeneralInfo?.sex ?? 'N/A',
-        address:item?.IsSurveyTaken?.GeneralInfo?.address ?? 'N/A',
-        organization:org ?? 'N/A',
-        position:position ?? 'N/A',
-
-
-        course: item.AlumniCredential?.Course?.acronym,
-        year: item.AlumniCredential?.gradClass,
-      });
+      if(
+        occupation.length == 0 ||
+        occupation.includes(item?.IsSurveyTaken?.Employed?.occupClass)
+        ){
+        data.push({
+          studentId: item.AlumniCredential?.studentId,
+          name: item.name,
+          email: item.email,
+  
+          gender:item?.IsSurveyTaken?.GeneralInfo?.sex ?? 'N/A',
+          address:item?.IsSurveyTaken?.GeneralInfo?.address ?? 'N/A',
+          organization:org ?? 'N/A',
+          position:position ?? 'N/A',
+  
+  
+          course: item.AlumniCredential?.Course?.acronym,
+          year: item.AlumniCredential?.gradClass,
+        });
+      }
     });
-
+    console.log(data)
     autoTable(doc, {
       columns: columns,
       body: data,
