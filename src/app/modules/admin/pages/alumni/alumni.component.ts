@@ -90,7 +90,7 @@ export class AlumniComponent implements OnInit {
     this.alumni.forEach((data: any) => {
       const occupationClass = data?.IsSurveyTaken?.Employed?.occupClass;
       
-      if (occupationClass && !tempOccupArray.some((item:any) => item.value === occupationClass)) {
+      if (occupationClass && !tempOccupArray.some((item:any) => item.label === occupationClass)) {
         tempOccupArray.push({ label: occupationClass });
       }
     });
